@@ -165,7 +165,7 @@
     {
       "key":   "wcag",
       "label": "WCAG — Accessibilitat tècnica (8 mètriques)",
-      "items": [
+      "mets": [
         {"long": "color_contrast_ratio",     "short": "color_contrast",      "wcag_ref": "1.4.3 AA"},
         {"long": "focus_visible_ratio",      "short": "focus_visibility",    "wcag_ref": "2.4.7 AA"},
         {"long": "target_size_clean",        "short": "target_size",         "wcag_ref": "2.5.8 AA"},
@@ -179,7 +179,7 @@
     {
       "key":   "text",
       "label": "Text — Llegibilitat (3 mètriques)",
-      "items": [
+      "mets": [
         {"long": "page_flesch",      "short": "flesch_reading_ease", "wcag_ref": "3.1.5 AAA"},
         {"long": "text_complexity",  "short": "text_complexity",     "wcag_ref": "3.1 AA"},
         {"long": "heading_hierarchy","short": "heading_hierarchy",   "wcag_ref": "1.3.1 A"}
@@ -188,7 +188,7 @@
     {
       "key":   "elements",
       "label": "Elements — Estructura (4 mètriques)",
-      "items": [
+      "mets": [
         {"long": "alt_text_coverage",       "short": "alt_text_coverage", "wcag_ref": "1.1.1 A"},
         {"long": "landmark_coverage",       "short": "landmark_coverage", "wcag_ref": "1.3.6 AAA"},
         {"long": "audit_medium_violations", "short": "medium_violations", "wcag_ref": "Múltiples"},
@@ -198,7 +198,7 @@
     {
       "key":   "performance",
       "label": "Rendiment (1 mètrica)",
-      "items": [
+      "mets": [
         {"long": "performance_lcp", "short": "performance_lcp", "wcag_ref": "EN 301 549"}
       ]
     }
@@ -219,7 +219,7 @@
         <tr class="group-header">
           <td colspan="3">{{ group.label }}</td>
         </tr>
-        {% for m in group.items %}
+        {% for m in group.mets %}
         {% set val = metrics.get(m.short, 0) %}
         {% set mc  = val | aci_color %}
         <tr>
