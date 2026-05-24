@@ -1,31 +1,295 @@
 {
-  "generated_at": "2026-05-24T10:56:36.706526Z",
+  "generated_at": "2026-05-24T11:12:26.552133Z",
   "pipeline_version": "0.1.0",
-  "n_urls": 3,
+  "n_urls": 36,
   "results": [
+    {
+      "url": "https://www.palaumusica.cat/ca/; Cultural",
+      "domain": "www.palaumusica.cat",
+      "aci_score": 3.885,
+      "profile": "wcag_strict",
+      "timestamp": 1779621066,
+      "report": "reports/www_palaumusica_cat_ca_Cultural_1779621061_wcag_strict.html"
+    },
     {
       "url": "https://www.tnc.cat/ca; Cultural",
       "domain": "www.tnc.cat",
       "aci_score": 3.844,
       "profile": "wcag_strict",
-      "timestamp": 1779620196,
-      "report": "reports/www_tnc_cat_ca_Cultural_1779620191_wcag_strict.html"
+      "timestamp": 1779621041,
+      "report": "reports/www_tnc_cat_ca_Cultural_1779621037_wcag_strict.html"
     },
     {
       "url": "https://web.ub.edu/; Educatiu",
       "domain": "web.ub.edu",
       "aci_score": 3.83,
       "profile": "wcag_strict",
-      "timestamp": 1779620191,
-      "report": "reports/web_ub_edu_Educatiu_1779620183_wcag_strict.html"
+      "timestamp": 1779620957,
+      "report": "reports/web_ub_edu_Educatiu_1779620950_wcag_strict.html"
     },
     {
-      "url": "https://www.gencat.cat/ca/ciutadania/inici; Institucional",
-      "domain": "www.gencat.cat",
+      "url": "https://www.sanidad.gob.es/; Institucional",
+      "domain": "www.sanidad.gob.es",
+      "aci_score": 3.826,
+      "profile": "wcag_strict",
+      "timestamp": 1779620950,
+      "report": "reports/www_sanidad_gob_es_Institucional_1779620944_wcag_strict.html"
+    },
+    {
+      "url": "https://www.lavanguardia.com/; Mitjans",
+      "domain": "www.lavanguardia.com",
+      "aci_score": 3.788,
+      "profile": "wcag_strict",
+      "timestamp": 1779621094,
+      "report": "reports/www_lavanguardia_com_Mitjans_1779621091_wcag_strict.html"
+    },
+    {
+      "url": "https://www.educacionfpydeportes.gob.es/portada.html; Institucional",
+      "domain": "www.educacionfpydeportes.gob.es",
+      "aci_score": 3.738,
+      "profile": "wcag_strict",
+      "timestamp": 1779620944,
+      "report": "reports/www_educacionfpydeportes_gob_es_portada_html_Institucional_1779620938_wcag_strict.html"
+    },
+    {
+      "url": "https://sede.agenciatributaria.gob.es/; Institucional",
+      "domain": "sede.agenciatributaria.gob.es",
+      "aci_score": 3.704,
+      "profile": "wcag_strict",
+      "timestamp": 1779620938,
+      "report": "reports/sede_agenciatributaria_gob_es_Institucional_1779620907_wcag_strict.html"
+    },
+    {
+      "url": "https://www.capraboacasa.com/ca/; Comercial",
+      "domain": "www.capraboacasa.com",
+      "aci_score": 3.682,
+      "profile": "wcag_strict",
+      "timestamp": 1779621106,
+      "report": "reports/www_capraboacasa_com_ca_Comercial_1779621098_wcag_strict.html"
+    },
+    {
+      "url": "https://es.wallapop.com/; Comercial",
+      "domain": "es.wallapop.com",
       "aci_score": 3.678,
       "profile": "wcag_strict",
-      "timestamp": 1779620183,
-      "report": "reports/www_gencat_cat_ca_ciutadania_inici_Institucional_1779620181_wcag_strict.html"
+      "timestamp": 1779621107,
+      "report": "reports/es_wallapop_com_Comercial_1779621106_wcag_strict.html"
+    },
+    {
+      "url": "https://www.ucm.es/; Educatiu",
+      "domain": "www.ucm.es",
+      "aci_score": 3.678,
+      "profile": "wcag_strict",
+      "timestamp": 1779620968,
+      "report": "reports/www_ucm_es_Educatiu_1779620967_wcag_strict.html"
+    },
+    {
+      "url": "https://www.uv.es/; Educatiu",
+      "domain": "www.uv.es",
+      "aci_score": 3.678,
+      "profile": "wcag_strict",
+      "timestamp": 1779620960,
+      "report": "reports/www_uv_es_Educatiu_1779620958_wcag_strict.html"
+    },
+    {
+      "url": "https://www.diba.cat/ca/inici; Institucional",
+      "domain": "www.diba.cat",
+      "aci_score": 3.676,
+      "profile": "wcag_strict",
+      "timestamp": 1779621037,
+      "report": "reports/www_diba_cat_ca_inici_Institucional_1779621021_wcag_strict.html"
+    },
+    {
+      "url": "https://www.rac1.cat/; Mitjans",
+      "domain": "www.rac1.cat",
+      "aci_score": 3.659,
+      "profile": "wcag_strict",
+      "timestamp": 1779621086,
+      "report": "reports/www_rac1_cat_Mitjans_1779621084_wcag_strict.html"
+    },
+    {
+      "url": "https://web.gencat.cat/ca/ciutadania/inici; Institucional",
+      "domain": "web.gencat.cat",
+      "aci_score": 3.627,
+      "profile": "wcag_strict",
+      "timestamp": 1779620992,
+      "report": "reports/web_gencat_cat_ca_ciutadania_inici_Institucional_1779620988_wcag_strict.html"
+    },
+    {
+      "url": "https://www.fcbarcelona.cat/ca/; Comercial",
+      "domain": "www.fcbarcelona.cat",
+      "aci_score": 3.624,
+      "profile": "wcag_strict",
+      "timestamp": 1779621142,
+      "report": "reports/www_fcbarcelona_cat_ca_Comercial_1779621111_wcag_strict.html"
+    },
+    {
+      "url": "https://www.compraonline.bonpreuesclat.cat/; Comercial",
+      "domain": "www.compraonline.bonpreuesclat.cat",
+      "aci_score": 3.606,
+      "profile": "wcag_strict",
+      "timestamp": 1779621098,
+      "report": "reports/www_compraonline_bonpreuesclat_cat_Comercial_1779621094_wcag_strict.html"
+    },
+    {
+      "url": "https://terrassadigital.cat/; Mitjans",
+      "domain": "terrassadigital.cat",
+      "aci_score": 3.604,
+      "profile": "wcag_strict",
+      "timestamp": 1779621091,
+      "report": "reports/terrassadigital_cat_Mitjans_1779621086_wcag_strict.html"
+    },
+    {
+      "url": "https://www.rcdespanyol.com/; Comercial",
+      "domain": "www.rcdespanyol.com",
+      "aci_score": 3.575,
+      "profile": "wcag_strict",
+      "timestamp": 1779621146,
+      "report": "reports/www_rcdespanyol_com_Comercial_1779621142_wcag_strict.html"
+    },
+    {
+      "url": "https://www.uab.cat/; Educatiu",
+      "domain": "www.uab.cat",
+      "aci_score": 3.558,
+      "profile": "wcag_strict",
+      "timestamp": 1779620958,
+      "report": "reports/www_uab_cat_Educatiu_1779620957_wcag_strict.html"
+    },
+    {
+      "url": "https://www.3cat.cat/3cat/; Mitjans",
+      "domain": "www.3cat.cat",
+      "aci_score": 3.551,
+      "profile": "wcag_strict",
+      "timestamp": 1779621076,
+      "report": "reports/www_3cat_cat_3cat_Mitjans_1779621066_wcag_strict.html"
+    },
+    {
+      "url": "https://serveiocupacio.gencat.cat/ca/inici; Institucional",
+      "domain": "serveiocupacio.gencat.cat",
+      "aci_score": 3.546,
+      "profile": "wcag_strict",
+      "timestamp": 1779621021,
+      "report": "reports/serveiocupacio_gencat_cat_ca_inici_Institucional_1779621014_wcag_strict.html"
+    },
+    {
+      "url": "https://www.url.edu/ca; Educatiu",
+      "domain": "www.url.edu",
+      "aci_score": 3.544,
+      "profile": "wcag_strict",
+      "timestamp": 1779620980,
+      "report": "reports/www_url_edu_ca_Educatiu_1779620977_wcag_strict.html"
+    },
+    {
+      "url": "https://www.museunacional.cat/ca; Cultural",
+      "domain": "www.museunacional.cat",
+      "aci_score": 3.531,
+      "profile": "wcag_strict",
+      "timestamp": 1779621048,
+      "report": "reports/www_museunacional_cat_ca_Cultural_1779621041_wcag_strict.html"
+    },
+    {
+      "url": "https://catsalut.gencat.cat/ca/inici/; Institucional",
+      "domain": "catsalut.gencat.cat",
+      "aci_score": 3.521,
+      "profile": "wcag_strict",
+      "timestamp": 1779621008,
+      "report": "reports/catsalut_gencat_cat_ca_inici_Institucional_1779621002_wcag_strict.html"
+    },
+    {
+      "url": "https://www.meteo.cat/; Institucional",
+      "domain": "www.meteo.cat",
+      "aci_score": 3.518,
+      "profile": "wcag_strict",
+      "timestamp": 1779621014,
+      "report": "reports/www_meteo_cat_Institucional_1779621008_wcag_strict.html"
+    },
+    {
+      "url": "https://educacio.gencat.cat/ca/inici; Institucional",
+      "domain": "educacio.gencat.cat",
+      "aci_score": 3.517,
+      "profile": "wcag_strict",
+      "timestamp": 1779621002,
+      "report": "reports/educacio_gencat_cat_ca_inici_Institucional_1779620992_wcag_strict.html"
+    },
+    {
+      "url": "https://www.upc.edu/ca; Educatiu",
+      "domain": "www.upc.edu",
+      "aci_score": 3.517,
+      "profile": "wcag_strict",
+      "timestamp": 1779620967,
+      "report": "reports/www_upc_edu_ca_Educatiu_1779620960_wcag_strict.html"
+    },
+    {
+      "url": "https://www.ara.cat/; Mitjans",
+      "domain": "www.ara.cat",
+      "aci_score": 3.5,
+      "profile": "wcag_strict",
+      "timestamp": 1779621084,
+      "report": "reports/www_ara_cat_Mitjans_1779621081_wcag_strict.html"
+    },
+    {
+      "url": "https://www.seg-social.es/wps/portal/wss/internet/Inicio; Institucional",
+      "domain": "www.seg-social.es",
+      "aci_score": 3.494,
+      "profile": "wcag_strict",
+      "timestamp": 1779620907,
+      "report": "reports/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional_1779620899_wcag_strict.html"
+    },
+    {
+      "url": "https://www.upf.edu/; Educatiu",
+      "domain": "www.upf.edu",
+      "aci_score": 3.48,
+      "profile": "wcag_strict",
+      "timestamp": 1779620972,
+      "report": "reports/www_upf_edu_Educatiu_1779620968_wcag_strict.html"
+    },
+    {
+      "url": "https://www.liceubarcelona.cat/ca; Cultural",
+      "domain": "www.liceubarcelona.cat",
+      "aci_score": 3.435,
+      "profile": "wcag_strict",
+      "timestamp": 1779621061,
+      "report": "reports/www_liceubarcelona_cat_ca_Cultural_1779621055_wcag_strict.html"
+    },
+    {
+      "url": "https://www.rtve.es/; Mitjans",
+      "domain": "www.rtve.es",
+      "aci_score": 3.415,
+      "profile": "wcag_strict",
+      "timestamp": 1779621081,
+      "report": "reports/www_rtve_es_Mitjans_1779621076_wcag_strict.html"
+    },
+    {
+      "url": "https://sagradafamilia.org/; Cultural",
+      "domain": "sagradafamilia.org",
+      "aci_score": 3.413,
+      "profile": "wcag_strict",
+      "timestamp": 1779621055,
+      "report": "reports/sagradafamilia_org_Cultural_1779621048_wcag_strict.html"
+    },
+    {
+      "url": "https://www.uoc.edu/ca; Educatiu",
+      "domain": "www.uoc.edu",
+      "aci_score": 3.342,
+      "profile": "wcag_strict",
+      "timestamp": 1779620977,
+      "report": "reports/www_uoc_edu_ca_Educatiu_1779620973_wcag_strict.html"
+    },
+    {
+      "url": "https://www.unav.edu/; Educatiu",
+      "domain": "www.unav.edu",
+      "aci_score": 3.184,
+      "profile": "wcag_strict",
+      "timestamp": 1779620988,
+      "report": "reports/www_unav_edu_Educatiu_1779620980_wcag_strict.html"
+    },
+    {
+      "url": "https://www.promofarma.com/; Comercial",
+      "domain": "www.promofarma.com",
+      "aci_score": 3.044,
+      "profile": "wcag_strict",
+      "timestamp": 1779621111,
+      "report": "reports/www_promofarma_com_Comercial_1779621107_wcag_strict.html"
     }
   ]
 }
