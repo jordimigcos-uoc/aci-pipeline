@@ -1,0 +1,39 @@
+https://www.seg-social.es/wps/portal/wss/internet/Inicio; Institucional
+https://sede.agenciatributaria.gob.es/; Institucional
+https://www.educacionfpydeportes.gob.es/portada.html; Institucional
+https://www.sanidad.gob.es/; Institucional
+https://web.ub.edu/; Educatiu
+https://www.uab.cat/; Educatiu
+https://www.uv.es/; Educatiu
+https://www.upc.edu/ca; Educatiu
+https://www.ucm.es/; Educatiu
+https://www.upf.edu/; Educatiu
+https://www.uoc.edu/ca; Educatiu
+https://www.url.edu/ca; Educatiu
+https://www.unav.edu/; Educatiu
+https://web.gencat.cat/ca/ciutadania/inici; Institucional
+https://educacio.gencat.cat/ca/inici; Institucional
+https://catsalut.gencat.cat/ca/inici/; Institucional
+https://www.meteo.cat/; Institucional
+https://serveiocupacio.gencat.cat/ca/inici; Institucional
+https://www.diba.cat/ca/inici; Institucional
+https://www.tnc.cat/ca; Cultural
+https://www.museunacional.cat/ca; Cultural
+https://sagradafamilia.org/; Cultural
+https://www.liceubarcelona.cat/ca; Cultural
+https://www.palaumusica.cat/ca/; Cultural
+https://www.3cat.cat/3cat/; Mitjans
+https://www.rtve.es/; Mitjans
+https://www.ara.cat/; Mitjans
+https://www.rac1.cat/; Mitjans
+https://terrassadigital.cat/; Mitjans
+https://www.lavanguardia.com/; Mitjans
+https://www.compraonline.bonpreuesclat.cat/; Comercial
+https://www.capraboacasa.com/ca/; Comercial
+https://es.wallapop.com/; Comercial
+https://www.promofarma.com/; Comercial
+https://www.fcbarcelona.cat/ca/; Comercial
+https://www.rcdespanyol.com/; Comercial
+
+
+

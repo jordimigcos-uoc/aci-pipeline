@@ -1,0 +1,6 @@
+# urls_sample.txt — 3 URLs úniques + 1 duplicada per provar dedup
+# Utilitzat per scripts/verify_run.sh
+https://www.uoc.edu/; Educatiu
+https://www.gencat.cat/; Institucional
+https://www.bcn.cat/; Institucional
+https://www.uoc.edu/; Educatiu

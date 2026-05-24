@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informe Comparatiu ACI — Batch Report</title>
+  <style>
+    :root {
+      --green: #28a745; --yellow: #ffc107; --red: #dc3545;
+      --orange: #fd7e14; --blue: #007bff; --gray: #6c757d;
+      --light: #f8f9fa; --border: #dee2e6; --dark: #2c3e50;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; color: #333; background: #f5f6fa; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+    header { background: var(--dark); color: #fff; padding: 28px; border-radius: 10px; margin-bottom: 28px; }
+    header h1 { font-size: 1.8em; margin-bottom: 8px; }
+    header p { opacity: 0.8; font-size: 0.95em; }
+
+    /* Summary stats */
+    .summary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; margin: 24px 0; }
+    .summary-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 20px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+    .summary-card .val { font-size: 2.4em; font-weight: 700; }
+    .summary-card .lbl { font-size: 0.85em; color: var(--gray); margin-top: 6px; }
+    .val-green { color: var(--green); }
+    .val-yellow { color: #856404; }
+    .val-red { color: var(--red); }
+    .val-blue { color: var(--blue); }
+
+    /* Chart */
+    .chart-section { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 24px; margin: 24px 0; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+    .chart-section h2 { font-size: 1.2em; color: var(--dark); margin-bottom: 20px; }
+    .chart-bar-row { display: flex; align-items: center; gap: 12px; margin: 8px 0; }
+    .chart-label { flex: 0 0 260px; font-size: 0.85em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #444; }
+    .chart-bar-wrap { flex: 1; background: #e9ecef; border-radius: 4px; height: 28px; overflow: hidden; position: relative; }
+    .chart-bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; font-size: 0.8em; font-weight: 700; color: #fff; transition: width 0.5s ease; }
+    .chart-val { flex: 0 0 55px; text-align: right; font-size: 0.9em; font-weight: 700; }
+
+    /* Table */
+    section { margin: 28px 0; }
+    section h2 { font-size: 1.2em; color: var(--dark); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.05); font-size: 0.9em; }
+    th { background: var(--dark); color: #fff; padding: 12px 14px; text-align: left; font-weight: 600; }
+    td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    tr:nth-child(even) td { background: var(--light); }
+    tr:hover td { background: #e8f4fd; }
+
+    .score-pill { display: inline-block; padding: 4px 14px; border-radius: 20px; font-weight: 700; font-size: 0.95em; color: #fff; }
+    .pill-green  { background: var(--green); }
+    .pill-yellow { background: #856404; }
+    .pill-red    { background: var(--red); }
+
+    .rank-circle { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; background: var(--dark); color: #fff; font-size: 0.85em; font-weight: 700; }
+    .rank-gold   { background: #f39c12; }
+    .rank-silver { background: #95a5a6; }
+    .rank-bronze { background: #e67e22; }
+
+    /* Heatmap */
+    .heatmap-section { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 24px; margin: 24px 0; overflow-x: auto; }
+    .heatmap-table th { font-size: 0.75em; white-space: nowrap; }
+    .heatmap-table td { text-align: center; font-size: 0.8em; padding: 6px 8px; }
+
+    footer { margin-top: 48px; padding: 20px 0; border-top: 2px solid var(--border); color: var(--gray); font-size: 0.85em; text-align: center; }
+    code { background: #f1f3f5; padding: 1px 5px; border-radius: 3px; font-family: monospace; font-size: 0.88em; }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>Informe Comparatiu d'Accessibilitat ACI — Batch</h1>
+    <p><strong>Perfil:</strong> {{ profile }} &nbsp;|&nbsp; <strong>URLs analitzades:</strong> {{ results | length }} &nbsp;|&nbsp; <strong>Data:</strong> {{ timestamp }}</p>
+    <p><strong>Pipeline:</strong> aci_pipeline v{{ pipeline_version }}</p>
+  </header>
+
+  <!-- Resum estadístic -->
+  <section>
+    <h2>Resum estadístic</h2>
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="val val-blue">{{ results | length }}</div>
+        <div class="lbl">URLs analitzades</div>
+      </div>
+      {% set scores = results | map(attribute='aci_score') | list %}
+      {% if scores %}
+      <div class="summary-card">
+        <div class="val {% if (scores | sum / scores | length) >= 4 %}val-green{% elif (scores | sum / scores | length) >= 2.5 %}val-yellow{% else %}val-red{% endif %}">
+          {{ (scores | sum / scores | length) | round(2) }}
+        </div>
+        <div class="lbl">ACI Mitja</div>
+      </div>
+      <div class="summary-card">
+        <div class="val val-green">{{ scores | max | round(2) }}</div>
+        <div class="lbl">ACI Maxim</div>
+      </div>
+      <div class="summary-card">
+        <div class="val val-red">{{ scores | min | round(2) }}</div>
+        <div class="lbl">ACI Minim</div>
+      </div>
+      {% set above4 = scores | select("ge", 4) | list | length %}
+      {% set above25 = scores | select("ge", 2.5) | list | length %}
+      <div class="summary-card">
+        <div class="val val-green">{{ above4 }}</div>
+        <div class="lbl">URLs Excel·lents (≥4.0)</div>
+      </div>
+      <div class="summary-card">
+        <div class="val val-red">{{ results | length - above25 }}</div>
+        <div class="lbl">URLs Insuficients (<2.5)</div>
+      </div>
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- Grafic de barres SVG inline -->
+  <div class="chart-section">
+    <h2>Puntuació ACI per URL</h2>
+    {% set bar_max_width = 500 %}
+    {% for r in results | sort(attribute='aci_score', reverse=True) %}
+    {% set pct = ((r.aci_score / 5.0) * 100) | int %}
+    {% set bar_color = "#28a745" if r.aci_score >= 4 else ("#ffc107" if r.aci_score >= 2.5 else "#dc3545") %}
+    <div class="chart-bar-row">
+      <div class="chart-label" title="{{ r.url }}">{{ r.url | truncate(50, True, '...') }}</div>
+      <div class="chart-bar-wrap">
+        <div class="chart-bar-fill" style="width: {{ pct }}%; background: {{ bar_color }};">
+          {% if pct > 15 %}{{ r.aci_score | round(2) }}/5{% endif %}
+        </div>
+      </div>
+      <div class="chart-val" style="color: {{ bar_color }}">{{ r.aci_score | round(2) }}</div>
+    </div>
+    {% endfor %}
+
+    <!-- SVG Chart comparatiu de sub-scores -->
+    {% if results | length > 0 and results[0].sub_scores is defined %}
+    <h3 style="margin-top:24px; font-size:1em; color:#444;">Sub-scores comparatius (SVG)</h3>
+    {% set groups = ["wcag", "text", "elements", "performance"] %}
+    {% set colors = ["#007bff", "#28a745", "#fd7e14", "#6f42c1"] %}
+    {% set svg_w = 700 %}
+    {% set svg_h = 200 %}
+    {% set bar_w = 30 %}
+    {% set group_gap = 20 %}
+    {% set url_count = results | length %}
+    <svg width="{{ svg_w }}" height="{{ svg_h + 60 }}" viewBox="0 0 {{ svg_w }} {{ svg_h + 60 }}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Grafic de barres comparatiu de sub-scores per grup">
+      <title>Sub-scores ACI comparatius per URL i grup</title>
+      <!-- Eixos -->
+      <line x1="50" y1="{{ svg_h }}" x2="{{ svg_w - 10 }}" y2="{{ svg_h }}" stroke="#ccc" stroke-width="1"/>
+      <!-- Etiquetes Y -->
+      {% for v in [0, 1, 2, 3, 4, 5] %}
+      {% set y_pos = svg_h - (v / 5 * svg_h) %}
+      <text x="45" y="{{ y_pos + 4 }}" text-anchor="end" font-size="10" fill="#888">{{ v }}</text>
+      <line x1="48" y1="{{ y_pos }}" x2="{{ svg_w - 10 }}" y2="{{ y_pos }}" stroke="#eee" stroke-width="1"/>
+      {% endfor %}
+      <!-- Barres per URL i grup -->
+      {% for r_idx in range(results | length) %}
+      {% set r = results[r_idx] %}
+      {% set x_base = 55 + r_idx * (groups | length * (bar_w + 2) + group_gap) %}
+      {% for g_idx in range(groups | length) %}
+      {% set grp = groups[g_idx] %}
+      {% set sc = r.sub_scores.get(grp, 0) or 0 %}
+      {% set bar_h = (sc / 5 * svg_h) | int %}
+      {% set x = x_base + g_idx * (bar_w + 2) %}
+      {% set y = svg_h - bar_h %}
+      <rect x="{{ x }}" y="{{ y }}" width="{{ bar_w }}" height="{{ bar_h }}" fill="{{ colors[g_idx] }}" opacity="0.85" rx="2">
+        <title>{{ r.url | truncate(40) }} — {{ grp }}: {{ sc | round(2) }}/5.0</title>
+      </rect>
+      {% endfor %}
+      <!-- Etiqueta URL -->
+      <text x="{{ x_base + (groups | length * (bar_w + 2)) / 2 }}" y="{{ svg_h + 18 }}" text-anchor="middle" font-size="9" fill="#555">
+        {{ r.url | truncate(20, True, '…') }}
+      </text>
+      {% endfor %}
+      <!-- Llegenda -->
+      {% for g_idx in range(groups | length) %}
+      <rect x="{{ 55 + g_idx * 100 }}" y="{{ svg_h + 35 }}" width="12" height="12" fill="{{ colors[g_idx] }}" rx="2"/>
+      <text x="{{ 70 + g_idx * 100 }}" y="{{ svg_h + 45 }}" font-size="11" fill="#444">{{ groups[g_idx] }}</text>
+      {% endfor %}
+    </svg>
+    {% endif %}
+  </div>
+
+  <!-- Taula comparativa detallada -->
+  <section>
+    <h2>Taula comparativa de resultats</h2>
+    <table>
+      <tr>
+        <th>#</th>
+        <th>URL</th>
+        <th>ACI Score</th>
+        <th>WCAG</th>
+        <th>Text</th>
+        <th>Elements</th>
+        <th>Perf.</th>
+        <th>Metriques NA</th>
+        <th>Informe</th>
+      </tr>
+      {% for r in results | sort(attribute='aci_score', reverse=True) %}
+      {% set rank = loop.index %}
+      <tr>
+        <td>
+          <span class="rank-circle {% if rank == 1 %}rank-gold{% elif rank == 2 %}rank-silver{% elif rank == 3 %}rank-bronze{% endif %}">
+            {{ rank }}
+          </span>
+        </td>
+        <td><a href="{{ r.url }}" target="_blank" rel="noopener"><code>{{ r.url | truncate(55, True, '...') }}</code></a></td>
+        <td>
+          <span class="score-pill {% if r.aci_score >= 4 %}pill-green{% elif r.aci_score >= 2.5 %}pill-yellow{% else %}pill-red{% endif %}">
+            {{ r.aci_score | round(2) }}/5.0
+          </span>
+        </td>
+        <td>{{ r.sub_scores.get('wcag', 'N/A') | round(2) if r.sub_scores.get('wcag') is not none else 'N/A' }}</td>
+        <td>{{ r.sub_scores.get('text', 'N/A') | round(2) if r.sub_scores.get('text') is not none else 'N/A' }}</td>
+        <td>{{ r.sub_scores.get('elements', 'N/A') | round(2) if r.sub_scores.get('elements') is not none else 'N/A' }}</td>
+        <td>{{ r.sub_scores.get('performance', 'N/A') | round(2) if r.sub_scores.get('performance') is not none else 'N/A' }}</td>
+        <td>{{ r.metrics_na | default(0) }}</td>
+        <td>
+          {% if r.html_report %}
+          <a href="{{ r.html_report }}">Informe</a>
+          {% else %}-{% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </section>
+
+  <!-- Heatmap de metriques -->
+  {% if results | length > 0 %}
+  <div class="heatmap-section">
+    <h2>Heatmap de Metriques Normalitzades</h2>
+    <table class="heatmap-table">
+      <tr>
+        <th>URL</th>
+        {% set first_metrics = results[0].normalized_metrics.keys() | list %}
+        {% for m in first_metrics %}
+        <th title="{{ m }}">{{ m | replace('_', ' ') | truncate(12, True, '') }}</th>
+        {% endfor %}
+      </tr>
+      {% for r in results %}
+      <tr>
+        <td style="text-align:left; font-size:0.8em;">{{ r.url | truncate(35, True, '...') }}</td>
+        {% for m in first_metrics %}
+        {% set v = r.normalized_metrics.get(m, 0.5) %}
+        {% set r_comp = ((1 - v) * 255) | int %}
+        {% set g_comp = (v * 200) | int %}
+        <td style="background: rgb({{ r_comp }},{{ g_comp }},80); color: {% if v > 0.5 %}#fff{% else %}#333{% endif %}; font-weight:600;">
+          {{ v | round(2) }}
+        </td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  {% endif %}
+
+  <footer>
+    <p>Generat per <strong>aci_pipeline v{{ pipeline_version }}</strong> — Pipeline d'avaluació d'accessibilitat cognitiva i visual</p>
+    <p>TFM — Jordi Miguel i Costal | {{ timestamp }}</p>
+  </footer>
+
+</div>
+</body>
+</html>

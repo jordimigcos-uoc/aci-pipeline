@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comparativa de perfils — {{ clean_url }}</title>
+  <link rel="stylesheet" href="../../static/css/site.css">
+  <style>
+    :root {
+      --c-wcag:        #0056b3;
+      --c-readability: #1a6e30;
+      --c-visual:      #721c24;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: var(--font-sans); background: var(--color-bg); color: var(--color-text); margin: 0; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #001f3f 0%, #003366 100%);
+      color: #fff; padding: 1.5rem 1.75rem; border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 { margin: 0 0 0.4rem; font-size: 1.2rem; opacity: 0.7; font-weight: 400; }
+    .hero p  { margin: 0; font-size: 1rem; word-break: break-all; }
+    .hero a  { color: #aed6f1; }
+
+    /* Score cards */
+    .profile-cards {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 700px) { .profile-cards { grid-template-columns: 1fr; } }
+
+    .profile-card {
+      border-radius: 8px; padding: 1.25rem 1rem; text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .profile-card.wcag        { background: #dbeafe; border: 2px solid var(--c-wcag); }
+    .profile-card.readability { background: #d4edda; border: 2px solid var(--c-readability); }
+    .profile-card.visual      { background: #f8d7da; border: 2px solid var(--c-visual); }
+
+    .profile-card h2 { margin: 0 0 0.5rem; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.07em; }
+    .profile-card.wcag h2        { color: var(--c-wcag); }
+    .profile-card.readability h2 { color: var(--c-readability); }
+    .profile-card.visual h2      { color: var(--c-visual); }
+
+    .aci-val { font-size: 2.8rem; font-weight: 900; line-height: 1; margin: 0.25rem 0; }
+    .aci-sub { font-size: 0.78rem; opacity: 0.75; }
+
+    {% for pname, pdata in profiles.items() %}
+    {% set s = pdata.aci_score %}
+    {% endfor %}
+
+    /* Sub-scores table */
+    .section-title {
+      font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.06em; color: var(--color-text-muted);
+      border-bottom: 2px solid var(--color-border);
+      padding-bottom: 0.4rem; margin: 1.5rem 0 0.75rem;
+    }
+
+    .cmp-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    .cmp-table th, .cmp-table td {
+      padding: 0.55rem 0.75rem; border: 1px solid var(--color-border); text-align: left;
+    }
+    .cmp-table th { background: #f1f3f5; font-weight: 700; }
+    .cmp-table td.num { text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .cmp-table tr:nth-child(even) { background: #f8f9fa; }
+
+    .best  { background: #d4edda !important; }
+    .worst { background: #f8d7da !important; }
+
+    /* Interventions */
+    .interv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 0.75rem; }
+    @media (max-width: 700px) { .interv-grid { grid-template-columns: 1fr; } }
+
+    .interv-col h3 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 0.5rem; }
+    .interv-col.wcag h3        { color: var(--c-wcag); }
+    .interv-col.readability h3 { color: var(--c-readability); }
+    .interv-col.visual h3      { color: var(--c-visual); }
+
+    .interv-item {
+      font-size: 0.8rem; padding: 0.4rem 0.6rem; border-radius: 4px;
+      margin-bottom: 0.35rem; background: #f8f9fa; border-left: 3px solid #dee2e6;
+    }
+    .interv-item .rank { font-weight: 700; margin-right: 0.35rem; }
+    .interv-item .wcag-tag { font-size: 0.7rem; opacity: 0.7; }
+
+    footer { margin-top: 2rem; padding-top: 0.75rem; border-top: 1px solid var(--color-border);
+             font-size: 0.78rem; color: var(--color-text-muted); text-align: center; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Salta al contingut principal</a>
+  <header class="site-header" role="banner">
+    <a class="site-header__logo" href="../../index.html" aria-label="ACI Pipeline — pàgina d'inici">
+      <img src="../../static/img/uoc_logo.svg" alt="UOC" width="80" height="32">
+      <span class="site-header__wordmark" aria-hidden="true">ACI<br>Pipeline</span>
+    </a>
+    <nav class="site-header__nav" aria-label="Navegació principal">
+      <ul role="list">
+        <li><a href="../../index.html">Índex</a></li>
+        <li><a href="../../report.html">Informe D3</a></li>
+        <li><a href="../../page_report.html" aria-current="page">Informes</a></li>
+      </ul>
+    </nav>
+    <div class="site-header__actions">
+      <div class="lang-selector" role="group" aria-label="Selecció de llengua">
+        <button class="lang-btn" data-lang="ca" aria-pressed="true">CA</button>
+        <button class="lang-btn" data-lang="es" aria-pressed="false">ES</button>
+        <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </header>
+
+<main id="main-content">
+<div class="container">
+
+  <div class="hero" role="region" aria-label="Informació de la URL">
+    <h1>Informe comparatiu de perfils — ACI Pipeline</h1>
+    <p><strong>URL:</strong> <a href="{{ clean_url }}" target="_blank" rel="noopener">{{ clean_url }}</a></p>
+    {% if web_type %}<p><strong>Tipus:</strong> {{ web_type }}</p>{% endif %}
+    <p><strong>Data:</strong> {{ timestamp }}</p>
+  </div>
+
+  <!-- Score cards per perfil -->
+  <section aria-labelledby="scores-title">
+    <div class="section-title" id="scores-title">Puntuació ACI per perfil</div>
+    <div class="profile-cards">
+      {% for pname, pdata in profiles.items() %}
+      {% set css_cls = "wcag" if pname == "wcag_strict" else ("readability" if pname == "readability_first" else "visual") %}
+      {% set label = "WCAG Strict" if pname == "wcag_strict" else ("Readability First" if pname == "readability_first" else "Visual First") %}
+      <div class="profile-card {{ css_cls }}" role="group" aria-label="Perfil {{ label }}">
+        <h2>{{ label }}</h2>
+        <div class="aci-val" aria-label="Puntuació ACI {{ pdata.aci_score | round(2) }} sobre 5">
+          {{ pdata.aci_score | round(2) }}
+        </div>
+        <div class="aci-sub">/ 5.0</div>
+        {% set qual = "Excel·lent" if pdata.aci_score >= 4 else ("Acceptable" if pdata.aci_score >= 2.5 else "Insuficient") %}
+        <div style="margin-top:0.4rem; font-size:0.82rem; font-weight:600;">{{ qual }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Sub-scores comparison table -->
+  <section aria-labelledby="subscores-title">
+    <div class="section-title" id="subscores-title">Comparativa de sub-scores</div>
+    <table class="cmp-table" aria-label="Sub-scores per perfil">
+      <thead>
+        <tr>
+          <th scope="col">Sub-score</th>
+          {% for pname in profiles %}
+          {% set label = "WCAG Strict" if pname == "wcag_strict" else ("Readability" if pname == "readability_first" else "Visual First") %}
+          <th scope="col">{{ label }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% set groups = ["wcag", "text", "elements", "performance"] %}
+        {% for grp in groups %}
+        <tr>
+          <th scope="row" style="text-transform:uppercase; letter-spacing:0.04em;">{{ grp }}</th>
+          {% set vals = [] %}
+          {% for pname, pdata in profiles.items() %}
+            {% set v = pdata.sub_scores.get(grp) %}
+            {% if v is not none %}{% set _ = vals.append(v) %}{% endif %}
+          {% endfor %}
+          {% set best_val  = vals | max if vals else none %}
+          {% set worst_val = vals | min if vals else none %}
+          {% for pname, pdata in profiles.items() %}
+            {% set v = pdata.sub_scores.get(grp) %}
+            {% if v is not none %}
+              {% if vals | length > 1 and v == best_val %}
+                <td class="num best">{{ v | round(2) }}</td>
+              {% elif vals | length > 1 and v == worst_val %}
+                <td class="num worst">{{ v | round(2) }}</td>
+              {% else %}
+                <td class="num">{{ v | round(2) }}</td>
+              {% endif %}
+            {% else %}
+              <td class="num">—</td>
+            {% endif %}
+          {% endfor %}
+        </tr>
+        {% endfor %}
+        <!-- ACI global -->
+        <tr style="font-weight:700; border-top: 2px solid var(--color-border);">
+          <th scope="row">ACI GLOBAL</th>
+          {% set avals = [] %}
+          {% for pname, pdata in profiles.items() %}
+            {% set _ = avals.append(pdata.aci_score) %}
+          {% endfor %}
+          {% for pname, pdata in profiles.items() %}
+            {% set v = pdata.aci_score %}
+            {% if v == avals | max %}
+              <td class="num best">{{ v | round(2) }}</td>
+            {% elif v == avals | min %}
+              <td class="num worst">{{ v | round(2) }}</td>
+            {% else %}
+              <td class="num">{{ v | round(2) }}</td>
+            {% endif %}
+          {% endfor %}
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:0.75rem; margin-top:0.4rem; color:var(--color-text-muted);">
+      <span style="background:#d4edda; padding:2px 6px; border-radius:3px;">millor</span> &nbsp;
+      <span style="background:#f8d7da; padding:2px 6px; border-radius:3px;">pitjor</span>
+    </p>
+  </section>
+
+  <!-- Top interventions per profile -->
+  <section aria-labelledby="interv-title">
+    <div class="section-title" id="interv-title">Principals intervencions per perfil (top 5)</div>
+    <div class="interv-grid">
+      {% for pname, pdata in profiles.items() %}
+      {% set css_cls = "wcag" if pname == "wcag_strict" else ("readability" if pname == "readability_first" else "visual") %}
+      {% set label = "WCAG Strict" if pname == "wcag_strict" else ("Readability" if pname == "readability_first" else "Visual First") %}
+      <div class="interv-col {{ css_cls }}">
+        <h3>{{ label }}</h3>
+        {% for iv in pdata.interventions[:5] %}
+        <div class="interv-item">
+          <span class="rank">#{{ iv.priority_rank }}</span>{{ iv.action }}
+          <div class="wcag-tag">{{ iv.metric }} · WCAG {{ iv.wcag_criterion }}</div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Raw metrics comparison -->
+  <section aria-labelledby="metrics-title">
+    <div class="section-title" id="metrics-title">Mètriques normalitzades</div>
+    <table class="cmp-table" aria-label="Mètriques normalitzades per perfil">
+      <thead>
+        <tr>
+          <th scope="col">Mètrica</th>
+          {% for pname in profiles %}
+          {% set label = "WCAG Strict" if pname == "wcag_strict" else ("Readability" if pname == "readability_first" else "Visual First") %}
+          <th scope="col">{{ label }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% set all_metrics = [] %}
+        {% for pname, pdata in profiles.items() %}
+          {% for m in pdata.normalized_metrics %}
+            {% if m not in all_metrics %}{% set _ = all_metrics.append(m) %}{% endif %}
+          {% endfor %}
+        {% endfor %}
+        {% for m in all_metrics | sort %}
+        <tr>
+          <th scope="row" style="font-weight:400; font-size:0.82rem;">{{ m }}</th>
+          {% for pname, pdata in profiles.items() %}
+          {% set v = pdata.normalized_metrics.get(m) %}
+          <td class="num">{{ "%.3f"|format(v) if v is not none else "—" }}</td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+</div>
+</main>
+
+  <footer class="site-footer" role="contentinfo">
+    <p>Pipeline d'accessibilitat cognitiva i visual (ACI) v{{ pipeline_version }} — TFM Jordi Miguel i Costal · UOC</p>
+    <p><small>{{ timestamp }}</small></p>
+  </footer>
+  <script type="module">
+    import { initI18n } from '../../static/js/i18n.js';
+    initI18n();
+  </script>
+</body>
+</html>

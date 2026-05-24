@@ -1,0 +1,124 @@
+# ================================================================
+# .gitignore — ACI Pipeline v0.1.0
+# ================================================================
+
+# ── Python ──────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# ── Entorns virtuals ─────────────────────────────────────────────
+.venv/
+venv/
+ENV/
+env/
+.env.local
+.env.*.local
+
+# ── Variables d'entorn (poden contenir secrets!) ─────────────────
+.env
+# Excepte l'exemple sense secrets:
+!.env.example
+
+# ── Tests i cobertura ─────────────────────────────────────────────
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+nosetests.xml
+coverage.xml
+
+# ── Dades generades pel pipeline (no pujar al repo) ───────────────
+# Screenshots i captures
+data/assets/
+# Paquets ZIP per URL
+data/*.zip
+# HTMLs processats
+data/output_html/
+# Mètriques i resultats generats
+data/metrics/*.json
+data/metrics/*.csv
+data/metrics/index.html
+data/reports/
+data/processed/
+data/samples/
+# Resultats de runs locals
+results/
+# Fitxers de resultats al root del data/
+data/*_package.zip
+data/*.json
+# Excepte arxius d'entrada (necessaris)
+!data/inputs/
+
+# ── Logs ─────────────────────────────────────────────────────────
+logs/
+*.log
+
+# ── Carpeta resultats del TFM ────────────────────────────────────
+resultats/
+
+# ── Fitxers LaTeX (documents acadèmics, no part del pipeline) ────
+*.aux
+*.log
+*.pdf
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.toc
+*.lof
+*.lot
+*.out
+*.bbl
+*.blg
+*.tex
+
+# ── Fitxers grans binaris ────────────────────────────────────────
+*.bin
+*.model
+*.pkl
+*.h5
+*.onnx
+static/js/*.min.js.map
+
+# ── IDEs ─────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+
+# ── macOS ────────────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+
+# ── Windows ──────────────────────────────────────────────────────
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ── Jupyter ──────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── GitHub Pages generat (es gestiona per la branca gh-pages) ────
+# No pujar docs/results.json (es genera a CI)
+docs/results.json
+docs/results/
+docs/reports/
+docs/logs/

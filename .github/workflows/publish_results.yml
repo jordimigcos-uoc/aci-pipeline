@@ -1,0 +1,194 @@
+# =============================================================================
+# publish_results.yml — Publica resultats del pipeline ACI a GitHub Pages
+#
+# Per què GitHub Pages no executa Python:
+#   GitHub Pages és un servei d'hosting estàtic (HTML/CSS/JS).
+#   Per tant, executem el pipeline ACI dins d'una GitHub Action, exportem
+#   els resultats (HTML, JSON, CSV) a la carpeta docs/, i Pages serveix
+#   aquest contingut estàtic des de la branca gh-pages.
+#
+# Trigger:
+#   - workflow_dispatch: execució manual des de la pestanya "Actions" de GitHub
+#   - push a main amb canvis a urls.sample.txt, src/ o configs/ (auto-publicació)
+#
+# Secrets necessaris:
+#   - ANTHROPIC_API_KEY: clau API d'Anthropic (opcional; M5-IA s'omet si falta)
+#     → Configura-la a: Settings → Secrets → Actions → New repository secret
+# =============================================================================
+name: Publica resultats a GitHub Pages
+
+on:
+  # Execució manual des de la interfície web de GitHub
+  workflow_dispatch:
+    inputs:
+      url_file:
+        description: "Fitxer d'URLs a analitzar"
+        required: false
+        default: "data/inputs/urls.sample.txt"
+      profile:
+        description: "Perfil de puntuació"
+        required: false
+        default: "wcag_strict"
+        type: choice
+        options:
+          - wcag_strict
+          - readability_first
+          - visual_first
+      all_profiles:
+        description: "Executa els 3 perfils (ignora 'profile')"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+
+  # Auto-publicació quan canvien fitxers clau
+  push:
+    branches: [main]
+    paths:
+      - "data/inputs/urls.sample.txt"
+      - "src/**"
+      - "configs/**"
+
+# Permisos per a Pages i per escriure a la branca gh-pages
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  run-pipeline-and-publish:
+    name: Executa pipeline i publica a Pages
+    runs-on: ubuntu-latest
+
+    steps:
+      # ── 1. Checkout ─────────────────────────────────────────────────────────
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # ── 2. Python ───────────────────────────────────────────────────────────
+      - name: Configura Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      # ── 3. Dependències ─────────────────────────────────────────────────────
+      - name: Instal·la dependències
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -e . --no-deps
+
+      # ── 4. Playwright ───────────────────────────────────────────────────────
+      - name: Instal·la Chromium (Playwright)
+        run: playwright install chromium --with-deps
+
+      # ── 5. Executa el pipeline ───────────────────────────────────────────────
+      - name: Executa pipeline ACI
+        run: |
+          URL_FILE="${{ github.event.inputs.url_file || 'data/inputs/urls.sample.txt' }}"
+          PROFILE="${{ github.event.inputs.profile || 'wcag_strict' }}"
+          ALL="${{ github.event.inputs.all_profiles || 'false' }}"
+
+          EXTRA_FLAGS=""
+          if [ "$ALL" = "true" ]; then
+            EXTRA_FLAGS="--all-profiles"
+          else
+            EXTRA_FLAGS="--profile $PROFILE"
+          fi
+
+          python -m aci_pipeline.cli \
+            --url-file "$URL_FILE" \
+            $EXTRA_FLAGS \
+            --output results/gh-pages/ \
+            --log-level INFO
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY || '' }}
+
+      # ── 6. Prepara docs/ per a Pages ────────────────────────────────────────
+      - name: Prepara carpeta docs/
+        run: |
+          mkdir -p docs/results docs/reports
+
+          # Copia informes HTML individuals
+          if ls results/gh-pages/reports/*.html 2>/dev/null; then
+            cp results/gh-pages/reports/*.html docs/reports/ || true
+          fi
+
+          # Copia CSVs i JSONs de mètriques
+          if ls results/gh-pages/metrics/*.json 2>/dev/null; then
+            cp results/gh-pages/metrics/*.json docs/results/ || true
+          fi
+          if ls results/gh-pages/metrics/*.csv 2>/dev/null; then
+            cp results/gh-pages/metrics/*.csv docs/results/ || true
+          fi
+
+          # Genera results.json consolidat per al dashboard
+          python - <<'PYEOF'
+          import json, pathlib, datetime
+
+          results = []
+          metrics_dir = pathlib.Path("results/gh-pages/metrics")
+          if metrics_dir.exists():
+              for f in sorted(metrics_dir.glob("*.json")):
+                  try:
+                      data = json.loads(f.read_text(encoding="utf-8"))
+                      if "aci_score" in data:
+                          results.append({
+                              "url":       data.get("url", ""),
+                              "domain":    data.get("url", "").split("/")[2] if "//" in data.get("url","") else "",
+                              "aci_score": round(float(data.get("aci_score", 0)), 3),
+                              "profile":   data.get("profile", ""),
+                              "timestamp": data.get("timestamp", ""),
+                              "report":    f"reports/{f.stem}.html",
+                          })
+                  except Exception as e:
+                      print(f"Ignorat {f.name}: {e}")
+
+          # Ordena per ACI descendent
+          results.sort(key=lambda r: r["aci_score"], reverse=True)
+
+          out = {
+              "generated_at": datetime.datetime.utcnow().isoformat() + "Z",
+              "pipeline_version": "0.1.0",
+              "n_urls": len(results),
+              "results": results,
+          }
+          pathlib.Path("docs/results.json").write_text(
+              json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8"
+          )
+          print(f"results.json: {len(results)} entrades")
+          PYEOF
+
+          # Còpia de logs (opcional, útil per a diagnosi)
+          mkdir -p docs/logs
+          cp logs/*.log docs/logs/ 2>/dev/null || true
+
+          echo "Contingut de docs/:"
+          ls -la docs/
+
+      # ── 7. Publica a la branca gh-pages amb peaceiris/actions-gh-pages ───────
+      # Necessita: Settings → Pages → Source: gh-pages branch / root
+      - name: Publica a GitHub Pages (branca gh-pages)
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token:    ${{ secrets.GITHUB_TOKEN }}   # Token automàtic de GitHub
+          publish_dir:     ./docs                         # Carpeta que es publica
+          publish_branch:  gh-pages                       # Branca de Pages
+          commit_message:  "ci: publica resultats ACI · run ${{ github.run_id }}"
+          keep_files:      false                          # Substitueix el contingut anterior
+
+      # ── 8. Informa de la URL de Pages ───────────────────────────────────────
+      - name: URL de GitHub Pages
+        run: |
+          echo ""
+          echo "╔══════════════════════════════════════════════════════════╗"
+          echo "║  Resultats publicats a GitHub Pages!                    ║"
+          echo "╚══════════════════════════════════════════════════════════╝"
+          REPO="${{ github.repository }}"
+          OWNER=$(echo $REPO | cut -d/ -f1)
+          REPONAME=$(echo $REPO | cut -d/ -f2)
+          echo "  URL: https://${OWNER}.github.io/${REPONAME}/"
+          echo ""

@@ -1,0 +1,83 @@
+# =============================================================================
+# ci.yml — Pipeline de CI per al repositori ACI Pipeline v0.1.0
+#
+# Trigger: push i pull_request a la branca main
+# Què fa:
+#   1. Instal·la Python 3.11 + dependències + Chromium (Playwright)
+#   2. Executa la suite de tests (pytest)
+#   3. Executa el pipeline amb les 3 URLs de mostra
+#   4. Desa els resultats com a artifact de GitHub Actions
+# =============================================================================
+name: CI — ACI Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Permís mínim: només lectura del repositori
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    name: Tests i execució del pipeline
+    runs-on: ubuntu-latest
+
+    steps:
+      # ── 1. Checkout del codi ────────────────────────────────────────────────
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # ── 2. Configura Python ─────────────────────────────────────────────────
+      - name: Configura Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip              # Caché de pip per accelerar execucions posteriors
+
+      # ── 3. Instal·la dependències Python ────────────────────────────────────
+      - name: Instal·la dependències
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # ── 4. Instal·la Chromium per a Playwright ──────────────────────────────
+      - name: Instal·la Chromium (Playwright)
+        run: playwright install chromium --with-deps
+
+      # ── 5. Instal·la el paquet en mode editable ─────────────────────────────
+      - name: Instal·la aci-pipeline (mode editable)
+        run: pip install -e . --no-deps
+
+      # ── 6. Executa tests unitaris ────────────────────────────────────────────
+      # ANTHROPIC_API_KEY pot ser 'dummy' en CI (M5-IA s'omet si la clau és inválida)
+      - name: Executa pytest
+        run: python -m pytest tests/ -v --tb=short -x
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY || 'sk-ant-dummy-for-ci' }}
+          LOG_LEVEL: WARNING    # Redueix el soroll als logs de CI
+
+      # ── 7. Executa el pipeline amb les URLs de mostra ───────────────────────
+      - name: Executa pipeline (mostra de 3 URLs)
+        run: |
+          python -m aci_pipeline.cli \
+            --url-file data/inputs/urls.sample.txt \
+            --profile wcag_strict \
+            --output results/ci/ \
+            --log-level INFO
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY || 'sk-ant-dummy-for-ci' }}
+
+      # ── 8. Desa resultats com a artifact ─────────────────────────────────────
+      # Disponibles a la pestanya "Artifacts" de cada execució d'Actions
+      - name: Desa resultats com a artifact
+        uses: actions/upload-artifact@v4
+        if: always()    # Desa fins i tot si el pipeline ha fallat parcialment
+        with:
+          name: ci-results-${{ github.run_id }}
+          path: |
+            results/ci/
+            logs/
+          retention-days: 14    # Elimina automàticament als 14 dies

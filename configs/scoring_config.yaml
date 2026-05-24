@@ -1,0 +1,124 @@
+# Configuració de perfils de puntuació ACI
+# Cada perfil defineix pesos per a cada mètrica (0 = ignorada, >0 = activa)
+
+profiles:
+  wcag_strict:
+    description: "Conformitat normativa WCAG/EN301549 - màxima prioritat legal"
+    metrics:
+      color_contrast_ratio: 5
+      focus_visible_ratio: 4
+      target_size_clean: 3
+      keyboard_clean: 5
+      aria_roles_valid: 4
+      accessible_names_coverage: 5
+      audit_critical_violations: 5
+      audit_high_violations: 4
+      audit_medium_violations: 2
+      audit_low_violations: 1
+      page_flesch: 2
+      text_complexity: 1
+      heading_hierarchy: 3
+      alt_text_coverage: 5
+      landmark_coverage: 3
+      performance_lcp: 2
+
+  readability_first:
+    description: "Llegibilitat i comprensió - prioritat editorial"
+    metrics:
+      color_contrast_ratio: 2
+      focus_visible_ratio: 1
+      target_size_clean: 1
+      keyboard_clean: 1
+      aria_roles_valid: 1
+      accessible_names_coverage: 2
+      audit_critical_violations: 3
+      audit_high_violations: 2
+      audit_medium_violations: 1
+      audit_low_violations: 0
+      page_flesch: 5
+      text_complexity: 5
+      heading_hierarchy: 5
+      alt_text_coverage: 3
+      landmark_coverage: 2
+      performance_lcp: 1
+
+  visual_first:
+    description: "Qualitat visual i multimèdia - prioritat producte"
+    metrics:
+      color_contrast_ratio: 4
+      focus_visible_ratio: 2
+      target_size_clean: 3
+      keyboard_clean: 1
+      aria_roles_valid: 2
+      accessible_names_coverage: 3
+      audit_critical_violations: 2
+      audit_high_violations: 2
+      audit_medium_violations: 1
+      audit_low_violations: 0
+      page_flesch: 2
+      text_complexity: 2
+      heading_hierarchy: 2
+      alt_text_coverage: 5
+      landmark_coverage: 2
+      performance_lcp: 4
+
+# Llindars de normalització per mètrica
+# norm: "ratio" → el valor ja és 0..1
+# norm: "flesch" → normalització Flesch (0..100 → 0..1)
+# norm: "inverse_count" → 0 violations = 1.0, creix el penalty
+# norm: "bool" → True=1.0, False=0.0
+normalization:
+  color_contrast_ratio:
+    norm: ratio
+    weight: 5
+  focus_visible_ratio:
+    norm: ratio
+    weight: 4
+  target_size_clean:
+    norm: ratio
+    weight: 3
+  keyboard_clean:
+    norm: bool
+    weight: 5
+  aria_roles_valid:
+    norm: ratio
+    weight: 4
+  accessible_names_coverage:
+    norm: ratio
+    weight: 5
+  audit_critical_violations:
+    norm: inverse_count
+    penalty_per_violation: 0.15
+    weight: 5
+  audit_high_violations:
+    norm: inverse_count
+    penalty_per_violation: 0.05
+    weight: 4
+  audit_medium_violations:
+    norm: inverse_count
+    penalty_per_violation: 0.02
+    weight: 2
+  audit_low_violations:
+    norm: inverse_count
+    penalty_per_violation: 0.01
+    weight: 1
+  page_flesch:
+    norm: flesch
+    weight: 3
+  text_complexity:
+    norm: ratio
+    weight: 2
+  heading_hierarchy:
+    norm: ratio
+    weight: 3
+  alt_text_coverage:
+    norm: ratio
+    weight: 5
+  landmark_coverage:
+    norm: ratio
+    weight: 3
+  performance_lcp:
+    norm: lcp
+    threshold_good: 2500
+    threshold_poor: 4000
+    weight: 3

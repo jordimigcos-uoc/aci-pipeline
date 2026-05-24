@@ -1,0 +1,32 @@
+# requirements.txt — Dependències del pipeline ACI v0.1.0
+# Instal·lació: pip install -r requirements.txt
+# Nota: també cal executar: playwright install chromium --with-deps
+
+# ── Motor de renderització i anàlisi web ──────────────────────────────────────
+playwright==1.44.0
+requests==2.32.3
+
+# ── Parseig HTML ──────────────────────────────────────────────────────────────
+beautifulsoup4==4.12.3
+lxml==5.2.2
+
+# ── Mètriques de llegibilitat ─────────────────────────────────────────────────
+textstat==0.7.3
+
+# ── Plantilles HTML ───────────────────────────────────────────────────────────
+jinja2==3.1.4
+
+# ── Configuració ─────────────────────────────────────────────────────────────
+pyyaml==6.0.1
+
+# ── IA (M5 — alt text automàtic) ─────────────────────────────────────────────
+# Requereix ANTHROPIC_API_KEY al .env o variable d'entorn
+anthropic==0.28.0
+
+# ── Imatge i contrast ────────────────────────────────────────────────────────
+pillow==10.3.0
+wcag-contrast-ratio==0.9
+
+# ── Tests ─────────────────────────────────────────────────────────────────────
+pytest==8.2.2
+pytest-asyncio==0.23.7

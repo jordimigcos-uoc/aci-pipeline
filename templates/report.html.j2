@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% set clean_url = url.split(';')[0].strip() %}
+  {% set web_type  = url.split(';')[1].strip() if ';' in url else '' %}
+  <title>Informe ACI — {{ clean_url }}</title>
+  <link rel="stylesheet" href="../../static/css/site.css">
+  <style>
+    :root {
+      --green: #28a745; --yellow: #ffc107; --red: #dc3545;
+      --orange: #fd7e14; --blue: #007bff; --gray: #6c757d;
+      --light: #f8f9fa; --border: #dee2e6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; color: #333; background: #fff; }
+    .container { max-width: 960px; margin: 0 auto; padding: 24px; }
+    header { background: #2c3e50; color: #fff; padding: 24px; margin-bottom: 24px; border-radius: 8px; }
+    header h1 { font-size: 1.6em; margin-bottom: 8px; }
+    header p { opacity: 0.85; font-size: 0.95em; margin: 2px 0; }
+    header a { color: #aed6f1; }
+
+    /* Score box */
+    .score-section { display: flex; gap: 16px; margin: 24px 0; flex-wrap: wrap; }
+    .score-box {
+      flex: 1; min-width: 180px; padding: 24px; border-radius: 12px;
+      text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .score-box .score-value { font-size: 3.5em; font-weight: 700; line-height: 1; }
+    .score-box .score-label { font-size: 0.9em; margin-top: 6px; opacity: 0.8; }
+    .score-box .score-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.85em; font-weight: 600; margin-top: 8px; background: rgba(255,255,255,0.3); }
+    {% if aci_score >= 4 %}
+    .score-box.main { background: linear-gradient(135deg, #28a745, #20c997); color: #fff; }
+    {% elif aci_score >= 2.5 %}
+    .score-box.main { background: linear-gradient(135deg, #ffc107, #fd7e14); color: #fff; }
+    {% else %}
+    .score-box.main { background: linear-gradient(135deg, #dc3545, #c82333); color: #fff; }
+    {% endif %}
+
+    /* Sub-score cards */
+    .sub-score-card { flex: 1; min-width: 120px; padding: 16px; border-radius: 8px; background: var(--light); border: 1px solid var(--border); text-align: center; }
+    .sub-score-card .sub-val { font-size: 1.8em; font-weight: 700; }
+    .sub-score-card .sub-name { font-size: 0.8em; color: var(--gray); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    {% for group in ["wcag", "text", "elements", "performance"] %}
+    {% endfor %}
+
+    /* Progress bars */
+    .metric-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .metric-row:last-child { border-bottom: none; }
+    .metric-name { flex: 0 0 220px; font-size: 0.9em; color: #444; }
+    .bar-wrap { flex: 1; background: #e9ecef; border-radius: 4px; height: 18px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.4s ease; }
+    .bar-fill.good { background: var(--green); }
+    .bar-fill.mid  { background: var(--yellow); }
+    .bar-fill.bad  { background: var(--red); }
+    .metric-score { flex: 0 0 50px; text-align: right; font-size: 0.85em; font-weight: 600; }
+    .metric-weight { flex: 0 0 30px; text-align: right; font-size: 0.8em; color: var(--gray); }
+
+    /* Tables */
+    table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.9em; }
+    th { background: #2c3e50; color: #fff; padding: 10px 12px; text-align: left; font-weight: 600; }
+    td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:nth-child(even) td { background: var(--light); }
+    tr:hover td { background: #e8f4fd; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.8em; font-weight: 600; }
+    .badge-red { background: #fde8ea; color: var(--red); }
+    .badge-orange { background: #fff3e0; color: var(--orange); }
+    .badge-yellow { background: #fff9e6; color: #856404; }
+    .badge-green { background: #d4edda; color: var(--green); }
+    .badge-gray { background: #e9ecef; color: var(--gray); }
+
+    /* Intervention table */
+    .priority-high td:first-child { border-left: 4px solid var(--red); }
+    .priority-mid td:first-child  { border-left: 4px solid var(--yellow); }
+    .priority-low td:first-child  { border-left: 4px solid var(--green); }
+    .rank-badge { display: inline-block; width: 28px; height: 28px; border-radius: 50%; background: #2c3e50; color: #fff; text-align: center; line-height: 28px; font-size: 0.85em; font-weight: 700; }
+
+    /* Sections */
+    section { margin: 32px 0; }
+    section h2 { font-size: 1.25em; color: #2c3e50; padding-bottom: 8px; border-bottom: 2px solid var(--border); margin-bottom: 16px; }
+    section h3 { font-size: 1.05em; color: #444; margin: 16px 0 8px; }
+
+    /* Axe violations */
+    .impact-critical { color: var(--red); font-weight: 700; }
+    .impact-serious  { color: var(--orange); font-weight: 700; }
+    .impact-moderate { color: #856404; font-weight: 600; }
+    .impact-minor    { color: var(--gray); }
+    code { background: #f1f3f5; padding: 1px 5px; border-radius: 3px; font-size: 0.88em; font-family: 'Consolas', monospace; }
+
+    /* Screenshot */
+    .screenshot-wrap { margin: 12px 0; }
+    .screenshot-wrap img { max-width: 100%; border: 1px solid var(--border); border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+
+    /* Summary stats */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin: 16px 0; }
+    .stat-card { background: var(--light); border: 1px solid var(--border); border-radius: 8px; padding: 14px; text-align: center; }
+    .stat-card .stat-val { font-size: 1.8em; font-weight: 700; color: #2c3e50; }
+    .stat-card .stat-label { font-size: 0.8em; color: var(--gray); margin-top: 4px; }
+
+    footer { margin-top: 48px; padding: 20px 0; border-top: 2px solid var(--border); color: var(--gray); font-size: 0.85em; text-align: center; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Salta al contingut principal</a>
+  <header class="site-header" role="banner">
+    <a class="site-header__logo" href="../../index.html" aria-label="ACI Pipeline — pàgina d'inici">
+      <img src="../../static/img/uoc_logo.svg" alt="UOC" width="80" height="32">
+      <span class="site-header__wordmark" aria-hidden="true">ACI<br>Pipeline</span>
+    </a>
+    <nav class="site-header__nav" aria-label="Navegació principal">
+      <ul role="list">
+        <li><a href="../../index.html">Índex</a></li>
+        <li><a href="../../report.html">Informe D3</a></li>
+        <li><a href="../../page_report.html" aria-current="page">Informe de pàgina</a></li>
+      </ul>
+    </nav>
+    <div class="site-header__actions">
+      <div class="lang-selector" role="group" aria-label="Selecció de llengua">
+        <button class="lang-btn" data-lang="ca" aria-pressed="true">CA</button>
+        <button class="lang-btn" data-lang="es" aria-pressed="false">ES</button>
+        <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </header>
+
+<div class="container">
+<main id="main-content">
+
+  <!-- Navegació entre perfils (injectada per JS des del manifest) -->
+  <nav id="profile-nav" aria-label="Navegació entre perfils" style="display:none;
+       flex-wrap:wrap;gap:6px;align-items:center;
+       padding:0.65rem 1rem;background:#f8f9fa;border-radius:6px;
+       border:1px solid #dee2e6;margin-bottom:1rem;">
+  </nav>
+
+  <!-- Report identity block -->
+  <section aria-label="Informació de la pàgina analitzada" style="margin-bottom:1.5rem; padding:1.25rem; background:#f1f3f5; border-radius:8px; border-left:4px solid #003366;">
+    <h1 style="font-size:1.15rem; margin:0 0 0.5rem; color:#003366;">Informe d'Accessibilitat Web — ACI Pipeline</h1>
+    <p><strong>URL:</strong> <a href="{{ clean_url }}" target="_blank" rel="noopener">{{ clean_url }}</a></p>
+    {% if web_type %}<p><strong>Tipus de web:</strong> {{ web_type }}</p>{% endif %}
+    <p><strong>Perfil actual:</strong> <strong>{{ profile }}</strong> &nbsp;|&nbsp; <strong>Data:</strong> {{ timestamp }}</p>
+    <p><strong>Pipeline:</strong> aci_pipeline v{{ pipeline_version }}</p>
+  </section>
+
+  <!-- Score principal -->
+  <section>
+    <h2>Puntuació ACI Global</h2>
+    <div class="score-section">
+      <div class="score-box main">
+        <div class="score-value">{{ aci_score | round(2) }}</div>
+        <div class="score-label">ACI Score / 5.0</div>
+        <div class="score-badge">
+          {% if aci_score >= 4 %}Excel·lent{% elif aci_score >= 3 %}Bo{% elif aci_score >= 2 %}Acceptable{% else %}Insuficient{% endif %}
+        </div>
+      </div>
+
+      {% for group, score in sub_scores.items() %}
+      {% if score is not none %}
+      <div class="sub-score-card">
+        <div class="sub-val" style="color: {% if score >= 4 %}#28a745{% elif score >= 2.5 %}#ffc107{% else %}#dc3545{% endif %}">
+          {{ score | round(1) }}
+        </div>
+        <div class="sub-name">{{ group }}</div>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Metriques per barra -->
+  <section>
+    <h2>Detall de Metriques (normalitzades 0-1)</h2>
+    {% for metric, norm_val in normalized_metrics.items() %}
+    {% set pct = (norm_val * 100) | int %}
+    {% set bar_class = "good" if norm_val >= 0.7 else ("mid" if norm_val >= 0.4 else "bad") %}
+    <div class="metric-row">
+      <div class="metric-name">{{ metric }}</div>
+      <div class="bar-wrap">
+        <div class="bar-fill {{ bar_class }}" style="width: {{ pct }}%"></div>
+      </div>
+      <div class="metric-score">{{ norm_val | round(3) }}</div>
+      <div class="metric-weight">w={{ weights.get(metric, '-') }}</div>
+    </div>
+    {% endfor %}
+  </section>
+
+  <!-- Intervencions prioritzades -->
+  <section>
+    <h2>Intervencions Prioritzades</h2>
+    <table>
+      <tr>
+        <th>#</th>
+        <th>Metrica</th>
+        <th>Accio recomanada</th>
+        <th>Score actual</th>
+        <th>Cost</th>
+        <th>Impacte</th>
+        <th>WCAG</th>
+      </tr>
+      {% for interv in interventions %}
+      {% set row_class = "priority-high" if interv.priority_score >= 3 else ("priority-mid" if interv.priority_score >= 1.5 else "priority-low") %}
+      <tr class="{{ row_class }}">
+        <td><span class="rank-badge">{{ interv.priority_rank }}</span></td>
+        <td><code>{{ interv.metric }}</code></td>
+        <td>{{ interv.action }}</td>
+        <td>
+          <span class="badge {% if interv.normalized_score >= 0.7 %}badge-green{% elif interv.normalized_score >= 0.4 %}badge-yellow{% else %}badge-red{% endif %}">
+            {{ interv.normalized_score | round(2) }}
+          </span>
+        </td>
+        <td>
+          <span class="badge {% if interv.cost == 'baix' %}badge-green{% elif interv.cost == 'mig' %}badge-yellow{% else %}badge-orange{% endif %}">
+            {{ interv.cost }}
+          </span>
+        </td>
+        <td>
+          <span class="badge {% if interv.impact_level == 'critic' %}badge-red{% elif interv.impact_level == 'alt' %}badge-orange{% else %}badge-gray{% endif %}">
+            {{ interv.impact_level }}
+          </span>
+        </td>
+        <td><small>{{ interv.wcag_criterion }}</small></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </section>
+
+  <!-- Violacions axe-core -->
+  {% if axe_violations %}
+  <section>
+    <h2>Violacions axe-core ({{ axe_violations | length }})</h2>
+    <table>
+      <tr><th>ID</th><th>Impacte</th><th>Descripcio</th><th>Elements afectats</th></tr>
+      {% for v in axe_violations %}
+      <tr>
+        <td><code>{{ v.id }}</code></td>
+        <td><span class="impact-{{ v.impact }}">{{ v.impact }}</span></td>
+        <td>{{ v.description }}</td>
+        <td>{{ v.nodes_affected }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </section>
+  {% endif %}
+
+  <!-- Metriques textuals -->
+  {% if text_metrics and text_metrics.flesch_reading_ease is not none %}
+  <section>
+    <h2>Metriques de Llegibilitat Textual</h2>
+    <div class="stats-grid">
+      {% if text_metrics.flesch_reading_ease is not none %}
+      <div class="stat-card">
+        <div class="stat-val" style="color: {% if text_metrics.flesch_reading_ease >= 60 %}#28a745{% elif text_metrics.flesch_reading_ease >= 30 %}#ffc107{% else %}#dc3545{% endif %}">
+          {{ text_metrics.flesch_reading_ease | round(1) }}
+        </div>
+        <div class="stat-label">Flesch Reading Ease</div>
+      </div>
+      {% endif %}
+      {% if text_metrics.num_words %}
+      <div class="stat-card">
+        <div class="stat-val">{{ text_metrics.num_words }}</div>
+        <div class="stat-label">Paraules</div>
+      </div>
+      {% endif %}
+      {% if text_metrics.num_sentences %}
+      <div class="stat-card">
+        <div class="stat-val">{{ text_metrics.num_sentences }}</div>
+        <div class="stat-label">Frases</div>
+      </div>
+      {% endif %}
+      {% if text_metrics.avg_sentence_length is not none %}
+      <div class="stat-card">
+        <div class="stat-val">{{ text_metrics.avg_sentence_length | round(1) }}</div>
+        <div class="stat-label">Paraules/frase (mitja)</div>
+      </div>
+      {% endif %}
+      {% if text_metrics.difficult_words is not none %}
+      <div class="stat-card">
+        <div class="stat-val">{{ text_metrics.difficult_words }}</div>
+        <div class="stat-label">Paraules complexes</div>
+      </div>
+      {% endif %}
+    </div>
+  </section>
+  {% endif %}
+
+  <!-- Rendiment -->
+  {% if perf and perf.lcp_ms is not none %}
+  <section>
+    <h2>Rendiment (Core Web Vitals)</h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-val" style="color: {% if perf.lcp_ms < 2500 %}#28a745{% elif perf.lcp_ms < 4000 %}#ffc107{% else %}#dc3545{% endif %}">
+          {{ (perf.lcp_ms / 1000) | round(2) }}s
+        </div>
+        <div class="stat-label">LCP ({{ perf.lcp_rating }})</div>
+      </div>
+      {% if perf.ttfb_ms is not none %}
+      <div class="stat-card">
+        <div class="stat-val">{{ perf.ttfb_ms | round(0) | int }}ms</div>
+        <div class="stat-label">TTFB</div>
+      </div>
+      {% endif %}
+      {% if perf.total_bytes %}
+      <div class="stat-card">
+        <div class="stat-val">{{ (perf.total_bytes / 1024) | round(0) | int }}KB</div>
+        <div class="stat-label">Total transferit</div>
+      </div>
+      {% endif %}
+    </div>
+  </section>
+  {% endif %}
+
+  <!-- Screenshot -->
+  {% if screenshot_path %}
+  <section>
+    <h2>Captura de pantalla</h2>
+    <div class="screenshot-wrap">
+      <img src="{{ screenshot_path }}" alt="Captura de pantalla de {{ clean_url }}" loading="lazy">
+    </div>
+  </section>
+  {% endif %}
+
+  <!-- Taula raw metrics -->
+  <section>
+    <h2>Valors Raw de Metriques</h2>
+    <table>
+      <tr><th>Metrica</th><th>Valor raw</th><th>Normalitzat</th><th>Pes</th></tr>
+      {% for metric, norm_val in normalized_metrics.items() %}
+      <tr>
+        <td><code>{{ metric }}</code></td>
+        <td>{{ raw_values.get(metric) if raw_values.get(metric) is not none else "N/A" }}</td>
+        <td>{{ norm_val | round(4) }}</td>
+        <td>{{ weights.get(metric, "-") }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </section>
+
+</main>
+</div>
+
+  <footer class="site-footer" role="contentinfo">
+    <p>Pipeline d'accessibilitat cognitiva i visual (ACI) v{{ pipeline_version }} — TFM Jordi Miguel i Costal · UOC</p>
+    <p><small>Basat en WCAG 2.1/2.2, EN 301 549 i axe-core &nbsp;|&nbsp; {{ timestamp }}</small></p>
+  </footer>
+  <script type="module">
+    import { initI18n } from '../../static/js/i18n.js';
+    initI18n();
+  </script>
+  <script>
+  /* Injecta navegació entre perfils llegint el manifest */
+  (async () => {
+    const PROFILE_LABELS = {
+      wcag_strict: 'WCAG Strict',
+      readability_first: 'Readability',
+      visual_first: 'Visual First'
+    };
+    const PROFILE_COLORS = {
+      wcag_strict: { bg: '#dbeafe', fg: '#1e40af', border: '#93c5fd' },
+      readability_first: { bg: '#d4edda', fg: '#1a6e30', border: '#86efac' },
+      visual_first: { bg: '#f8d7da', fg: '#721c24', border: '#fca5a5' }
+    };
+    const CURRENT_PROFILE = '{{ profile }}';
+    const CURRENT_URL = '{{ clean_url }}';
+
+    try {
+      const res = await fetch('../../data/reports_manifest.json');
+      if (!res.ok) return;
+      const manifest = await res.json();
+      const entry = manifest.find(e => e.url === CURRENT_URL);
+      if (!entry) return;
+
+      const profileReports = entry.profile_reports || {};
+      const hasCmp = !!entry.comparative_report;
+      if (!Object.keys(profileReports).length && !hasCmp) return;
+
+      const nav = document.getElementById('profile-nav');
+      const parts = [];
+
+      parts.push('<span style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#6c757d;margin-right:4px;">Perfils:</span>');
+
+      for (const [p, url] of Object.entries(profileReports)) {
+        const isCurrent = p === CURRENT_PROFILE;
+        const c = PROFILE_COLORS[p] || { bg: '#f1f3f5', fg: '#333', border: '#ccc' };
+        parts.push(`<a href="${url}"
+          style="display:inline-flex;align-items:center;padding:4px 10px;border-radius:4px;
+                 font-size:0.78rem;font-weight:700;text-decoration:none;
+                 background:${isCurrent ? c.fg : c.bg};color:${isCurrent ? '#fff' : c.fg};
+                 border:1.5px solid ${c.border};"
+          ${isCurrent ? 'aria-current="page"' : ''}
+          aria-label="Informe perfil ${PROFILE_LABELS[p] || p}">
+          ${PROFILE_LABELS[p] || p}
+        </a>`);
+      }
+
+      if (hasCmp) {
+        parts.push(`<a href="${entry.comparative_report}" target="_blank" rel="noopener"
+          style="display:inline-flex;align-items:center;padding:4px 10px;border-radius:4px;
+                 font-size:0.78rem;font-weight:700;text-decoration:none;
+                 background:#003366;color:#fff;border:1.5px solid #003366;"
+          aria-label="Informe comparatiu entre els tres perfils">
+          ⇌ Comparatiu
+        </a>`);
+      }
+
+      nav.innerHTML = parts.join('');
+      nav.style.display = 'flex';
+    } catch (_) { /* manifest no disponible: silenci */ }
+  })();
+  </script>
+</body>
+</html>

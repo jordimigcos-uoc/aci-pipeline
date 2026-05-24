@@ -1,0 +1,62 @@
+# pyproject.toml — Configuració del paquet aci-pipeline
+# Instal·lació: pip install -e .  (mode editable per al TFM)
+# O bé:        pip install -r requirements.txt  (instal·lació directa de deps)
+
+[build-system]
+requires = ["setuptools>=67", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name            = "aci-pipeline"
+version         = "0.1.0"
+description     = "Pipeline automatitzat d'avaluació d'accessibilitat web (ACI)"
+readme          = "README.md"
+requires-python = ">=3.10"
+license         = { text = "MIT" }
+authors         = [{ name = "Jordi Miguel i Costal" }]
+keywords        = ["accessibility", "wcag", "web", "pipeline", "aci", "en301549"]
+
+# Dependències de runtime (igual que requirements.txt però sense versions dev)
+dependencies = [
+    "playwright==1.44.0",
+    "beautifulsoup4==4.12.3",
+    "lxml==5.2.2",
+    "textstat==0.7.3",
+    "jinja2==3.1.4",
+    "pyyaml==6.0.1",
+    "requests==2.32.3",
+    "anthropic==0.28.0",
+    "pillow==10.3.0",
+    "wcag-contrast-ratio==0.9",
+]
+
+[project.optional-dependencies]
+# pip install -e ".[dev]"
+dev = [
+    "pytest==8.2.2",
+    "pytest-asyncio==0.23.7",
+]
+# pip install -e ".[plots]"  (per als scripts de diagrama)
+plots = [
+    "matplotlib>=3.8",
+    "numpy>=1.26",
+]
+
+# Entrypoint CLI: permet executar `aci-pipeline` directament un cop instal·lat
+[project.scripts]
+aci-pipeline = "aci_pipeline.cli:main"
+
+# Descoberta automàtica del paquet dins de src/
+[tool.setuptools.packages.find]
+where = ["src"]
+
+# Configuració de pytest
+[tool.pytest.ini_options]
+testpaths    = ["tests"]
+asyncio_mode = "auto"
+addopts      = "-v --tb=short"
+
+# Configuració de mypy (opcional, per a comprovació de tipus)
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true

@@ -1,0 +1,7 @@
+# ACI Pipeline — Mostra de 3 URLs per a proves locals i CI
+# Format: URL; Categoria (opcional)
+# Les línies que comencen per # s'ignoren
+
+https://www.gencat.cat/ca/ciutadania/inici; Institucional
+https://web.ub.edu/; Educatiu
+https://www.tnc.cat/ca; Cultural
