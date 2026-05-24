@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<!--
+  test_page.html — Pàgina de proves per als tests d'integració ACI Pipeline
+  =========================================================================
+  Dissenyada intencionalment amb PROBLEMES D'ACCESSIBILITAT per verificar
+  que el pipeline els detecta correctament. NO és un exemple a seguir.
+
+  Problemes inclosos (requerits pels tests de test_integracio.py):
+    ✗  Dos H1 (multiple_h1 = True)
+    ✗  Salt H1 → H3 sense H2 intermedi (hierarchy violation)
+    ✗  Imatges sense atribut alt (alt=None)
+    ✗  Imatges amb alt buit o genèric (not meaningful)
+    ✗  SVG sense títol ni aria-label (no accessible name)
+    ✗  Taula sense capçaleres <th>
+    ✗  Formulari amb inputs sense etiqueta <label>
+    ✗  Botons sense text accessible
+    ✗  Cap landmark: no <main>, <nav>, <header>, <footer>
+-->
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pàgina de Proves — ACI Pipeline Tests</title>
+</head>
+<body>
+
+  <!-- ══ VIOLACIÓ 1: Primer H1 ══════════════════════════════════════════════ -->
+  <h1>Títol Principal de la Pàgina de Proves d'Accessibilitat</h1>
+
+  <!-- ══ VIOLACIÓ 2: Salt H1 → H3 (sense H2 intermedi) ════════════════════ -->
+  <h3>Subsecció Directa — Salt de Nivell Intencional</h3>
+
+  <!-- ══ CONTINGUT DE TEXT (>100 caràcters per als tests de llegibilitat) ══ -->
+  <p>
+    Aquest és el contingut principal de la pàgina de proves per al pipeline ACI.
+    La pàgina ha estat dissenyada intencionalment amb nombrosos problemes d'accessibilitat
+    per verificar que els mòduls M2, M3, M4 i M6 els detecten i puntuen correctament.
+    El text és suficientment llarg per superar el llindar mínim dels tests de llegibilitat.
+  </p>
+  <p>
+    Segon paràgraf amb informació addicional sobre el procés d'avaluació automatitzada
+    de l'accessibilitat web. El pipeline analitza criteris WCAG 2.1 AA i genera un índex
+    ACI (Accessibility Computation Index) en escala de zero a cinc punts.
+  </p>
+  <p>
+    Tercer paràgraf per assegurar que el comptador de paraules supera el llindar mínim
+    establert als tests d'integració del sistema. L'accessibilitat web és fonamental
+    per a la inclusió digital de totes les persones.
+  </p>
+
+  <!-- ══ VIOLACIÓ 3: Imatges sense alt o amb alt no significatiu ═══════════ -->
+
+  <!-- logo.png: alt buit → not meaningful (decorativa però mal declarada) -->
+  <img src="logo.png" alt="">
+
+  <!-- chart.png: alt genèric → not meaningful -->
+  <img src="chart.png" alt="image">
+
+  <!-- decoration.jpg: SENSE atribut alt → alt=None, needs_ai=True ← requerit per test -->
+  <img src="decoration.jpg">
+
+  <!-- photo.jpg: SENSE atribut alt → alt=None, needs_ai=True -->
+  <img src="photo.jpg">
+
+  <!-- diagram.png: alt SIGNIFICATIU (l'única imatge accessible) -->
+  <img src="diagram.png" alt="Diagrama complet del flux d'anàlisi d'accessibilitat web">
+
+  <!-- ══ VIOLACIÓ 4: SVG sense descripció ═══════════════════════════════════ -->
+  <!-- role="img" però sense <title> ni aria-label → not meaningful -->
+  <svg width="80" height="80" role="img">
+    <circle cx="40" cy="40" r="35" fill="#2c6fad"/>
+    <rect x="20" y="55" width="40" height="15" fill="#5a9e6f"/>
+  </svg>
+
+  <!-- ══ VIOLACIÓ 5: Taula sense capçaleres <th> ═══════════════════════════ -->
+  <table>
+    <tr>
+      <td>Mètrica</td>
+      <td>Valor obtingut</td>
+      <td>Llindar WCAG</td>
+    </tr>
+    <tr>
+      <td>Contrast de color</td>
+      <td>2.8:1</td>
+      <td>4.5:1 (AA)</td>
+    </tr>
+    <tr>
+      <td>Mida objectiu</td>
+      <td>22px</td>
+      <td>24px mínim</td>
+    </tr>
+  </table>
+
+  <!-- ══ VIOLACIÓ 6: Formulari amb inputs sense etiqueta ════════════════════ -->
+  <form action="/cerca" method="get">
+
+    <!-- Input CORRECTE: té <label> associat via for/id -->
+    <label for="cerca-principal">Cerca:</label>
+    <input type="text" id="cerca-principal" name="q">
+
+    <!-- Inputs INCORRECTES: sense <label>, sense aria-label → unlabeled -->
+    <input type="text"  name="filtre"   placeholder="Filtre per categoria">
+    <input type="email" name="email"    placeholder="Correu electrònic de contacte">
+
+    <!-- Botons SENSE text accessible → accessible_names_coverage baixa -->
+    <button type="submit"></button>
+    <button type="button"></button>
+
+  </form>
+
+  <!-- ══ VIOLACIÓ 7: Segon H1 (multiple H1) ════════════════════════════════ -->
+  <h1>Segon Títol Principal — Redundant i Incorrecte</h1>
+
+  <!-- H2 vàlid (per tenir jerarquia mixta) -->
+  <h2>Secció de Recursos i Enllaços</h2>
+
+  <p>
+    Aquesta secció conté enllaços i botons addicionals per assegurar que
+    els tests de detecció d'elements interactius funcionin correctament.
+  </p>
+
+  <!-- ══ Elements interactius (mínim 3 requerit per test) ═════════════════ -->
+
+  <!-- Enllaç AMB text accessible -->
+  <a href="/documentacio">Documentació tècnica del pipeline</a>
+
+  <!-- Enllaç SENSE text accessible (aria-label buit) -->
+  <a href="/descarrega" aria-label=""></a>
+
+  <!-- Botó AMB text accessible -->
+  <button type="button">Veure resultats complets</button>
+
+  <!-- ══ CAP LANDMARK: no <header>, <nav>, <main>, <footer> ════════════════ -->
+  <!-- Absència intencional de landmarks → landmark_coverage = 0.0 -->
+
+</body>
+</html>

@@ -50,14 +50,15 @@ data/metrics/*.csv
 data/metrics/index.html
 data/reports/
 data/processed/
-data/samples/
+# data/samples/ NO exclòs: conté fixtures de test (test_page.html)
 # Resultats de runs locals
 results/
 # Fitxers de resultats al root del data/
 data/*_package.zip
 data/*.json
-# Excepte arxius d'entrada (necessaris)
+# Excepte arxius d'entrada i de test (necessaris al repo)
 !data/inputs/
+!data/samples/
 
 # ── Logs ─────────────────────────────────────────────────────────
 logs/
