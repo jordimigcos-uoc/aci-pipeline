@@ -1,0 +1,4 @@
+url,timestamp,profile,aci_score,aci_normalized,metrics_evaluated,metrics_na
+https://www.gencat.cat/ca/ciutadania/inici; Institucional,1779620183,wcag_strict,3.678,0.7356,16,7
+https://web.ub.edu/; Educatiu,1779620191,wcag_strict,3.83,0.7661,16,7
+https://www.tnc.cat/ca; Cultural,1779620196,wcag_strict,3.844,0.7688,16,7

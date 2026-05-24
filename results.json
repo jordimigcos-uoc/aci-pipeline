@@ -1,0 +1,31 @@
+{
+  "generated_at": "2026-05-24T10:56:36.706526Z",
+  "pipeline_version": "0.1.0",
+  "n_urls": 3,
+  "results": [
+    {
+      "url": "https://www.tnc.cat/ca; Cultural",
+      "domain": "www.tnc.cat",
+      "aci_score": 3.844,
+      "profile": "wcag_strict",
+      "timestamp": 1779620196,
+      "report": "reports/www_tnc_cat_ca_Cultural_1779620191_wcag_strict.html"
+    },
+    {
+      "url": "https://web.ub.edu/; Educatiu",
+      "domain": "web.ub.edu",
+      "aci_score": 3.83,
+      "profile": "wcag_strict",
+      "timestamp": 1779620191,
+      "report": "reports/web_ub_edu_Educatiu_1779620183_wcag_strict.html"
+    },
+    {
+      "url": "https://www.gencat.cat/ca/ciutadania/inici; Institucional",
+      "domain": "www.gencat.cat",
+      "aci_score": 3.678,
+      "profile": "wcag_strict",
+      "timestamp": 1779620183,
+      "report": "reports/www_gencat_cat_ca_ciutadania_inici_Institucional_1779620181_wcag_strict.html"
+    }
+  ]
+}

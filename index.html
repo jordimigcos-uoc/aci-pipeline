@@ -1,1 +1,374 @@
-﻿<!DOCTYPE html><html><head><meta charset="UTF-8"><title>ACI Pipeline</title></head><body><p>Publicació pendent — executa el workflow a GitHub Actions.</p></body></html>
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ACI Pipeline — Dashboard de resultats</title>
+  <style>
+    /* ── Reset i base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f4f6f9;
+      color: #1a1a2e;
+      min-height: 100vh;
+    }
+
+    /* ── Capçalera ── */
+    header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #2c6fad 100%);
+      color: white;
+      padding: 2rem 1.5rem 1.5rem;
+    }
+    header h1 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.5px; }
+    header p  { margin-top: 0.4rem; opacity: 0.85; font-size: 0.95rem; }
+    .header-meta {
+      margin-top: 1rem;
+      display: flex; gap: 1.5rem; flex-wrap: wrap;
+      font-size: 0.82rem; opacity: 0.75;
+    }
+
+    /* ── Layout principal ── */
+    main { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+
+    /* ── Targetes de KPI ── */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .kpi {
+      background: white;
+      border-radius: 10px;
+      padding: 1.2rem 1rem;
+      text-align: center;
+      box-shadow: 0 1px 6px rgba(0,0,0,.08);
+      border-top: 4px solid var(--accent, #2c6fad);
+    }
+    .kpi-value { font-size: 2rem; font-weight: 800; color: var(--accent, #2c6fad); }
+    .kpi-label { font-size: 0.78rem; color: #666; margin-top: 0.3rem; text-transform: uppercase; letter-spacing: .5px; }
+
+    /* ── Taula de resultats ── */
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 1px 6px rgba(0,0,0,.08);
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+    .card-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid #eee;
+      background: #fafafa;
+    }
+    .card-header h2 { font-size: 1rem; font-weight: 600; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    thead { background: #f0f4f8; }
+    th {
+      padding: 0.7rem 1rem; text-align: left;
+      font-size: 0.78rem; font-weight: 600;
+      color: #555; text-transform: uppercase; letter-spacing: .5px;
+      cursor: pointer; user-select: none;
+    }
+    th:hover { background: #e4ecf4; }
+    td { padding: 0.65rem 1rem; border-bottom: 1px solid #f0f0f0; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #f8fbff; }
+
+    /* ── Badges de puntuació ACI ── */
+    .aci-badge {
+      display: inline-block;
+      padding: 0.2rem 0.55rem;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: white;
+    }
+    .aci-badge.green  { background: #2ecc71; }
+    .aci-badge.orange { background: #e67e22; }
+    .aci-badge.red    { background: #e74c3c; }
+
+    /* ── Barra de progrés ACI ── */
+    .aci-bar {
+      width: 100%; height: 8px; background: #eee;
+      border-radius: 4px; overflow: hidden; margin-top: 4px;
+    }
+    .aci-bar-fill { height: 100%; border-radius: 4px; transition: width .3s; }
+
+    /* ── Perfil chips ── */
+    .chip {
+      display: inline-block;
+      font-size: 0.7rem; padding: 0.15rem 0.5rem;
+      border-radius: 12px; background: #e8f0fe; color: #2c6fad;
+      font-weight: 600; letter-spacing: .3px;
+    }
+
+    /* ── Botó Run ── */
+    .btn-run {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: #2ecc71; color: white;
+      padding: 0.5rem 1.1rem; border-radius: 6px;
+      font-weight: 600; font-size: 0.88rem;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: background .2s;
+    }
+    .btn-run:hover { background: #27ae60; }
+    .btn-run svg { width: 14px; height: 14px; fill: white; }
+
+    .btn-refresh {
+      background: none; border: 1px solid #ccc;
+      border-radius: 6px; padding: 0.4rem 0.8rem;
+      font-size: 0.8rem; cursor: pointer; color: #555;
+    }
+    .btn-refresh:hover { background: #f0f0f0; }
+
+    /* ── Estat ── */
+    #status {
+      font-size: 0.82rem; color: #888;
+      margin-bottom: 1rem; padding: 0 0.25rem;
+    }
+    #status.error { color: #e74c3c; }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center; padding: 1.5rem;
+      font-size: 0.78rem; color: #aaa;
+    }
+    footer a { color: #2c6fad; text-decoration: none; }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      header h1 { font-size: 1.3rem; }
+      .col-domain { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Capçalera ── -->
+<header>
+  <h1>🌐 ACI Pipeline — Dashboard de resultats</h1>
+  <p>Avaluació automatitzada d'accessibilitat web · WCAG 2.1 AA / EN 301 549</p>
+  <div class="header-meta">
+    <span id="hdr-generated">Carregant...</span>
+    <span id="hdr-version">v0.1.0</span>
+    <span id="hdr-nurls"></span>
+  </div>
+</header>
+
+<!-- ── Contingut principal ── -->
+<main>
+  <p id="status">⏳ Carregant resultats...</p>
+
+  <!-- KPIs -->
+  <div class="kpi-grid" id="kpi-grid" style="display:none">
+    <div class="kpi" style="--accent:#2c6fad">
+      <div class="kpi-value" id="kpi-nurls">—</div>
+      <div class="kpi-label">URLs analitzades</div>
+    </div>
+    <div class="kpi" style="--accent:#2ecc71">
+      <div class="kpi-value" id="kpi-max">—</div>
+      <div class="kpi-label">ACI màxim</div>
+    </div>
+    <div class="kpi" style="--accent:#e67e22">
+      <div class="kpi-value" id="kpi-mean">—</div>
+      <div class="kpi-label">ACI mitjà</div>
+    </div>
+    <div class="kpi" style="--accent:#e74c3c">
+      <div class="kpi-value" id="kpi-min">—</div>
+      <div class="kpi-label">ACI mínim</div>
+    </div>
+  </div>
+
+  <!-- Taula -->
+  <div class="card" id="results-card" style="display:none">
+    <div class="card-header">
+      <h2>📊 Resultats per URL</h2>
+      <div style="display:flex;gap:.5rem;align-items:center">
+        <button class="btn-refresh" onclick="loadResults()">↻ Refresca</button>
+        <a id="btn-run-action" class="btn-run" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.97 4.97L7 9.94 4.03 6.97l-.94.94L7 11.82l5.91-5.91-.94-.94z"/></svg>
+          Executa pipeline
+        </a>
+      </div>
+    </div>
+
+    <table id="results-table">
+      <thead>
+        <tr>
+          <th onclick="sortTable(0)">#</th>
+          <th onclick="sortTable(1)">Domini</th>
+          <th onclick="sortTable(2)" class="col-domain">URL</th>
+          <th onclick="sortTable(3)">ACI ↕</th>
+          <th onclick="sortTable(4)">Perfil</th>
+          <th>Informe</th>
+        </tr>
+      </thead>
+      <tbody id="results-tbody"></tbody>
+    </table>
+  </div>
+
+  <!-- Nota sobre l'execució -->
+  <div class="card" style="padding:1.25rem;font-size:.85rem;color:#555;line-height:1.7">
+    <strong>Com funciona?</strong><br>
+    GitHub Pages serveix contingut <em>estàtic</em>; per tant, el pipeline Python s'executa
+    dins d'una <strong>GitHub Action</strong> i exporta els resultats (HTML, JSON, CSV) a aquesta
+    pàgina. Per llençar una nova anàlisi manualment:
+    <ol style="margin-top:.6rem;padding-left:1.4rem">
+      <li>Ves a <strong>Actions → Publica resultats a GitHub Pages</strong> al teu repositori.</li>
+      <li>Fes clic a <strong>Run workflow</strong>, tria el perfil i el fitxer d'URLs.</li>
+      <li>En 2–5 minuts, la pàgina s'actualitzarà amb els nous resultats.</li>
+    </ol>
+  </div>
+</main>
+
+<footer>
+  ACI Pipeline v0.1.0 · Jordi Miguel i Costal · TFM 2026 ·
+  <a href="https://github.com" id="footer-repo">Repositori GitHub</a>
+</footer>
+
+<script>
+// ─── Configuració ──────────────────────────────────────────────────────────
+const RESULTS_JSON = "results.json";   // Generat per publish_results.yml
+let   currentSort  = { col: 3, asc: false };  // Ordena per ACI desc per defecte
+
+// ─── Carrega i mostra els resultats ───────────────────────────────────────
+async function loadResults() {
+  const status = document.getElementById("status");
+  status.textContent = "⏳ Carregant resultats...";
+  status.className = "";
+
+  try {
+    const res  = await fetch(RESULTS_JSON + "?t=" + Date.now());
+    if (!res.ok) throw new Error(`HTTP ${res.status}: ${RESULTS_JSON} no trobat`);
+    const data = await res.json();
+    renderDashboard(data);
+  } catch (err) {
+    status.textContent = "⚠️ " + err.message +
+      " — Els resultats apareixeran aquí un cop s'executi el pipeline.";
+    status.className = "error";
+    document.getElementById("kpi-grid").style.display    = "none";
+    document.getElementById("results-card").style.display = "none";
+  }
+}
+
+// ─── Renderitza el dashboard ───────────────────────────────────────────────
+function renderDashboard(data) {
+  const results = data.results || [];
+  const n       = results.length;
+
+  // Meta capçalera
+  document.getElementById("hdr-generated").textContent =
+    "Generat: " + (data.generated_at ? new Date(data.generated_at).toLocaleString("ca-ES") : "—");
+  document.getElementById("hdr-version").textContent  =
+    "Pipeline " + (data.pipeline_version || "0.1.0");
+  document.getElementById("hdr-nurls").textContent     =
+    n + " URL" + (n !== 1 ? "s" : "") + " analitzada" + (n !== 1 ? "s" : "");
+
+  // KPIs
+  if (n > 0) {
+    const scores = results.map(r => r.aci_score).filter(Number.isFinite);
+    const mean   = scores.reduce((a, b) => a + b, 0) / scores.length;
+    document.getElementById("kpi-nurls").textContent = n;
+    document.getElementById("kpi-max").textContent   = Math.max(...scores).toFixed(3);
+    document.getElementById("kpi-mean").textContent  = mean.toFixed(3);
+    document.getElementById("kpi-min").textContent   = Math.min(...scores).toFixed(3);
+    document.getElementById("kpi-grid").style.display = "";
+  }
+
+  // Taula
+  renderTable(results);
+  document.getElementById("results-card").style.display = "";
+  document.getElementById("status").textContent = n === 0
+    ? "ℹ️ No hi ha resultats. Executa el pipeline des d'Actions."
+    : "";
+
+  // Botó Run → links al workflow del repositori
+  const repoMeta = document.querySelector('meta[name="github-repo"]');
+  const repoUrl  = repoMeta ? repoMeta.content : detectRepo();
+  if (repoUrl) {
+    const actionsUrl = repoUrl + "/actions/workflows/publish_results.yml";
+    document.getElementById("btn-run-action").href = actionsUrl;
+    document.getElementById("footer-repo").href    = repoUrl;
+  }
+}
+
+// ─── Renderitza les files de la taula ─────────────────────────────────────
+function renderTable(results) {
+  const tbody = document.getElementById("results-tbody");
+  tbody.innerHTML = "";
+
+  results.forEach((r, i) => {
+    const aci    = typeof r.aci_score === "number" ? r.aci_score : parseFloat(r.aci_score) || 0;
+    const pct    = Math.round((aci / 5) * 100);
+    const cls    = aci >= 3.5 ? "green" : aci >= 2.5 ? "orange" : "red";
+    const color  = aci >= 3.5 ? "#2ecc71" : aci >= 2.5 ? "#e67e22" : "#e74c3c";
+    const domain = r.domain || (r.url || "").replace(/^https?:\/\//, "").split("/")[0];
+    const report = r.report ? `<a href="${r.report}" target="_blank">📄 veure</a>` : "—";
+
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td style="color:#999;font-size:.8rem">${i + 1}</td>
+      <td><strong>${escHtml(domain)}</strong></td>
+      <td class="col-domain" style="font-size:.78rem;color:#666;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
+        <a href="${escHtml(r.url || '')}" target="_blank" rel="noopener">${escHtml(r.url || '—')}</a>
+      </td>
+      <td>
+        <span class="aci-badge ${cls}">${aci.toFixed(3)}</span>
+        <div class="aci-bar">
+          <div class="aci-bar-fill" style="width:${pct}%;background:${color}"></div>
+        </div>
+      </td>
+      <td><span class="chip">${escHtml(r.profile || '—')}</span></td>
+      <td>${report}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// ─── Ordenació de la taula ─────────────────────────────────────────────────
+function sortTable(col) {
+  if (currentSort.col === col) {
+    currentSort.asc = !currentSort.asc;
+  } else {
+    currentSort = { col, asc: col !== 3 };   // ACI ordena desc per defecte
+  }
+
+  const tbody = document.getElementById("results-tbody");
+  const rows  = Array.from(tbody.querySelectorAll("tr"));
+
+  rows.sort((a, b) => {
+    const av = a.cells[col]?.textContent.trim() || "";
+    const bv = b.cells[col]?.textContent.trim() || "";
+    const an = parseFloat(av), bn = parseFloat(bv);
+    const cmp = isNaN(an) || isNaN(bn) ? av.localeCompare(bv) : an - bn;
+    return currentSort.asc ? cmp : -cmp;
+  });
+
+  rows.forEach(r => tbody.appendChild(r));
+}
+
+// ─── Helpers ───────────────────────────────────────────────────────────────
+function escHtml(str) {
+  return (str || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+
+function detectRepo() {
+  // Intenta deduir la URL del repo des de la URL de Pages
+  const h = window.location.hostname;          // p.ex. "jmiguel.github.io"
+  const p = window.location.pathname.split("/")[1];   // p.ex. "aci-pipeline"
+  if (h.endsWith("github.io") && p) {
+    const owner = h.replace(".github.io", "");
+    return `https://github.com/${owner}/${p}`;
+  }
+  return null;
+}
+
+// ─── Inicialitza quan la pàgina carrega ────────────────────────────────────
+document.addEventListener("DOMContentLoaded", loadResults);
+</script>
+</body>
+</html>
