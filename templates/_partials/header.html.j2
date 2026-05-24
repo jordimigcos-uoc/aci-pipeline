@@ -1,0 +1,44 @@
+{# ─────────────────────────────────────────────────────────────────────────────
+   templates/_partials/header.html.j2
+   Inclòs amb {% include "header.html.j2" %} des de qualsevol plantilla.
+   Variables esperades al context del pare:
+     pipeline_version  — string  p.ex. "0.2.0"
+     active_nav        — string  "index" | "metrics" | "report" | ""
+     root_path         — string  "" (arrel) | "../" (reports/)
+──────────────────────────────────────────────────────────────────────────── #}
+<a href="#main" class="skip-link">Salta al contingut principal</a>
+<header class="site-header" role="banner">
+
+  <a href="{{ root_path }}index.html"
+     class="site-header__logo"
+     aria-label="ACI Pipeline — Pàgina d'inici">
+    <svg aria-hidden="true" focusable="false" width="26" height="26"
+         viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="26" height="26" rx="5" fill="#0056b3"/>
+      <polyline points="4,20 8,10 12,16 16,8 20,14 22,11"
+                fill="none" stroke="#fff" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span class="site-header__wordmark">ACI Pipeline</span>
+  </a>
+
+  <nav class="site-header__nav" aria-label="Navegació principal">
+    <ul role="list">
+      <li>
+        <a href="{{ root_path }}index.html"
+           {% if active_nav == 'index' %}aria-current="page"{% endif %}>Tauler</a>
+      </li>
+      <li>
+        <a href="{{ root_path }}metrics.html"
+           {% if active_nav == 'metrics' %}aria-current="page"{% endif %}>Metodologia</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="site-header__actions">
+    <span style="font-size:0.72rem;opacity:0.65;font-variant-numeric:tabular-nums">
+      v{{ pipeline_version }}
+    </span>
+  </div>
+
+</header>

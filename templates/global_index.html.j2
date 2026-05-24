@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+        content="Tauler global d'accessibilitat ACI Pipeline: {{ n_urls }} llocs web analitzats. ACI mitjà: {{ kpi_mean }}/100.">
+  <meta property="og:title" content="Tauler ACI Pipeline — Accessibilitat Web">
+  <title>Tauler global — ACI Pipeline v{{ pipeline_version }}</title>
+  <link rel="stylesheet" href="static/css/site.css">
+  <link rel="stylesheet" href="static/css/reports.css">
+</head>
+<body>
+
+{% set root_path = '' %}
+{% set active_nav = 'index' %}
+{% include "header.html.j2" %}
+
+{# D3 tooltip (global, fora de main) #}
+<div id="d3-tooltip" role="tooltip" aria-hidden="true"></div>
+
+<main id="main" class="page-main">
+
+  {# ── KPI strip ──────────────────────────────────────────────────────── #}
+  <div class="kpi-strip" aria-label="Indicadors clau de rendiment">
+    <div class="kpi-card">
+      <span class="kpi-card__value">{{ n_urls }}</span>
+      <span class="kpi-card__label">Llocs analitzats</span>
+    </div>
+    <div class="kpi-card kpi-card--grey">
+      <span class="kpi-card__value">{{ n_types }}</span>
+      <span class="kpi-card__label">Tipus de web</span>
+    </div>
+    {% if kpi_max is not none %}
+    <div class="kpi-card kpi-card--green">
+      <span class="kpi-card__value">{{ kpi_max }}</span>
+      <span class="kpi-card__label">ACI màxim</span>
+    </div>
+    {% endif %}
+    {% if kpi_mean is not none %}
+    <div class="kpi-card kpi-card--alt">
+      <span class="kpi-card__value">{{ kpi_mean }}</span>
+      <span class="kpi-card__label">ACI mitjà</span>
+    </div>
+    {% endif %}
+    {% if kpi_min is not none %}
+    <div class="kpi-card kpi-card--red">
+      <span class="kpi-card__value">{{ kpi_min }}</span>
+      <span class="kpi-card__label">ACI mínim</span>
+    </div>
+    {% endif %}
+    <div class="kpi-card" style="background:#374151">
+      <span class="kpi-card__value">{{ pipeline_version }}</span>
+      <span class="kpi-card__label">Versió pipeline</span>
+    </div>
+  </div>
+
+  {# ── Filter controls ────────────────────────────────────────────────── #}
+  <section aria-label="Controls de filtratge">
+    <h2 class="section-title">Filtres</h2>
+    <div class="filter-bar" id="filter-bar">
+
+      <div class="filter-group">
+        <span class="filter-label" id="type-filter-label">Tipus de web</span>
+        <div class="type-btns" role="group" aria-labelledby="type-filter-label">
+          <button class="type-btn" aria-pressed="false" data-type=""
+                  onclick="toggleType('')">Tots</button>
+          {% for t in web_types %}
+          <button class="type-btn" aria-pressed="false"
+                  data-type="{{ t }}"
+                  onclick="toggleType('{{ t }}')"
+                  style="border-color:{{ type_colors.get(t, '#4b5563') }}">
+            {{ t | capitalize }}
+          </button>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label" for="profile-select">Perfil ACI</label>
+        <select class="filter-select" id="profile-select"
+                onchange="setProfile(this.value)">
+          {% for p in profiles_list %}
+          <option value="{{ p }}">{{ profile_labels[p] }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label" for="search-input">Cerca domini</label>
+        <input type="search" class="filter-input" id="search-input"
+               placeholder="ex: uoc.edu…"
+               oninput="setSearch(this.value)"
+               aria-label="Cerca per nom de domini">
+      </div>
+
+      <button class="reset-btn" onclick="resetFilters()" aria-label="Reinicia tots els filtres">
+        ↺ Reinicia
+      </button>
+
+    </div>
+  </section>
+
+  {# ── Chart 1: Comparison bar by type ────────────────────────────────── #}
+  <section aria-labelledby="ch1-title">
+    <h2 class="section-title" id="ch1-title">① Puntuació ACI per tipus de web i perfil</h2>
+    <p style="font-size:0.875rem;color:var(--color-text-muted);margin-bottom:0.75rem">
+      Barres agrupades: ACI mitjà per tipus de web, desglossat pels 3 perfils de puntuació.
+    </p>
+    <div class="chart-section">
+      <div class="chart-section__header">
+        <span class="chart-section__title">Comparativa multi-sèrie</span>
+        <button class="export-btn" onclick="exportD3Chart('chart-comparison','comparison')"
+                aria-label="Exporta el gràfic de comparació com a SVG">⬇ SVG</button>
+      </div>
+      <div class="chart-container chart-container--tall" id="chart-comparison"
+           role="img" aria-label="Gràfic de barres agrupades: ACI per tipus de web"></div>
+    </div>
+  </section>
+
+  {# ── Chart 2: WCAG principles radar by sector ────────────────────────── #}
+  <section aria-labelledby="ch2-title">
+    <h2 class="section-title" id="ch2-title">② Principis WCAG 2.1 per sector</h2>
+    <p style="font-size:0.875rem;color:var(--color-text-muted);margin-bottom:0.75rem">
+      Radar dels 4 principis WCAG (Perceptible, Operable, Comprensible, Robust) agrupat per tipus de web.
+      Cada línia representa la mitjana del sector.
+    </p>
+    <div class="chart-section">
+      <div class="chart-section__header">
+        <span class="chart-section__title">Radar WCAG per sector</span>
+        <button class="export-btn" onclick="exportD3Chart('chart-principles','principles')"
+                aria-label="Exporta el radar de principis com a SVG">⬇ SVG</button>
+      </div>
+      <div class="chart-container chart-container--tall" id="chart-principles"
+           role="img" aria-label="Gràfic radar dels principis WCAG per sector"></div>
+    </div>
+  </section>
+
+  {# ── Chart 3: Boxplot ACI per sector ─────────────────────────────────── #}
+  <section aria-labelledby="ch3-title">
+    <h2 class="section-title" id="ch3-title">③ Distribució ACI per sector</h2>
+    <p style="font-size:0.875rem;color:var(--color-text-muted);margin-bottom:0.75rem">
+      Diagrama de caixes (boxplot) de la distribució de puntuacions ACI per cada tipus de web.
+      Mostra mediana, quartils i valors extrems.
+    </p>
+    <div class="chart-section">
+      <div class="chart-section__header">
+        <span class="chart-section__title">Boxplot ACI per sector</span>
+        <button class="export-btn" onclick="exportD3Chart('chart-boxplot','boxplot')"
+                aria-label="Exporta el boxplot com a SVG">⬇ SVG</button>
+      </div>
+      <div class="chart-container chart-container--tall" id="chart-boxplot"
+           role="img" aria-label="Diagrama de caixes ACI per sector"></div>
+    </div>
+  </section>
+
+  {# ── Chart 4: Stacked bars sub-scores by domain ──────────────────────── #}
+  <section aria-labelledby="ch4-title">
+    <h2 class="section-title" id="ch4-title">④ Sub-puntuacions per domini (apilades)</h2>
+    <p style="font-size:0.875rem;color:var(--color-text-muted);margin-bottom:0.75rem">
+      Barres apilades de les 4 sub-puntuacions (WCAG, Text, Elements, Rendiment) per cada domini.
+      Permet identificar quina dimensió és la limitant.
+    </p>
+    <div class="chart-section">
+      <div class="chart-section__header">
+        <span class="chart-section__title">Sub-puntuacions apilades</span>
+        <button class="export-btn" onclick="exportD3Chart('chart-stacked','stacked')"
+                aria-label="Exporta les barres apilades com a SVG">⬇ SVG</button>
+      </div>
+      <div class="chart-container chart-container--tall chart-container--wide" id="chart-stacked"
+           role="img" aria-label="Barres apilades de sub-puntuacions per domini"></div>
+    </div>
+  </section>
+
+  {# ── Chart 5: Top 10 / Bottom 10 ─────────────────────────────────────── #}
+  <section aria-labelledby="ch5-title">
+    <h2 class="section-title" id="ch5-title">⑤ Top 10 i Bottom 10 per ACI</h2>
+    <p style="font-size:0.875rem;color:var(--color-text-muted);margin-bottom:0.75rem">
+      Barres horitzontals dels 10 llocs amb millor i pitjor puntuació ACI global.
+    </p>
+    <div class="charts-grid-2">
+      <div class="chart-section">
+        <div class="chart-section__header">
+          <span class="chart-section__title">Top 10</span>
+          <button class="export-btn" onclick="exportD3Chart('chart-top10','top10')"
+                  aria-label="Exporta el top 10 com a SVG">⬇ SVG</button>
+        </div>
+        <div class="chart-container chart-container--tall" id="chart-top10"
+             role="img" aria-label="Top 10 llocs web per puntuació ACI"></div>
+      </div>
+      <div class="chart-section">
+        <div class="chart-section__header">
+          <span class="chart-section__title">Bottom 10</span>
+          <button class="export-btn" onclick="exportD3Chart('chart-bottom10','bottom10')"
+                  aria-label="Exporta el bottom 10 com a SVG">⬇ SVG</button>
+        </div>
+        <div class="chart-container chart-container--tall" id="chart-bottom10"
+             role="img" aria-label="Bottom 10 llocs web per puntuació ACI"></div>
+      </div>
+    </div>
+  </section>
+
+  {# ── Chart 6: Radar readability_first mean sub-scores ────────────────── #}
+  <section aria-labelledby="ch6-title">
+    <h2 class="section-title" id="ch6-title">⑥ Radar del perfil Readability First (sub-puntuacions mitges)</h2>
+    <p style="font-size:0.875rem;color:var(--color-text-muted);margin-bottom:0.75rem">
+      Radar de les sub-puntuacions mitges del perfil <em>readability_first</em> per tipus de web.
+      Permet avaluar la llegibilitat com a factor prioritari.
+    </p>
+    <div class="chart-section">
+      <div class="chart-section__header">
+        <span class="chart-section__title">Radar llegibilitat per sector</span>
+        <button class="export-btn" onclick="exportD3Chart('chart-radar-readability','radar_readability')"
+                aria-label="Exporta el radar de llegibilitat com a SVG">⬇ SVG</button>
+      </div>
+      <div class="chart-container chart-container--tall" id="chart-radar-readability"
+           role="img" aria-label="Radar del perfil readability_first per sub-puntuació i sector"></div>
+    </div>
+  </section>
+
+  {# ── Chart 7: Heatmap metrics by domain ──────────────────────────────── #}
+  <section aria-labelledby="ch7-title">
+    <h2 class="section-title" id="ch7-title">⑦ Mapa de calor: mètriques per domini</h2>
+    <p style="font-size:0.875rem;color:var(--color-text-muted);margin-bottom:0.75rem">
+      Heatmap on cada cel·la mostra la puntuació d'una mètrica per un domini específic.
+      Permet identificar patrons i punts febles de forma visual.
+    </p>
+    <div class="chart-section">
+      <div class="chart-section__header">
+        <span class="chart-section__title">Heatmap mètriques × dominis</span>
+        <button class="export-btn" onclick="exportD3Chart('chart-heatmap','heatmap')"
+                aria-label="Exporta el mapa de calor com a SVG">⬇ SVG</button>
+      </div>
+      <div class="chart-container chart-container--wide" id="chart-heatmap"
+           role="img" aria-label="Mapa de calor de mètriques per domini"
+           style="min-height:300px"></div>
+    </div>
+  </section>
+
+  {# ── Chart 8: Lollipop universities ──────────────────────────────────── #}
+  <section aria-labelledby="ch8-title">
+    <h2 class="section-title" id="ch8-title">⑧ Lollipop: universitats per ACI</h2>
+    <p style="font-size:0.875rem;color:var(--color-text-muted);margin-bottom:0.75rem">
+      Gràfic de lollipop per als llocs web classificats com a <em>universitat</em>,
+      ordenats per puntuació ACI descendent.
+    </p>
+    <div class="chart-section">
+      <div class="chart-section__header">
+        <span class="chart-section__title">Rànquing d'universitats</span>
+        <button class="export-btn" onclick="exportD3Chart('chart-lollipop','lollipop')"
+                aria-label="Exporta el lollipop d'universitats com a SVG">⬇ SVG</button>
+      </div>
+      <div class="chart-container chart-container--tall" id="chart-lollipop"
+           role="img" aria-label="Gràfic lollipop de les universitats ordenades per ACI"></div>
+    </div>
+  </section>
+
+  {# ── Chart 9: Scatter ACI vs alt_text_coverage ───────────────────────── #}
+  <section aria-labelledby="ch9-title">
+    <h2 class="section-title" id="ch9-title">⑨ Dispersió: ACI vs. cobertura de text alternatiu</h2>
+    <p style="font-size:0.875rem;color:var(--color-text-muted);margin-bottom:0.75rem">
+      Gràfic de dispersió que mostra la correlació entre la cobertura d'atributs <code>alt</code>
+      (criterio WCAG 1.1.1 A) i la puntuació ACI global. Colors per tipus de web.
+    </p>
+    <div class="chart-section">
+      <div class="chart-section__header">
+        <span class="chart-section__title">Dispersió ACI × alt-text</span>
+        <button class="export-btn" onclick="exportD3Chart('chart-scatter','scatter')"
+                aria-label="Exporta el gràfic de dispersió com a SVG">⬇ SVG</button>
+      </div>
+      <div class="chart-container chart-container--tall" id="chart-scatter"
+           role="img" aria-label="Gràfic de dispersió ACI vs cobertura alt text"></div>
+    </div>
+  </section>
+
+  {# ── Chart 10: Impact-effort matrix ──────────────────────────────────── #}
+  <section aria-labelledby="ch10-title">
+    <h2 class="section-title" id="ch10-title">⑩ Matriu impacte–esforç de recomanacions</h2>
+    <p style="font-size:0.875rem;color:var(--color-text-muted);margin-bottom:0.75rem">
+      Les 12 recomanacions prioritàries visualitzades per impacte (eix Y) i esforç d'implementació (eix X).
+      La mida dels cercles representa la prioritat. Objectiu: accions a l'angle superior esquerre.
+    </p>
+    <div class="chart-section">
+      <div class="chart-section__header">
+        <span class="chart-section__title">Matriu impacte–esforç</span>
+        <button class="export-btn" onclick="exportD3Chart('chart-impact-effort','impact_effort')"
+                aria-label="Exporta la matriu impacte-esforç com a SVG">⬇ SVG</button>
+      </div>
+      <div class="chart-container chart-container--tall" id="chart-impact-effort"
+           role="img" aria-label="Matriu de les 12 recomanacions prioritàries per impacte i esforç"></div>
+    </div>
+  </section>
+
+  {# ── Data table ─────────────────────────────────────────────────────── #}
+  <section aria-labelledby="table-title">
+    <h2 class="section-title" id="table-title">Taula de llocs web analitzats</h2>
+    <p id="table-count" style="font-size:0.85rem;color:var(--color-text-muted);margin-bottom:0.75rem">
+      Carregant…
+    </p>
+    <div class="data-table-wrapper">
+      <table class="data-table" id="results-table" aria-describedby="table-count">
+        <thead>
+          <tr>
+            <th scope="col" data-col="domain" tabindex="0">Domini ↕</th>
+            <th scope="col" data-col="type"   tabindex="0">Tipus ↕</th>
+            <th scope="col" data-col="wcag_strict"       tabindex="0">WCAG Strict ↕</th>
+            <th scope="col" data-col="readability_first" tabindex="0">Readability ↕</th>
+            <th scope="col" data-col="visual_first"      tabindex="0">Visual ↕</th>
+            <th scope="col" data-col="best_score"        tabindex="0">Millor ↕</th>
+            <th scope="col">Informes</th>
+          </tr>
+        </thead>
+        <tbody id="table-body">
+          <tr><td colspan="7" class="table-empty">Carregant dades…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+{% include "footer.html.j2" %}
+
+{# ── Scripts ──────────────────────────────────────────────────────────── #}
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+
+{# Dades injectades (NO raw — Jinja2 substitueix les variables) #}
+<script>
+var TABLE_ROWS      = {{ table_rows_json }};
+var D3_DATA         = {{ d3_data_json }};
+var TYPE_COLORS     = {{ type_colors_json }};
+var RECOMMENDATIONS = {{ recommendations_json }};
+var PROFILE_COLORS  = {{ profile_colors | tojson }};
+var PROFILE_LABELS  = {{ profile_labels | tojson }};
+var METRIC_LABELS   = {{ metric_labels | tojson }};
+</script>
+
+<script src="static/js/global_charts.js"></script>
+
+{% raw %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  /* ── Filter state ── */
+  var activeTypes   = [];
+  var activeProfile = "wcag_strict";
+  var searchTerm    = "";
+  var sortCol       = "best_score";
+  var sortAsc       = false;
+
+  /* ── Type toggle ── */
+  window.toggleType = function (t) {
+    if (t === "") {
+      activeTypes = [];
+    } else {
+      var idx = activeTypes.indexOf(t);
+      if (idx >= 0) activeTypes.splice(idx, 1);
+      else          activeTypes.push(t);
+    }
+    updateTypeBtns();
+    redrawAll();
+  };
+
+  function updateTypeBtns() {
+    document.querySelectorAll(".type-btn").forEach(function (btn) {
+      var bt = btn.dataset.type;
+      var active = bt === "" ? activeTypes.length === 0 : activeTypes.indexOf(bt) >= 0;
+      btn.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+  }
+
+  /* ── Profile filter ── */
+  window.setProfile = function (p) {
+    activeProfile = p;
+    redrawAll();
+  };
+
+  /* ── Search filter ── */
+  window.setSearch = function (v) {
+    searchTerm = v.trim().toLowerCase();
+    redrawAll();
+  };
+
+  /* ── Reset ── */
+  window.resetFilters = function () {
+    activeTypes   = [];
+    activeProfile = "wcag_strict";
+    searchTerm    = "";
+    document.getElementById("profile-select").value = "wcag_strict";
+    document.getElementById("search-input").value   = "";
+    updateTypeBtns();
+    redrawAll();
+  };
+
+  /* ── Filtered data ── */
+  function getFiltered() {
+    return D3_DATA.filter(function (d) {
+      if (activeTypes.length && activeTypes.indexOf(d.type) < 0) return false;
+      if (searchTerm && d.domain.toLowerCase().indexOf(searchTerm) < 0) return false;
+      return true;
+    });
+  }
+
+  /* ── Redraw all charts + table ── */
+  function redrawAll() {
+    var data = getFiltered();
+    drawComparisonChart(data, activeProfile);
+    drawPrinciplesRadar(data, activeProfile);
+    drawBoxplot(data, activeProfile);
+    drawStackedBars(data, activeProfile);
+    drawTopBottom(data, activeProfile);
+    drawRadarReadability(data);
+    drawHeatmap(data, activeProfile);
+    drawLollipop(data, activeProfile);
+    drawScatter(data, activeProfile);
+    drawImpactEffort(RECOMMENDATIONS);
+    renderTable(data);
+  }
+
+  /* ── Table render ── */
+  function scoreCell(score) {
+    if (score === null || score === undefined) return "<td>—</td>";
+    var c = score >= 70 ? "#27ae60" : (score >= 50 ? "#e67e22" : "#e74c3c");
+    return "<td><span class=\"score-pill\" style=\"background:" + c + "\">" +
+           score.toFixed(1) + "</span></td>";
+  }
+
+  function renderTable(data) {
+    var tbody = document.getElementById("table-body");
+    var count = document.getElementById("table-count");
+    if (!data.length) {
+      tbody.innerHTML = "<tr><td colspan=\"7\" class=\"table-empty\">Cap resultat amb els filtres actuals.</td></tr>";
+      count.textContent = "0 llocs web";
+      return;
+    }
+    // Sort
+    var sorted = data.slice().sort(function (a, b) {
+      var av = getCellVal(a, sortCol);
+      var bv = getCellVal(b, sortCol);
+      if (av === null) av = -Infinity;
+      if (bv === null) bv = -Infinity;
+      return sortAsc ? (av > bv ? 1 : -1) : (av < bv ? 1 : -1);
+    });
+
+    var html = "";
+    sorted.forEach(function (d) {
+      var ws = (d.profiles.wcag_strict       || {}).score || null;
+      var rs = (d.profiles.readability_first || {}).score || null;
+      var vs = (d.profiles.visual_first      || {}).score || null;
+      var tc = TYPE_COLORS[d.type] || "#4b5563";
+      html += "<tr>";
+      html += "<td class=\"domain-cell\"><a href=\"" + (d.comparative_url || "#") +
+              "\" title=\"" + d.url + "\">" + d.domain + "</a></td>";
+      html += "<td><span class=\"type-tag\" style=\"background:" + tc + "\">" + d.type + "</span></td>";
+      html += scoreCell(ws);
+      html += scoreCell(rs);
+      html += scoreCell(vs);
+      html += scoreCell(d.best_score);
+      // Links
+      html += "<td style=\"white-space:nowrap;font-size:0.78rem\">";
+      ["wcag_strict","readability_first","visual_first"].forEach(function (p) {
+        var pr = (d.profiles[p] || {}).report;
+        if (pr) html += "<a href=\"" + pr + "\" style=\"margin-right:4px;color:var(--color-accent)\">" +
+                         p.charAt(0).toUpperCase() + "</a>";
+      });
+      if (d.comparative_url) {
+        html += "<a href=\"" + d.comparative_url + "\" style=\"color:#6b7280\">⇄</a>";
+      }
+      html += "</td></tr>";
+    });
+
+    tbody.innerHTML = html;
+    count.textContent = sorted.length + " lloc" + (sorted.length !== 1 ? "s web" : " web") +
+                        (activeTypes.length || searchTerm ? " (filtrat)" : "");
+  }
+
+  function getCellVal(d, col) {
+    if (col === "domain")            return d.domain;
+    if (col === "type")              return d.type;
+    if (col === "best_score")        return d.best_score;
+    if (col === "wcag_strict")       return (d.profiles.wcag_strict       || {}).score;
+    if (col === "readability_first") return (d.profiles.readability_first || {}).score;
+    if (col === "visual_first")      return (d.profiles.visual_first      || {}).score;
+    return null;
+  }
+
+  /* ── Table header sort ── */
+  document.querySelectorAll(".data-table thead th[data-col]").forEach(function (th) {
+    th.addEventListener("click", function () {
+      var col = this.dataset.col;
+      if (sortCol === col) sortAsc = !sortAsc;
+      else { sortCol = col; sortAsc = col === "domain" || col === "type"; }
+      document.querySelectorAll(".data-table thead th").forEach(function (h) {
+        h.classList.remove("sort-asc", "sort-desc");
+      });
+      this.classList.add(sortAsc ? "sort-asc" : "sort-desc");
+      renderTable(getFiltered());
+    });
+    th.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); this.click(); }
+    });
+  });
+
+  /* ── SVG export ── */
+  window.exportD3Chart = function (containerId, filename) {
+    var container = document.getElementById(containerId);
+    var svg = container.querySelector("svg");
+    if (!svg) { alert("Cap gràfic SVG disponible per exportar."); return; }
+    var serializer = new XMLSerializer();
+    var svgStr = serializer.serializeToString(svg);
+    var blob = new Blob([svgStr], { type: "image/svg+xml;charset=utf-8" });
+    var url  = URL.createObjectURL(blob);
+    var a    = document.createElement("a");
+    a.href   = url;
+    a.download = filename + ".svg";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  /* ── Initial draw ── */
+  updateTypeBtns();
+  redrawAll();
+});
+</script>
+{% endraw %}
+
+</body>
+</html>

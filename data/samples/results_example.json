@@ -1,0 +1,187 @@
+{
+  "url": "https://www.uoc.edu",
+  "slug": "www-uoc-edu",
+  "type": "universitat",
+  "timestamp": "2026-05-24T11:20:44Z",
+  "profiles": {
+    "wcag_strict": {
+      "score_overall": 72.4,
+      "metrics": {
+        "color_contrast":        80.0,
+        "focus_visibility":      65.0,
+        "target_size":           55.0,
+        "keyboard_nav":          70.0,
+        "aria_roles":            75.0,
+        "accessible_names":      68.0,
+        "critical_violations":   85.0,
+        "high_violations":       78.0,
+        "medium_violations":     90.0,
+        "low_violations":        92.0,
+        "flesch_reading_ease":   58.0,
+        "text_complexity":       62.0,
+        "heading_hierarchy":     80.0,
+        "alt_text_coverage":     60.0,
+        "landmark_coverage":     65.0,
+        "performance_lcp":       75.0,
+        "accessibility":         74.0,
+        "readability":           66.7,
+        "performance":           75.0,
+        "seo":                   72.5,
+        "robustness":            74.0
+      },
+      "sub_scores_100": {
+        "wcag":        73.5,
+        "text":        66.7,
+        "elements":    67.0,
+        "performance": 75.0
+      },
+      "wcag_principles": {
+        "perceptible":  73.3,
+        "operable":     63.3,
+        "comprensible": 66.7,
+        "robust":       74.5
+      },
+      "notes": "Bon contrast general però focus visible millorable. Jerarquia de capçaleres correcta.",
+      "raw": {
+        "color_contrast_ratio":      0.80,
+        "focus_visible_ratio":       0.65,
+        "target_size_clean":         0.55,
+        "keyboard_clean":            0.70,
+        "aria_roles_valid":          0.75,
+        "accessible_names_coverage": 0.68,
+        "audit_critical_violations": 0.85,
+        "audit_high_violations":     0.78,
+        "audit_medium_violations":   0.90,
+        "audit_low_violations":      0.92,
+        "page_flesch":               0.58,
+        "text_complexity":           0.62,
+        "heading_hierarchy":         0.80,
+        "alt_text_coverage":         0.60,
+        "landmark_coverage":         0.65,
+        "performance_lcp":           0.75
+      }
+    },
+    "readability_first": {
+      "score_overall": 68.2,
+      "metrics": {
+        "color_contrast":        60.0,
+        "focus_visibility":      55.0,
+        "target_size":           50.0,
+        "keyboard_nav":          60.0,
+        "aria_roles":            65.0,
+        "accessible_names":      60.0,
+        "critical_violations":   80.0,
+        "high_violations":       72.0,
+        "medium_violations":     85.0,
+        "low_violations":        88.0,
+        "flesch_reading_ease":   58.0,
+        "text_complexity":       62.0,
+        "heading_hierarchy":     80.0,
+        "alt_text_coverage":     60.0,
+        "landmark_coverage":     65.0,
+        "performance_lcp":       70.0,
+        "accessibility":         66.0,
+        "readability":           66.7,
+        "performance":           70.0,
+        "seo":                   72.5,
+        "robustness":            68.0
+      },
+      "sub_scores_100": {
+        "wcag":        66.8,
+        "text":        66.7,
+        "elements":    62.5,
+        "performance": 70.0
+      },
+      "wcag_principles": {
+        "perceptible":  66.0,
+        "operable":     55.0,
+        "comprensible": 66.7,
+        "robust":       68.5
+      },
+      "notes": "Llegibilitat acceptable. Millora necessària en contrast i focus per a usuaris amb discapacitat visual.",
+      "raw": {
+        "color_contrast_ratio":      0.60,
+        "focus_visible_ratio":       0.55,
+        "target_size_clean":         0.50,
+        "keyboard_clean":            0.60,
+        "aria_roles_valid":          0.65,
+        "accessible_names_coverage": 0.60,
+        "audit_critical_violations": 0.80,
+        "audit_high_violations":     0.72,
+        "audit_medium_violations":   0.85,
+        "audit_low_violations":      0.88,
+        "page_flesch":               0.58,
+        "text_complexity":           0.62,
+        "heading_hierarchy":         0.80,
+        "alt_text_coverage":         0.60,
+        "landmark_coverage":         0.65,
+        "performance_lcp":           0.70
+      }
+    },
+    "visual_first": {
+      "score_overall": 74.8,
+      "metrics": {
+        "color_contrast":        82.0,
+        "focus_visibility":      68.0,
+        "target_size":           60.0,
+        "keyboard_nav":          72.0,
+        "aria_roles":            76.0,
+        "accessible_names":      70.0,
+        "critical_violations":   86.0,
+        "high_violations":       80.0,
+        "medium_violations":     91.0,
+        "low_violations":        93.0,
+        "flesch_reading_ease":   58.0,
+        "text_complexity":       62.0,
+        "heading_hierarchy":     80.0,
+        "alt_text_coverage":     62.0,
+        "landmark_coverage":     66.0,
+        "performance_lcp":       78.0,
+        "accessibility":         76.0,
+        "readability":           66.7,
+        "performance":           78.0,
+        "seo":                   73.0,
+        "robustness":            76.0
+      },
+      "sub_scores_100": {
+        "wcag":        76.1,
+        "text":        66.7,
+        "elements":    68.5,
+        "performance": 78.0
+      },
+      "wcag_principles": {
+        "perceptible":  74.7,
+        "operable":     66.7,
+        "comprensible": 66.7,
+        "robust":       76.0
+      },
+      "notes": "Excel·lent qualitat visual. Bones puntuacions de contrast i rendiment.",
+      "raw": {
+        "color_contrast_ratio":      0.82,
+        "focus_visible_ratio":       0.68,
+        "target_size_clean":         0.60,
+        "keyboard_clean":            0.72,
+        "aria_roles_valid":          0.76,
+        "accessible_names_coverage": 0.70,
+        "audit_critical_violations": 0.86,
+        "audit_high_violations":     0.80,
+        "audit_medium_violations":   0.91,
+        "audit_low_violations":      0.93,
+        "page_flesch":               0.58,
+        "text_complexity":           0.62,
+        "heading_hierarchy":         0.80,
+        "alt_text_coverage":         0.62,
+        "landmark_coverage":         0.66,
+        "performance_lcp":           0.78
+      }
+    }
+  },
+  "comparative": {
+    "best_profile":    "visual_first",
+    "best_score":      74.8,
+    "worst_profile":   "readability_first",
+    "worst_score":     68.2,
+    "score_variance":  6.6,
+    "mean_score":      71.8
+  }
+}

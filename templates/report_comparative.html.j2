@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+        content="Informe comparatiu d'accessibilitat ACI per {{ domain }}. Millor perfil: {{ comparative.best_profile }} ({{ comparative.best_score }}/100).">
+  <meta property="og:title" content="{{ domain }} · Comparatiu — ACI Pipeline">
+  <title>{{ domain }} · Comparatiu 3 perfils — ACI Pipeline</title>
+  <link rel="stylesheet" href="../static/css/site.css">
+  <link rel="stylesheet" href="../static/css/reports.css">
+</head>
+<body>
+{% set root_path = '../' %}
+{% set active_nav = 'report' %}
+{% include "header.html.j2" %}
+
+<main id="main" class="page-main">
+
+  {# ── Breadcrumbs ─────────────────────────────────────────────────────── #}
+  <nav class="breadcrumbs" aria-label="Fil d'Ariadna">
+    <a href="../index.html">Tauler</a>
+    <span class="breadcrumbs__sep" aria-hidden="true">›</span>
+    <span aria-current="page">{{ domain }} · Comparatiu</span>
+  </nav>
+
+  {# ── Profile nav ─────────────────────────────────────────────────────── #}
+  <nav class="profile-nav" aria-label="Navegació entre perfils">
+    {% for p in profiles_list %}
+    {% if p in profiles_data %}
+    <a href="{{ slug }}_{{ p }}.html" class="chip">{{ profile_labels[p] }}</a>
+    {% endif %}
+    {% endfor %}
+    <span class="chip chip--active" aria-current="page">⇄ Comparatiu</span>
+  </nav>
+
+  {# ── Comparative hero KPIs ───────────────────────────────────────────── #}
+  <h1 style="font-size:1.4rem;font-weight:700;margin:0 0 1.25rem">
+    Comparativa d'accessibilitat: {{ domain }}
+  </h1>
+
+  <div class="cmp-summary-grid" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr))">
+
+    {% for p in profiles_list %}
+    {% if p in profiles_data %}
+    {% set pd = profiles_data[p] %}
+    {% set pc = pd.score_overall | aci_color %}
+    {% set is_best  = (p == comparative.best_profile) %}
+    {% set is_worst = (p == comparative.worst_profile) %}
+    <div class="cmp-card"
+         style="{% if is_best %}background:#f0fdf4;border:2px solid #15803d{% elif is_worst %}background:#fff7ed;border:2px solid #c2410c{% endif %}">
+      <div class="cmp-card__label">
+        {{ profile_labels[p] }}
+        {% if is_best %}  <span style="font-size:0.65rem;background:#dcfce7;color:#15803d;border-radius:3px;padding:0 4px">✓ Millor</span>{% endif %}
+        {% if is_worst %}<span style="font-size:0.65rem;background:#ffedd5;color:#c2410c;border-radius:3px;padding:0 4px">⚠ Pitjor</span>{% endif %}
+      </div>
+      <div class="cmp-card__score" style="color:{{ pc }}">{{ "%.1f"|format(pd.score_overall) }}</div>
+      <div class="cmp-card__profile">{{ pd.score_overall | aci_label }}</div>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+    <div class="cmp-card" style="background:#f8f9fa">
+      <div class="cmp-card__label">Variació màx.–mín.</div>
+      <div class="cmp-card__score" style="color:#374151">{{ "%.1f"|format(comparative.score_variance) }}</div>
+      <div class="cmp-card__profile">punts · Mitjana {{ "%.1f"|format(comparative.mean_score) }}</div>
+    </div>
+
+  </div>
+
+  {# ── Charts ─────────────────────────────────────────────────────────── #}
+  <h2 class="section-title">Visualitzacions comparatives</h2>
+
+  <div class="charts-grid-2">
+
+    {# Radar: WCAG principles × 3 profiles #}
+    <div class="chart-section">
+      <div class="chart-section__header">
+        <span class="chart-section__title">Principis WCAG (3 perfils)</span>
+        <button class="export-btn"
+                onclick="exportChartPNG('cmp-radar-canvas','{{ slug }}_cmp_radar')"
+                aria-label="Exporta el radar comparatiu com a PNG">⬇ PNG</button>
+      </div>
+      <div class="chart-container" style="height:300px;display:flex;align-items:center;justify-content:center">
+        <canvas id="cmp-radar-canvas"
+                role="img"
+                aria-label="Gràfic radar comparatiu dels principis WCAG per als 3 perfils">
+        </canvas>
+      </div>
+    </div>
+
+    {# Bar: 16 metrics × 3 profiles #}
+    <div class="chart-section">
+      <div class="chart-section__header">
+        <span class="chart-section__title">Mètriques comparades (16 × 3 perfils)</span>
+        <button class="export-btn"
+                onclick="exportChartPNG('cmp-bar-canvas','{{ slug }}_cmp_bar')"
+                aria-label="Exporta el gràfic de barres comparatiu com a PNG">⬇ PNG</button>
+      </div>
+      <div class="chart-container chart-container--tall" style="height:340px">
+        <canvas id="cmp-bar-canvas"
+                role="img"
+                aria-label="Gràfic de barres agrupades comparant les 16 mètriques per als 3 perfils">
+        </canvas>
+      </div>
+    </div>
+
+  </div>
+
+  {# ── Sub-scores comparison table ─────────────────────────────────────── #}
+  <h2 class="section-title">Sub-puntuacions per perfil</h2>
+
+  {% set sub_labels = {"wcag":"WCAG","text":"Text","elements":"Elements","performance":"Rendiment"} %}
+
+  <div class="cmp-table-wrapper">
+    <table class="cmp-table" aria-label="Comparació de sub-puntuacions entre els 3 perfils">
+      <thead>
+        <tr>
+          <th scope="col">Sub-puntuació</th>
+          {% for p in profiles_list %}
+          {% if p in profiles_data %}
+          <th scope="col" style="color:{{ profile_colors[p] }}">{{ profile_labels[p] }}</th>
+          {% endif %}
+          {% endfor %}
+          <th scope="col">Diferència</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for sk in ["wcag", "text", "elements", "performance"] %}
+        {# Collect values for this sub-score across profiles #}
+        {% set vals = [] %}
+        {% for p in profiles_list %}
+        {% if p in profiles_data %}
+        {% set v = profiles_data[p].sub_scores_100.get(sk, 0) %}
+        {% if vals.append(v) %}{% endif %}
+        {% endif %}
+        {% endfor %}
+        {% set bv = vals | max if vals else 0 %}
+        {% set wv = vals | min if vals else 0 %}
+        <tr>
+          <td><strong>{{ sub_labels[sk] }}</strong></td>
+          {% for p in profiles_list %}
+          {% if p in profiles_data %}
+          {% set v = profiles_data[p].sub_scores_100.get(sk, 0) %}
+          <td>
+            <span class="score-pill" style="background:{{ v | aci_color }}">{{ "%.1f"|format(v) }}</span>
+            {% if v == bv and vals | length > 1 %}<span style="font-size:0.7rem;color:#15803d;margin-left:3px">▲</span>{% endif %}
+            {% if v == wv and vals | length > 1 %}<span style="font-size:0.7rem;color:#c2410c;margin-left:3px">▼</span>{% endif %}
+          </td>
+          {% endif %}
+          {% endfor %}
+          <td style="color:var(--color-text-muted);font-size:0.85rem">{{ "%.1f"|format(bv - wv) }}</td>
+        </tr>
+        {% endfor %}
+
+        {# Total ACI row #}
+        {% set all_scores = [] %}
+        {% for p in profiles_list %}
+        {% if p in profiles_data %}
+        {% if all_scores.append(profiles_data[p].score_overall) %}{% endif %}
+        {% endif %}
+        {% endfor %}
+        {% set best_total  = all_scores | max if all_scores else 0 %}
+        {% set worst_total = all_scores | min if all_scores else 0 %}
+        <tr style="background:var(--color-bg-alt);font-weight:700">
+          <td>ACI Global</td>
+          {% for p in profiles_list %}
+          {% if p in profiles_data %}
+          {% set v = profiles_data[p].score_overall %}
+          <td>
+            <span class="score-pill" style="background:{{ v | aci_color }}">{{ "%.1f"|format(v) }}</span>
+            {% if v == best_total and all_scores | length > 1 %}<span style="font-size:0.7rem;color:#15803d;margin-left:3px">▲</span>{% endif %}
+            {% if v == worst_total and all_scores | length > 1 %}<span style="font-size:0.7rem;color:#c2410c;margin-left:3px">▼</span>{% endif %}
+          </td>
+          {% endif %}
+          {% endfor %}
+          <td style="color:var(--color-text-muted)">{{ "%.1f"|format(comparative.score_variance) }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  {# ── WCAG principles per profile ─────────────────────────────────────── #}
+  <h2 class="section-title">Principis WCAG detallats</h2>
+
+  <div class="cmp-table-wrapper">
+    <table class="cmp-table" aria-label="Comparació dels principis WCAG entre els 3 perfils">
+      <thead>
+        <tr>
+          <th scope="col">Principi WCAG 2.1</th>
+          {% for p in profiles_list %}
+          {% if p in profiles_data %}
+          <th scope="col" style="color:{{ profile_colors[p] }}">{{ profile_labels[p] }}</th>
+          {% endif %}
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for pk, plabel in [("perceptible","Perceptible (1.x)"),
+                               ("operable","Operable (2.x)"),
+                               ("comprensible","Comprensible (3.x)"),
+                               ("robust","Robust (4.x)")] %}
+        {% set pvals = [] %}
+        {% for p in profiles_list %}
+        {% if p in profiles_data %}
+        {% set pv = profiles_data[p].wcag_principles.get(pk, 0) %}
+        {% if pvals.append(pv) %}{% endif %}
+        {% endif %}
+        {% endfor %}
+        {% set pbest = pvals | max if pvals else 0 %}
+        <tr>
+          <td>{{ plabel }}</td>
+          {% for p in profiles_list %}
+          {% if p in profiles_data %}
+          {% set pv = profiles_data[p].wcag_principles.get(pk, 0) %}
+          <td>
+            <div class="metric-bar-wrap" style="min-width:120px">
+              <div class="metric-bar-bg">
+                <div class="metric-bar-fill"
+                     style="width:{{ pv }}%;background:{{ pv | aci_color }}"></div>
+              </div>
+              <span class="metric-val" style="color:{{ pv | aci_color }}">{{ "%.1f"|format(pv) }}</span>
+            </div>
+          </td>
+          {% endif %}
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  {# ── Links to individual reports ─────────────────────────────────────── #}
+  <h2 class="section-title">Informes per perfil</h2>
+  <div class="profile-nav" style="margin-bottom:2rem">
+    {% for p in profiles_list %}
+    {% if p in profiles_data %}
+    <a href="{{ slug }}_{{ p }}.html"
+       class="chip"
+       style="border-color:{{ profile_colors[p] }};color:{{ profile_colors[p] }}">
+      {{ profile_labels[p] }} — {{ "%.1f"|format(profiles_data[p].score_overall) }}/100
+    </a>
+    {% endif %}
+    {% endfor %}
+    <a href="../index.html" class="chip" style="border-color:#4b5563;color:#4b5563">← Tornar al tauler</a>
+  </div>
+
+</main>
+
+{% include "footer.html.j2" %}
+
+{# ── Scripts ──────────────────────────────────────────────────────────── #}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+
+<script>
+var CMP_RADAR_DATA = {{ principles_radar_json }};
+var CMP_BAR_DATA   = {{ cmp_bar_json }};
+</script>
+
+{% raw %}
+<script>
+(function () {
+  "use strict";
+
+  /* ── Radar: 3 perfils × 4 principis WCAG ──────────── */
+  var radarCtx = document.getElementById("cmp-radar-canvas").getContext("2d");
+  new Chart(radarCtx, {
+    type: "radar",
+    data: CMP_RADAR_DATA,
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      scales: {
+        r: {
+          min: 0, max: 100,
+          ticks: {
+            stepSize: 25,
+            font: { size: 10 },
+            color: "#6b7280",
+            backdropColor: "transparent"
+          },
+          grid:        { color: "#e5e7eb" },
+          angleLines:  { color: "#d1d5db" },
+          pointLabels: { font: { size: 12, weight: "600" }, color: "#1f2937" }
+        }
+      },
+      plugins: {
+        legend: { position: "bottom", labels: { font: { size: 11 }, usePointStyle: true } },
+        tooltip: {
+          callbacks: {
+            label: function (ctx) {
+              return ctx.dataset.label + ": " + ctx.parsed.r.toFixed(1) + "/100";
+            }
+          }
+        }
+      }
+    }
+  });
+
+  /* ── Bar: 3 perfils × 16 mètriques ────────────────── */
+  var barCtx = document.getElementById("cmp-bar-canvas").getContext("2d");
+  new Chart(barCtx, {
+    type: "bar",
+    data: CMP_BAR_DATA,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          min: 0, max: 100,
+          ticks: { font: { size: 10 }, color: "#6b7280" },
+          grid:  { color: "#f3f4f6" }
+        },
+        x: {
+          ticks: { font: { size: 8 }, maxRotation: 55, color: "#6b7280" }
+        }
+      },
+      plugins: {
+        legend: {
+          position: "top",
+          labels: { font: { size: 11 }, usePointStyle: true, padding: 12 }
+        },
+        tooltip: {
+          callbacks: {
+            label: function (ctx) {
+              return ctx.dataset.label + ": " + ctx.parsed.y.toFixed(1) + "/100";
+            }
+          }
+        }
+      }
+    }
+  });
+
+  /* ── Export PNG ────────────────────────────────────── */
+  window.exportChartPNG = function (canvasId, filename) {
+    var canvas = document.getElementById(canvasId);
+    var url    = canvas.toDataURL("image/png");
+    var a      = document.createElement("a");
+    a.href     = url;
+    a.download = filename + ".png";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+}());
+</script>
+{% endraw %}
+
+</body>
+</html>

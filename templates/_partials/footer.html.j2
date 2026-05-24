@@ -1,0 +1,20 @@
+{# ─────────────────────────────────────────────────────────────────────────────
+   templates/_partials/footer.html.j2
+   Variables esperades al context del pare:
+     pipeline_version  — string
+     ts_build          — string ISO (opcional, índex global)
+     timestamp         — string ISO (opcional, informes per perfil)
+──────────────────────────────────────────────────────────────────────────── #}
+{% set build_date = ts_build or timestamp or '' %}
+<footer class="site-footer" role="contentinfo">
+  <p>
+    <strong>ACI Pipeline</strong> v{{ pipeline_version }}
+    {% if build_date %}
+      &middot; Generat el
+      <time datetime="{{ build_date }}">{{ build_date[:10] }}</time>
+    {% endif %}
+    &middot; Projecte TFM
+    &middot; Referència:
+    <abbr title="Web Content Accessibility Guidelines">WCAG</abbr>&nbsp;2.1&nbsp;AA
+  </p>
+</footer>

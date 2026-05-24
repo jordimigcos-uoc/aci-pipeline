@@ -1,21 +1,23 @@
 # =============================================================================
-# publish_reports.yml — Pipeline ACI complet + informes Jinja2/D3 → GitHub Pages
+# publish_reports.yml — Pipeline ACI complet + lloc estàtic Jinja2/D3 → Pages
 #
 # Genera per a cada URL analitzada:
-#   - 3 informes HTML individuals (wcag_strict / readability_first / visual_first)
-#   - 1 informe comparatiu HTML amb gràfics D3 (radar + barres agrupades)
-#   - 1 índex global HTML amb D3 (ranking, categoria, heatmap) + taula filtrable
-#   - docs/results.json, docs/data/scores.csv, docs/data/reports_manifest.json
+#   - 3 informes HTML per perfil (wcag_strict / readability_first / visual_first)
+#   - 1 informe comparatiu HTML amb Chart.js
+#   - 1 índex global HTML amb 10 gràfics D3 (filtres, taula, metodologia)
+#   - docs/results/<slug>/results.json
+#   - docs/figures/<prefix>_<chartname>.jpg   (exportació Playwright)
 #
 # Trigger:
 #   - workflow_dispatch: execució manual
-#   - push a main amb canvis a urls.sample.txt, src/ o configs/
+#   - push a main amb canvis a urls.sample.txt, src/, configs/, templates/,
+#     site_generation/, static/ o scripts/
 #
 # Secrets necessaris:
 #   - ANTHROPIC_API_KEY: clau API d'Anthropic (opcional; M5-IA s'omet si falta)
 #     → Settings → Secrets and variables → Actions → New repository secret
 # =============================================================================
-name: Publica informes ACI complets a GitHub Pages
+name: Publica informes ACI a GitHub Pages
 
 on:
   workflow_dispatch:
@@ -25,7 +27,7 @@ on:
         required: false
         default: "data/inputs/urls.sample.txt"
       profile:
-        description: "Perfil de puntuació"
+        description: "Perfil de puntuació (si all_profiles=false)"
         required: false
         default: "wcag_strict"
         type: choice
@@ -34,7 +36,15 @@ on:
           - readability_first
           - visual_first
       all_profiles:
-        description: "Executa tots 3 perfils (ignora 'profile')"
+        description: "Executa els 3 perfils (ignora 'profile')"
+        required: false
+        default: "true"
+        type: choice
+        options:
+          - "true"
+          - "false"
+      export_charts:
+        description: "Exporta gràfics D3 com a JPG"
         required: false
         default: "true"
         type: choice
@@ -49,7 +59,10 @@ on:
       - "src/**"
       - "configs/**"
       - "templates/**"
+      - "site_generation/**"
+      - "static/**"
       - "scripts/render_reports.py"
+      - "scripts/export_charts.py"
 
 permissions:
   contents: write
@@ -58,7 +71,7 @@ permissions:
 
 jobs:
   run-pipeline-and-publish:
-    name: Pipeline ACI + render Jinja2/D3 + publica Pages
+    name: Pipeline ACI + lloc estàtic + GitHub Pages
     runs-on: ubuntu-22.04   # ubuntu-latest=24.04 trenca libasound2 amb Playwright 1.44
 
     steps:
@@ -73,14 +86,14 @@ jobs:
           python-version: "3.11"
           cache: pip
 
-      # ── 3. Dependències ─────────────────────────────────────────────────────
-      - name: Instal·la dependències
+      # ── 3. Dependències Python ───────────────────────────────────────────────
+      - name: Instal·la dependències Python
         run: |
           pip install --upgrade pip setuptools wheel
           pip install -r requirements.txt
           echo "PYTHONPATH=$GITHUB_WORKSPACE/src" >> $GITHUB_ENV
 
-      # ── 4. Playwright (Chromium) ─────────────────────────────────────────────
+      # ── 4. Playwright + Chromium ─────────────────────────────────────────────
       - name: Instal·la Chromium (Playwright)
         run: playwright install chromium --with-deps
 
@@ -105,12 +118,14 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY || '' }}
 
-      # ── 6. Renderitza informes Jinja2 + D3 ──────────────────────────────────
-      - name: Renderitza informes i genera lloc estàtic (render_reports.py)
+      # ── 6. Genera lloc estàtic (Jinja2 + D3) ────────────────────────────────
+      - name: Genera lloc estàtic (site_generation/render_reports.py)
         run: |
-          python scripts/render_reports.py \
-            --results results/gh-pages \
-            --output  docs
+          python site_generation/render_reports.py \
+            --results-dir results/gh-pages \
+            --output-dir  docs \
+            --templates-dir templates \
+            --log-level INFO
 
           # Còpia de logs (útil per a diagnosi des de Pages)
           mkdir -p docs/logs
@@ -120,13 +135,31 @@ jobs:
           echo "── Contingut de docs/ ──────────────────────────────"
           ls -lh docs/
           echo ""
-          echo "── Informes HTML generats ──────────────────────────"
-          ls docs/reports/ 2>/dev/null | head -30 || echo "  (cap informe)"
+          echo "── Informes HTML (reports/) ────────────────────────"
+          ls docs/reports/ 2>/dev/null | head -40 || echo "  (cap informe)"
           echo ""
-          echo "── Fitxers de dades ────────────────────────────────"
-          ls docs/data/ 2>/dev/null || echo "  (directori data/ buit)"
+          echo "── Fitxers de resultats per slug ───────────────────"
+          find docs/results -name "results.json" 2>/dev/null | head -20 || echo "  (cap slug)"
 
-      # ── 7. Comprova que l'índex s'ha generat ────────────────────────────────
+      # ── 7. Exporta gràfics D3 com a JPG ─────────────────────────────────────
+      - name: Exporta gràfics D3 (scripts/export_charts.py)
+        if: ${{ github.event.inputs.export_charts != 'false' }}
+        run: |
+          if [ -f docs/index.html ]; then
+            python scripts/export_charts.py \
+              --input   docs/index.html \
+              --output  docs/figures \
+              --prefix  global \
+              --width   1440 \
+              --quality 90 \
+              --format  jpg \
+              --log-level INFO
+          else
+            echo "docs/index.html no trobat; s'omet l'exportació de gràfics"
+          fi
+        continue-on-error: true   # no bloqueja el workflow si l'export falla
+
+      # ── 8. Verifica que l'índex s'ha generat ────────────────────────────────
       - name: Verifica index.html
         run: |
           if [ ! -f docs/index.html ]; then
@@ -135,8 +168,20 @@ jobs:
           fi
           echo "✓ docs/index.html generat correctament"
           wc -l docs/index.html
+          echo ""
+          echo "── Resum fitxers generats ──────────────────────────"
+          echo "  Informes HTML:   $(ls docs/reports/*.html 2>/dev/null | wc -l)"
+          echo "  Slugs JSON:      $(find docs/results -name 'results.json' 2>/dev/null | wc -l)"
+          echo "  Figures JPG/PNG: $(ls docs/figures/*.jpg docs/figures/*.png 2>/dev/null | wc -l)"
 
-      # ── 8. Publica a la branca gh-pages ─────────────────────────────────────
+      # ── 9. Tests (opcional, no bloqueja) ────────────────────────────────────
+      - name: Executa tests pytest
+        run: |
+          pytest tests/test_render.py -v --tb=short 2>&1 || \
+            echo "⚠ Alguns tests han fallat (reviseu el log)"
+        continue-on-error: true
+
+      # ── 10. Publica a la branca gh-pages ────────────────────────────────────
       - name: Publica a GitHub Pages (gh-pages branch)
         uses: peaceiris/actions-gh-pages@v3
         with:
@@ -146,7 +191,7 @@ jobs:
           commit_message: "ci: publica informes ACI · run ${{ github.run_id }}"
           keep_files:     false
 
-      # ── 9. Informa de la URL pública ─────────────────────────────────────────
+      # ── 11. Informa de la URL pública ────────────────────────────────────────
       - name: URL de GitHub Pages
         run: |
           echo ""
@@ -156,6 +201,8 @@ jobs:
           REPO="${{ github.repository }}"
           OWNER=$(echo "$REPO" | cut -d/ -f1)
           NAME=$(echo "$REPO"  | cut -d/ -f2)
-          echo "  Dashboard: https://${OWNER}.github.io/${NAME}/"
-          echo "  Informes:  https://${OWNER}.github.io/${NAME}/reports/"
+          echo "  Tauler:     https://${OWNER}.github.io/${NAME}/"
+          echo "  Informes:   https://${OWNER}.github.io/${NAME}/reports/"
+          echo "  Figures:    https://${OWNER}.github.io/${NAME}/figures/"
+          echo "  Metodologia:https://${OWNER}.github.io/${NAME}/metrics.html"
           echo ""
