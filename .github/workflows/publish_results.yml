@@ -60,7 +60,7 @@ permissions:
 jobs:
   run-pipeline-and-publish:
     name: Executa pipeline i publica a Pages
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04   # ubuntu-latest = 24.04 trenca libasound2 amb Playwright 1.44
 
     steps:
       # ── 1. Checkout ─────────────────────────────────────────────────────────

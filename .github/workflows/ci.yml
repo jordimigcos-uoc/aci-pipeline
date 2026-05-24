@@ -23,7 +23,7 @@ permissions:
 jobs:
   build-and-test:
     name: Tests i execució del pipeline
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04   # ubuntu-latest = 24.04 trenca libasound2 amb Playwright 1.44
 
     steps:
       # ── 1. Checkout del codi ────────────────────────────────────────────────
