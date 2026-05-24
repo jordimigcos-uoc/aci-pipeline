@@ -77,9 +77,9 @@ jobs:
       # ── 3. Dependències ─────────────────────────────────────────────────────
       - name: Instal·la dependències
         run: |
-          pip install --upgrade pip
+          pip install --upgrade pip setuptools wheel
           pip install -r requirements.txt
-          pip install -e . --no-deps
+          echo "PYTHONPATH=$GITHUB_WORKSPACE/src" >> $GITHUB_ENV
 
       # ── 4. Playwright ───────────────────────────────────────────────────────
       - name: Instal·la Chromium (Playwright)

@@ -40,18 +40,17 @@ jobs:
       # ── 3. Instal·la dependències Python ────────────────────────────────────
       - name: Instal·la dependències
         run: |
-          pip install --upgrade pip
+          pip install --upgrade pip setuptools wheel
           pip install -r requirements.txt
+          # Afegeix src/ al path perquè python -m aci_pipeline.cli funcioni
+          # sense necessitat de pip install -e (evita problemes de build-backend)
+          echo "PYTHONPATH=$GITHUB_WORKSPACE/src" >> $GITHUB_ENV
 
       # ── 4. Instal·la Chromium per a Playwright ──────────────────────────────
       - name: Instal·la Chromium (Playwright)
         run: playwright install chromium --with-deps
 
-      # ── 5. Instal·la el paquet en mode editable ─────────────────────────────
-      - name: Instal·la aci-pipeline (mode editable)
-        run: pip install -e . --no-deps
-
-      # ── 6. Executa tests unitaris ────────────────────────────────────────────
+      # ── 5. Executa tests unitaris ────────────────────────────────────────────
       # ANTHROPIC_API_KEY pot ser 'dummy' en CI (M5-IA s'omet si la clau és inválida)
       - name: Executa pytest
         run: python -m pytest tests/ -v --tb=short -x
@@ -59,7 +58,7 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY || 'sk-ant-dummy-for-ci' }}
           LOG_LEVEL: WARNING    # Redueix el soroll als logs de CI
 
-      # ── 7. Executa el pipeline amb les URLs de mostra ───────────────────────
+      # ── 6. Executa el pipeline amb les URLs de mostra ───────────────────────
       - name: Executa pipeline (mostra de 3 URLs)
         run: |
           python -m aci_pipeline.cli \
