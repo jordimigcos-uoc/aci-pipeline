@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-24T13:42:38Z",
+  "generated_at": "2026-05-24T14:05:37Z",
   "pipeline_version": "0.1.0",
   "n_urls": 36,
   "results": [
@@ -110,42 +110,6 @@
         }
       },
       "aci_best": 3.83
-    },
-    {
-      "url": "https://www.sanidad.gob.es/",
-      "domain": "www.sanidad.gob.es",
-      "category": "Institucional",
-      "profiles": {
-        "wcag_strict": {
-          "aci_score": 3.826,
-          "sub_scores": {
-            "wcag": 3.327,
-            "text": 3.75,
-            "elements": 4.581,
-            "performance": 2.5
-          },
-          "normalized_metrics": {
-            "color_contrast_ratio": 0.5,
-            "focus_visible_ratio": 0.5,
-            "target_size_clean": 0.5,
-            "keyboard_clean": 0.5,
-            "aria_roles_valid": 1.0,
-            "accessible_names_coverage": 0.99,
-            "audit_critical_violations": 1.0,
-            "audit_high_violations": 0.95,
-            "audit_medium_violations": 0.98,
-            "audit_low_violations": 0.99,
-            "page_flesch": 0.5,
-            "text_complexity": 0.5,
-            "heading_hierarchy": 1.0,
-            "alt_text_coverage": 0.875,
-            "landmark_coverage": 0.75,
-            "performance_lcp": 0.5
-          },
-          "report": "reports/www_sanidad_gob_es_Institucional_wcag_strict.html"
-        }
-      },
-      "aci_best": 3.826
     },
     {
       "url": "https://www.lavanguardia.com/",
@@ -398,6 +362,42 @@
         }
       },
       "aci_best": 3.676
+    },
+    {
+      "url": "https://www.sanidad.gob.es/",
+      "domain": "www.sanidad.gob.es",
+      "category": "Institucional",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.67,
+          "sub_scores": {
+            "wcag": 3.0,
+            "text": 3.75,
+            "elements": 4.581,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 0.99,
+            "audit_critical_violations": 0.7,
+            "audit_high_violations": 0.9,
+            "audit_medium_violations": 0.98,
+            "audit_low_violations": 1.0,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 0.875,
+            "landmark_coverage": 0.75,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/www_sanidad_gob_es_Institucional_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.67
     },
     {
       "url": "https://www.rac1.cat/",
@@ -760,42 +760,6 @@
       "aci_best": 3.544
     },
     {
-      "url": "https://educacio.gencat.cat/ca/inici",
-      "domain": "educacio.gencat.cat",
-      "category": "Institucional",
-      "profiles": {
-        "wcag_strict": {
-          "aci_score": 3.539,
-          "sub_scores": {
-            "wcag": 3.25,
-            "text": 3.75,
-            "elements": 3.774,
-            "performance": 2.5
-          },
-          "normalized_metrics": {
-            "color_contrast_ratio": 0.5,
-            "focus_visible_ratio": 0.5,
-            "target_size_clean": 0.5,
-            "keyboard_clean": 0.5,
-            "aria_roles_valid": 1.0,
-            "accessible_names_coverage": 0.976,
-            "audit_critical_violations": 1.0,
-            "audit_high_violations": 0.85,
-            "audit_medium_violations": 1.0,
-            "audit_low_violations": 0.99,
-            "page_flesch": 0.5,
-            "text_complexity": 0.5,
-            "heading_hierarchy": 1.0,
-            "alt_text_coverage": 0.19,
-            "landmark_coverage": 1.0,
-            "performance_lcp": 0.5
-          },
-          "report": "reports/educacio_gencat_cat_ca_inici_Institucional_wcag_strict.html"
-        }
-      },
-      "aci_best": 3.539
-    },
-    {
       "url": "https://www.museunacional.cat/ca",
       "domain": "www.museunacional.cat",
       "category": "Cultural",
@@ -830,6 +794,42 @@
         }
       },
       "aci_best": 3.531
+    },
+    {
+      "url": "https://www.meteo.cat/",
+      "domain": "www.meteo.cat",
+      "category": "Institucional",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.522,
+          "sub_scores": {
+            "wcag": 3.183,
+            "text": 3.75,
+            "elements": 3.826,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 1.0,
+            "audit_critical_violations": 0.85,
+            "audit_high_violations": 0.95,
+            "audit_medium_violations": 1.0,
+            "audit_low_violations": 0.98,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 0.202,
+            "landmark_coverage": 1.0,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/www_meteo_cat_Institucional_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.522
     },
     {
       "url": "https://catsalut.gencat.cat/ca/inici/",
@@ -868,16 +868,16 @@
       "aci_best": 3.521
     },
     {
-      "url": "https://www.meteo.cat/",
-      "domain": "www.meteo.cat",
+      "url": "https://educacio.gencat.cat/ca/inici",
+      "domain": "educacio.gencat.cat",
       "category": "Institucional",
       "profiles": {
         "wcag_strict": {
-          "aci_score": 3.518,
+          "aci_score": 3.517,
           "sub_scores": {
-            "wcag": 3.183,
+            "wcag": 3.212,
             "text": 3.75,
-            "elements": 3.813,
+            "elements": 3.775,
             "performance": 2.5
           },
           "normalized_metrics": {
@@ -886,22 +886,22 @@
             "target_size_clean": 0.5,
             "keyboard_clean": 0.5,
             "aria_roles_valid": 1.0,
-            "accessible_names_coverage": 1.0,
-            "audit_critical_violations": 0.85,
-            "audit_high_violations": 0.95,
-            "audit_medium_violations": 1.0,
-            "audit_low_violations": 0.98,
+            "accessible_names_coverage": 0.976,
+            "audit_critical_violations": 1.0,
+            "audit_high_violations": 0.8,
+            "audit_medium_violations": 0.98,
+            "audit_low_violations": 0.99,
             "page_flesch": 0.5,
             "text_complexity": 0.5,
             "heading_hierarchy": 1.0,
-            "alt_text_coverage": 0.193,
+            "alt_text_coverage": 0.191,
             "landmark_coverage": 1.0,
             "performance_lcp": 0.5
           },
-          "report": "reports/www_meteo_cat_Institucional_wcag_strict.html"
+          "report": "reports/educacio_gencat_cat_ca_inici_Institucional_wcag_strict.html"
         }
       },
-      "aci_best": 3.518
+      "aci_best": 3.517
     },
     {
       "url": "https://www.upc.edu/ca",

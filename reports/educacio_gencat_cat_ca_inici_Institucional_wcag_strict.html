@@ -138,7 +138,7 @@
     <h1 style="font-size:1.15rem; margin:0 0 0.5rem; color:#003366;">Informe d'Accessibilitat Web — ACI Pipeline</h1>
     <p><strong>URL:</strong> <a href="https://educacio.gencat.cat/ca/inici" target="_blank" rel="noopener">https://educacio.gencat.cat/ca/inici</a></p>
     <p><strong>Tipus de web:</strong> Institucional</p>
-    <p><strong>Perfil actual:</strong> <strong>wcag_strict</strong> &nbsp;|&nbsp; <strong>Data:</strong> 2026-05-24 13:40 UTC</p>
+    <p><strong>Perfil actual:</strong> <strong>wcag_strict</strong> &nbsp;|&nbsp; <strong>Data:</strong> 2026-05-24 14:03 UTC</p>
     <p><strong>Pipeline:</strong> aci_pipeline v0.1.0</p>
   </section>
 
@@ -147,7 +147,7 @@
     <h2>Puntuació ACI Global</h2>
     <div class="score-section">
       <div class="score-box main">
-        <div class="score-value">3.54</div>
+        <div class="score-value">3.52</div>
         <div class="score-label">ACI Score / 5.0</div>
         <div class="score-badge">
           Bo
@@ -280,9 +280,9 @@
     <div class="metric-row">
       <div class="metric-name">audit_high_violations</div>
       <div class="bar-wrap">
-        <div class="bar-fill good" style="width: 85%"></div>
+        <div class="bar-fill good" style="width: 80%"></div>
       </div>
-      <div class="metric-score">0.85</div>
+      <div class="metric-score">0.8</div>
       <div class="metric-weight">w=4</div>
     </div>
     
@@ -291,9 +291,9 @@
     <div class="metric-row">
       <div class="metric-name">audit_medium_violations</div>
       <div class="bar-wrap">
-        <div class="bar-fill good" style="width: 100%"></div>
+        <div class="bar-fill good" style="width: 98%"></div>
       </div>
-      <div class="metric-score">1.0</div>
+      <div class="metric-score">0.98</div>
       <div class="metric-weight">w=2</div>
     </div>
     
@@ -348,7 +348,7 @@
       <div class="bar-wrap">
         <div class="bar-fill bad" style="width: 19%"></div>
       </div>
-      <div class="metric-score">0.19</div>
+      <div class="metric-score">0.191</div>
       <div class="metric-weight">w=5</div>
     </div>
     
@@ -558,7 +558,7 @@
         <td>Resoldre violacions greus d'axe-core (nivell AA)</td>
         <td>
           <span class="badge badge-green">
-            0.85
+            0.8
           </span>
         </td>
         <td>
@@ -623,6 +623,29 @@
       
       <tr class="priority-low">
         <td><span class="rank-badge">11</span></td>
+        <td><code>audit_medium_violations</code></td>
+        <td>Revisar i corregir violacions moderades d'axe-core</td>
+        <td>
+          <span class="badge badge-green">
+            0.98
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-yellow">
+            mig
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-gray">
+            mig
+          </span>
+        </td>
+        <td><small>multiples</small></td>
+      </tr>
+      
+      
+      <tr class="priority-low">
+        <td><span class="rank-badge">12</span></td>
         <td><code>aria_roles_valid</code></td>
         <td>Corregir atributs ARIA invàlids o incorrectes</td>
         <td>
@@ -645,7 +668,7 @@
       
       
       <tr class="priority-low">
-        <td><span class="rank-badge">12</span></td>
+        <td><span class="rank-badge">13</span></td>
         <td><code>audit_critical_violations</code></td>
         <td>Resoldre violacions critiques d'axe-core (nivell A)</td>
         <td>
@@ -661,29 +684,6 @@
         <td>
           <span class="badge badge-red">
             critic
-          </span>
-        </td>
-        <td><small>multiples</small></td>
-      </tr>
-      
-      
-      <tr class="priority-low">
-        <td><span class="rank-badge">13</span></td>
-        <td><code>audit_medium_violations</code></td>
-        <td>Revisar i corregir violacions moderades d'axe-core</td>
-        <td>
-          <span class="badge badge-green">
-            1.0
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-yellow">
-            mig
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-gray">
-            mig
           </span>
         </td>
         <td><small>multiples</small></td>
@@ -741,7 +741,7 @@
   <!-- Violacions axe-core -->
   
   <section>
-    <h2>Violacions axe-core (4)</h2>
+    <h2>Violacions axe-core (6)</h2>
     <table>
       <tr><th>ID</th><th>Impacte</th><th>Descripcio</th><th>Elements afectats</th></tr>
       
@@ -750,6 +750,13 @@
         <td><span class="impact-minor">minor</span></td>
         <td>Ensures role attribute has an appropriate value for the element</td>
         <td>2</td>
+      </tr>
+      
+      <tr>
+        <td><code>color-contrast</code></td>
+        <td><span class="impact-serious">serious</span></td>
+        <td>Ensures the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds</td>
+        <td>1</td>
       </tr>
       
       <tr>
@@ -764,6 +771,13 @@
         <td><span class="impact-serious">serious</span></td>
         <td>Ensures links have discernible text</td>
         <td>1</td>
+      </tr>
+      
+      <tr>
+        <td><code>region</code></td>
+        <td><span class="impact-moderate">moderate</span></td>
+        <td>Ensures all page content is contained by landmarks</td>
+        <td>6</td>
       </tr>
       
       <tr>
@@ -801,7 +815,7 @@
       
       <tr>
         <td><code>color_contrast_ratio</code></td>
-        <td>N/A</td>
+        <td>0.5</td>
         <td>0.5</td>
         <td>5</td>
       </tr>
@@ -850,15 +864,15 @@
       
       <tr>
         <td><code>audit_high_violations</code></td>
-        <td>3</td>
-        <td>0.85</td>
+        <td>4</td>
+        <td>0.8</td>
         <td>4</td>
       </tr>
       
       <tr>
         <td><code>audit_medium_violations</code></td>
-        <td>0</td>
-        <td>1.0</td>
+        <td>1</td>
+        <td>0.98</td>
         <td>2</td>
       </tr>
       
@@ -892,8 +906,8 @@
       
       <tr>
         <td><code>alt_text_coverage</code></td>
-        <td>0.19</td>
-        <td>0.19</td>
+        <td>0.191</td>
+        <td>0.191</td>
         <td>5</td>
       </tr>
       
@@ -919,7 +933,7 @@
 
   <footer class="site-footer" role="contentinfo">
     <p>Pipeline d'accessibilitat cognitiva i visual (ACI) v0.1.0 — TFM Jordi Miguel i Costal · UOC</p>
-    <p><small>Basat en WCAG 2.1/2.2, EN 301 549 i axe-core &nbsp;|&nbsp; 2026-05-24 13:40 UTC</small></p>
+    <p><small>Basat en WCAG 2.1/2.2, EN 301 549 i axe-core &nbsp;|&nbsp; 2026-05-24 14:03 UTC</small></p>
   </footer>
   <script type="module">
     import { initI18n } from '../../static/js/i18n.js';
