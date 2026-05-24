@@ -1,0 +1,186 @@
+{
+  "url": "https://www.educacionfpydeportes.gob.es/portada.html",
+  "slug": "www-educacionfpydeportes-gob-es-portada-html",
+  "domain": "www.educacionfpydeportes.gob.es",
+  "type": "institucional",
+  "timestamp": "2026-05-24T17:56:11+00:00",
+  "profiles": {
+    "readability_first": {
+      "score_overall": 72.7,
+      "metrics": {
+        "color_contrast": 50.0,
+        "focus_visibility": 50.0,
+        "target_size": 50.0,
+        "keyboard_nav": 50.0,
+        "aria_roles": 100.0,
+        "accessible_names": 97.3,
+        "critical_violations": 100.0,
+        "high_violations": 95.0,
+        "medium_violations": 94.0,
+        "low_violations": 0,
+        "flesch_reading_ease": 50.0,
+        "text_complexity": 50.0,
+        "heading_hierarchy": 100.0,
+        "alt_text_coverage": 71.4,
+        "landmark_coverage": 75.0,
+        "performance_lcp": 50.0,
+        "accessibility": 74.6,
+        "readability": 66.7,
+        "performance": 50.0,
+        "seo": 87.5,
+        "robustness": 99.1
+      },
+      "sub_scores_100": {
+        "wcag": 74.0,
+        "text": 66.7,
+        "elements": 82.3,
+        "performance": 50.0
+      },
+      "wcag_principles": {
+        "perceptible": 73.8,
+        "operable": 50.0,
+        "comprensible": 66.7,
+        "robust": 98.1
+      },
+      "notes": "",
+      "raw": {
+        "color_contrast_ratio": null,
+        "focus_visible_ratio": null,
+        "target_size_clean": null,
+        "keyboard_clean": null,
+        "aria_roles_valid": 1.0,
+        "accessible_names_coverage": 0.973,
+        "audit_critical_violations": 0,
+        "audit_high_violations": 1,
+        "audit_medium_violations": 3,
+        "page_flesch": null,
+        "text_complexity": null,
+        "heading_hierarchy": 1.0,
+        "alt_text_coverage": 0.714,
+        "landmark_coverage": 0.75,
+        "performance_lcp": null
+      }
+    },
+    "visual_first": {
+      "score_overall": 69.8,
+      "metrics": {
+        "color_contrast": 50.0,
+        "focus_visibility": 50.0,
+        "target_size": 50.0,
+        "keyboard_nav": 50.0,
+        "aria_roles": 100.0,
+        "accessible_names": 97.3,
+        "critical_violations": 100.0,
+        "high_violations": 95.0,
+        "medium_violations": 94.0,
+        "low_violations": 0,
+        "flesch_reading_ease": 50.0,
+        "text_complexity": 50.0,
+        "heading_hierarchy": 100.0,
+        "alt_text_coverage": 71.4,
+        "landmark_coverage": 75.0,
+        "performance_lcp": 50.0,
+        "accessibility": 74.6,
+        "readability": 66.7,
+        "performance": 50.0,
+        "seo": 87.5,
+        "robustness": 99.1
+      },
+      "sub_scores_100": {
+        "wcag": 63.6,
+        "text": 66.7,
+        "elements": 83.2,
+        "performance": 50.0
+      },
+      "wcag_principles": {
+        "perceptible": 73.8,
+        "operable": 50.0,
+        "comprensible": 66.7,
+        "robust": 98.1
+      },
+      "notes": "",
+      "raw": {
+        "color_contrast_ratio": null,
+        "focus_visible_ratio": null,
+        "target_size_clean": null,
+        "keyboard_clean": null,
+        "aria_roles_valid": 1.0,
+        "accessible_names_coverage": 0.973,
+        "audit_critical_violations": 0,
+        "audit_high_violations": 1,
+        "audit_medium_violations": 3,
+        "page_flesch": null,
+        "text_complexity": null,
+        "heading_hierarchy": 1.0,
+        "alt_text_coverage": 0.714,
+        "landmark_coverage": 0.75,
+        "performance_lcp": null
+      }
+    },
+    "wcag_strict": {
+      "score_overall": 74.8,
+      "metrics": {
+        "color_contrast": 50.0,
+        "focus_visibility": 50.0,
+        "target_size": 50.0,
+        "keyboard_nav": 50.0,
+        "aria_roles": 100.0,
+        "accessible_names": 97.3,
+        "critical_violations": 100.0,
+        "high_violations": 95.0,
+        "medium_violations": 94.0,
+        "low_violations": 100.0,
+        "flesch_reading_ease": 50.0,
+        "text_complexity": 50.0,
+        "heading_hierarchy": 100.0,
+        "alt_text_coverage": 71.4,
+        "landmark_coverage": 75.0,
+        "performance_lcp": 50.0,
+        "accessibility": 74.6,
+        "readability": 66.7,
+        "performance": 50.0,
+        "seo": 87.5,
+        "robustness": 99.1
+      },
+      "sub_scores_100": {
+        "wcag": 66.5,
+        "text": 75.0,
+        "elements": 86.4,
+        "performance": 50.0
+      },
+      "wcag_principles": {
+        "perceptible": 73.8,
+        "operable": 50.0,
+        "comprensible": 66.7,
+        "robust": 98.1
+      },
+      "notes": "",
+      "raw": {
+        "color_contrast_ratio": null,
+        "focus_visible_ratio": null,
+        "target_size_clean": null,
+        "keyboard_clean": null,
+        "aria_roles_valid": 1.0,
+        "accessible_names_coverage": 0.973,
+        "audit_critical_violations": 0,
+        "audit_high_violations": 1,
+        "audit_medium_violations": 3,
+        "audit_low_violations": 0,
+        "page_flesch": null,
+        "text_complexity": null,
+        "heading_hierarchy": 1.0,
+        "alt_text_coverage": 0.714,
+        "landmark_coverage": 0.75,
+        "performance_lcp": null
+      }
+    }
+  },
+  "comparative": {
+    "best_profile": "wcag_strict",
+    "best_score": 74.8,
+    "worst_profile": "visual_first",
+    "worst_score": 69.8,
+    "mean_score": 72.4,
+    "score_variance": 5.0
+  }
+}

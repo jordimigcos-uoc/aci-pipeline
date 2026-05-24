@@ -1,0 +1,186 @@
+{
+  "url": "https://www.uab.cat/",
+  "slug": "www-uab-cat",
+  "domain": "www.uab.cat",
+  "type": "educatiu",
+  "timestamp": "2026-05-24T17:56:28+00:00",
+  "profiles": {
+    "readability_first": {
+      "score_overall": 69.5,
+      "metrics": {
+        "color_contrast": 50.0,
+        "focus_visibility": 50.0,
+        "target_size": 50.0,
+        "keyboard_nav": 50.0,
+        "aria_roles": 100.0,
+        "accessible_names": 75.0,
+        "critical_violations": 100.0,
+        "high_violations": 95.0,
+        "medium_violations": 94.0,
+        "low_violations": 0,
+        "flesch_reading_ease": 50.0,
+        "text_complexity": 50.0,
+        "heading_hierarchy": 100.0,
+        "alt_text_coverage": 100.0,
+        "landmark_coverage": 0.0,
+        "performance_lcp": 50.0,
+        "accessibility": 70.8,
+        "readability": 66.7,
+        "performance": 50.0,
+        "seo": 50.0,
+        "robustness": 91.7
+      },
+      "sub_scores_100": {
+        "wcag": 74.0,
+        "text": 66.7,
+        "elements": 68.8,
+        "performance": 50.0
+      },
+      "wcag_principles": {
+        "perceptible": 83.3,
+        "operable": 50.0,
+        "comprensible": 66.7,
+        "robust": 92.5
+      },
+      "notes": "",
+      "raw": {
+        "color_contrast_ratio": null,
+        "focus_visible_ratio": null,
+        "target_size_clean": null,
+        "keyboard_clean": null,
+        "aria_roles_valid": 1.0,
+        "accessible_names_coverage": 0.75,
+        "audit_critical_violations": 0,
+        "audit_high_violations": 1,
+        "audit_medium_violations": 3,
+        "page_flesch": null,
+        "text_complexity": null,
+        "heading_hierarchy": 1.0,
+        "alt_text_coverage": 1.0,
+        "landmark_coverage": 0.0,
+        "performance_lcp": null
+      }
+    },
+    "visual_first": {
+      "score_overall": 67.8,
+      "metrics": {
+        "color_contrast": 50.0,
+        "focus_visibility": 50.0,
+        "target_size": 50.0,
+        "keyboard_nav": 50.0,
+        "aria_roles": 100.0,
+        "accessible_names": 75.0,
+        "critical_violations": 100.0,
+        "high_violations": 95.0,
+        "medium_violations": 94.0,
+        "low_violations": 0,
+        "flesch_reading_ease": 50.0,
+        "text_complexity": 50.0,
+        "heading_hierarchy": 100.0,
+        "alt_text_coverage": 100.0,
+        "landmark_coverage": 0.0,
+        "performance_lcp": 50.0,
+        "accessibility": 70.8,
+        "readability": 66.7,
+        "performance": 50.0,
+        "seo": 50.0,
+        "robustness": 91.7
+      },
+      "sub_scores_100": {
+        "wcag": 63.6,
+        "text": 66.7,
+        "elements": 77.1,
+        "performance": 50.0
+      },
+      "wcag_principles": {
+        "perceptible": 83.3,
+        "operable": 50.0,
+        "comprensible": 66.7,
+        "robust": 92.5
+      },
+      "notes": "",
+      "raw": {
+        "color_contrast_ratio": null,
+        "focus_visible_ratio": null,
+        "target_size_clean": null,
+        "keyboard_clean": null,
+        "aria_roles_valid": 1.0,
+        "accessible_names_coverage": 0.75,
+        "audit_critical_violations": 0,
+        "audit_high_violations": 1,
+        "audit_medium_violations": 3,
+        "page_flesch": null,
+        "text_complexity": null,
+        "heading_hierarchy": 1.0,
+        "alt_text_coverage": 1.0,
+        "landmark_coverage": 0.0,
+        "performance_lcp": null
+      }
+    },
+    "wcag_strict": {
+      "score_overall": 71.2,
+      "metrics": {
+        "color_contrast": 50.0,
+        "focus_visibility": 50.0,
+        "target_size": 50.0,
+        "keyboard_nav": 50.0,
+        "aria_roles": 100.0,
+        "accessible_names": 75.0,
+        "critical_violations": 100.0,
+        "high_violations": 95.0,
+        "medium_violations": 94.0,
+        "low_violations": 100.0,
+        "flesch_reading_ease": 50.0,
+        "text_complexity": 50.0,
+        "heading_hierarchy": 100.0,
+        "alt_text_coverage": 100.0,
+        "landmark_coverage": 0.0,
+        "performance_lcp": 50.0,
+        "accessibility": 70.8,
+        "readability": 66.7,
+        "performance": 50.0,
+        "seo": 50.0,
+        "robustness": 91.7
+      },
+      "sub_scores_100": {
+        "wcag": 66.5,
+        "text": 75.0,
+        "elements": 75.0,
+        "performance": 50.0
+      },
+      "wcag_principles": {
+        "perceptible": 83.3,
+        "operable": 50.0,
+        "comprensible": 66.7,
+        "robust": 92.5
+      },
+      "notes": "",
+      "raw": {
+        "color_contrast_ratio": null,
+        "focus_visible_ratio": null,
+        "target_size_clean": null,
+        "keyboard_clean": null,
+        "aria_roles_valid": 1.0,
+        "accessible_names_coverage": 0.75,
+        "audit_critical_violations": 0,
+        "audit_high_violations": 1,
+        "audit_medium_violations": 3,
+        "audit_low_violations": 0,
+        "page_flesch": null,
+        "text_complexity": null,
+        "heading_hierarchy": 1.0,
+        "alt_text_coverage": 1.0,
+        "landmark_coverage": 0.0,
+        "performance_lcp": null
+      }
+    }
+  },
+  "comparative": {
+    "best_profile": "wcag_strict",
+    "best_score": 71.2,
+    "worst_profile": "visual_first",
+    "worst_score": 67.8,
+    "mean_score": 69.5,
+    "score_variance": 3.4
+  }
+}

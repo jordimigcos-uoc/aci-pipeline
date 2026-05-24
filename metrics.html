@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+        content="Metodologia del pipeline ACI: 16 mètriques WCAG 2.1, 3 perfils de puntuació i fórmula de càlcul.">
+  <title>Metodologia ACI Pipeline v0.2.0</title>
+  <link rel="stylesheet" href="static/css/site.css">
+  <link rel="stylesheet" href="static/css/reports.css">
+</head>
+<body>
+<a href="#main" class="skip-link">Salta al contingut principal</a>
+<header class="site-header" role="banner">
+
+  <a href="index.html"
+     class="site-header__logo"
+     aria-label="ACI Pipeline — Pàgina d'inici">
+    <svg aria-hidden="true" focusable="false" width="26" height="26"
+         viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="26" height="26" rx="5" fill="#0056b3"/>
+      <polyline points="4,20 8,10 12,16 16,8 20,14 22,11"
+                fill="none" stroke="#fff" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span class="site-header__wordmark">ACI Pipeline</span>
+  </a>
+
+  <nav class="site-header__nav" aria-label="Navegació principal">
+    <ul role="list">
+      <li>
+        <a href="index.html"
+>Tauler</a>
+      </li>
+      <li>
+        <a href="metrics.html"
+aria-current="page">Metodologia</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="site-header__actions">
+    <span style="font-size:0.72rem;opacity:0.65;font-variant-numeric:tabular-nums">
+      v0.2.0
+    </span>
+  </div>
+
+</header>
+<main id="main" class="page-main">
+
+  <h1 style="font-size:1.6rem;font-weight:800;margin:0 0 0.5rem">
+    Metodologia ACI Pipeline
+  </h1>
+  <p style="color:var(--color-text-muted);font-size:0.9rem;margin-bottom:2rem">
+    Versió 0.2.0 &middot; Referència: WCAG 2.1 AA / EN 301 549 &middot; Projecte TFM
+  </p>
+
+  <h2 class="section-title">Fórmula ACI</h2>
+  <p>
+    L'Índex d'Accessibilitat i Comprensió (<strong>ACI</strong>) és una puntuació composada
+    que agrega 16 mètriques d'accessibilitat web en una escala de 0 a 100.
+  </p>
+  <div class="formula-box" role="math" aria-label="Fórmula ACI: ACI = sumatori de ni per wi dividit pel sumatori de wi, multiplicat per 100">
+    ACI = ( &Sigma; n<sub>i</sub> &middot; w<sub>i</sub> ) / ( &Sigma; w<sub>i</sub> ) &times; 100 &isin; [0, 100]
+  </div>
+  <p style="font-size:0.9rem">
+    On <strong>n<sub>i</sub></strong> és el valor normalitzat de la mètrica <em>i</em> (rang [0, 1])
+    i <strong>w<sub>i</sub></strong> és el seu pes dins del perfil de puntuació seleccionat.
+  </p>
+  <p style="font-size:0.9rem">
+    <strong>Interpretació:</strong>
+    <span style="color:#27ae60;font-weight:700">≥ 70 → Excel·lent</span> ·
+    <span style="color:#e67e22;font-weight:700">50–69 → Acceptable</span> ·
+    <span style="color:#e74c3c;font-weight:700">&lt; 50 → Insuficient</span>
+  </p>
+
+  <h2 class="section-title">Principis WCAG 2.1 (agregats)</h2>
+  <p style="font-size:0.9rem;margin-bottom:1rem">
+    Les 16 mètriques s'agrupen en els 4 principis fonamentals de WCAG 2.1:
+  </p>
+  <div class="sub-scores" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+    <div class="sub-score-card">
+      <div class="sub-score-card__label" style="color:#1d4ed8">Perceptible (1.x)</div>
+      <div style="font-size:0.85rem;margin-top:0.4rem">Contrast de color, cobertura alt text, jerarquia capçaleres</div>
+    </div>
+    <div class="sub-score-card">
+      <div class="sub-score-card__label" style="color:#7c3aed">Operable (2.x)</div>
+      <div style="font-size:0.85rem;margin-top:0.4rem">Focus visible, mida objectiu, navegació per teclat</div>
+    </div>
+    <div class="sub-score-card">
+      <div class="sub-score-card__label" style="color:#15803d">Comprensible (3.x)</div>
+      <div style="font-size:0.85rem;margin-top:0.4rem">Llegibilitat Flesch, complexitat textual, jerarquia capçaleres</div>
+    </div>
+    <div class="sub-score-card">
+      <div class="sub-score-card__label" style="color:#0e7490">Robust (4.x)</div>
+      <div style="font-size:0.85rem;margin-top:0.4rem">Rols ARIA vàlids, noms accessibles, violacions crítiques/altes</div>
+    </div>
+  </div>
+
+  <h2 class="section-title">Perfils de puntuació</h2>
+  <p style="font-size:0.9rem;margin-bottom:1rem">
+    Cada perfil assigna pesos diferents a les 16 mètriques per reflectir prioritats distintes
+    d'accessibilitat:
+  </p>
+  <div class="cmp-table-wrapper">
+    <table class="cmp-table" aria-label="Descripció dels 3 perfils de puntuació ACI">
+      <thead>
+        <tr>
+          <th scope="col">Perfil</th>
+          <th scope="col">Enfocament</th>
+          <th scope="col">Mètriques prioritàries</th>
+          <th scope="col">&Sigma; Pesos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:#1d4ed8">WCAG Strict</strong></td>
+          <td>Compliment estricte dels criteris WCAG 2.1 AA</td>
+          <td>Contrast, focus, ARIA, violacions d'auditoria</td>
+          <td>54</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#15803d">Readability First</strong></td>
+          <td>Prioritat a la llegibilitat i comprensió del contingut</td>
+          <td>Flesch, complexitat, capçaleres, alt text</td>
+          <td>35</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#be123c">Visual First</strong></td>
+          <td>Prioritat a la qualitat visual i contrast</td>
+          <td>Contrast, mida objectiu, rendiment LCP, landmarks</td>
+          <td>37</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">Les 16 mètriques d'accessibilitat</h2>
+  <p style="font-size:0.9rem;margin-bottom:1rem">
+    El pipeline ACI analitza 16 mètriques agrupades en 4 sub-puntuacions:
+    <strong>WCAG</strong> (8 mètriques), <strong>Text</strong> (3),
+    <strong>Elements</strong> (4) i <strong>Rendiment</strong> (1).
+  </p>
+
+
+  <div class="metrics-table-wrapper">
+    <table class="metrics-table"
+           aria-label="Les 16 mètriques del pipeline ACI amb descripció i referència WCAG">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Mètrica</th>
+          <th scope="col">Grup</th>
+          <th scope="col">Ref. WCAG</th>
+          <th scope="col">Descripció</th>
+          <th scope="col">Com es mesura</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="color:var(--color-text-muted);font-size:0.8rem">1</td>
+          <td><strong>Contrast de color</strong></td>
+          <td>
+            <span class="wcag-badge"
+                  style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe
+">
+              WCAG
+            </span>
+          </td>
+          <td><span class="wcag-badge">1.4.3 AA</span></td>
+          <td style="font-size:0.83rem">Proporció de contrast entre text i fons. WCAG exigeix mínim 4.5:1 (text normal) o 3:1 (text gran).</td>
+          <td style="font-size:0.78rem;color:var(--color-text-muted)">Playwright + axe-core: ratio de contrast de tots els elements de text</td>
+        </tr>
+        <tr>
+          <td style="color:var(--color-text-muted);font-size:0.8rem">2</td>
+          <td><strong>Visibilitat del focus</strong></td>
+          <td>
+            <span class="wcag-badge"
+                  style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe
+">
+              WCAG
+            </span>
+          </td>
+          <td><span class="wcag-badge">2.4.7 AA</span></td>
+          <td style="font-size:0.83rem">Proporció d'elements interactius amb indicador de focus visible al navegar per teclat.</td>
+          <td style="font-size:0.78rem;color:var(--color-text-muted)">Playwright: detecció d'outline CSS i :focus-visible</td>
+        </tr>
+        <tr>
+          <td style="color:var(--color-text-muted);font-size:0.8rem">3</td>
+          <td><strong>Mida objectiu tàctil</strong></td>
+          <td>
+            <span class="wcag-badge"
+                  style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe
+">
+              WCAG
+            </span>
+          </td>
+          <td><span class="wcag-badge">2.5.8 AA</span></td>
+          <td style="font-size:0.83rem">Proporció d'elements interactius (botons, enllaços) amb mida mínima de 24×24 px.</td>
+          <td style="font-size:0.78rem;color:var(--color-text-muted)">Playwright: getBoundingClientRect() per a tots els elements clicables</td>
+        </tr>
+        <tr>
+          <td style="color:var(--color-text-muted);font-size:0.8rem">4</td>
+          <td><strong>Navegació per teclat</strong></td>
+          <td>
+            <span class="wcag-badge"
+                  style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe
+">
+              WCAG
+            </span>
+          </td>
+          <td><span class="wcag-badge">2.1.1 A</span></td>
+          <td style="font-size:0.83rem">Cobertura de funcionalitat accessible per teclat sense trampes de focus.</td>
+          <td style="font-size:0.78rem;color:var(--color-text-muted)">Playwright: simulació de navegació Tab + detecció de trampes de focus</td>
+        </tr>
+        <tr>
+          <td style="color:var(--color-text-muted);font-size:0.8rem">5</td>
+          <td><strong>Rols ARIA vàlids</strong></td>
+          <td>
+            <span class="wcag-badge"
+                  style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe
+">
+              WCAG
+            </span>
+          </td>
+          <td><span class="wcag-badge">4.1.2 AA</span></td>
+          <td style="font-size:0.83rem">Proporció d'atributs ARIA (role, aria-*) amb valors vàlids i coherents amb el context.</td>
+          <td style="font-size:0.78rem;color:var(--color-text-muted)">axe-core: regles aria-allowed-attr, aria-required-attr, aria-valid-attr</td>
+        </tr>
+        <tr>
+          <td style="color:var(--color-text-muted);font-size:0.8rem">6</td>
+          <td><strong>Noms accessibles</strong></td>
+          <td>
+            <span class="wcag-badge"
+                  style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe
+">
+              WCAG
+            </span>
+          </td>
+          <td><span class="wcag-badge">4.1.2 AA</span></td>
+          <td style="font-size:0.83rem">Cobertura d'elements interactius (botons, formularis, imatges) amb nom accessible.</td>
+          <td style="font-size:0.78rem;color:var(--color-text-muted)">axe-core: regles label, button-name, image-alt, link-name</td>
+        </tr>
+        <tr>
+          <td style="color:var(--color-text-muted);font-size:0.8rem">7</td>
+          <td><strong>Violacions crítiques</strong></td>
+          <td>
+            <span class="wcag-badge"
+                  style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe
+">
+              WCAG
+            </span>
+          </td>
+          <td><span class="wcag-badge">Múltiples</span></td>
+          <td style="font-size:0.83rem">Proporció d'absència de violacions crítiques axe-core (impacte=critical). Valor alt = menys violacions.</td>
+          <td style="font-size:0.78rem;color:var(--color-text-muted)">axe-core: violations filtrades per impact=critical</td>
+        </tr>
+        <tr>
+          <td style="color:var(--color-text-muted);font-size:0.8rem">8</td>
+          <td><strong>Violacions altes</strong></td>
+          <td>
+            <span class="wcag-badge"
+                  style="background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe
+">
+              WCAG
+            </span>
+          </td>
+          <td><span class="wcag-badge">Múltiples</span></td>
+          <td style="font-size:0.83rem">Proporció d'absència de violacions altes axe-core (impacte=serious).</td>
+          <td style="font-size:0.78rem;color:var(--color-text-muted)">axe-core: violations filtrades per impact=serious</td>
+        </tr>
+        <tr>
+          <td style="color:var(--color-text-muted);font-size:0.8rem">9</td>
+          <td><strong>Llegibilitat Flesch</strong></td>
+          <td>
+            <span class="wcag-badge"
+                  style="background:#f0fdf4;color:#15803d;border-color:#bbf7d0
+">
+              Text
+            </span>
+          </td>
+          <td><span class="wcag-badge">3.1.5 AAA</span></td>
+          <td style="font-size:0.83rem">Índex de llegibilitat Flesch-Kincaid adaptat al català/castellà. Valors alts indiquen text més llegible.</td>
+          <td style="font-size:0.78rem;color:var(--color-text-muted)">M4-Text: textstat amb el text principal de la pàgina</td>
+        </tr>
+        <tr>
+          <td style="color:var(--color-text-muted);font-size:0.8rem">10</td>
+          <td><strong>Complexitat textual</strong></td>
+          <td>
+            <span class="wcag-badge"
+                  style="background:#f0fdf4;color:#15803d;border-color:#bbf7d0
+">
+              Text
+            </span>
+          </td>
+          <td><span class="wcag-badge">3.1 AA</span></td>
+          <td style="font-size:0.83rem">Indicador invers de complexitat: paraules llargues, frases complexes, vocabulari especialitzat.</td>
+          <td style="font-size:0.78rem;color:var(--color-text-muted)">M4-Text: anàlisi morfosintàctica del cos del text</td>
+        </tr>
+        <tr>
+          <td style="color:var(--color-text-muted);font-size:0.8rem">11</td>
+          <td><strong>Jerarquia de capçaleres</strong></td>
+          <td>
+            <span class="wcag-badge"
+                  style="background:#f0fdf4;color:#15803d;border-color:#bbf7d0
+">
+              Text
+            </span>
+          </td>
+          <td><span class="wcag-badge">1.3.1 A</span></td>
+          <td style="font-size:0.83rem">Coherència de l'estructura h1–h6: absència de salts de nivell i presència d'un únic h1.</td>
+          <td style="font-size:0.78rem;color:var(--color-text-muted)">Playwright: extracció i validació de l'ordre de capçaleres</td>
+        </tr>
+        <tr>
+          <td style="color:var(--color-text-muted);font-size:0.8rem">12</td>
+          <td><strong>Alt text d'imatges</strong></td>
+          <td>
+            <span class="wcag-badge"
+                  style="background:#fdf4ff;color:#7c3aed;border-color:#e9d5ff
+">
+              Elements
+            </span>
+          </td>
+          <td><span class="wcag-badge">1.1.1 A</span></td>
+          <td style="font-size:0.83rem">Proporció d'imatges no decoratives amb atribut alt no buit i descriptiu.</td>
+          <td style="font-size:0.78rem;color:var(--color-text-muted)">Playwright + axe-core: imatges sense alt o amb alt buit</td>
+        </tr>
+        <tr>
+          <td style="color:var(--color-text-muted);font-size:0.8rem">13</td>
+          <td><strong>Landmarks de navegació</strong></td>
+          <td>
+            <span class="wcag-badge"
+                  style="background:#fdf4ff;color:#7c3aed;border-color:#e9d5ff
+">
+              Elements
+            </span>
+          </td>
+          <td><span class="wcag-badge">1.3.6 AAA</span></td>
+          <td style="font-size:0.83rem">Cobertura de regions HTML5/ARIA: main, nav, header, footer, aside, section amb etiqueta.</td>
+          <td style="font-size:0.78rem;color:var(--color-text-muted)">Playwright: detecció d'elements landmark i roles ARIA equivalents</td>
+        </tr>
+        <tr>
+          <td style="color:var(--color-text-muted);font-size:0.8rem">14</td>
+          <td><strong>Violacions moderades</strong></td>
+          <td>
+            <span class="wcag-badge"
+                  style="background:#fdf4ff;color:#7c3aed;border-color:#e9d5ff
+">
+              Elements
+            </span>
+          </td>
+          <td><span class="wcag-badge">Múltiples</span></td>
+          <td style="font-size:0.83rem">Proporció d'absència de violacions moderades axe-core (impacte=moderate).</td>
+          <td style="font-size:0.78rem;color:var(--color-text-muted)">axe-core: violations filtrades per impact=moderate</td>
+        </tr>
+        <tr>
+          <td style="color:var(--color-text-muted);font-size:0.8rem">15</td>
+          <td><strong>Violacions baixes</strong></td>
+          <td>
+            <span class="wcag-badge"
+                  style="background:#fdf4ff;color:#7c3aed;border-color:#e9d5ff
+">
+              Elements
+            </span>
+          </td>
+          <td><span class="wcag-badge">Múltiples</span></td>
+          <td style="font-size:0.83rem">Proporció d'absència de violacions menors axe-core (impacte=minor).</td>
+          <td style="font-size:0.78rem;color:var(--color-text-muted)">axe-core: violations filtrades per impact=minor</td>
+        </tr>
+        <tr>
+          <td style="color:var(--color-text-muted);font-size:0.8rem">16</td>
+          <td><strong>LCP (Core Web Vitals)</strong></td>
+          <td>
+            <span class="wcag-badge"
+                  style="background:#fff7ed;color:#c2410c;border-color:#fed7aa">
+              Rendiment
+            </span>
+          </td>
+          <td><span class="wcag-badge">EN 301 549</span></td>
+          <td style="font-size:0.83rem">Largest Contentful Paint normalitzat. LCP ≤ 2.5s → 100; LCP ≥ 4s → 0. Afecta usabilitat i accessibilitat cognitiva.</td>
+          <td style="font-size:0.78rem;color:var(--color-text-muted)">Playwright: PerformanceObserver LCP entry al carregament</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">Recomanacions prioritàries</h2>
+  <p style="font-size:0.9rem;margin-bottom:1rem">
+    Les recomanacions s'avaluen en funció del <strong>impacte</strong> en l'accessibilitat (0–1)
+    i l'<strong>esforç</strong> d'implementació (0–1). La prioritat (1–5) combina ambdós factors.
+  </p>
+
+  <div class="metrics-table-wrapper">
+    <table class="recs-table" aria-label="Taula de recomanacions prioritàries per millorar l'accessibilitat">
+      <thead>
+        <tr>
+          <th scope="col">Recomanació</th>
+          <th scope="col">Mètrica afectada</th>
+          <th scope="col">Ref. WCAG</th>
+          <th scope="col">Impacte</th>
+          <th scope="col">Esforç</th>
+          <th scope="col">Prioritat</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Corregir contrast de color</strong></td>
+          <td style="font-size:0.82rem;color:var(--color-text-muted)">color_contrast_ratio</td>
+          <td><span class="wcag-badge">1.4.3 AA</span></td>
+          <td>
+            <div class="metric-bar-wrap">
+              <div class="metric-bar-bg">
+                <div class="metric-bar-fill"
+                     style="width:90%;background:#27ae60"></div>
+              </div>
+              <span class="metric-val" style="color:#27ae60">90%</span>
+            </div>
+          </td>
+          <td>
+            <div class="metric-bar-wrap">
+              <div class="metric-bar-bg">
+                <div class="metric-bar-fill"
+                     style="width:30%;background:#e67e22"></div>
+              </div>
+              <span class="metric-val" style="color:#e67e22">30%</span>
+            </div>
+          </td>
+          <td style="text-align:center;font-size:1.1rem">
+★★★★★          </td>
+        </tr>
+        <tr>
+          <td><strong>Afegir alt text a imatges</strong></td>
+          <td style="font-size:0.82rem;color:var(--color-text-muted)">alt_text_coverage</td>
+          <td><span class="wcag-badge">1.1.1 A</span></td>
+          <td>
+            <div class="metric-bar-wrap">
+              <div class="metric-bar-bg">
+                <div class="metric-bar-fill"
+                     style="width:85%;background:#27ae60"></div>
+              </div>
+              <span class="metric-val" style="color:#27ae60">85%</span>
+            </div>
+          </td>
+          <td>
+            <div class="metric-bar-wrap">
+              <div class="metric-bar-bg">
+                <div class="metric-bar-fill"
+                     style="width:40%;background:#e67e22"></div>
+              </div>
+              <span class="metric-val" style="color:#e67e22">40%</span>
+            </div>
+          </td>
+          <td style="text-align:center;font-size:1.1rem">
+★★★★★          </td>
+        </tr>
+        <tr>
+          <td><strong>Corregir violacions crítiques</strong></td>
+          <td style="font-size:0.82rem;color:var(--color-text-muted)">audit_critical_violations</td>
+          <td><span class="wcag-badge">Múltiples</span></td>
+          <td>
+            <div class="metric-bar-wrap">
+              <div class="metric-bar-bg">
+                <div class="metric-bar-fill"
+                     style="width:95%;background:#27ae60"></div>
+              </div>
+              <span class="metric-val" style="color:#27ae60">95%</span>
+            </div>
+          </td>
+          <td>
+            <div class="metric-bar-wrap">
+              <div class="metric-bar-bg">
+                <div class="metric-bar-fill"
+                     style="width:60%;background:#e67e22"></div>
+              </div>
+              <span class="metric-val" style="color:#e67e22">60%</span>
+            </div>
+          </td>
+          <td style="text-align:center;font-size:1.1rem">
+★★★★★          </td>
+        </tr>
+        <tr>
+          <td><strong>Etiquetar controls formulari</strong></td>
+          <td style="font-size:0.82rem;color:var(--color-text-muted)">accessible_names_coverage</td>
+          <td><span class="wcag-badge">4.1.2 AA</span></td>
+          <td>
+            <div class="metric-bar-wrap">
+              <div class="metric-bar-bg">
+                <div class="metric-bar-fill"
+                     style="width:80%;background:#27ae60"></div>
+              </div>
+              <span class="metric-val" style="color:#27ae60">80%</span>
+            </div>
+          </td>
+          <td>
+            <div class="metric-bar-wrap">
+              <div class="metric-bar-bg">
+                <div class="metric-bar-fill"
+                     style="width:35%;background:#e67e22"></div>
+              </div>
+              <span class="metric-val" style="color:#e67e22">35%</span>
+            </div>
+          </td>
+          <td style="text-align:center;font-size:1.1rem">
+★★★★☆          </td>
+        </tr>
+        <tr>
+          <td><strong>Afegir focus visible</strong></td>
+          <td style="font-size:0.82rem;color:var(--color-text-muted)">focus_visible_ratio</td>
+          <td><span class="wcag-badge">2.4.7 AA</span></td>
+          <td>
+            <div class="metric-bar-wrap">
+              <div class="metric-bar-bg">
+                <div class="metric-bar-fill"
+                     style="width:75%;background:#27ae60"></div>
+              </div>
+              <span class="metric-val" style="color:#27ae60">75%</span>
+            </div>
+          </td>
+          <td>
+            <div class="metric-bar-wrap">
+              <div class="metric-bar-bg">
+                <div class="metric-bar-fill"
+                     style="width:40%;background:#e67e22"></div>
+              </div>
+              <span class="metric-val" style="color:#e67e22">40%</span>
+            </div>
+          </td>
+          <td style="text-align:center;font-size:1.1rem">
+★★★★☆          </td>
+        </tr>
+        <tr>
+          <td><strong>Estructura de capçaleres</strong></td>
+          <td style="font-size:0.82rem;color:var(--color-text-muted)">heading_hierarchy</td>
+          <td><span class="wcag-badge">1.3.1 A</span></td>
+          <td>
+            <div class="metric-bar-wrap">
+              <div class="metric-bar-bg">
+                <div class="metric-bar-fill"
+                     style="width:70%;background:#27ae60"></div>
+              </div>
+              <span class="metric-val" style="color:#27ae60">70%</span>
+            </div>
+          </td>
+          <td>
+            <div class="metric-bar-wrap">
+              <div class="metric-bar-bg">
+                <div class="metric-bar-fill"
+                     style="width:30%;background:#e67e22"></div>
+              </div>
+              <span class="metric-val" style="color:#e67e22">30%</span>
+            </div>
+          </td>
+          <td style="text-align:center;font-size:1.1rem">
+★★★★☆          </td>
+        </tr>
+        <tr>
+          <td><strong>Millorar navegació teclat</strong></td>
+          <td style="font-size:0.82rem;color:var(--color-text-muted)">keyboard_clean</td>
+          <td><span class="wcag-badge">2.1.1 A</span></td>
+          <td>
+            <div class="metric-bar-wrap">
+              <div class="metric-bar-bg">
+                <div class="metric-bar-fill"
+                     style="width:85%;background:#27ae60"></div>
+              </div>
+              <span class="metric-val" style="color:#27ae60">85%</span>
+            </div>
+          </td>
+          <td>
+            <div class="metric-bar-wrap">
+              <div class="metric-bar-bg">
+                <div class="metric-bar-fill"
+                     style="width:65%;background:#e67e22"></div>
+              </div>
+              <span class="metric-val" style="color:#e67e22">65%</span>
+            </div>
+          </td>
+          <td style="text-align:center;font-size:1.1rem">
+★★★★☆          </td>
+        </tr>
+        <tr>
+          <td><strong>Simplificar textos</strong></td>
+          <td style="font-size:0.82rem;color:var(--color-text-muted)">text_complexity</td>
+          <td><span class="wcag-badge">3.1.5 AAA</span></td>
+          <td>
+            <div class="metric-bar-wrap">
+              <div class="metric-bar-bg">
+                <div class="metric-bar-fill"
+                     style="width:65%;background:#27ae60"></div>
+              </div>
+              <span class="metric-val" style="color:#27ae60">65%</span>
+            </div>
+          </td>
+          <td>
+            <div class="metric-bar-wrap">
+              <div class="metric-bar-bg">
+                <div class="metric-bar-fill"
+                     style="width:70%;background:#e67e22"></div>
+              </div>
+              <span class="metric-val" style="color:#e67e22">70%</span>
+            </div>
+          </td>
+          <td style="text-align:center;font-size:1.1rem">
+★★★☆☆          </td>
+        </tr>
+        <tr>
+          <td><strong>Afegir landmarks HTML5</strong></td>
+          <td style="font-size:0.82rem;color:var(--color-text-muted)">landmark_coverage</td>
+          <td><span class="wcag-badge">1.3.6 AAA</span></td>
+          <td>
+            <div class="metric-bar-wrap">
+              <div class="metric-bar-bg">
+                <div class="metric-bar-fill"
+                     style="width:60%;background:#27ae60"></div>
+              </div>
+              <span class="metric-val" style="color:#27ae60">60%</span>
+            </div>
+          </td>
+          <td>
+            <div class="metric-bar-wrap">
+              <div class="metric-bar-bg">
+                <div class="metric-bar-fill"
+                     style="width:25%;background:#e67e22"></div>
+              </div>
+              <span class="metric-val" style="color:#e67e22">25%</span>
+            </div>
+          </td>
+          <td style="text-align:center;font-size:1.1rem">
+★★★☆☆          </td>
+        </tr>
+        <tr>
+          <td><strong>Augmentar mida objectius</strong></td>
+          <td style="font-size:0.82rem;color:var(--color-text-muted)">target_size_clean</td>
+          <td><span class="wcag-badge">2.5.8 AA</span></td>
+          <td>
+            <div class="metric-bar-wrap">
+              <div class="metric-bar-bg">
+                <div class="metric-bar-fill"
+                     style="width:55%;background:#27ae60"></div>
+              </div>
+              <span class="metric-val" style="color:#27ae60">55%</span>
+            </div>
+          </td>
+          <td>
+            <div class="metric-bar-wrap">
+              <div class="metric-bar-bg">
+                <div class="metric-bar-fill"
+                     style="width:45%;background:#e67e22"></div>
+              </div>
+              <span class="metric-val" style="color:#e67e22">45%</span>
+            </div>
+          </td>
+          <td style="text-align:center;font-size:1.1rem">
+★★★☆☆          </td>
+        </tr>
+        <tr>
+          <td><strong>Optimitzar rendiment LCP</strong></td>
+          <td style="font-size:0.82rem;color:var(--color-text-muted)">performance_lcp</td>
+          <td><span class="wcag-badge">EN 301 549</span></td>
+          <td>
+            <div class="metric-bar-wrap">
+              <div class="metric-bar-bg">
+                <div class="metric-bar-fill"
+                     style="width:70%;background:#27ae60"></div>
+              </div>
+              <span class="metric-val" style="color:#27ae60">70%</span>
+            </div>
+          </td>
+          <td>
+            <div class="metric-bar-wrap">
+              <div class="metric-bar-bg">
+                <div class="metric-bar-fill"
+                     style="width:80%;background:#e67e22"></div>
+              </div>
+              <span class="metric-val" style="color:#e67e22">80%</span>
+            </div>
+          </td>
+          <td style="text-align:center;font-size:1.1rem">
+★★★☆☆          </td>
+        </tr>
+        <tr>
+          <td><strong>Corregir rols ARIA</strong></td>
+          <td style="font-size:0.82rem;color:var(--color-text-muted)">aria_roles_valid</td>
+          <td><span class="wcag-badge">4.1.2 AA</span></td>
+          <td>
+            <div class="metric-bar-wrap">
+              <div class="metric-bar-bg">
+                <div class="metric-bar-fill"
+                     style="width:60%;background:#27ae60"></div>
+              </div>
+              <span class="metric-val" style="color:#27ae60">60%</span>
+            </div>
+          </td>
+          <td>
+            <div class="metric-bar-wrap">
+              <div class="metric-bar-bg">
+                <div class="metric-bar-fill"
+                     style="width:50%;background:#e67e22"></div>
+              </div>
+              <span class="metric-val" style="color:#e67e22">50%</span>
+            </div>
+          </td>
+          <td style="text-align:center;font-size:1.1rem">
+★★★☆☆          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">Mòduls del pipeline ACI</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:2rem">
+    <div class="sub-score-card" style="text-align:left">
+      <div style="font-size:0.72rem;font-weight:800;color:var(--color-primary);letter-spacing:0.08em">M1</div>
+      <div style="font-size:0.95rem;font-weight:700;margin:0.2rem 0 0.4rem">Captura</div>
+      <div style="font-size:0.82rem;color:var(--color-text-muted)">Playwright headless: carrega la pàgina, captura DOM + captures de pantalla</div>
+    </div>
+    <div class="sub-score-card" style="text-align:left">
+      <div style="font-size:0.72rem;font-weight:800;color:var(--color-primary);letter-spacing:0.08em">M2</div>
+      <div style="font-size:0.95rem;font-weight:700;margin:0.2rem 0 0.4rem">Auditoria</div>
+      <div style="font-size:0.82rem;color:var(--color-text-muted)">axe-core: detecta violacions WCAG/ARIA classificades per impacte</div>
+    </div>
+    <div class="sub-score-card" style="text-align:left">
+      <div style="font-size:0.72rem;font-weight:800;color:var(--color-primary);letter-spacing:0.08em">M3</div>
+      <div style="font-size:0.95rem;font-weight:700;margin:0.2rem 0 0.4rem">Accessibilitat</div>
+      <div style="font-size:0.82rem;color:var(--color-text-muted)">Mètriques WCAG 2.1: contrast, focus, teclat, ARIA, noms, mida</div>
+    </div>
+    <div class="sub-score-card" style="text-align:left">
+      <div style="font-size:0.72rem;font-weight:800;color:var(--color-primary);letter-spacing:0.08em">M4</div>
+      <div style="font-size:0.95rem;font-weight:700;margin:0.2rem 0 0.4rem">Text</div>
+      <div style="font-size:0.82rem;color:var(--color-text-muted)">Llegibilitat Flesch, complexitat morfosintàctica, jerarquia de capçaleres</div>
+    </div>
+    <div class="sub-score-card" style="text-align:left">
+      <div style="font-size:0.72rem;font-weight:800;color:var(--color-primary);letter-spacing:0.08em">M5</div>
+      <div style="font-size:0.95rem;font-weight:700;margin:0.2rem 0 0.4rem">IA</div>
+      <div style="font-size:0.82rem;color:var(--color-text-muted)">Claude AI (opcional): anàlisi semàntic i notes interpretatives per mètrica</div>
+    </div>
+    <div class="sub-score-card" style="text-align:left">
+      <div style="font-size:0.72rem;font-weight:800;color:var(--color-primary);letter-spacing:0.08em">M6</div>
+      <div style="font-size:0.95rem;font-weight:700;margin:0.2rem 0 0.4rem">Puntuació</div>
+      <div style="font-size:0.82rem;color:var(--color-text-muted)">Agregació ponderada ACI amb els 3 perfils de puntuació</div>
+    </div>
+    <div class="sub-score-card" style="text-align:left">
+      <div style="font-size:0.72rem;font-weight:800;color:var(--color-primary);letter-spacing:0.08em">M7</div>
+      <div style="font-size:0.95rem;font-weight:700;margin:0.2rem 0 0.4rem">Exportació</div>
+      <div style="font-size:0.82rem;color:var(--color-text-muted)">Generació de JSON per slug, CSV global i manifest de reports</div>
+    </div>
+    <div class="sub-score-card" style="text-align:left">
+      <div style="font-size:0.72rem;font-weight:800;color:var(--color-primary);letter-spacing:0.08em">M8</div>
+      <div style="font-size:0.95rem;font-weight:700;margin:0.2rem 0 0.4rem">Publicació</div>
+      <div style="font-size:0.82rem;color:var(--color-text-muted)">Jinja2 + D3.js → HTML estàtic · GitHub Actions → GitHub Pages</div>
+    </div>
+  </div>
+
+  <p style="font-size:0.85rem;color:var(--color-text-muted)">
+    <strong>Referència completa:</strong> llibre blanca del TFM — Projecte ACI Pipeline v0.2.0.
+    Estàndards aplicats: WCAG 2.1 AA, EN 301 549 v3.2.1, axe-core 4.x, Playwright 1.44.
+  </p>
+
+</main>
+
+<footer class="site-footer" role="contentinfo">
+  <p>
+    <strong>ACI Pipeline</strong> v0.2.0
+    &middot; Projecte TFM
+    &middot; Referència:
+    <abbr title="Web Content Accessibility Guidelines">WCAG</abbr>&nbsp;2.1&nbsp;AA
+  </p>
+</footer>
+</body>
+</html>

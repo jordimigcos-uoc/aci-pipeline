@@ -1,0 +1,186 @@
+{
+  "url": "https://www.capraboacasa.com/ca/",
+  "slug": "www-capraboacasa-com-ca",
+  "domain": "www.capraboacasa.com",
+  "type": "comercial",
+  "timestamp": "2026-05-24T17:58:59+00:00",
+  "profiles": {
+    "readability_first": {
+      "score_overall": 72.1,
+      "metrics": {
+        "color_contrast": 33.3,
+        "focus_visibility": 50.0,
+        "target_size": 50.0,
+        "keyboard_nav": 50.0,
+        "aria_roles": 100.0,
+        "accessible_names": 99.5,
+        "critical_violations": 85.0,
+        "high_violations": 85.0,
+        "medium_violations": 96.0,
+        "low_violations": 0,
+        "flesch_reading_ease": 50.0,
+        "text_complexity": 50.0,
+        "heading_hierarchy": 100.0,
+        "alt_text_coverage": 96.1,
+        "landmark_coverage": 75.0,
+        "performance_lcp": 50.0,
+        "accessibility": 69.6,
+        "readability": 66.7,
+        "performance": 50.0,
+        "seo": 87.5,
+        "robustness": 94.8
+      },
+      "sub_scores_100": {
+        "wcag": 64.2,
+        "text": 66.7,
+        "elements": 92.2,
+        "performance": 50.0
+      },
+      "wcag_principles": {
+        "perceptible": 76.5,
+        "operable": 50.0,
+        "comprensible": 66.7,
+        "robust": 92.4
+      },
+      "notes": "",
+      "raw": {
+        "color_contrast_ratio": 0.333,
+        "focus_visible_ratio": null,
+        "target_size_clean": null,
+        "keyboard_clean": null,
+        "aria_roles_valid": 1.0,
+        "accessible_names_coverage": 0.995,
+        "audit_critical_violations": 1,
+        "audit_high_violations": 3,
+        "audit_medium_violations": 2,
+        "page_flesch": null,
+        "text_complexity": null,
+        "heading_hierarchy": 1.0,
+        "alt_text_coverage": 0.961,
+        "landmark_coverage": 0.75,
+        "performance_lcp": null
+      }
+    },
+    "visual_first": {
+      "score_overall": 70.2,
+      "metrics": {
+        "color_contrast": 33.3,
+        "focus_visibility": 50.0,
+        "target_size": 50.0,
+        "keyboard_nav": 50.0,
+        "aria_roles": 100.0,
+        "accessible_names": 99.5,
+        "critical_violations": 85.0,
+        "high_violations": 85.0,
+        "medium_violations": 96.0,
+        "low_violations": 0,
+        "flesch_reading_ease": 50.0,
+        "text_complexity": 50.0,
+        "heading_hierarchy": 100.0,
+        "alt_text_coverage": 96.1,
+        "landmark_coverage": 75.0,
+        "performance_lcp": 50.0,
+        "accessibility": 69.6,
+        "readability": 66.7,
+        "performance": 50.0,
+        "seo": 87.5,
+        "robustness": 94.8
+      },
+      "sub_scores_100": {
+        "wcag": 55.2,
+        "text": 66.7,
+        "elements": 94.1,
+        "performance": 50.0
+      },
+      "wcag_principles": {
+        "perceptible": 76.5,
+        "operable": 50.0,
+        "comprensible": 66.7,
+        "robust": 92.4
+      },
+      "notes": "",
+      "raw": {
+        "color_contrast_ratio": 0.333,
+        "focus_visible_ratio": null,
+        "target_size_clean": null,
+        "keyboard_clean": null,
+        "aria_roles_valid": 1.0,
+        "accessible_names_coverage": 0.995,
+        "audit_critical_violations": 1,
+        "audit_high_violations": 3,
+        "audit_medium_violations": 2,
+        "page_flesch": null,
+        "text_complexity": null,
+        "heading_hierarchy": 1.0,
+        "alt_text_coverage": 0.961,
+        "landmark_coverage": 0.75,
+        "performance_lcp": null
+      }
+    },
+    "wcag_strict": {
+      "score_overall": 73.6,
+      "metrics": {
+        "color_contrast": 33.3,
+        "focus_visibility": 50.0,
+        "target_size": 50.0,
+        "keyboard_nav": 50.0,
+        "aria_roles": 100.0,
+        "accessible_names": 99.5,
+        "critical_violations": 85.0,
+        "high_violations": 85.0,
+        "medium_violations": 96.0,
+        "low_violations": 100.0,
+        "flesch_reading_ease": 50.0,
+        "text_complexity": 50.0,
+        "heading_hierarchy": 100.0,
+        "alt_text_coverage": 96.1,
+        "landmark_coverage": 75.0,
+        "performance_lcp": 50.0,
+        "accessibility": 69.6,
+        "readability": 66.7,
+        "performance": 50.0,
+        "seo": 87.5,
+        "robustness": 94.8
+      },
+      "sub_scores_100": {
+        "wcag": 58.9,
+        "text": 75.0,
+        "elements": 94.3,
+        "performance": 50.0
+      },
+      "wcag_principles": {
+        "perceptible": 76.5,
+        "operable": 50.0,
+        "comprensible": 66.7,
+        "robust": 92.4
+      },
+      "notes": "",
+      "raw": {
+        "color_contrast_ratio": 0.333,
+        "focus_visible_ratio": null,
+        "target_size_clean": null,
+        "keyboard_clean": null,
+        "aria_roles_valid": 1.0,
+        "accessible_names_coverage": 0.995,
+        "audit_critical_violations": 1,
+        "audit_high_violations": 3,
+        "audit_medium_violations": 2,
+        "audit_low_violations": 0,
+        "page_flesch": null,
+        "text_complexity": null,
+        "heading_hierarchy": 1.0,
+        "alt_text_coverage": 0.961,
+        "landmark_coverage": 0.75,
+        "performance_lcp": null
+      }
+    }
+  },
+  "comparative": {
+    "best_profile": "wcag_strict",
+    "best_score": 73.6,
+    "worst_profile": "visual_first",
+    "worst_score": 70.2,
+    "mean_score": 72.0,
+    "score_variance": 3.4
+  }
+}
