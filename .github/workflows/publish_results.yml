@@ -107,60 +107,12 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY || '' }}
 
-      # ── 6. Prepara docs/ per a Pages ────────────────────────────────────────
-      - name: Prepara carpeta docs/
+      # ── 6. Genera el lloc estàtic amb build_site.py ─────────────────────────
+      - name: Genera lloc estàtic (build_site.py)
         run: |
-          mkdir -p docs/results docs/reports
-
-          # Copia informes HTML individuals
-          if ls results/gh-pages/reports/*.html 2>/dev/null; then
-            cp results/gh-pages/reports/*.html docs/reports/ || true
-          fi
-
-          # Copia CSVs i JSONs de mètriques
-          if ls results/gh-pages/metrics/*.json 2>/dev/null; then
-            cp results/gh-pages/metrics/*.json docs/results/ || true
-          fi
-          if ls results/gh-pages/metrics/*.csv 2>/dev/null; then
-            cp results/gh-pages/metrics/*.csv docs/results/ || true
-          fi
-
-          # Genera results.json consolidat per al dashboard
-          python - <<'PYEOF'
-          import json, pathlib, datetime
-
-          results = []
-          metrics_dir = pathlib.Path("results/gh-pages/metrics")
-          if metrics_dir.exists():
-              for f in sorted(metrics_dir.glob("*.json")):
-                  try:
-                      data = json.loads(f.read_text(encoding="utf-8"))
-                      if "aci_score" in data:
-                          results.append({
-                              "url":       data.get("url", ""),
-                              "domain":    data.get("url", "").split("/")[2] if "//" in data.get("url","") else "",
-                              "aci_score": round(float(data.get("aci_score", 0)), 3),
-                              "profile":   data.get("profile", ""),
-                              "timestamp": data.get("timestamp", ""),
-                              "report":    f"reports/{f.stem}.html",
-                          })
-                  except Exception as e:
-                      print(f"Ignorat {f.name}: {e}")
-
-          # Ordena per ACI descendent
-          results.sort(key=lambda r: r["aci_score"], reverse=True)
-
-          out = {
-              "generated_at": datetime.datetime.utcnow().isoformat() + "Z",
-              "pipeline_version": "0.1.0",
-              "n_urls": len(results),
-              "results": results,
-          }
-          pathlib.Path("docs/results.json").write_text(
-              json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8"
-          )
-          print(f"results.json: {len(results)} entrades")
-          PYEOF
+          python scripts/build_site.py \
+            --results results/gh-pages \
+            --output  docs
 
           # Còpia de logs (opcional, útil per a diagnosi)
           mkdir -p docs/logs
@@ -168,6 +120,8 @@ jobs:
 
           echo "Contingut de docs/:"
           ls -la docs/
+          echo "Informes HTML generats:"
+          ls docs/reports/ 2>/dev/null | head -20 || echo "  (cap)"
 
       # ── 7. Publica a la branca gh-pages amb peaceiris/actions-gh-pages ───────
       # Necessita: Settings → Pages → Source: gh-pages branch / root
