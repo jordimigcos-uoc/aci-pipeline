@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <title>Informe ACI — https://www.ucm.es/</title>
+  <link rel="stylesheet" href="../static/css/site.css">
+  <style>
+    :root {
+      --green: #28a745; --yellow: #ffc107; --red: #dc3545;
+      --orange: #fd7e14; --blue: #007bff; --gray: #6c757d;
+      --light: #f8f9fa; --border: #dee2e6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; color: #333; background: #fff; }
+    .container { max-width: 960px; margin: 0 auto; padding: 24px; }
+    header { background: #2c3e50; color: #fff; padding: 24px; margin-bottom: 24px; border-radius: 8px; }
+    header h1 { font-size: 1.6em; margin-bottom: 8px; }
+    header p { opacity: 0.85; font-size: 0.95em; margin: 2px 0; }
+    header a { color: #aed6f1; }
+
+    /* Score box */
+    .score-section { display: flex; gap: 16px; margin: 24px 0; flex-wrap: wrap; }
+    .score-box {
+      flex: 1; min-width: 180px; padding: 24px; border-radius: 12px;
+      text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .score-box .score-value { font-size: 3.5em; font-weight: 700; line-height: 1; }
+    .score-box .score-label { font-size: 0.9em; margin-top: 6px; opacity: 0.8; }
+    .score-box .score-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.85em; font-weight: 600; margin-top: 8px; background: rgba(255,255,255,0.3); }
+    
+    .score-box.main { background: linear-gradient(135deg, #ffc107, #fd7e14); color: #fff; }
+    
+
+    /* Sub-score cards */
+    .sub-score-card { flex: 1; min-width: 120px; padding: 16px; border-radius: 8px; background: var(--light); border: 1px solid var(--border); text-align: center; }
+    .sub-score-card .sub-val { font-size: 1.8em; font-weight: 700; }
+    .sub-score-card .sub-name { font-size: 0.8em; color: var(--gray); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    
+    
+    
+    
+    
+
+    /* Progress bars */
+    .metric-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .metric-row:last-child { border-bottom: none; }
+    .metric-name { flex: 0 0 220px; font-size: 0.9em; color: #444; }
+    .bar-wrap { flex: 1; background: #e9ecef; border-radius: 4px; height: 18px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.4s ease; }
+    .bar-fill.good { background: var(--green); }
+    .bar-fill.mid  { background: var(--yellow); }
+    .bar-fill.bad  { background: var(--red); }
+    .metric-score { flex: 0 0 50px; text-align: right; font-size: 0.85em; font-weight: 600; }
+    .metric-weight { flex: 0 0 30px; text-align: right; font-size: 0.8em; color: var(--gray); }
+
+    /* Tables */
+    table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.9em; }
+    th { background: #2c3e50; color: #fff; padding: 10px 12px; text-align: left; font-weight: 600; }
+    td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:nth-child(even) td { background: var(--light); }
+    tr:hover td { background: #e8f4fd; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.8em; font-weight: 600; }
+    .badge-red { background: #fde8ea; color: var(--red); }
+    .badge-orange { background: #fff3e0; color: var(--orange); }
+    .badge-yellow { background: #fff9e6; color: #856404; }
+    .badge-green { background: #d4edda; color: var(--green); }
+    .badge-gray { background: #e9ecef; color: var(--gray); }
+
+    /* Intervention table */
+    .priority-high td:first-child { border-left: 4px solid var(--red); }
+    .priority-mid td:first-child  { border-left: 4px solid var(--yellow); }
+    .priority-low td:first-child  { border-left: 4px solid var(--green); }
+    .rank-badge { display: inline-block; width: 28px; height: 28px; border-radius: 50%; background: #2c3e50; color: #fff; text-align: center; line-height: 28px; font-size: 0.85em; font-weight: 700; }
+
+    /* Sections */
+    section { margin: 32px 0; }
+    section h2 { font-size: 1.25em; color: #2c3e50; padding-bottom: 8px; border-bottom: 2px solid var(--border); margin-bottom: 16px; }
+    section h3 { font-size: 1.05em; color: #444; margin: 16px 0 8px; }
+
+    /* Axe violations */
+    .impact-critical { color: var(--red); font-weight: 700; }
+    .impact-serious  { color: var(--orange); font-weight: 700; }
+    .impact-moderate { color: #856404; font-weight: 600; }
+    .impact-minor    { color: var(--gray); }
+    code { background: #f1f3f5; padding: 1px 5px; border-radius: 3px; font-size: 0.88em; font-family: 'Consolas', monospace; }
+
+    /* Screenshot */
+    .screenshot-wrap { margin: 12px 0; }
+    .screenshot-wrap img { max-width: 100%; border: 1px solid var(--border); border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+
+    /* Summary stats */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin: 16px 0; }
+    .stat-card { background: var(--light); border: 1px solid var(--border); border-radius: 8px; padding: 14px; text-align: center; }
+    .stat-card .stat-val { font-size: 1.8em; font-weight: 700; color: #2c3e50; }
+    .stat-card .stat-label { font-size: 0.8em; color: var(--gray); margin-top: 4px; }
+
+    footer { margin-top: 48px; padding: 20px 0; border-top: 2px solid var(--border); color: var(--gray); font-size: 0.85em; text-align: center; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Salta al contingut principal</a>
+  <header class="site-header" role="banner">
+    <a class="site-header__logo" href="../index.html" aria-label="ACI Pipeline — pàgina d'inici">
+      <img src="../static/img/uoc_logo.svg" alt="UOC" width="80" height="32">
+      <span class="site-header__wordmark" aria-hidden="true">ACI<br>Pipeline</span>
+    </a>
+    <nav class="site-header__nav" aria-label="Navegació principal">
+      <ul role="list">
+        <li><a href="../index.html">Índex</a></li>
+        <li><a href="../../report.html">Informe D3</a></li>
+        <li><a href="../../page_report.html" aria-current="page">Informe de pàgina</a></li>
+      </ul>
+    </nav>
+    <div class="site-header__actions">
+      <div class="lang-selector" role="group" aria-label="Selecció de llengua">
+        <button class="lang-btn" data-lang="ca" aria-pressed="true">CA</button>
+        <button class="lang-btn" data-lang="es" aria-pressed="false">ES</button>
+        <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </header>
+
+<div class="container">
+<main id="main-content">
+
+  <!-- Navegació entre perfils (injectada per JS des del manifest) -->
+  <nav id="profile-nav" aria-label="Navegació entre perfils" style="display:none;
+       flex-wrap:wrap;gap:6px;align-items:center;
+       padding:0.65rem 1rem;background:#f8f9fa;border-radius:6px;
+       border:1px solid #dee2e6;margin-bottom:1rem;">
+  </nav>
+
+  <!-- Report identity block -->
+  <section aria-label="Informació de la pàgina analitzada" style="margin-bottom:1.5rem; padding:1.25rem; background:#f1f3f5; border-radius:8px; border-left:4px solid #003366;">
+    <h1 style="font-size:1.15rem; margin:0 0 0.5rem; color:#003366;">Informe d'Accessibilitat Web — ACI Pipeline</h1>
+    <p><strong>URL:</strong> <a href="https://www.ucm.es/" target="_blank" rel="noopener">https://www.ucm.es/</a></p>
+    <p><strong>Tipus de web:</strong> Educatiu</p>
+    <p><strong>Perfil actual:</strong> <strong>wcag_strict</strong> &nbsp;|&nbsp; <strong>Data:</strong> 2026-05-24 13:40 UTC</p>
+    <p><strong>Pipeline:</strong> aci_pipeline v0.1.0</p>
+  </section>
+
+  <!-- Score principal -->
+  <section>
+    <h2>Puntuació ACI Global</h2>
+    <div class="score-section">
+      <div class="score-box main">
+        <div class="score-value">3.68</div>
+        <div class="score-label">ACI Score / 5.0</div>
+        <div class="score-badge">
+          Bo
+        </div>
+      </div>
+
+      
+      
+      <div class="sub-score-card">
+        <div class="sub-val" style="color: #ffc107">
+          3.3
+        </div>
+        <div class="sub-name">wcag</div>
+      </div>
+      
+      
+      
+      <div class="sub-score-card">
+        <div class="sub-val" style="color: #ffc107">
+          3.8
+        </div>
+        <div class="sub-name">text</div>
+      </div>
+      
+      
+      
+      <div class="sub-score-card">
+        <div class="sub-val" style="color: #28a745">
+          4.1
+        </div>
+        <div class="sub-name">elements</div>
+      </div>
+      
+      
+      
+      <div class="sub-score-card">
+        <div class="sub-val" style="color: #ffc107">
+          2.5
+        </div>
+        <div class="sub-name">performance</div>
+      </div>
+      
+      
+    </div>
+  </section>
+
+  <!-- Metriques per barra -->
+  <section>
+    <h2>Detall de Metriques (normalitzades 0-1)</h2>
+    
+    
+    
+    <div class="metric-row">
+      <div class="metric-name">color_contrast_ratio</div>
+      <div class="bar-wrap">
+        <div class="bar-fill mid" style="width: 50%"></div>
+      </div>
+      <div class="metric-score">0.5</div>
+      <div class="metric-weight">w=5</div>
+    </div>
+    
+    
+    
+    <div class="metric-row">
+      <div class="metric-name">focus_visible_ratio</div>
+      <div class="bar-wrap">
+        <div class="bar-fill mid" style="width: 50%"></div>
+      </div>
+      <div class="metric-score">0.5</div>
+      <div class="metric-weight">w=4</div>
+    </div>
+    
+    
+    
+    <div class="metric-row">
+      <div class="metric-name">target_size_clean</div>
+      <div class="bar-wrap">
+        <div class="bar-fill mid" style="width: 50%"></div>
+      </div>
+      <div class="metric-score">0.5</div>
+      <div class="metric-weight">w=3</div>
+    </div>
+    
+    
+    
+    <div class="metric-row">
+      <div class="metric-name">keyboard_clean</div>
+      <div class="bar-wrap">
+        <div class="bar-fill mid" style="width: 50%"></div>
+      </div>
+      <div class="metric-score">0.5</div>
+      <div class="metric-weight">w=5</div>
+    </div>
+    
+    
+    
+    <div class="metric-row">
+      <div class="metric-name">aria_roles_valid</div>
+      <div class="bar-wrap">
+        <div class="bar-fill good" style="width: 100%"></div>
+      </div>
+      <div class="metric-score">1.0</div>
+      <div class="metric-weight">w=4</div>
+    </div>
+    
+    
+    
+    <div class="metric-row">
+      <div class="metric-name">accessible_names_coverage</div>
+      <div class="bar-wrap">
+        <div class="bar-fill good" style="width: 100%"></div>
+      </div>
+      <div class="metric-score">1.0</div>
+      <div class="metric-weight">w=5</div>
+    </div>
+    
+    
+    
+    <div class="metric-row">
+      <div class="metric-name">audit_critical_violations</div>
+      <div class="bar-wrap">
+        <div class="bar-fill good" style="width: 100%"></div>
+      </div>
+      <div class="metric-score">1.0</div>
+      <div class="metric-weight">w=5</div>
+    </div>
+    
+    
+    
+    <div class="metric-row">
+      <div class="metric-name">audit_high_violations</div>
+      <div class="bar-wrap">
+        <div class="bar-fill good" style="width: 95%"></div>
+      </div>
+      <div class="metric-score">0.95</div>
+      <div class="metric-weight">w=4</div>
+    </div>
+    
+    
+    
+    <div class="metric-row">
+      <div class="metric-name">audit_medium_violations</div>
+      <div class="bar-wrap">
+        <div class="bar-fill good" style="width: 96%"></div>
+      </div>
+      <div class="metric-score">0.96</div>
+      <div class="metric-weight">w=2</div>
+    </div>
+    
+    
+    
+    <div class="metric-row">
+      <div class="metric-name">audit_low_violations</div>
+      <div class="bar-wrap">
+        <div class="bar-fill good" style="width: 100%"></div>
+      </div>
+      <div class="metric-score">1.0</div>
+      <div class="metric-weight">w=1</div>
+    </div>
+    
+    
+    
+    <div class="metric-row">
+      <div class="metric-name">page_flesch</div>
+      <div class="bar-wrap">
+        <div class="bar-fill mid" style="width: 50%"></div>
+      </div>
+      <div class="metric-score">0.5</div>
+      <div class="metric-weight">w=2</div>
+    </div>
+    
+    
+    
+    <div class="metric-row">
+      <div class="metric-name">text_complexity</div>
+      <div class="bar-wrap">
+        <div class="bar-fill mid" style="width: 50%"></div>
+      </div>
+      <div class="metric-score">0.5</div>
+      <div class="metric-weight">w=1</div>
+    </div>
+    
+    
+    
+    <div class="metric-row">
+      <div class="metric-name">heading_hierarchy</div>
+      <div class="bar-wrap">
+        <div class="bar-fill good" style="width: 100%"></div>
+      </div>
+      <div class="metric-score">1.0</div>
+      <div class="metric-weight">w=3</div>
+    </div>
+    
+    
+    
+    <div class="metric-row">
+      <div class="metric-name">alt_text_coverage</div>
+      <div class="bar-wrap">
+        <div class="bar-fill good" style="width: 100%"></div>
+      </div>
+      <div class="metric-score">1.0</div>
+      <div class="metric-weight">w=5</div>
+    </div>
+    
+    
+    
+    <div class="metric-row">
+      <div class="metric-name">landmark_coverage</div>
+      <div class="bar-wrap">
+        <div class="bar-fill bad" style="width: 0%"></div>
+      </div>
+      <div class="metric-score">0.0</div>
+      <div class="metric-weight">w=3</div>
+    </div>
+    
+    
+    
+    <div class="metric-row">
+      <div class="metric-name">performance_lcp</div>
+      <div class="bar-wrap">
+        <div class="bar-fill mid" style="width: 50%"></div>
+      </div>
+      <div class="metric-score">0.5</div>
+      <div class="metric-weight">w=2</div>
+    </div>
+    
+  </section>
+
+  <!-- Intervencions prioritzades -->
+  <section>
+    <h2>Intervencions Prioritzades</h2>
+    <table>
+      <tr>
+        <th>#</th>
+        <th>Metrica</th>
+        <th>Accio recomanada</th>
+        <th>Score actual</th>
+        <th>Cost</th>
+        <th>Impacte</th>
+        <th>WCAG</th>
+      </tr>
+      
+      
+      <tr class="priority-high">
+        <td><span class="rank-badge">1</span></td>
+        <td><code>landmark_coverage</code></td>
+        <td>Afegir landmarks semantics (main, nav, header, footer)</td>
+        <td>
+          <span class="badge badge-red">
+            0.0
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-green">
+            baix
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-gray">
+            mig
+          </span>
+        </td>
+        <td><small>1.3.1/4.1.2</small></td>
+      </tr>
+      
+      
+      <tr class="priority-mid">
+        <td><span class="rank-badge">2</span></td>
+        <td><code>color_contrast_ratio</code></td>
+        <td>Corregir contrast de color text/fons</td>
+        <td>
+          <span class="badge badge-yellow">
+            0.5
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-yellow">
+            mig
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-orange">
+            alt
+          </span>
+        </td>
+        <td><small>1.4.3</small></td>
+      </tr>
+      
+      
+      <tr class="priority-mid">
+        <td><span class="rank-badge">3</span></td>
+        <td><code>keyboard_clean</code></td>
+        <td>Eliminar trampes de focus i assegurar navegació per teclat</td>
+        <td>
+          <span class="badge badge-yellow">
+            0.5
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-orange">
+            alt
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-red">
+            critic
+          </span>
+        </td>
+        <td><small>2.1.1/2.1.2</small></td>
+      </tr>
+      
+      
+      <tr class="priority-mid">
+        <td><span class="rank-badge">4</span></td>
+        <td><code>focus_visible_ratio</code></td>
+        <td>Afegir indicadors de focus visibles (CSS :focus)</td>
+        <td>
+          <span class="badge badge-yellow">
+            0.5
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-green">
+            baix
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-orange">
+            alt
+          </span>
+        </td>
+        <td><small>2.4.7/2.4.11</small></td>
+      </tr>
+      
+      
+      <tr class="priority-mid">
+        <td><span class="rank-badge">5</span></td>
+        <td><code>target_size_clean</code></td>
+        <td>Ampliar àrees d'interacció (mínim 24x24 px WCAG 2.5.8)</td>
+        <td>
+          <span class="badge badge-yellow">
+            0.5
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-yellow">
+            mig
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-gray">
+            mig
+          </span>
+        </td>
+        <td><small>2.5.8</small></td>
+      </tr>
+      
+      
+      <tr class="priority-low">
+        <td><span class="rank-badge">6</span></td>
+        <td><code>page_flesch</code></td>
+        <td>Simplificar el text per millorar la llegibilitat (Flesch > 60)</td>
+        <td>
+          <span class="badge badge-yellow">
+            0.5
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-orange">
+            alt
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-gray">
+            mig
+          </span>
+        </td>
+        <td><small>3.1.5</small></td>
+      </tr>
+      
+      
+      <tr class="priority-low">
+        <td><span class="rank-badge">7</span></td>
+        <td><code>performance_lcp</code></td>
+        <td>Optimitzar LCP: imatges, fonts i recursos bloquejants</td>
+        <td>
+          <span class="badge badge-yellow">
+            0.5
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-orange">
+            alt
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-gray">
+            mig
+          </span>
+        </td>
+        <td><small>N/A (Web Vitals)</small></td>
+      </tr>
+      
+      
+      <tr class="priority-low">
+        <td><span class="rank-badge">8</span></td>
+        <td><code>text_complexity</code></td>
+        <td>Reduir frases llargues i vocabulari complex</td>
+        <td>
+          <span class="badge badge-yellow">
+            0.5
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-orange">
+            alt
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-gray">
+            mig
+          </span>
+        </td>
+        <td><small>3.1.5</small></td>
+      </tr>
+      
+      
+      <tr class="priority-low">
+        <td><span class="rank-badge">9</span></td>
+        <td><code>audit_high_violations</code></td>
+        <td>Resoldre violacions greus d'axe-core (nivell AA)</td>
+        <td>
+          <span class="badge badge-green">
+            0.95
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-yellow">
+            mig
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-orange">
+            alt
+          </span>
+        </td>
+        <td><small>multiples</small></td>
+      </tr>
+      
+      
+      <tr class="priority-low">
+        <td><span class="rank-badge">10</span></td>
+        <td><code>audit_medium_violations</code></td>
+        <td>Revisar i corregir violacions moderades d'axe-core</td>
+        <td>
+          <span class="badge badge-green">
+            0.96
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-yellow">
+            mig
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-gray">
+            mig
+          </span>
+        </td>
+        <td><small>multiples</small></td>
+      </tr>
+      
+      
+      <tr class="priority-low">
+        <td><span class="rank-badge">11</span></td>
+        <td><code>aria_roles_valid</code></td>
+        <td>Corregir atributs ARIA invàlids o incorrectes</td>
+        <td>
+          <span class="badge badge-green">
+            1.0
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-green">
+            baix
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-gray">
+            mig
+          </span>
+        </td>
+        <td><small>4.1.2</small></td>
+      </tr>
+      
+      
+      <tr class="priority-low">
+        <td><span class="rank-badge">12</span></td>
+        <td><code>accessible_names_coverage</code></td>
+        <td>Afegir aria-label/aria-labelledby als elements interactius sense nom</td>
+        <td>
+          <span class="badge badge-green">
+            1.0
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-green">
+            baix
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-orange">
+            alt
+          </span>
+        </td>
+        <td><small>4.1.2/1.1.1</small></td>
+      </tr>
+      
+      
+      <tr class="priority-low">
+        <td><span class="rank-badge">13</span></td>
+        <td><code>audit_critical_violations</code></td>
+        <td>Resoldre violacions critiques d'axe-core (nivell A)</td>
+        <td>
+          <span class="badge badge-green">
+            1.0
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-orange">
+            alt
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-red">
+            critic
+          </span>
+        </td>
+        <td><small>multiples</small></td>
+      </tr>
+      
+      
+      <tr class="priority-low">
+        <td><span class="rank-badge">14</span></td>
+        <td><code>heading_hierarchy</code></td>
+        <td>Corregir la jerarquia d'encapcalaments (H1->H2->H3...)</td>
+        <td>
+          <span class="badge badge-green">
+            1.0
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-green">
+            baix
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-gray">
+            mig
+          </span>
+        </td>
+        <td><small>1.3.1/2.4.6</small></td>
+      </tr>
+      
+      
+      <tr class="priority-low">
+        <td><span class="rank-badge">15</span></td>
+        <td><code>alt_text_coverage</code></td>
+        <td>Afegir text alternatiu a totes les imatges informatives</td>
+        <td>
+          <span class="badge badge-green">
+            1.0
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-yellow">
+            mig
+          </span>
+        </td>
+        <td>
+          <span class="badge badge-orange">
+            alt
+          </span>
+        </td>
+        <td><small>1.1.1</small></td>
+      </tr>
+      
+    </table>
+  </section>
+
+  <!-- Violacions axe-core -->
+  
+  <section>
+    <h2>Violacions axe-core (3)</h2>
+    <table>
+      <tr><th>ID</th><th>Impacte</th><th>Descripcio</th><th>Elements afectats</th></tr>
+      
+      <tr>
+        <td><code>html-has-lang</code></td>
+        <td><span class="impact-serious">serious</span></td>
+        <td>Ensures every HTML document has a lang attribute</td>
+        <td>1</td>
+      </tr>
+      
+      <tr>
+        <td><code>landmark-one-main</code></td>
+        <td><span class="impact-moderate">moderate</span></td>
+        <td>Ensures the document has a main landmark</td>
+        <td>1</td>
+      </tr>
+      
+      <tr>
+        <td><code>region</code></td>
+        <td><span class="impact-moderate">moderate</span></td>
+        <td>Ensures all page content is contained by landmarks</td>
+        <td>2</td>
+      </tr>
+      
+    </table>
+  </section>
+  
+
+  <!-- Metriques textuals -->
+  
+
+  <!-- Rendiment -->
+  
+
+  <!-- Screenshot -->
+  
+  <section>
+    <h2>Captura de pantalla</h2>
+    <div class="screenshot-wrap">
+      <img src="../assets/www_ucm_es_Educatiu_screenshot.png" alt="Captura de pantalla de https://www.ucm.es/" loading="lazy">
+    </div>
+  </section>
+  
+
+  <!-- Taula raw metrics -->
+  <section>
+    <h2>Valors Raw de Metriques</h2>
+    <table>
+      <tr><th>Metrica</th><th>Valor raw</th><th>Normalitzat</th><th>Pes</th></tr>
+      
+      <tr>
+        <td><code>color_contrast_ratio</code></td>
+        <td>N/A</td>
+        <td>0.5</td>
+        <td>5</td>
+      </tr>
+      
+      <tr>
+        <td><code>focus_visible_ratio</code></td>
+        <td>N/A</td>
+        <td>0.5</td>
+        <td>4</td>
+      </tr>
+      
+      <tr>
+        <td><code>target_size_clean</code></td>
+        <td>N/A</td>
+        <td>0.5</td>
+        <td>3</td>
+      </tr>
+      
+      <tr>
+        <td><code>keyboard_clean</code></td>
+        <td>N/A</td>
+        <td>0.5</td>
+        <td>5</td>
+      </tr>
+      
+      <tr>
+        <td><code>aria_roles_valid</code></td>
+        <td>1.0</td>
+        <td>1.0</td>
+        <td>4</td>
+      </tr>
+      
+      <tr>
+        <td><code>accessible_names_coverage</code></td>
+        <td>1.0</td>
+        <td>1.0</td>
+        <td>5</td>
+      </tr>
+      
+      <tr>
+        <td><code>audit_critical_violations</code></td>
+        <td>0</td>
+        <td>1.0</td>
+        <td>5</td>
+      </tr>
+      
+      <tr>
+        <td><code>audit_high_violations</code></td>
+        <td>1</td>
+        <td>0.95</td>
+        <td>4</td>
+      </tr>
+      
+      <tr>
+        <td><code>audit_medium_violations</code></td>
+        <td>2</td>
+        <td>0.96</td>
+        <td>2</td>
+      </tr>
+      
+      <tr>
+        <td><code>audit_low_violations</code></td>
+        <td>0</td>
+        <td>1.0</td>
+        <td>1</td>
+      </tr>
+      
+      <tr>
+        <td><code>page_flesch</code></td>
+        <td>N/A</td>
+        <td>0.5</td>
+        <td>2</td>
+      </tr>
+      
+      <tr>
+        <td><code>text_complexity</code></td>
+        <td>N/A</td>
+        <td>0.5</td>
+        <td>1</td>
+      </tr>
+      
+      <tr>
+        <td><code>heading_hierarchy</code></td>
+        <td>1.0</td>
+        <td>1.0</td>
+        <td>3</td>
+      </tr>
+      
+      <tr>
+        <td><code>alt_text_coverage</code></td>
+        <td>1.0</td>
+        <td>1.0</td>
+        <td>5</td>
+      </tr>
+      
+      <tr>
+        <td><code>landmark_coverage</code></td>
+        <td>0.0</td>
+        <td>0.0</td>
+        <td>3</td>
+      </tr>
+      
+      <tr>
+        <td><code>performance_lcp</code></td>
+        <td>N/A</td>
+        <td>0.5</td>
+        <td>2</td>
+      </tr>
+      
+    </table>
+  </section>
+
+</main>
+</div>
+
+  <footer class="site-footer" role="contentinfo">
+    <p>Pipeline d'accessibilitat cognitiva i visual (ACI) v0.1.0 — TFM Jordi Miguel i Costal · UOC</p>
+    <p><small>Basat en WCAG 2.1/2.2, EN 301 549 i axe-core &nbsp;|&nbsp; 2026-05-24 13:40 UTC</small></p>
+  </footer>
+  <script type="module">
+    import { initI18n } from '../../static/js/i18n.js';
+    initI18n();
+  </script>
+  <script>
+  /* Injecta navegació entre perfils llegint el manifest */
+  (async () => {
+    const PROFILE_LABELS = {
+      wcag_strict: 'WCAG Strict',
+      readability_first: 'Readability',
+      visual_first: 'Visual First'
+    };
+    const PROFILE_COLORS = {
+      wcag_strict: { bg: '#dbeafe', fg: '#1e40af', border: '#93c5fd' },
+      readability_first: { bg: '#d4edda', fg: '#1a6e30', border: '#86efac' },
+      visual_first: { bg: '#f8d7da', fg: '#721c24', border: '#fca5a5' }
+    };
+    const CURRENT_PROFILE = 'wcag_strict';
+    const CURRENT_URL = 'https://www.ucm.es/';
+
+    try {
+      const res = await fetch('../data/reports_manifest.json');
+      if (!res.ok) return;
+      const manifest = await res.json();
+      const entry = manifest.find(e => e.url === CURRENT_URL);
+      if (!entry) return;
+
+      const profileReports = entry.profile_reports || {};
+      const hasCmp = !!entry.comparative_report;
+      if (!Object.keys(profileReports).length && !hasCmp) return;
+
+      const nav = document.getElementById('profile-nav');
+      const parts = [];
+
+      parts.push('<span style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#6c757d;margin-right:4px;">Perfils:</span>');
+
+      for (const [p, url] of Object.entries(profileReports)) {
+        const isCurrent = p === CURRENT_PROFILE;
+        const c = PROFILE_COLORS[p] || { bg: '#f1f3f5', fg: '#333', border: '#ccc' };
+        parts.push(`<a href="${url}"
+          style="display:inline-flex;align-items:center;padding:4px 10px;border-radius:4px;
+                 font-size:0.78rem;font-weight:700;text-decoration:none;
+                 background:${isCurrent ? c.fg : c.bg};color:${isCurrent ? '#fff' : c.fg};
+                 border:1.5px solid ${c.border};"
+          ${isCurrent ? 'aria-current="page"' : ''}
+          aria-label="Informe perfil ${PROFILE_LABELS[p] || p}">
+          ${PROFILE_LABELS[p] || p}
+        </a>`);
+      }
+
+      if (hasCmp) {
+        parts.push(`<a href="${entry.comparative_report}" target="_blank" rel="noopener"
+          style="display:inline-flex;align-items:center;padding:4px 10px;border-radius:4px;
+                 font-size:0.78rem;font-weight:700;text-decoration:none;
+                 background:#003366;color:#fff;border:1.5px solid #003366;"
+          aria-label="Informe comparatiu entre els tres perfils">
+          ⇌ Comparatiu
+        </a>`);
+      }
+
+      nav.innerHTML = parts.join('');
+      nav.style.display = 'flex';
+    } catch (_) { /* manifest no disponible: silenci */ }
+  })();
+  </script>
+</body>
+</html>

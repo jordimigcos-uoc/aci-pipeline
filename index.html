@@ -1,374 +1,520 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ACI Pipeline — Dashboard de resultats</title>
   <style>
-    /* ── Reset i base ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: #f4f6f9;
-      color: #1a1a2e;
-      min-height: 100vh;
+      background: #f0f2f5; color: #1a1a2e; line-height: 1.5;
     }
-
-    /* ── Capçalera ── */
+    /* Header */
     header {
-      background: linear-gradient(135deg, #1a1a2e 0%, #2c6fad 100%);
-      color: white;
-      padding: 2rem 1.5rem 1.5rem;
+      background: linear-gradient(135deg, #001f3f 0%, #0056b3 100%);
+      color: #fff; padding: 1.75rem 2rem 1.5rem;
     }
-    header h1 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.5px; }
-    header p  { margin-top: 0.4rem; opacity: 0.85; font-size: 0.95rem; }
+    header h1 { font-size: 1.65rem; font-weight: 800; letter-spacing: -0.5px; }
+    header p  { margin-top: 0.35rem; opacity: 0.85; font-size: 0.93rem; }
     .header-meta {
-      margin-top: 1rem;
       display: flex; gap: 1.5rem; flex-wrap: wrap;
-      font-size: 0.82rem; opacity: 0.75;
+      margin-top: 0.9rem; font-size: 0.78rem; opacity: 0.7;
     }
-
-    /* ── Layout principal ── */
-    main { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
-
-    /* ── Targetes de KPI ── */
+    /* Layout */
+    main { max-width: 1200px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+    /* Cards */
+    .card {
+      background: #fff; border-radius: 10px;
+      box-shadow: 0 1px 8px rgba(0,0,0,.07); margin-bottom: 1.5rem; overflow: hidden;
+    }
+    .card-hd {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.9rem 1.25rem; border-bottom: 1px solid #eee; background: #fafafa;
+    }
+    .card-hd h2 { font-size: 0.95rem; font-weight: 700; color: #333; }
+    .card-body  { padding: 1.25rem; }
+    /* KPIs */
     .kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 1rem;
-      margin-bottom: 1.5rem;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem; margin-bottom: 1.5rem;
     }
     .kpi {
-      background: white;
-      border-radius: 10px;
-      padding: 1.2rem 1rem;
-      text-align: center;
-      box-shadow: 0 1px 6px rgba(0,0,0,.08);
-      border-top: 4px solid var(--accent, #2c6fad);
+      background: #fff; border-radius: 10px; padding: 1.1rem 1rem; text-align: center;
+      box-shadow: 0 1px 8px rgba(0,0,0,.07); border-top: 4px solid var(--kc, #0056b3);
     }
-    .kpi-value { font-size: 2rem; font-weight: 800; color: var(--accent, #2c6fad); }
-    .kpi-label { font-size: 0.78rem; color: #666; margin-top: 0.3rem; text-transform: uppercase; letter-spacing: .5px; }
-
-    /* ── Taula de resultats ── */
-    .card {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 1px 6px rgba(0,0,0,.08);
-      overflow: hidden;
-      margin-bottom: 1.5rem;
+    .kpi-val { font-size: 2rem; font-weight: 800; color: var(--kc, #0056b3); }
+    .kpi-lbl { font-size: 0.72rem; color: #777; margin-top: 0.3rem; text-transform: uppercase; letter-spacing: .5px; }
+    /* Filtres */
+    .filters {
+      display: flex; gap: 0.75rem; flex-wrap: wrap; padding: 0.9rem 1.25rem;
+      border-bottom: 1px solid #f0f0f0; align-items: center;
     }
-    .card-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1rem 1.25rem;
-      border-bottom: 1px solid #eee;
-      background: #fafafa;
+    .filters input, .filters select {
+      padding: 0.4rem 0.75rem; border: 1px solid #ddd; border-radius: 6px;
+      font-size: 0.85rem; background: #fafafa; outline: none;
     }
-    .card-header h2 { font-size: 1rem; font-weight: 600; }
-
-    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    .filters input:focus, .filters select:focus { border-color: #0056b3; background: #fff; }
+    .filters label { font-size: 0.78rem; color: #666; font-weight: 600; }
+    .btn-reset {
+      padding: 0.4rem 0.8rem; border: 1px solid #ddd; border-radius: 6px;
+      font-size: 0.78rem; background: none; cursor: pointer; color: #666;
+    }
+    .btn-reset:hover { background: #f0f0f0; }
+    /* Taula */
+    .tbl-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 560px; }
     thead { background: #f0f4f8; }
     th {
-      padding: 0.7rem 1rem; text-align: left;
-      font-size: 0.78rem; font-weight: 600;
-      color: #555; text-transform: uppercase; letter-spacing: .5px;
-      cursor: pointer; user-select: none;
+      padding: 0.65rem 0.85rem; text-align: left; font-size: 0.72rem;
+      font-weight: 700; color: #444; text-transform: uppercase;
+      letter-spacing: .5px; cursor: pointer; user-select: none; white-space: nowrap;
     }
-    th:hover { background: #e4ecf4; }
-    td { padding: 0.65rem 1rem; border-bottom: 1px solid #f0f0f0; }
+    th:hover { background: #e2eaf3; }
+    th.sort-asc::after  { content: " ▲"; opacity: .6; }
+    th.sort-desc::after { content: " ▼"; opacity: .6; }
+    td { padding: 0.55rem 0.85rem; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
     tr:last-child td { border-bottom: none; }
-    tr:hover td { background: #f8fbff; }
-
-    /* ── Badges de puntuació ACI ── */
-    .aci-badge {
-      display: inline-block;
-      padding: 0.2rem 0.55rem;
-      border-radius: 20px;
-      font-weight: 700;
-      font-size: 0.82rem;
-      color: white;
+    tr:hover td { background: #f5f9ff; }
+    td.num { text-align: right; color: #999; font-size: 0.8rem; font-variant-numeric: tabular-nums; }
+    .url-small { font-size: 0.72rem; color: #888; }
+    .url-small a { color: #0056b3; text-decoration: none; }
+    .url-small a:hover { text-decoration: underline; }
+    .cat-chip {
+      display: inline-block; padding: 0.15rem 0.5rem; border-radius: 12px;
+      background: #e8f0fe; color: #1a56b3; font-size: 0.72rem;
+      font-weight: 600; white-space: nowrap;
     }
-    .aci-badge.green  { background: #2ecc71; }
-    .aci-badge.orange { background: #e67e22; }
-    .aci-badge.red    { background: #e74c3c; }
-
-    /* ── Barra de progrés ACI ── */
-    .aci-bar {
-      width: 100%; height: 8px; background: #eee;
-      border-radius: 4px; overflow: hidden; margin-top: 4px;
+    .aci-num  { font-size: 0.92rem; font-weight: 700; }
+    .aci-dash { color: #bbb; }
+    .mini-bar { height: 4px; background: #eee; border-radius: 2px; margin: 3px 0; overflow: hidden; }
+    .mini-bar div { height: 100%; border-radius: 2px; }
+    td a { color: #0056b3; text-decoration: none; }
+    td a:hover { text-decoration: underline; }
+    .no-results { padding: 2rem; text-align: center; color: #aaa; }
+    /* Metodologia */
+    .method-section { margin-bottom: 2rem; }
+    .method-section h3 {
+      font-size: 1rem; color: #001f3f; margin-bottom: 0.75rem;
+      padding-bottom: 0.4rem; border-bottom: 2px solid #e0e8f0;
     }
-    .aci-bar-fill { height: 100%; border-radius: 4px; transition: width .3s; }
-
-    /* ── Perfil chips ── */
-    .chip {
-      display: inline-block;
-      font-size: 0.7rem; padding: 0.15rem 0.5rem;
-      border-radius: 12px; background: #e8f0fe; color: #2c6fad;
-      font-weight: 600; letter-spacing: .3px;
+    .formula-box {
+      background: #f0f4f8; border-left: 4px solid #0056b3;
+      padding: 0.9rem 1.2rem; border-radius: 0 8px 8px 0;
+      font-family: 'Consolas', 'Courier New', monospace; font-size: 1rem; margin: 0.75rem 0;
     }
-
-    /* ── Botó Run ── */
+    .profiles-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1rem; margin: 0.75rem 0;
+    }
+    .profile-card { border-radius: 8px; padding: 1rem; border: 2px solid #ddd; }
+    .profile-card.wcag        { background: #dbeafe; border-color: #1d4ed8; }
+    .profile-card.readability { background: #dcfce7; border-color: #15803d; }
+    .profile-card.visual      { background: #ffe4e6; border-color: #be123c; }
+    .profile-card h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.35rem; }
+    .profile-card.wcag h4        { color: #1d4ed8; }
+    .profile-card.readability h4 { color: #15803d; }
+    .profile-card.visual h4      { color: #be123c; }
+    .profile-card p { font-size: 0.8rem; color: #444; line-height: 1.5; }
+    .met-table { font-size: 0.82rem; width: 100%; border-collapse: collapse; }
+    .met-table thead th { background: #001f3f; color: #fff; padding: 0.5rem 0.75rem; text-align: left; }
+    .met-table td { padding: 0.4rem 0.75rem; border-bottom: 1px solid #eee; }
+    .met-table tr:nth-child(even) td { background: #f8f9fa; }
+    .met-table code { font-size: 0.76rem; background: #f0f0f0; padding: 1px 4px; border-radius: 3px; }
+    .met-table td.num { text-align: right; font-variant-numeric: tabular-nums; color: #333; }
+    /* Descàrregues */
+    .dl-grid { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .dl-btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; font-weight: 600;
+      text-decoration: none; border: 2px solid #0056b3; color: #0056b3;
+      background: #fff; transition: background 0.15s;
+    }
+    .dl-btn:hover { background: #0056b3; color: #fff; }
+    /* Botó execució */
     .btn-run {
       display: inline-flex; align-items: center; gap: 0.4rem;
-      background: #2ecc71; color: white;
-      padding: 0.5rem 1.1rem; border-radius: 6px;
-      font-weight: 600; font-size: 0.88rem;
-      text-decoration: none; border: none; cursor: pointer;
-      transition: background .2s;
+      padding: 0.45rem 1rem; border-radius: 6px; font-size: 0.83rem;
+      font-weight: 600; text-decoration: none; background: #27ae60;
+      color: #fff; border: none; cursor: pointer; transition: background 0.15s;
     }
-    .btn-run:hover { background: #27ae60; }
-    .btn-run svg { width: 14px; height: 14px; fill: white; }
-
-    .btn-refresh {
-      background: none; border: 1px solid #ccc;
-      border-radius: 6px; padding: 0.4rem 0.8rem;
-      font-size: 0.8rem; cursor: pointer; color: #555;
-    }
-    .btn-refresh:hover { background: #f0f0f0; }
-
-    /* ── Estat ── */
-    #status {
-      font-size: 0.82rem; color: #888;
-      margin-bottom: 1rem; padding: 0 0.25rem;
-    }
-    #status.error { color: #e74c3c; }
-
-    /* ── Footer ── */
-    footer {
-      text-align: center; padding: 1.5rem;
-      font-size: 0.78rem; color: #aaa;
-    }
-    footer a { color: #2c6fad; text-decoration: none; }
-
-    /* ── Responsive ── */
-    @media (max-width: 640px) {
-      header h1 { font-size: 1.3rem; }
-      .col-domain { display: none; }
-    }
+    .btn-run:hover { background: #1e8449; color: #fff; }
+    /* Footer */
+    footer { text-align: center; padding: 2rem 1rem; font-size: 0.78rem; color: #aaa; }
+    footer a { color: #0056b3; text-decoration: none; }
+    @media (max-width: 700px) { header h1 { font-size: 1.3rem; } }
   </style>
 </head>
 <body>
 
-<!-- ── Capçalera ── -->
-<header>
-  <h1>🌐 ACI Pipeline — Dashboard de resultats</h1>
-  <p>Avaluació automatitzada d'accessibilitat web · WCAG 2.1 AA / EN 301 549</p>
+<header role="banner">
+  <h1>&#127760; ACI Pipeline &#8212; Dashboard de resultats</h1>
+  <p>Avaluació automatitzada d&#39;accessibilitat web &middot; WCAG 2.1 AA / EN 301 549</p>
   <div class="header-meta">
-    <span id="hdr-generated">Carregant...</span>
-    <span id="hdr-version">v0.1.0</span>
-    <span id="hdr-nurls"></span>
+    <span>Generat: 2026-05-24T13:42:38Z</span>
+    <span>Pipeline v0.1.0</span>
+    <span>36 URLs analitzades</span>
   </div>
 </header>
 
-<!-- ── Contingut principal ── -->
 <main>
-  <p id="status">⏳ Carregant resultats...</p>
 
   <!-- KPIs -->
-  <div class="kpi-grid" id="kpi-grid" style="display:none">
-    <div class="kpi" style="--accent:#2c6fad">
-      <div class="kpi-value" id="kpi-nurls">—</div>
-      <div class="kpi-label">URLs analitzades</div>
+  <div class="kpi-grid" role="region" aria-label="Indicadors clau de rendiment">
+    <div class="kpi" style="--kc:#0056b3">
+      <div class="kpi-val">36</div>
+      <div class="kpi-lbl">URLs analitzades</div>
     </div>
-    <div class="kpi" style="--accent:#2ecc71">
-      <div class="kpi-value" id="kpi-max">—</div>
-      <div class="kpi-label">ACI màxim</div>
+    <div class="kpi" style="--kc:#27ae60">
+      <div class="kpi-val">3.885</div>
+      <div class="kpi-lbl">ACI m&agrave;xim</div>
     </div>
-    <div class="kpi" style="--accent:#e67e22">
-      <div class="kpi-value" id="kpi-mean">—</div>
-      <div class="kpi-label">ACI mitjà</div>
+    <div class="kpi" style="--kc:#e67e22">
+      <div class="kpi-val">3.568</div>
+      <div class="kpi-lbl">ACI mitj&agrave;</div>
     </div>
-    <div class="kpi" style="--accent:#e74c3c">
-      <div class="kpi-value" id="kpi-min">—</div>
-      <div class="kpi-label">ACI mínim</div>
+    <div class="kpi" style="--kc:#e74c3c">
+      <div class="kpi-val">3.044</div>
+      <div class="kpi-lbl">ACI m&iacute;nim</div>
     </div>
   </div>
 
-  <!-- Taula -->
-  <div class="card" id="results-card" style="display:none">
-    <div class="card-header">
-      <h2>📊 Resultats per URL</h2>
-      <div style="display:flex;gap:.5rem;align-items:center">
-        <button class="btn-refresh" onclick="loadResults()">↻ Refresca</button>
-        <a id="btn-run-action" class="btn-run" href="#" target="_blank" rel="noopener">
-          <svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.97 4.97L7 9.94 4.03 6.97l-.94.94L7 11.82l5.91-5.91-.94-.94z"/></svg>
-          Executa pipeline
+  <!-- Taula de resultats -->
+  <div class="card" role="region" aria-labelledby="tbl-title">
+    <div class="card-hd">
+      <h2 id="tbl-title">&#128202; Resultats per URL</h2>
+      <a id="btn-run" class="btn-run" href="#" target="_blank" rel="noopener"
+         aria-label="Executa el pipeline des de GitHub Actions">
+        &#9654; Executa pipeline
+      </a>
+    </div>
+
+    <div class="filters" role="search" aria-label="Filtres">
+      <label for="f-text">Cerca:</label>
+      <input type="search" id="f-text" placeholder="domini, URL&hellip;"
+             aria-label="Cerca per domini o URL">
+
+      <label for="f-cat">Categoria:</label>
+      <select id="f-cat" aria-label="Filtra per categoria">
+        <option value="">Totes</option>
+        <option value="Comercial">Comercial</option>
+<option value="Cultural">Cultural</option>
+<option value="Educatiu">Educatiu</option>
+<option value="Institucional">Institucional</option>
+<option value="Mitjans">Mitjans</option>
+      </select>
+
+      <label for="f-min">ACI &ge;:</label>
+      <input type="number" id="f-min" min="0" max="5" step="0.1" value="0"
+             style="width:70px" aria-label="Puntuaci&oacute; ACI m&iacute;nima">
+
+      <button class="btn-reset" onclick="resetFilters()"
+              aria-label="Reinicia els filtres">&#10005; Reinicia</button>
+      <span id="f-count" style="font-size:0.78rem;color:#888;margin-left:auto"
+            aria-live="polite"></span>
+    </div>
+
+    <div class="tbl-wrap">
+      <table aria-label="Resultats d'accessibilitat per URL">
+        <thead>
+          <tr>
+            <th onclick="sortBy(0)" aria-sort="none">#</th>
+            <th onclick="sortBy(1)" aria-sort="none">Domini / URL</th>
+            <th onclick="sortBy(2)" aria-sort="none">Categoria</th>
+            <th onclick="sortBy(3)" aria-sort="none"
+                title="WCAG Strict">WCAG</th>
+            <th onclick="sortBy(4)" aria-sort="none"
+                title="Readability First">Read.</th>
+            <th onclick="sortBy(5)" aria-sort="none"
+                title="Visual First">Visual</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          <tr data-cat="Cultural" data-url="https://www.palaumusica.cat/ca/"><td class="num">1</td><td><strong>www.palaumusica.cat</strong><br><small class="url-small"><a href="https://www.palaumusica.cat/ca/" target="_blank" rel="noopener">https://www.palaumusica.cat/ca/</a></small></td><td><span class="cat-chip">Cultural</span></td><td data-val="3.885"><span class="aci-num" style="color:#27ae60">3.885</span><div class="mini-bar"><div style="width:77%;background:#27ae60"></div></div> <a href="reports/www_palaumusica_cat_ca_Cultural_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Cultural" data-url="https://www.tnc.cat/ca"><td class="num">2</td><td><strong>www.tnc.cat</strong><br><small class="url-small"><a href="https://www.tnc.cat/ca" target="_blank" rel="noopener">https://www.tnc.cat/ca</a></small></td><td><span class="cat-chip">Cultural</span></td><td data-val="3.844"><span class="aci-num" style="color:#27ae60">3.844</span><div class="mini-bar"><div style="width:76%;background:#27ae60"></div></div> <a href="reports/www_tnc_cat_ca_Cultural_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Educatiu" data-url="https://web.ub.edu/"><td class="num">3</td><td><strong>web.ub.edu</strong><br><small class="url-small"><a href="https://web.ub.edu/" target="_blank" rel="noopener">https://web.ub.edu/</a></small></td><td><span class="cat-chip">Educatiu</span></td><td data-val="3.830"><span class="aci-num" style="color:#27ae60">3.830</span><div class="mini-bar"><div style="width:76%;background:#27ae60"></div></div> <a href="reports/web_ub_edu_Educatiu_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Institucional" data-url="https://www.sanidad.gob.es/"><td class="num">4</td><td><strong>www.sanidad.gob.es</strong><br><small class="url-small"><a href="https://www.sanidad.gob.es/" target="_blank" rel="noopener">https://www.sanidad.gob.es/</a></small></td><td><span class="cat-chip">Institucional</span></td><td data-val="3.826"><span class="aci-num" style="color:#27ae60">3.826</span><div class="mini-bar"><div style="width:76%;background:#27ae60"></div></div> <a href="reports/www_sanidad_gob_es_Institucional_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Mitjans" data-url="https://www.lavanguardia.com/"><td class="num">5</td><td><strong>www.lavanguardia.com</strong><br><small class="url-small"><a href="https://www.lavanguardia.com/" target="_blank" rel="noopener">https://www.lavanguardia.com/</a></small></td><td><span class="cat-chip">Mitjans</span></td><td data-val="3.788"><span class="aci-num" style="color:#27ae60">3.788</span><div class="mini-bar"><div style="width:75%;background:#27ae60"></div></div> <a href="reports/www_lavanguardia_com_Mitjans_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Institucional" data-url="https://www.educacionfpydeportes.gob.es/portada.html"><td class="num">6</td><td><strong>www.educacionfpydeportes.gob.es</strong><br><small class="url-small"><a href="https://www.educacionfpydeportes.gob.es/portada.html" target="_blank" rel="noopener">https://www.educacionfpydeportes.gob.es/portada.html</a></small></td><td><span class="cat-chip">Institucional</span></td><td data-val="3.738"><span class="aci-num" style="color:#27ae60">3.738</span><div class="mini-bar"><div style="width:74%;background:#27ae60"></div></div> <a href="reports/www_educacionfpydeportes_gob_es_portada_html_Institucional_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Institucional" data-url="https://sede.agenciatributaria.gob.es/"><td class="num">7</td><td><strong>sede.agenciatributaria.gob.es</strong><br><small class="url-small"><a href="https://sede.agenciatributaria.gob.es/" target="_blank" rel="noopener">https://sede.agenciatributaria.gob.es/</a></small></td><td><span class="cat-chip">Institucional</span></td><td data-val="3.704"><span class="aci-num" style="color:#27ae60">3.704</span><div class="mini-bar"><div style="width:74%;background:#27ae60"></div></div> <a href="reports/sede_agenciatributaria_gob_es_Institucional_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Comercial" data-url="https://www.capraboacasa.com/ca/"><td class="num">8</td><td><strong>www.capraboacasa.com</strong><br><small class="url-small"><a href="https://www.capraboacasa.com/ca/" target="_blank" rel="noopener">https://www.capraboacasa.com/ca/</a></small></td><td><span class="cat-chip">Comercial</span></td><td data-val="3.682"><span class="aci-num" style="color:#27ae60">3.682</span><div class="mini-bar"><div style="width:73%;background:#27ae60"></div></div> <a href="reports/www_capraboacasa_com_ca_Comercial_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Educatiu" data-url="https://www.ucm.es/"><td class="num">9</td><td><strong>www.ucm.es</strong><br><small class="url-small"><a href="https://www.ucm.es/" target="_blank" rel="noopener">https://www.ucm.es/</a></small></td><td><span class="cat-chip">Educatiu</span></td><td data-val="3.678"><span class="aci-num" style="color:#27ae60">3.678</span><div class="mini-bar"><div style="width:73%;background:#27ae60"></div></div> <a href="reports/www_ucm_es_Educatiu_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Educatiu" data-url="https://www.uv.es/"><td class="num">10</td><td><strong>www.uv.es</strong><br><small class="url-small"><a href="https://www.uv.es/" target="_blank" rel="noopener">https://www.uv.es/</a></small></td><td><span class="cat-chip">Educatiu</span></td><td data-val="3.678"><span class="aci-num" style="color:#27ae60">3.678</span><div class="mini-bar"><div style="width:73%;background:#27ae60"></div></div> <a href="reports/www_uv_es_Educatiu_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Institucional" data-url="https://www.diba.cat/ca/inici"><td class="num">11</td><td><strong>www.diba.cat</strong><br><small class="url-small"><a href="https://www.diba.cat/ca/inici" target="_blank" rel="noopener">https://www.diba.cat/ca/inici</a></small></td><td><span class="cat-chip">Institucional</span></td><td data-val="3.676"><span class="aci-num" style="color:#27ae60">3.676</span><div class="mini-bar"><div style="width:73%;background:#27ae60"></div></div> <a href="reports/www_diba_cat_ca_inici_Institucional_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Mitjans" data-url="https://www.rac1.cat/"><td class="num">12</td><td><strong>www.rac1.cat</strong><br><small class="url-small"><a href="https://www.rac1.cat/" target="_blank" rel="noopener">https://www.rac1.cat/</a></small></td><td><span class="cat-chip">Mitjans</span></td><td data-val="3.659"><span class="aci-num" style="color:#27ae60">3.659</span><div class="mini-bar"><div style="width:73%;background:#27ae60"></div></div> <a href="reports/www_rac1_cat_Mitjans_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Comercial" data-url="https://www.compraonline.bonpreuesclat.cat/"><td class="num">13</td><td><strong>www.compraonline.bonpreuesclat.cat</strong><br><small class="url-small"><a href="https://www.compraonline.bonpreuesclat.cat/" target="_blank" rel="noopener">https://www.compraonline.bonpreuesclat.cat/</a></small></td><td><span class="cat-chip">Comercial</span></td><td data-val="3.606"><span class="aci-num" style="color:#27ae60">3.606</span><div class="mini-bar"><div style="width:72%;background:#27ae60"></div></div> <a href="reports/www_compraonline_bonpreuesclat_cat_Comercial_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Institucional" data-url="https://web.gencat.cat/ca/ciutadania/inici"><td class="num">14</td><td><strong>web.gencat.cat</strong><br><small class="url-small"><a href="https://web.gencat.cat/ca/ciutadania/inici" target="_blank" rel="noopener">https://web.gencat.cat/ca/ciutadania/inici</a></small></td><td><span class="cat-chip">Institucional</span></td><td data-val="3.605"><span class="aci-num" style="color:#27ae60">3.605</span><div class="mini-bar"><div style="width:72%;background:#27ae60"></div></div> <a href="reports/web_gencat_cat_ca_ciutadania_inici_Institucional_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Mitjans" data-url="https://terrassadigital.cat/"><td class="num">15</td><td><strong>terrassadigital.cat</strong><br><small class="url-small"><a href="https://terrassadigital.cat/" target="_blank" rel="noopener">https://terrassadigital.cat/</a></small></td><td><span class="cat-chip">Mitjans</span></td><td data-val="3.604"><span class="aci-num" style="color:#27ae60">3.604</span><div class="mini-bar"><div style="width:72%;background:#27ae60"></div></div> <a href="reports/terrassadigital_cat_Mitjans_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Comercial" data-url="https://es.wallapop.com/"><td class="num">16</td><td><strong>es.wallapop.com</strong><br><small class="url-small"><a href="https://es.wallapop.com/" target="_blank" rel="noopener">https://es.wallapop.com/</a></small></td><td><span class="cat-chip">Comercial</span></td><td data-val="3.591"><span class="aci-num" style="color:#27ae60">3.591</span><div class="mini-bar"><div style="width:71%;background:#27ae60"></div></div> <a href="reports/es_wallapop_com_Comercial_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Comercial" data-url="https://www.rcdespanyol.com/"><td class="num">17</td><td><strong>www.rcdespanyol.com</strong><br><small class="url-small"><a href="https://www.rcdespanyol.com/" target="_blank" rel="noopener">https://www.rcdespanyol.com/</a></small></td><td><span class="cat-chip">Comercial</span></td><td data-val="3.575"><span class="aci-num" style="color:#27ae60">3.575</span><div class="mini-bar"><div style="width:71%;background:#27ae60"></div></div> <a href="reports/www_rcdespanyol_com_Comercial_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Educatiu" data-url="https://www.uab.cat/"><td class="num">18</td><td><strong>www.uab.cat</strong><br><small class="url-small"><a href="https://www.uab.cat/" target="_blank" rel="noopener">https://www.uab.cat/</a></small></td><td><span class="cat-chip">Educatiu</span></td><td data-val="3.558"><span class="aci-num" style="color:#27ae60">3.558</span><div class="mini-bar"><div style="width:71%;background:#27ae60"></div></div> <a href="reports/www_uab_cat_Educatiu_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Mitjans" data-url="https://www.3cat.cat/3cat/"><td class="num">19</td><td><strong>www.3cat.cat</strong><br><small class="url-small"><a href="https://www.3cat.cat/3cat/" target="_blank" rel="noopener">https://www.3cat.cat/3cat/</a></small></td><td><span class="cat-chip">Mitjans</span></td><td data-val="3.547"><span class="aci-num" style="color:#27ae60">3.547</span><div class="mini-bar"><div style="width:70%;background:#27ae60"></div></div> <a href="reports/www_3cat_cat_3cat_Mitjans_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Institucional" data-url="https://serveiocupacio.gencat.cat/ca/inici"><td class="num">20</td><td><strong>serveiocupacio.gencat.cat</strong><br><small class="url-small"><a href="https://serveiocupacio.gencat.cat/ca/inici" target="_blank" rel="noopener">https://serveiocupacio.gencat.cat/ca/inici</a></small></td><td><span class="cat-chip">Institucional</span></td><td data-val="3.546"><span class="aci-num" style="color:#27ae60">3.546</span><div class="mini-bar"><div style="width:70%;background:#27ae60"></div></div> <a href="reports/serveiocupacio_gencat_cat_ca_inici_Institucional_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Educatiu" data-url="https://www.url.edu/ca"><td class="num">21</td><td><strong>www.url.edu</strong><br><small class="url-small"><a href="https://www.url.edu/ca" target="_blank" rel="noopener">https://www.url.edu/ca</a></small></td><td><span class="cat-chip">Educatiu</span></td><td data-val="3.544"><span class="aci-num" style="color:#27ae60">3.544</span><div class="mini-bar"><div style="width:70%;background:#27ae60"></div></div> <a href="reports/www_url_edu_ca_Educatiu_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Institucional" data-url="https://educacio.gencat.cat/ca/inici"><td class="num">22</td><td><strong>educacio.gencat.cat</strong><br><small class="url-small"><a href="https://educacio.gencat.cat/ca/inici" target="_blank" rel="noopener">https://educacio.gencat.cat/ca/inici</a></small></td><td><span class="cat-chip">Institucional</span></td><td data-val="3.539"><span class="aci-num" style="color:#27ae60">3.539</span><div class="mini-bar"><div style="width:70%;background:#27ae60"></div></div> <a href="reports/educacio_gencat_cat_ca_inici_Institucional_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Cultural" data-url="https://www.museunacional.cat/ca"><td class="num">23</td><td><strong>www.museunacional.cat</strong><br><small class="url-small"><a href="https://www.museunacional.cat/ca" target="_blank" rel="noopener">https://www.museunacional.cat/ca</a></small></td><td><span class="cat-chip">Cultural</span></td><td data-val="3.531"><span class="aci-num" style="color:#27ae60">3.531</span><div class="mini-bar"><div style="width:70%;background:#27ae60"></div></div> <a href="reports/www_museunacional_cat_ca_Cultural_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Institucional" data-url="https://catsalut.gencat.cat/ca/inici/"><td class="num">24</td><td><strong>catsalut.gencat.cat</strong><br><small class="url-small"><a href="https://catsalut.gencat.cat/ca/inici/" target="_blank" rel="noopener">https://catsalut.gencat.cat/ca/inici/</a></small></td><td><span class="cat-chip">Institucional</span></td><td data-val="3.521"><span class="aci-num" style="color:#27ae60">3.521</span><div class="mini-bar"><div style="width:70%;background:#27ae60"></div></div> <a href="reports/catsalut_gencat_cat_ca_inici_Institucional_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Institucional" data-url="https://www.meteo.cat/"><td class="num">25</td><td><strong>www.meteo.cat</strong><br><small class="url-small"><a href="https://www.meteo.cat/" target="_blank" rel="noopener">https://www.meteo.cat/</a></small></td><td><span class="cat-chip">Institucional</span></td><td data-val="3.518"><span class="aci-num" style="color:#27ae60">3.518</span><div class="mini-bar"><div style="width:70%;background:#27ae60"></div></div> <a href="reports/www_meteo_cat_Institucional_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Educatiu" data-url="https://www.upc.edu/ca"><td class="num">26</td><td><strong>www.upc.edu</strong><br><small class="url-small"><a href="https://www.upc.edu/ca" target="_blank" rel="noopener">https://www.upc.edu/ca</a></small></td><td><span class="cat-chip">Educatiu</span></td><td data-val="3.517"><span class="aci-num" style="color:#27ae60">3.517</span><div class="mini-bar"><div style="width:70%;background:#27ae60"></div></div> <a href="reports/www_upc_edu_ca_Educatiu_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Mitjans" data-url="https://www.ara.cat/"><td class="num">27</td><td><strong>www.ara.cat</strong><br><small class="url-small"><a href="https://www.ara.cat/" target="_blank" rel="noopener">https://www.ara.cat/</a></small></td><td><span class="cat-chip">Mitjans</span></td><td data-val="3.500"><span class="aci-num" style="color:#27ae60">3.500</span><div class="mini-bar"><div style="width:70%;background:#27ae60"></div></div> <a href="reports/www_ara_cat_Mitjans_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Institucional" data-url="https://www.seg-social.es/wps/portal/wss/internet/Inicio"><td class="num">28</td><td><strong>www.seg-social.es</strong><br><small class="url-small"><a href="https://www.seg-social.es/wps/portal/wss/internet/Inicio" target="_blank" rel="noopener">https://www.seg-social.es/wps/portal/wss/internet/Inicio</a></small></td><td><span class="cat-chip">Institucional</span></td><td data-val="3.494"><span class="aci-num" style="color:#e67e22">3.494</span><div class="mini-bar"><div style="width:69%;background:#e67e22"></div></div> <a href="reports/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Educatiu" data-url="https://www.upf.edu/"><td class="num">29</td><td><strong>www.upf.edu</strong><br><small class="url-small"><a href="https://www.upf.edu/" target="_blank" rel="noopener">https://www.upf.edu/</a></small></td><td><span class="cat-chip">Educatiu</span></td><td data-val="3.480"><span class="aci-num" style="color:#e67e22">3.480</span><div class="mini-bar"><div style="width:69%;background:#e67e22"></div></div> <a href="reports/www_upf_edu_Educatiu_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Cultural" data-url="https://www.liceubarcelona.cat/ca"><td class="num">30</td><td><strong>www.liceubarcelona.cat</strong><br><small class="url-small"><a href="https://www.liceubarcelona.cat/ca" target="_blank" rel="noopener">https://www.liceubarcelona.cat/ca</a></small></td><td><span class="cat-chip">Cultural</span></td><td data-val="3.435"><span class="aci-num" style="color:#e67e22">3.435</span><div class="mini-bar"><div style="width:68%;background:#e67e22"></div></div> <a href="reports/www_liceubarcelona_cat_ca_Cultural_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Mitjans" data-url="https://www.rtve.es/"><td class="num">31</td><td><strong>www.rtve.es</strong><br><small class="url-small"><a href="https://www.rtve.es/" target="_blank" rel="noopener">https://www.rtve.es/</a></small></td><td><span class="cat-chip">Mitjans</span></td><td data-val="3.415"><span class="aci-num" style="color:#e67e22">3.415</span><div class="mini-bar"><div style="width:68%;background:#e67e22"></div></div> <a href="reports/www_rtve_es_Mitjans_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Cultural" data-url="https://sagradafamilia.org/"><td class="num">32</td><td><strong>sagradafamilia.org</strong><br><small class="url-small"><a href="https://sagradafamilia.org/" target="_blank" rel="noopener">https://sagradafamilia.org/</a></small></td><td><span class="cat-chip">Cultural</span></td><td data-val="3.413"><span class="aci-num" style="color:#e67e22">3.413</span><div class="mini-bar"><div style="width:68%;background:#e67e22"></div></div> <a href="reports/sagradafamilia_org_Cultural_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Comercial" data-url="https://www.fcbarcelona.cat/ca/"><td class="num">33</td><td><strong>www.fcbarcelona.cat</strong><br><small class="url-small"><a href="https://www.fcbarcelona.cat/ca/" target="_blank" rel="noopener">https://www.fcbarcelona.cat/ca/</a></small></td><td><span class="cat-chip">Comercial</span></td><td data-val="3.349"><span class="aci-num" style="color:#e67e22">3.349</span><div class="mini-bar"><div style="width:66%;background:#e67e22"></div></div> <a href="reports/www_fcbarcelona_cat_ca_Comercial_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Educatiu" data-url="https://www.uoc.edu/ca"><td class="num">34</td><td><strong>www.uoc.edu</strong><br><small class="url-small"><a href="https://www.uoc.edu/ca" target="_blank" rel="noopener">https://www.uoc.edu/ca</a></small></td><td><span class="cat-chip">Educatiu</span></td><td data-val="3.342"><span class="aci-num" style="color:#e67e22">3.342</span><div class="mini-bar"><div style="width:66%;background:#e67e22"></div></div> <a href="reports/www_uoc_edu_ca_Educatiu_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Educatiu" data-url="https://www.unav.edu/"><td class="num">35</td><td><strong>www.unav.edu</strong><br><small class="url-small"><a href="https://www.unav.edu/" target="_blank" rel="noopener">https://www.unav.edu/</a></small></td><td><span class="cat-chip">Educatiu</span></td><td data-val="3.184"><span class="aci-num" style="color:#e67e22">3.184</span><div class="mini-bar"><div style="width:63%;background:#e67e22"></div></div> <a href="reports/www_unav_edu_Educatiu_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+<tr data-cat="Comercial" data-url="https://www.promofarma.com/"><td class="num">36</td><td><strong>www.promofarma.com</strong><br><small class="url-small"><a href="https://www.promofarma.com/" target="_blank" rel="noopener">https://www.promofarma.com/</a></small></td><td><span class="cat-chip">Comercial</span></td><td data-val="3.044"><span class="aci-num" style="color:#e67e22">3.044</span><div class="mini-bar"><div style="width:60%;background:#e67e22"></div></div> <a href="reports/www_promofarma_com_Comercial_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
+
+        </tbody>
+      </table>
+    </div>
+    <p class="no-results" id="no-results" role="status" style="display:none">
+      Cap resultat correspon als filtres aplicats.
+    </p>
+  </div>
+
+  <!-- Metodologia -->
+  <div class="card" role="region" aria-labelledby="method-title">
+    <div class="card-hd">
+      <h2 id="method-title">&#128208; Metodologia &#8212; &Iacute;ndex ACI</h2>
+    </div>
+    <div class="card-body">
+
+      <div class="method-section">
+        <h3>F&oacute;rmula de l&#39;ACI</h3>
+        <p>L&#39;<strong>Accessibility Computation Index (ACI)</strong> pondera 16 m&egrave;triques
+           normalitzades amb els pesos del perfil actiu:</p>
+        <div class="formula-box" role="math" aria-label="F&oacute;rmula ACI">
+          ACI = (&Sigma; n&shy;&sup1; &middot; w&shy;&sup1;) / (&Sigma; w&shy;&sup1;) &times; 5.0
+          &nbsp;&isin; [0, 5]
+        </div>
+        <p style="font-size:0.85rem;color:#555;margin-top:0.5rem">
+          On <em>n&#7522; &isin; [0,1]</em> &eacute;s el valor normalitzat de la m&egrave;trica
+          <em>i</em> i <em>w&#7522;</em> &eacute;s el seu pes en el perfil seleccionat.
+          Escala de qualitat:
+          <span style="color:#27ae60">&#10003; Excel&middot;lent &ge; 4.0</span> &nbsp;&#183;&nbsp;
+          <span style="color:#e67e22">&#9650; Acceptable &ge; 2.5</span> &nbsp;&#183;&nbsp;
+          <span style="color:#e74c3c">&#10007; Insuficient &lt; 2.5</span>
+        </p>
+      </div>
+
+      <div class="method-section">
+        <h3>Perfils de puntuaci&oacute;</h3>
+        <div class="profiles-grid">
+          <div class="profile-card wcag">
+            <h4>WCAG Strict (&Sigma;w&nbsp;=&nbsp;54)</h4>
+            <p>M&agrave;xima prioritat per a conformitat normativa WCAG 2.1 AA i EN&nbsp;301&nbsp;549.
+               Pes fort a contrast, teclat, noms accessibles i violacions cr&iacute;tiques.
+               Recomanat per a webs institucionals i administracions p&uacute;bliques.</p>
+          </div>
+          <div class="profile-card readability">
+            <h4>Readability First (&Sigma;w&nbsp;=&nbsp;35)</h4>
+            <p>Prioritza la llegibilitat i comprens&iacute; del contingut textual.
+               Pes fort a Flesch, complexitat textual i jerarquia de cap&ccedil;aleres.
+               Recomanat per a portals educatius i editorials.</p>
+          </div>
+          <div class="profile-card visual">
+            <h4>Visual First (&Sigma;w&nbsp;=&nbsp;37)</h4>
+            <p>Prioritza la qualitat visual i l&#39;accessibilitat d&#39;imatges.
+               Pes fort a contrast, alt text i LCP de rendiment.
+               Recomanat per a webs multim&egrave;dia i comercials.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="method-section">
+        <h3>Les 16 m&egrave;triques del pipeline</h3>
+        <p style="font-size:0.8rem;color:#666;margin-bottom:0.6rem">
+          W&nbsp;=&nbsp;WCAG Strict &nbsp;|&nbsp;
+          R&nbsp;=&nbsp;Readability First &nbsp;|&nbsp;
+          V&nbsp;=&nbsp;Visual First
+        </p>
+        <table class="met-table" aria-label="Descripció de les 16 mètriques ACI"><thead><tr><th>#</th><th>Mètrica</th><th>Nom</th><th>WCAG</th><th title='WCAG Strict'>W</th><th title='Readability First'>R</th><th title='Visual First'>V</th></tr></thead><tbody>
+<tr><td class="num">1</td><td><code>color_contrast_ratio</code></td><td>Contrast de color</td><td><small>1.4.3 AA</small></td><td class="num">5</td><td class="num">2</td><td class="num">4</td></tr>
+<tr><td class="num">2</td><td><code>focus_visible_ratio</code></td><td>Visibilitat del focus</td><td><small>2.4.7 AA</small></td><td class="num">4</td><td class="num">1</td><td class="num">2</td></tr>
+<tr><td class="num">3</td><td><code>target_size_clean</code></td><td>Mida objectiu tàctil</td><td><small>2.5.8 AA</small></td><td class="num">3</td><td class="num">1</td><td class="num">3</td></tr>
+<tr><td class="num">4</td><td><code>keyboard_clean</code></td><td>Navegació per teclat</td><td><small>2.1.1 A</small></td><td class="num">5</td><td class="num">1</td><td class="num">1</td></tr>
+<tr><td class="num">5</td><td><code>aria_roles_valid</code></td><td>Rols ARIA vàlids</td><td><small>4.1.2 AA</small></td><td class="num">4</td><td class="num">1</td><td class="num">2</td></tr>
+<tr><td class="num">6</td><td><code>accessible_names_coverage</code></td><td>Noms accessibles</td><td><small>4.1.2 AA</small></td><td class="num">5</td><td class="num">2</td><td class="num">3</td></tr>
+<tr><td class="num">7</td><td><code>audit_critical_violations</code></td><td>Violacions crítiques (axe)</td><td><small>Múltiples</small></td><td class="num">5</td><td class="num">3</td><td class="num">2</td></tr>
+<tr><td class="num">8</td><td><code>audit_high_violations</code></td><td>Violacions altes (axe)</td><td><small>Múltiples</small></td><td class="num">4</td><td class="num">2</td><td class="num">2</td></tr>
+<tr><td class="num">9</td><td><code>audit_medium_violations</code></td><td>Violacions mitjanes (axe)</td><td><small>Múltiples</small></td><td class="num">2</td><td class="num">1</td><td class="num">1</td></tr>
+<tr><td class="num">10</td><td><code>audit_low_violations</code></td><td>Violacions baixes (axe)</td><td><small>Múltiples</small></td><td class="num">1</td><td class="num">0</td><td class="num">0</td></tr>
+<tr><td class="num">11</td><td><code>page_flesch</code></td><td>Llegibilitat Flesch</td><td><small>3.1.5 AAA</small></td><td class="num">2</td><td class="num">5</td><td class="num">2</td></tr>
+<tr><td class="num">12</td><td><code>text_complexity</code></td><td>Complexitat textual</td><td><small>3.1 AA</small></td><td class="num">1</td><td class="num">5</td><td class="num">2</td></tr>
+<tr><td class="num">13</td><td><code>heading_hierarchy</code></td><td>Jerarquia de capçaleres</td><td><small>1.3.1 A</small></td><td class="num">3</td><td class="num">5</td><td class="num">2</td></tr>
+<tr><td class="num">14</td><td><code>alt_text_coverage</code></td><td>Alt text d'imatges</td><td><small>1.1.1 A</small></td><td class="num">5</td><td class="num">3</td><td class="num">5</td></tr>
+<tr><td class="num">15</td><td><code>landmark_coverage</code></td><td>Landmarks de navegació</td><td><small>1.3.6 AAA</small></td><td class="num">3</td><td class="num">2</td><td class="num">2</td></tr>
+<tr><td class="num">16</td><td><code>performance_lcp</code></td><td>LCP (Core Web Vitals)</td><td><small>EN 301 549</small></td><td class="num">2</td><td class="num">1</td><td class="num">4</td></tr>
+</tbody></table>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Desc&#224;rregues -->
+  <div class="card" role="region" aria-labelledby="dl-title">
+    <div class="card-hd"><h2 id="dl-title">&#8595; Desc&agrave;rregues</h2></div>
+    <div class="card-body">
+      <div class="dl-grid">
+        <a class="dl-btn" href="data/scores.csv" download
+           aria-label="Descarrega les puntuacions en format CSV">
+          &#128196; scores.csv
+        </a>
+        <a class="dl-btn" href="results.json" download
+           aria-label="Descarrega les dades consolidades en format JSON">
+          &#x7B;&#x7D; results.json
+        </a>
+        <a class="dl-btn" href="data/reports_manifest.json" download
+           aria-label="Descarrega el manifest d'informes">
+          &#128203; reports_manifest.json
         </a>
       </div>
     </div>
-
-    <table id="results-table">
-      <thead>
-        <tr>
-          <th onclick="sortTable(0)">#</th>
-          <th onclick="sortTable(1)">Domini</th>
-          <th onclick="sortTable(2)" class="col-domain">URL</th>
-          <th onclick="sortTable(3)">ACI ↕</th>
-          <th onclick="sortTable(4)">Perfil</th>
-          <th>Informe</th>
-        </tr>
-      </thead>
-      <tbody id="results-tbody"></tbody>
-    </table>
   </div>
 
-  <!-- Nota sobre l'execució -->
-  <div class="card" style="padding:1.25rem;font-size:.85rem;color:#555;line-height:1.7">
-    <strong>Com funciona?</strong><br>
-    GitHub Pages serveix contingut <em>estàtic</em>; per tant, el pipeline Python s'executa
-    dins d'una <strong>GitHub Action</strong> i exporta els resultats (HTML, JSON, CSV) a aquesta
-    pàgina. Per llençar una nova anàlisi manualment:
-    <ol style="margin-top:.6rem;padding-left:1.4rem">
-      <li>Ves a <strong>Actions → Publica resultats a GitHub Pages</strong> al teu repositori.</li>
-      <li>Fes clic a <strong>Run workflow</strong>, tria el perfil i el fitxer d'URLs.</li>
-      <li>En 2–5 minuts, la pàgina s'actualitzarà amb els nous resultats.</li>
-    </ol>
-  </div>
 </main>
 
-<footer>
-  ACI Pipeline v0.1.0 · Jordi Miguel i Costal · TFM 2026 ·
-  <a href="https://github.com" id="footer-repo">Repositori GitHub</a>
+<footer role="contentinfo">
+  <p>ACI Pipeline v0.1.0 &middot; Jordi Miguel i Costal &middot; TFM 2026 &middot;
+     <a id="repo-link" href="https://github.com" rel="noopener">Repositori GitHub</a></p>
+  <p>Basat en WCAG 2.1/2.2, EN 301 549 i axe-core</p>
 </footer>
 
 <script>
-// ─── Configuració ──────────────────────────────────────────────────────────
-const RESULTS_JSON = "results.json";   // Generat per publish_results.yml
-let   currentSort  = { col: 3, asc: false };  // Ordena per ACI desc per defecte
+// Dades embegudes (generades per build_site.py — no cal fetch)
+const ALL_ROWS = [{"url": "https://www.palaumusica.cat/ca/", "domain": "www.palaumusica.cat", "category": "Cultural", "profiles": {"wcag_strict": {"aci": 3.885, "report": "reports/www_palaumusica_cat_ca_Cultural_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.885}, {"url": "https://www.tnc.cat/ca", "domain": "www.tnc.cat", "category": "Cultural", "profiles": {"wcag_strict": {"aci": 3.844, "report": "reports/www_tnc_cat_ca_Cultural_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.844}, {"url": "https://web.ub.edu/", "domain": "web.ub.edu", "category": "Educatiu", "profiles": {"wcag_strict": {"aci": 3.83, "report": "reports/web_ub_edu_Educatiu_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.83}, {"url": "https://www.sanidad.gob.es/", "domain": "www.sanidad.gob.es", "category": "Institucional", "profiles": {"wcag_strict": {"aci": 3.826, "report": "reports/www_sanidad_gob_es_Institucional_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.826}, {"url": "https://www.lavanguardia.com/", "domain": "www.lavanguardia.com", "category": "Mitjans", "profiles": {"wcag_strict": {"aci": 3.788, "report": "reports/www_lavanguardia_com_Mitjans_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.788}, {"url": "https://www.educacionfpydeportes.gob.es/portada.html", "domain": "www.educacionfpydeportes.gob.es", "category": "Institucional", "profiles": {"wcag_strict": {"aci": 3.738, "report": "reports/www_educacionfpydeportes_gob_es_portada_html_Institucional_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.738}, {"url": "https://sede.agenciatributaria.gob.es/", "domain": "sede.agenciatributaria.gob.es", "category": "Institucional", "profiles": {"wcag_strict": {"aci": 3.704, "report": "reports/sede_agenciatributaria_gob_es_Institucional_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.704}, {"url": "https://www.capraboacasa.com/ca/", "domain": "www.capraboacasa.com", "category": "Comercial", "profiles": {"wcag_strict": {"aci": 3.682, "report": "reports/www_capraboacasa_com_ca_Comercial_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.682}, {"url": "https://www.ucm.es/", "domain": "www.ucm.es", "category": "Educatiu", "profiles": {"wcag_strict": {"aci": 3.678, "report": "reports/www_ucm_es_Educatiu_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.678}, {"url": "https://www.uv.es/", "domain": "www.uv.es", "category": "Educatiu", "profiles": {"wcag_strict": {"aci": 3.678, "report": "reports/www_uv_es_Educatiu_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.678}, {"url": "https://www.diba.cat/ca/inici", "domain": "www.diba.cat", "category": "Institucional", "profiles": {"wcag_strict": {"aci": 3.676, "report": "reports/www_diba_cat_ca_inici_Institucional_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.676}, {"url": "https://www.rac1.cat/", "domain": "www.rac1.cat", "category": "Mitjans", "profiles": {"wcag_strict": {"aci": 3.659, "report": "reports/www_rac1_cat_Mitjans_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.659}, {"url": "https://www.compraonline.bonpreuesclat.cat/", "domain": "www.compraonline.bonpreuesclat.cat", "category": "Comercial", "profiles": {"wcag_strict": {"aci": 3.606, "report": "reports/www_compraonline_bonpreuesclat_cat_Comercial_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.606}, {"url": "https://web.gencat.cat/ca/ciutadania/inici", "domain": "web.gencat.cat", "category": "Institucional", "profiles": {"wcag_strict": {"aci": 3.605, "report": "reports/web_gencat_cat_ca_ciutadania_inici_Institucional_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.605}, {"url": "https://terrassadigital.cat/", "domain": "terrassadigital.cat", "category": "Mitjans", "profiles": {"wcag_strict": {"aci": 3.604, "report": "reports/terrassadigital_cat_Mitjans_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.604}, {"url": "https://es.wallapop.com/", "domain": "es.wallapop.com", "category": "Comercial", "profiles": {"wcag_strict": {"aci": 3.591, "report": "reports/es_wallapop_com_Comercial_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.591}, {"url": "https://www.rcdespanyol.com/", "domain": "www.rcdespanyol.com", "category": "Comercial", "profiles": {"wcag_strict": {"aci": 3.575, "report": "reports/www_rcdespanyol_com_Comercial_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.575}, {"url": "https://www.uab.cat/", "domain": "www.uab.cat", "category": "Educatiu", "profiles": {"wcag_strict": {"aci": 3.558, "report": "reports/www_uab_cat_Educatiu_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.558}, {"url": "https://www.3cat.cat/3cat/", "domain": "www.3cat.cat", "category": "Mitjans", "profiles": {"wcag_strict": {"aci": 3.547, "report": "reports/www_3cat_cat_3cat_Mitjans_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.547}, {"url": "https://serveiocupacio.gencat.cat/ca/inici", "domain": "serveiocupacio.gencat.cat", "category": "Institucional", "profiles": {"wcag_strict": {"aci": 3.546, "report": "reports/serveiocupacio_gencat_cat_ca_inici_Institucional_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.546}, {"url": "https://www.url.edu/ca", "domain": "www.url.edu", "category": "Educatiu", "profiles": {"wcag_strict": {"aci": 3.544, "report": "reports/www_url_edu_ca_Educatiu_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.544}, {"url": "https://educacio.gencat.cat/ca/inici", "domain": "educacio.gencat.cat", "category": "Institucional", "profiles": {"wcag_strict": {"aci": 3.539, "report": "reports/educacio_gencat_cat_ca_inici_Institucional_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.539}, {"url": "https://www.museunacional.cat/ca", "domain": "www.museunacional.cat", "category": "Cultural", "profiles": {"wcag_strict": {"aci": 3.531, "report": "reports/www_museunacional_cat_ca_Cultural_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.531}, {"url": "https://catsalut.gencat.cat/ca/inici/", "domain": "catsalut.gencat.cat", "category": "Institucional", "profiles": {"wcag_strict": {"aci": 3.521, "report": "reports/catsalut_gencat_cat_ca_inici_Institucional_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.521}, {"url": "https://www.meteo.cat/", "domain": "www.meteo.cat", "category": "Institucional", "profiles": {"wcag_strict": {"aci": 3.518, "report": "reports/www_meteo_cat_Institucional_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.518}, {"url": "https://www.upc.edu/ca", "domain": "www.upc.edu", "category": "Educatiu", "profiles": {"wcag_strict": {"aci": 3.517, "report": "reports/www_upc_edu_ca_Educatiu_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.517}, {"url": "https://www.ara.cat/", "domain": "www.ara.cat", "category": "Mitjans", "profiles": {"wcag_strict": {"aci": 3.5, "report": "reports/www_ara_cat_Mitjans_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.5}, {"url": "https://www.seg-social.es/wps/portal/wss/internet/Inicio", "domain": "www.seg-social.es", "category": "Institucional", "profiles": {"wcag_strict": {"aci": 3.494, "report": "reports/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.494}, {"url": "https://www.upf.edu/", "domain": "www.upf.edu", "category": "Educatiu", "profiles": {"wcag_strict": {"aci": 3.48, "report": "reports/www_upf_edu_Educatiu_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.48}, {"url": "https://www.liceubarcelona.cat/ca", "domain": "www.liceubarcelona.cat", "category": "Cultural", "profiles": {"wcag_strict": {"aci": 3.435, "report": "reports/www_liceubarcelona_cat_ca_Cultural_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.435}, {"url": "https://www.rtve.es/", "domain": "www.rtve.es", "category": "Mitjans", "profiles": {"wcag_strict": {"aci": 3.415, "report": "reports/www_rtve_es_Mitjans_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.415}, {"url": "https://sagradafamilia.org/", "domain": "sagradafamilia.org", "category": "Cultural", "profiles": {"wcag_strict": {"aci": 3.413, "report": "reports/sagradafamilia_org_Cultural_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.413}, {"url": "https://www.fcbarcelona.cat/ca/", "domain": "www.fcbarcelona.cat", "category": "Comercial", "profiles": {"wcag_strict": {"aci": 3.349, "report": "reports/www_fcbarcelona_cat_ca_Comercial_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.349}, {"url": "https://www.uoc.edu/ca", "domain": "www.uoc.edu", "category": "Educatiu", "profiles": {"wcag_strict": {"aci": 3.342, "report": "reports/www_uoc_edu_ca_Educatiu_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.342}, {"url": "https://www.unav.edu/", "domain": "www.unav.edu", "category": "Educatiu", "profiles": {"wcag_strict": {"aci": 3.184, "report": "reports/www_unav_edu_Educatiu_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.184}, {"url": "https://www.promofarma.com/", "domain": "www.promofarma.com", "category": "Comercial", "profiles": {"wcag_strict": {"aci": 3.044, "report": "reports/www_promofarma_com_Comercial_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.044}];
+const PROFILES = ["wcag_strict", "readability_first", "visual_first"];
+let sortCol = -1, sortAsc = true;
 
-// ─── Carrega i mostra els resultats ───────────────────────────────────────
-async function loadResults() {
-  const status = document.getElementById("status");
-  status.textContent = "⏳ Carregant resultats...";
-  status.className = "";
-
-  try {
-    const res  = await fetch(RESULTS_JSON + "?t=" + Date.now());
-    if (!res.ok) throw new Error(`HTTP ${res.status}: ${RESULTS_JSON} no trobat`);
-    const data = await res.json();
-    renderDashboard(data);
-  } catch (err) {
-    status.textContent = "⚠️ " + err.message +
-      " — Els resultats apareixeran aquí un cop s'executi el pipeline.";
-    status.className = "error";
-    document.getElementById("kpi-grid").style.display    = "none";
-    document.getElementById("results-card").style.display = "none";
+// Detecta repo GitHub des de l'URL de Pages
+(function () {
+  var h = window.location.hostname;
+  var p = (window.location.pathname.split('/')[1] || '');
+  if (h.endsWith('github.io') && p) {
+    var owner = h.replace('.github.io', '');
+    var repo  = 'https://github.com/' + owner + '/' + p;
+    document.getElementById('repo-link').href = repo;
+    document.getElementById('btn-run').href   =
+      repo + '/actions/workflows/publish_results.yml';
   }
+}());
+
+// Filtrat
+function getFilters() {
+  return {
+    text:   document.getElementById('f-text').value.toLowerCase().trim(),
+    cat:    document.getElementById('f-cat').value,
+    minAci: parseFloat(document.getElementById('f-min').value) || 0,
+  };
 }
 
-// ─── Renderitza el dashboard ───────────────────────────────────────────────
-function renderDashboard(data) {
-  const results = data.results || [];
-  const n       = results.length;
-
-  // Meta capçalera
-  document.getElementById("hdr-generated").textContent =
-    "Generat: " + (data.generated_at ? new Date(data.generated_at).toLocaleString("ca-ES") : "—");
-  document.getElementById("hdr-version").textContent  =
-    "Pipeline " + (data.pipeline_version || "0.1.0");
-  document.getElementById("hdr-nurls").textContent     =
-    n + " URL" + (n !== 1 ? "s" : "") + " analitzada" + (n !== 1 ? "s" : "");
-
-  // KPIs
-  if (n > 0) {
-    const scores = results.map(r => r.aci_score).filter(Number.isFinite);
-    const mean   = scores.reduce((a, b) => a + b, 0) / scores.length;
-    document.getElementById("kpi-nurls").textContent = n;
-    document.getElementById("kpi-max").textContent   = Math.max(...scores).toFixed(3);
-    document.getElementById("kpi-mean").textContent  = mean.toFixed(3);
-    document.getElementById("kpi-min").textContent   = Math.min(...scores).toFixed(3);
-    document.getElementById("kpi-grid").style.display = "";
-  }
-
-  // Taula
-  renderTable(results);
-  document.getElementById("results-card").style.display = "";
-  document.getElementById("status").textContent = n === 0
-    ? "ℹ️ No hi ha resultats. Executa el pipeline des d'Actions."
-    : "";
-
-  // Botó Run → links al workflow del repositori
-  const repoMeta = document.querySelector('meta[name="github-repo"]');
-  const repoUrl  = repoMeta ? repoMeta.content : detectRepo();
-  if (repoUrl) {
-    const actionsUrl = repoUrl + "/actions/workflows/publish_results.yml";
-    document.getElementById("btn-run-action").href = actionsUrl;
-    document.getElementById("footer-repo").href    = repoUrl;
-  }
-}
-
-// ─── Renderitza les files de la taula ─────────────────────────────────────
-function renderTable(results) {
-  const tbody = document.getElementById("results-tbody");
-  tbody.innerHTML = "";
-
-  results.forEach((r, i) => {
-    const aci    = typeof r.aci_score === "number" ? r.aci_score : parseFloat(r.aci_score) || 0;
-    const pct    = Math.round((aci / 5) * 100);
-    const cls    = aci >= 3.5 ? "green" : aci >= 2.5 ? "orange" : "red";
-    const color  = aci >= 3.5 ? "#2ecc71" : aci >= 2.5 ? "#e67e22" : "#e74c3c";
-    const domain = r.domain || (r.url || "").replace(/^https?:\/\//, "").split("/")[0];
-    const report = r.report ? `<a href="${r.report}" target="_blank">📄 veure</a>` : "—";
-
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td style="color:#999;font-size:.8rem">${i + 1}</td>
-      <td><strong>${escHtml(domain)}</strong></td>
-      <td class="col-domain" style="font-size:.78rem;color:#666;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
-        <a href="${escHtml(r.url || '')}" target="_blank" rel="noopener">${escHtml(r.url || '—')}</a>
-      </td>
-      <td>
-        <span class="aci-badge ${cls}">${aci.toFixed(3)}</span>
-        <div class="aci-bar">
-          <div class="aci-bar-fill" style="width:${pct}%;background:${color}"></div>
-        </div>
-      </td>
-      <td><span class="chip">${escHtml(r.profile || '—')}</span></td>
-      <td>${report}</td>
-    `;
-    tbody.appendChild(tr);
+function applyFilters() {
+  var f = getFilters();
+  var filtered = ALL_ROWS.filter(function (r) {
+    if (f.text && !r.domain.toLowerCase().includes(f.text) &&
+        !r.url.toLowerCase().includes(f.text)) return false;
+    if (f.cat && r.category !== f.cat) return false;
+    var best = r.aci_max;
+    if (best !== null && best < f.minAci) return false;
+    return true;
   });
+  renderRows(filtered);
 }
 
-// ─── Ordenació de la taula ─────────────────────────────────────────────────
-function sortTable(col) {
-  if (currentSort.col === col) {
-    currentSort.asc = !currentSort.asc;
-  } else {
-    currentSort = { col, asc: col !== 3 };   // ACI ordena desc per defecte
-  }
+function aciColor(s) {
+  if (s === null) return '#888';
+  return s >= 3.5 ? '#27ae60' : s >= 2.5 ? '#e67e22' : '#e74c3c';
+}
 
-  const tbody = document.getElementById("results-tbody");
-  const rows  = Array.from(tbody.querySelectorAll("tr"));
+function esc(s) {
+  return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
 
-  rows.sort((a, b) => {
-    const av = a.cells[col]?.textContent.trim() || "";
-    const bv = b.cells[col]?.textContent.trim() || "";
-    const an = parseFloat(av), bn = parseFloat(bv);
-    const cmp = isNaN(an) || isNaN(bn) ? av.localeCompare(bv) : an - bn;
-    return currentSort.asc ? cmp : -cmp;
+function renderRows(rows) {
+  var tbody  = document.getElementById('tbody');
+  var noRes  = document.getElementById('no-results');
+  var fCount = document.getElementById('f-count');
+  fCount.textContent = rows.length + ' resultat' + (rows.length !== 1 ? 's' : '');
+
+  if (!rows.length) { tbody.innerHTML = ''; noRes.style.display = ''; return; }
+  noRes.style.display = 'none';
+
+  tbody.innerHTML = rows.map(function (r, i) {
+    var cells = [
+      '<td class="num">' + (i + 1) + '</td>',
+      '<td><strong>' + esc(r.domain) + '</strong><br>' +
+        '<small class="url-small"><a href="' + esc(r.url) + '" target="_blank" rel="noopener">' +
+        esc(r.url) + '</a></small></td>',
+      '<td><span class="cat-chip">' + esc(r.category || '—') + '</span></td>',
+    ];
+    PROFILES.forEach(function (p) {
+      var pd    = r.profiles[p] || {};
+      var aci   = pd.aci !== undefined ? pd.aci : null;
+      var rep   = pd.report || null;
+      if (aci !== null) {
+        var pct   = Math.round(aci / 5 * 100);
+        var color = aciColor(aci);
+        var link  = rep ? ' <a href="' + rep + '" title="Informe">&#128196;</a>' : '';
+        cells.push(
+          '<td data-val="' + aci.toFixed(3) + '">' +
+          '<span class="aci-num" style="color:' + color + '">' + aci.toFixed(3) + '</span>' +
+          '<div class="mini-bar"><div style="width:' + pct + '%;background:' + color + '"></div></div>' +
+          link + '</td>'
+        );
+      } else {
+        cells.push('<td data-val="0"><span class="aci-dash">—</span></td>');
+      }
+    });
+    return '<tr>' + cells.join('') + '</tr>';
+  }).join('');
+}
+
+// Ordenació
+function sortBy(col) {
+  var ths = document.querySelectorAll('thead th');
+  ths.forEach(function (th) {
+    th.classList.remove('sort-asc', 'sort-desc');
+    th.removeAttribute('aria-sort');
   });
+  if (sortCol === col) { sortAsc = !sortAsc; } else { sortCol = col; sortAsc = (col < 3); }
+  ths[col].classList.add(sortAsc ? 'sort-asc' : 'sort-desc');
+  ths[col].setAttribute('aria-sort', sortAsc ? 'ascending' : 'descending');
 
-  rows.forEach(r => tbody.appendChild(r));
+  var rows = Array.from(document.querySelectorAll('#tbody tr'));
+  rows.sort(function (a, b) {
+    var av, bv, cmp;
+    if (col >= 3) {
+      av  = parseFloat(a.cells[col] && a.cells[col].dataset.val) || 0;
+      bv  = parseFloat(b.cells[col] && b.cells[col].dataset.val) || 0;
+      cmp = av - bv;
+    } else {
+      av  = (a.cells[col] && a.cells[col].textContent.trim()) || '';
+      bv  = (b.cells[col] && b.cells[col].textContent.trim()) || '';
+      cmp = av.localeCompare(bv, 'ca');
+    }
+    return sortAsc ? cmp : -cmp;
+  });
+  var tbody = document.getElementById('tbody');
+  rows.forEach(function (r) { tbody.appendChild(r); });
 }
 
-// ─── Helpers ───────────────────────────────────────────────────────────────
-function escHtml(str) {
-  return (str || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+function resetFilters() {
+  document.getElementById('f-text').value = '';
+  document.getElementById('f-cat').value  = '';
+  document.getElementById('f-min').value  = '0';
+  applyFilters();
 }
 
-function detectRepo() {
-  // Intenta deduir la URL del repo des de la URL de Pages
-  const h = window.location.hostname;          // p.ex. "jmiguel.github.io"
-  const p = window.location.pathname.split("/")[1];   // p.ex. "aci-pipeline"
-  if (h.endsWith("github.io") && p) {
-    const owner = h.replace(".github.io", "");
-    return `https://github.com/${owner}/${p}`;
-  }
-  return null;
-}
-
-// ─── Inicialitza quan la pàgina carrega ────────────────────────────────────
-document.addEventListener("DOMContentLoaded", loadResults);
+// Inicialitza
+document.getElementById('f-text').addEventListener('input',  applyFilters);
+document.getElementById('f-cat').addEventListener('change',  applyFilters);
+document.getElementById('f-min').addEventListener('input',   applyFilters);
+document.getElementById('f-count').textContent =
+  ALL_ROWS.length + ' resultat' + (ALL_ROWS.length !== 1 ? 's' : '');
 </script>
 </body>
 </html>

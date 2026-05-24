@@ -1,295 +1,1303 @@
 {
-  "generated_at": "2026-05-24T11:12:26.552133Z",
+  "generated_at": "2026-05-24T13:42:38Z",
   "pipeline_version": "0.1.0",
   "n_urls": 36,
   "results": [
     {
-      "url": "https://www.palaumusica.cat/ca/; Cultural",
+      "url": "https://www.palaumusica.cat/ca/",
       "domain": "www.palaumusica.cat",
-      "aci_score": 3.885,
-      "profile": "wcag_strict",
-      "timestamp": 1779621066,
-      "report": "reports/www_palaumusica_cat_ca_Cultural_1779621061_wcag_strict.html"
+      "category": "Cultural",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.885,
+          "sub_scores": {
+            "wcag": 3.365,
+            "text": 3.75,
+            "elements": 4.694,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 0.997,
+            "accessible_names_coverage": 0.879,
+            "audit_critical_violations": 1.0,
+            "audit_high_violations": 1.0,
+            "audit_medium_violations": 1.0,
+            "audit_low_violations": 1.0,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 0.915,
+            "landmark_coverage": 1.0,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/www_palaumusica_cat_ca_Cultural_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.885
     },
     {
-      "url": "https://www.tnc.cat/ca; Cultural",
+      "url": "https://www.tnc.cat/ca",
       "domain": "www.tnc.cat",
-      "aci_score": 3.844,
-      "profile": "wcag_strict",
-      "timestamp": 1779621041,
-      "report": "reports/www_tnc_cat_ca_Cultural_1779621037_wcag_strict.html"
+      "category": "Cultural",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.844,
+          "sub_scores": {
+            "wcag": 3.327,
+            "text": 3.75,
+            "elements": 4.658,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 0.994,
+            "accessible_names_coverage": 0.992,
+            "audit_critical_violations": 1.0,
+            "audit_high_violations": 0.95,
+            "audit_medium_violations": 0.94,
+            "audit_low_violations": 1.0,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 0.78,
+            "landmark_coverage": 1.0,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/www_tnc_cat_ca_Cultural_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.844
     },
     {
-      "url": "https://web.ub.edu/; Educatiu",
+      "url": "https://web.ub.edu/",
       "domain": "web.ub.edu",
-      "aci_score": 3.83,
-      "profile": "wcag_strict",
-      "timestamp": 1779620957,
-      "report": "reports/web_ub_edu_Educatiu_1779620950_wcag_strict.html"
+      "category": "Educatiu",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.83,
+          "sub_scores": {
+            "wcag": 3.327,
+            "text": 3.75,
+            "elements": 4.593,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 0.998,
+            "accessible_names_coverage": 0.96,
+            "audit_critical_violations": 1.0,
+            "audit_high_violations": 0.95,
+            "audit_medium_violations": 0.98,
+            "audit_low_violations": 0.99,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 0.915,
+            "landmark_coverage": 0.75,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/web_ub_edu_Educatiu_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.83
     },
     {
-      "url": "https://www.sanidad.gob.es/; Institucional",
+      "url": "https://www.sanidad.gob.es/",
       "domain": "www.sanidad.gob.es",
-      "aci_score": 3.826,
-      "profile": "wcag_strict",
-      "timestamp": 1779620950,
-      "report": "reports/www_sanidad_gob_es_Institucional_1779620944_wcag_strict.html"
+      "category": "Institucional",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.826,
+          "sub_scores": {
+            "wcag": 3.327,
+            "text": 3.75,
+            "elements": 4.581,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 0.99,
+            "audit_critical_violations": 1.0,
+            "audit_high_violations": 0.95,
+            "audit_medium_violations": 0.98,
+            "audit_low_violations": 0.99,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 0.875,
+            "landmark_coverage": 0.75,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/www_sanidad_gob_es_Institucional_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.826
     },
     {
-      "url": "https://www.lavanguardia.com/; Mitjans",
+      "url": "https://www.lavanguardia.com/",
       "domain": "www.lavanguardia.com",
-      "aci_score": 3.788,
-      "profile": "wcag_strict",
-      "timestamp": 1779621094,
-      "report": "reports/www_lavanguardia_com_Mitjans_1779621091_wcag_strict.html"
+      "category": "Mitjans",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.788,
+          "sub_scores": {
+            "wcag": 3.183,
+            "text": 3.75,
+            "elements": 4.666,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 0.923,
+            "audit_critical_violations": 0.85,
+            "audit_high_violations": 0.95,
+            "audit_medium_violations": 1.0,
+            "audit_low_violations": 1.0,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 1.0,
+            "landmark_coverage": 0.75,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/www_lavanguardia_com_Mitjans_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.788
     },
     {
-      "url": "https://www.educacionfpydeportes.gob.es/portada.html; Institucional",
+      "url": "https://www.educacionfpydeportes.gob.es/portada.html",
       "domain": "www.educacionfpydeportes.gob.es",
-      "aci_score": 3.738,
-      "profile": "wcag_strict",
-      "timestamp": 1779620944,
-      "report": "reports/www_educacionfpydeportes_gob_es_portada_html_Institucional_1779620938_wcag_strict.html"
+      "category": "Institucional",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.738,
+          "sub_scores": {
+            "wcag": 3.327,
+            "text": 3.75,
+            "elements": 4.319,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 0.973,
+            "audit_critical_violations": 1.0,
+            "audit_high_violations": 0.95,
+            "audit_medium_violations": 0.94,
+            "audit_low_violations": 1.0,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 0.714,
+            "landmark_coverage": 0.75,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/www_educacionfpydeportes_gob_es_portada_html_Institucional_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.738
     },
     {
-      "url": "https://sede.agenciatributaria.gob.es/; Institucional",
+      "url": "https://sede.agenciatributaria.gob.es/",
       "domain": "sede.agenciatributaria.gob.es",
-      "aci_score": 3.704,
-      "profile": "wcag_strict",
-      "timestamp": 1779620938,
-      "report": "reports/sede_agenciatributaria_gob_es_Institucional_1779620907_wcag_strict.html"
+      "category": "Institucional",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.704,
+          "sub_scores": {
+            "wcag": 3.365,
+            "text": 3.75,
+            "elements": 4.118,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 1.0,
+            "audit_critical_violations": 1.0,
+            "audit_high_violations": 1.0,
+            "audit_medium_violations": 1.0,
+            "audit_low_violations": 1.0,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 1.0,
+            "landmark_coverage": 0.0,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/sede_agenciatributaria_gob_es_Institucional_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.704
     },
     {
-      "url": "https://www.capraboacasa.com/ca/; Comercial",
+      "url": "https://www.capraboacasa.com/ca/",
       "domain": "www.capraboacasa.com",
-      "aci_score": 3.682,
-      "profile": "wcag_strict",
-      "timestamp": 1779621106,
-      "report": "reports/www_capraboacasa_com_ca_Comercial_1779621098_wcag_strict.html"
+      "category": "Comercial",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.682,
+          "sub_scores": {
+            "wcag": 2.945,
+            "text": 3.75,
+            "elements": 4.715,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.333,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 0.995,
+            "audit_critical_violations": 0.85,
+            "audit_high_violations": 0.85,
+            "audit_medium_violations": 0.96,
+            "audit_low_violations": 1.0,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 0.961,
+            "landmark_coverage": 0.75,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/www_capraboacasa_com_ca_Comercial_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.682
     },
     {
-      "url": "https://es.wallapop.com/; Comercial",
-      "domain": "es.wallapop.com",
-      "aci_score": 3.678,
-      "profile": "wcag_strict",
-      "timestamp": 1779621107,
-      "report": "reports/es_wallapop_com_Comercial_1779621106_wcag_strict.html"
-    },
-    {
-      "url": "https://www.ucm.es/; Educatiu",
+      "url": "https://www.ucm.es/",
       "domain": "www.ucm.es",
-      "aci_score": 3.678,
-      "profile": "wcag_strict",
-      "timestamp": 1779620968,
-      "report": "reports/www_ucm_es_Educatiu_1779620967_wcag_strict.html"
+      "category": "Educatiu",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.678,
+          "sub_scores": {
+            "wcag": 3.327,
+            "text": 3.75,
+            "elements": 4.118,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 1.0,
+            "audit_critical_violations": 1.0,
+            "audit_high_violations": 0.95,
+            "audit_medium_violations": 0.96,
+            "audit_low_violations": 1.0,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 1.0,
+            "landmark_coverage": 0.0,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/www_ucm_es_Educatiu_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.678
     },
     {
-      "url": "https://www.uv.es/; Educatiu",
+      "url": "https://www.uv.es/",
       "domain": "www.uv.es",
-      "aci_score": 3.678,
-      "profile": "wcag_strict",
-      "timestamp": 1779620960,
-      "report": "reports/www_uv_es_Educatiu_1779620958_wcag_strict.html"
+      "category": "Educatiu",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.678,
+          "sub_scores": {
+            "wcag": 3.327,
+            "text": 3.75,
+            "elements": 4.118,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 1.0,
+            "audit_critical_violations": 1.0,
+            "audit_high_violations": 0.95,
+            "audit_medium_violations": 0.96,
+            "audit_low_violations": 1.0,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 1.0,
+            "landmark_coverage": 0.0,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/www_uv_es_Educatiu_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.678
     },
     {
-      "url": "https://www.diba.cat/ca/inici; Institucional",
+      "url": "https://www.diba.cat/ca/inici",
       "domain": "www.diba.cat",
-      "aci_score": 3.676,
-      "profile": "wcag_strict",
-      "timestamp": 1779621037,
-      "report": "reports/www_diba_cat_ca_inici_Institucional_1779621021_wcag_strict.html"
+      "category": "Institucional",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.676,
+          "sub_scores": {
+            "wcag": 3.288,
+            "text": 3.75,
+            "elements": 4.194,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 0.908,
+            "audit_critical_violations": 1.0,
+            "audit_high_violations": 0.9,
+            "audit_medium_violations": 0.92,
+            "audit_low_violations": 1.0,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 0.694,
+            "landmark_coverage": 0.75,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/www_diba_cat_ca_inici_Institucional_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.676
     },
     {
-      "url": "https://www.rac1.cat/; Mitjans",
+      "url": "https://www.rac1.cat/",
       "domain": "www.rac1.cat",
-      "aci_score": 3.659,
-      "profile": "wcag_strict",
-      "timestamp": 1779621086,
-      "report": "reports/www_rac1_cat_Mitjans_1779621084_wcag_strict.html"
+      "category": "Mitjans",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.659,
+          "sub_scores": {
+            "wcag": 3.288,
+            "text": 3.75,
+            "elements": 4.118,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 1.0,
+            "audit_critical_violations": 1.0,
+            "audit_high_violations": 0.9,
+            "audit_medium_violations": 0.96,
+            "audit_low_violations": 1.0,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 1.0,
+            "landmark_coverage": 0.0,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/www_rac1_cat_Mitjans_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.659
     },
     {
-      "url": "https://web.gencat.cat/ca/ciutadania/inici; Institucional",
-      "domain": "web.gencat.cat",
-      "aci_score": 3.627,
-      "profile": "wcag_strict",
-      "timestamp": 1779620992,
-      "report": "reports/web_gencat_cat_ca_ciutadania_inici_Institucional_1779620988_wcag_strict.html"
-    },
-    {
-      "url": "https://www.fcbarcelona.cat/ca/; Comercial",
-      "domain": "www.fcbarcelona.cat",
-      "aci_score": 3.624,
-      "profile": "wcag_strict",
-      "timestamp": 1779621142,
-      "report": "reports/www_fcbarcelona_cat_ca_Comercial_1779621111_wcag_strict.html"
-    },
-    {
-      "url": "https://www.compraonline.bonpreuesclat.cat/; Comercial",
+      "url": "https://www.compraonline.bonpreuesclat.cat/",
       "domain": "www.compraonline.bonpreuesclat.cat",
-      "aci_score": 3.606,
-      "profile": "wcag_strict",
-      "timestamp": 1779621098,
-      "report": "reports/www_compraonline_bonpreuesclat_cat_Comercial_1779621094_wcag_strict.html"
+      "category": "Comercial",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.606,
+          "sub_scores": {
+            "wcag": 3.327,
+            "text": 3.75,
+            "elements": 3.865,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 0.992,
+            "audit_critical_violations": 1.0,
+            "audit_high_violations": 0.95,
+            "audit_medium_violations": 1.0,
+            "audit_low_violations": 1.0,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 0.236,
+            "landmark_coverage": 1.0,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/www_compraonline_bonpreuesclat_cat_Comercial_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.606
     },
     {
-      "url": "https://terrassadigital.cat/; Mitjans",
+      "url": "https://web.gencat.cat/ca/ciutadania/inici",
+      "domain": "web.gencat.cat",
+      "category": "Institucional",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.605,
+          "sub_scores": {
+            "wcag": 3.327,
+            "text": 3.75,
+            "elements": 3.876,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 0.991,
+            "audit_critical_violations": 1.0,
+            "audit_high_violations": 0.95,
+            "audit_medium_violations": 0.98,
+            "audit_low_violations": 0.99,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 0.395,
+            "landmark_coverage": 0.75,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/web_gencat_cat_ca_ciutadania_inici_Institucional_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.605
+    },
+    {
+      "url": "https://terrassadigital.cat/",
       "domain": "terrassadigital.cat",
-      "aci_score": 3.604,
-      "profile": "wcag_strict",
-      "timestamp": 1779621091,
-      "report": "reports/terrassadigital_cat_Mitjans_1779621086_wcag_strict.html"
+      "category": "Mitjans",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.604,
+          "sub_scores": {
+            "wcag": 3.288,
+            "text": 3.75,
+            "elements": 3.943,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 0.978,
+            "accessible_names_coverage": 0.978,
+            "audit_critical_violations": 1.0,
+            "audit_high_violations": 0.9,
+            "audit_medium_violations": 0.96,
+            "audit_low_violations": 1.0,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 0.321,
+            "landmark_coverage": 1.0,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/terrassadigital_cat_Mitjans_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.604
     },
     {
-      "url": "https://www.rcdespanyol.com/; Comercial",
+      "url": "https://es.wallapop.com/",
+      "domain": "es.wallapop.com",
+      "category": "Comercial",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.591,
+          "sub_scores": {
+            "wcag": 2.984,
+            "text": 3.75,
+            "elements": 4.347,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.143,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 1.0,
+            "audit_critical_violations": 1.0,
+            "audit_high_violations": 0.95,
+            "audit_medium_violations": 1.0,
+            "audit_low_violations": 0.99,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 0.556,
+            "landmark_coverage": 1.0,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/es_wallapop_com_Comercial_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.591
+    },
+    {
+      "url": "https://www.rcdespanyol.com/",
       "domain": "www.rcdespanyol.com",
-      "aci_score": 3.575,
-      "profile": "wcag_strict",
-      "timestamp": 1779621146,
-      "report": "reports/www_rcdespanyol_com_Comercial_1779621142_wcag_strict.html"
+      "category": "Comercial",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.575,
+          "sub_scores": {
+            "wcag": 2.984,
+            "text": 3.75,
+            "elements": 4.338,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.333,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 1.0,
+            "audit_critical_violations": 0.85,
+            "audit_high_violations": 0.9,
+            "audit_medium_violations": 0.92,
+            "audit_low_violations": 1.0,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 1.0,
+            "landmark_coverage": 0.25,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/www_rcdespanyol_com_Comercial_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.575
     },
     {
-      "url": "https://www.uab.cat/; Educatiu",
+      "url": "https://www.uab.cat/",
       "domain": "www.uab.cat",
-      "aci_score": 3.558,
-      "profile": "wcag_strict",
-      "timestamp": 1779620958,
-      "report": "reports/www_uab_cat_Educatiu_1779620957_wcag_strict.html"
+      "category": "Educatiu",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.558,
+          "sub_scores": {
+            "wcag": 3.327,
+            "text": 3.75,
+            "elements": 3.75,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 0.75,
+            "audit_critical_violations": 1.0,
+            "audit_high_violations": 0.95,
+            "audit_medium_violations": 0.94,
+            "audit_low_violations": 1.0,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 1.0,
+            "landmark_coverage": 0.0,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/www_uab_cat_Educatiu_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.558
     },
     {
-      "url": "https://www.3cat.cat/3cat/; Mitjans",
+      "url": "https://www.3cat.cat/3cat/",
       "domain": "www.3cat.cat",
-      "aci_score": 3.551,
-      "profile": "wcag_strict",
-      "timestamp": 1779621076,
-      "report": "reports/www_3cat_cat_3cat_Mitjans_1779621066_wcag_strict.html"
+      "category": "Mitjans",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.547,
+          "sub_scores": {
+            "wcag": 3.288,
+            "text": 3.75,
+            "elements": 3.75,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 0.75,
+            "audit_critical_violations": 1.0,
+            "audit_high_violations": 0.9,
+            "audit_medium_violations": 0.98,
+            "audit_low_violations": 1.0,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 1.0,
+            "landmark_coverage": 0.0,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/www_3cat_cat_3cat_Mitjans_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.547
     },
     {
-      "url": "https://serveiocupacio.gencat.cat/ca/inici; Institucional",
+      "url": "https://serveiocupacio.gencat.cat/ca/inici",
       "domain": "serveiocupacio.gencat.cat",
-      "aci_score": 3.546,
-      "profile": "wcag_strict",
-      "timestamp": 1779621021,
-      "report": "reports/serveiocupacio_gencat_cat_ca_inici_Institucional_1779621014_wcag_strict.html"
+      "category": "Institucional",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.546,
+          "sub_scores": {
+            "wcag": 3.212,
+            "text": 3.75,
+            "elements": 3.869,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 0.947,
+            "audit_critical_violations": 1.0,
+            "audit_high_violations": 0.8,
+            "audit_medium_violations": 0.98,
+            "audit_low_violations": 0.98,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 0.284,
+            "landmark_coverage": 1.0,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/serveiocupacio_gencat_cat_ca_inici_Institucional_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.546
     },
     {
-      "url": "https://www.url.edu/ca; Educatiu",
+      "url": "https://www.url.edu/ca",
       "domain": "www.url.edu",
-      "aci_score": 3.544,
-      "profile": "wcag_strict",
-      "timestamp": 1779620980,
-      "report": "reports/www_url_edu_ca_Educatiu_1779620977_wcag_strict.html"
+      "category": "Educatiu",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.544,
+          "sub_scores": {
+            "wcag": 3.183,
+            "text": 2.75,
+            "elements": 4.268,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 0.835,
+            "audit_critical_violations": 0.85,
+            "audit_high_violations": 0.95,
+            "audit_medium_violations": 0.96,
+            "audit_low_violations": 1.0,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 0.6,
+            "alt_text_coverage": 0.667,
+            "landmark_coverage": 1.0,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/www_url_edu_ca_Educatiu_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.544
     },
     {
-      "url": "https://www.museunacional.cat/ca; Cultural",
-      "domain": "www.museunacional.cat",
-      "aci_score": 3.531,
-      "profile": "wcag_strict",
-      "timestamp": 1779621048,
-      "report": "reports/www_museunacional_cat_ca_Cultural_1779621041_wcag_strict.html"
-    },
-    {
-      "url": "https://catsalut.gencat.cat/ca/inici/; Institucional",
-      "domain": "catsalut.gencat.cat",
-      "aci_score": 3.521,
-      "profile": "wcag_strict",
-      "timestamp": 1779621008,
-      "report": "reports/catsalut_gencat_cat_ca_inici_Institucional_1779621002_wcag_strict.html"
-    },
-    {
-      "url": "https://www.meteo.cat/; Institucional",
-      "domain": "www.meteo.cat",
-      "aci_score": 3.518,
-      "profile": "wcag_strict",
-      "timestamp": 1779621014,
-      "report": "reports/www_meteo_cat_Institucional_1779621008_wcag_strict.html"
-    },
-    {
-      "url": "https://educacio.gencat.cat/ca/inici; Institucional",
+      "url": "https://educacio.gencat.cat/ca/inici",
       "domain": "educacio.gencat.cat",
-      "aci_score": 3.517,
-      "profile": "wcag_strict",
-      "timestamp": 1779621002,
-      "report": "reports/educacio_gencat_cat_ca_inici_Institucional_1779620992_wcag_strict.html"
+      "category": "Institucional",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.539,
+          "sub_scores": {
+            "wcag": 3.25,
+            "text": 3.75,
+            "elements": 3.774,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 0.976,
+            "audit_critical_violations": 1.0,
+            "audit_high_violations": 0.85,
+            "audit_medium_violations": 1.0,
+            "audit_low_violations": 0.99,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 0.19,
+            "landmark_coverage": 1.0,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/educacio_gencat_cat_ca_inici_Institucional_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.539
     },
     {
-      "url": "https://www.upc.edu/ca; Educatiu",
+      "url": "https://www.museunacional.cat/ca",
+      "domain": "www.museunacional.cat",
+      "category": "Cultural",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.531,
+          "sub_scores": {
+            "wcag": 3.221,
+            "text": 3.75,
+            "elements": 3.812,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 0.856,
+            "audit_critical_violations": 0.85,
+            "audit_high_violations": 1.0,
+            "audit_medium_violations": 0.96,
+            "audit_low_violations": 1.0,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 0.636,
+            "landmark_coverage": 0.5,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/www_museunacional_cat_ca_Cultural_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.531
+    },
+    {
+      "url": "https://catsalut.gencat.cat/ca/inici/",
+      "domain": "catsalut.gencat.cat",
+      "category": "Institucional",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.521,
+          "sub_scores": {
+            "wcag": 3.212,
+            "text": 3.75,
+            "elements": 3.787,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 0.963,
+            "audit_critical_violations": 1.0,
+            "audit_high_violations": 0.8,
+            "audit_medium_violations": 0.98,
+            "audit_low_violations": 0.99,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 0.212,
+            "landmark_coverage": 1.0,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/catsalut_gencat_cat_ca_inici_Institucional_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.521
+    },
+    {
+      "url": "https://www.meteo.cat/",
+      "domain": "www.meteo.cat",
+      "category": "Institucional",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.518,
+          "sub_scores": {
+            "wcag": 3.183,
+            "text": 3.75,
+            "elements": 3.813,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 1.0,
+            "audit_critical_violations": 0.85,
+            "audit_high_violations": 0.95,
+            "audit_medium_violations": 1.0,
+            "audit_low_violations": 0.98,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 0.193,
+            "landmark_coverage": 1.0,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/www_meteo_cat_Institucional_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.518
+    },
+    {
+      "url": "https://www.upc.edu/ca",
       "domain": "www.upc.edu",
-      "aci_score": 3.517,
-      "profile": "wcag_strict",
-      "timestamp": 1779620967,
-      "report": "reports/www_upc_edu_ca_Educatiu_1779620960_wcag_strict.html"
+      "category": "Educatiu",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.517,
+          "sub_scores": {
+            "wcag": 2.984,
+            "text": 3.75,
+            "elements": 4.126,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.333,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 0.948,
+            "audit_critical_violations": 0.85,
+            "audit_high_violations": 0.9,
+            "audit_medium_violations": 0.98,
+            "audit_low_violations": 0.98,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 0.458,
+            "landmark_coverage": 1.0,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/www_upc_edu_ca_Educatiu_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.517
     },
     {
-      "url": "https://www.ara.cat/; Mitjans",
+      "url": "https://www.ara.cat/",
       "domain": "www.ara.cat",
-      "aci_score": 3.5,
-      "profile": "wcag_strict",
-      "timestamp": 1779621084,
-      "report": "reports/www_ara_cat_Mitjans_1779621081_wcag_strict.html"
+      "category": "Mitjans",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.5,
+          "sub_scores": {
+            "wcag": 3.288,
+            "text": 3.25,
+            "elements": 3.8,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 0.864,
+            "audit_critical_violations": 1.0,
+            "audit_high_violations": 0.9,
+            "audit_medium_violations": 0.94,
+            "audit_low_violations": 1.0,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 0.8,
+            "alt_text_coverage": 0.32,
+            "landmark_coverage": 1.0,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/www_ara_cat_Mitjans_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.5
     },
     {
-      "url": "https://www.seg-social.es/wps/portal/wss/internet/Inicio; Institucional",
+      "url": "https://www.seg-social.es/wps/portal/wss/internet/Inicio",
       "domain": "www.seg-social.es",
-      "aci_score": 3.494,
-      "profile": "wcag_strict",
-      "timestamp": 1779620907,
-      "report": "reports/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional_1779620899_wcag_strict.html"
+      "category": "Institucional",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.494,
+          "sub_scores": {
+            "wcag": 2.962,
+            "text": 3.75,
+            "elements": 4.068,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 0.845,
+            "audit_critical_violations": 0.7,
+            "audit_high_violations": 0.85,
+            "audit_medium_violations": 1.0,
+            "audit_low_violations": 1.0,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 0.521,
+            "landmark_coverage": 1.0,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.494
     },
     {
-      "url": "https://www.upf.edu/; Educatiu",
+      "url": "https://www.upf.edu/",
       "domain": "www.upf.edu",
-      "aci_score": 3.48,
-      "profile": "wcag_strict",
-      "timestamp": 1779620972,
-      "report": "reports/www_upf_edu_Educatiu_1779620968_wcag_strict.html"
+      "category": "Educatiu",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.48,
+          "sub_scores": {
+            "wcag": 3.221,
+            "text": 3.75,
+            "elements": 3.628,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 0.667,
+            "audit_critical_violations": 0.85,
+            "audit_high_violations": 1.0,
+            "audit_medium_violations": 1.0,
+            "audit_low_violations": 1.0,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 1.0,
+            "landmark_coverage": 0.0,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/www_upf_edu_Educatiu_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.48
     },
     {
-      "url": "https://www.liceubarcelona.cat/ca; Cultural",
+      "url": "https://www.liceubarcelona.cat/ca",
       "domain": "www.liceubarcelona.cat",
-      "aci_score": 3.435,
-      "profile": "wcag_strict",
-      "timestamp": 1779621061,
-      "report": "reports/www_liceubarcelona_cat_ca_Cultural_1779621055_wcag_strict.html"
+      "category": "Cultural",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.435,
+          "sub_scores": {
+            "wcag": 3.144,
+            "text": 3.75,
+            "elements": 3.613,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 0.187,
+            "audit_critical_violations": 0.85,
+            "audit_high_violations": 0.9,
+            "audit_medium_violations": 0.98,
+            "audit_low_violations": 1.0,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 0.87,
+            "landmark_coverage": 1.0,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/www_liceubarcelona_cat_ca_Cultural_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.435
     },
     {
-      "url": "https://www.rtve.es/; Mitjans",
+      "url": "https://www.rtve.es/",
       "domain": "www.rtve.es",
-      "aci_score": 3.415,
-      "profile": "wcag_strict",
-      "timestamp": 1779621081,
-      "report": "reports/www_rtve_es_Mitjans_1779621076_wcag_strict.html"
+      "category": "Mitjans",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.415,
+          "sub_scores": {
+            "wcag": 2.984,
+            "text": 3.75,
+            "elements": 3.799,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.143,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 1.0,
+            "audit_critical_violations": 1.0,
+            "audit_high_violations": 0.95,
+            "audit_medium_violations": 0.98,
+            "audit_low_violations": 0.99,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 0.333,
+            "landmark_coverage": 0.75,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/www_rtve_es_Mitjans_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.415
     },
     {
-      "url": "https://sagradafamilia.org/; Cultural",
+      "url": "https://sagradafamilia.org/",
       "domain": "sagradafamilia.org",
-      "aci_score": 3.413,
-      "profile": "wcag_strict",
-      "timestamp": 1779621055,
-      "report": "reports/sagradafamilia_org_Cultural_1779621048_wcag_strict.html"
+      "category": "Cultural",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.413,
+          "sub_scores": {
+            "wcag": 3.25,
+            "text": 1.25,
+            "elements": 4.293,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 0.809,
+            "audit_critical_violations": 1.0,
+            "audit_high_violations": 0.85,
+            "audit_medium_violations": 0.94,
+            "audit_low_violations": 0.98,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 0.0,
+            "alt_text_coverage": 0.86,
+            "landmark_coverage": 0.75,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/sagradafamilia_org_Cultural_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.413
     },
     {
-      "url": "https://www.uoc.edu/ca; Educatiu",
+      "url": "https://www.fcbarcelona.cat/ca/",
+      "domain": "www.fcbarcelona.cat",
+      "category": "Comercial",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.349,
+          "sub_scores": {
+            "wcag": 2.74,
+            "text": 3.75,
+            "elements": 3.978,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 0.98,
+            "audit_critical_violations": 0.55,
+            "audit_high_violations": 0.75,
+            "audit_medium_violations": 0.96,
+            "audit_low_violations": 0.97,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 1.0,
+            "alt_text_coverage": 0.325,
+            "landmark_coverage": 1.0,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/www_fcbarcelona_cat_ca_Comercial_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.349
+    },
+    {
+      "url": "https://www.uoc.edu/ca",
       "domain": "www.uoc.edu",
-      "aci_score": 3.342,
-      "profile": "wcag_strict",
-      "timestamp": 1779620977,
-      "report": "reports/www_uoc_edu_ca_Educatiu_1779620973_wcag_strict.html"
+      "category": "Educatiu",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.342,
+          "sub_scores": {
+            "wcag": 3.365,
+            "text": 2.75,
+            "elements": 3.334,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 1.0,
+            "audit_critical_violations": 1.0,
+            "audit_high_violations": 1.0,
+            "audit_medium_violations": 0.98,
+            "audit_low_violations": 1.0,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 0.6,
+            "alt_text_coverage": 0.167,
+            "landmark_coverage": 0.5,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/www_uoc_edu_ca_Educatiu_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.342
     },
     {
-      "url": "https://www.unav.edu/; Educatiu",
+      "url": "https://www.unav.edu/",
       "domain": "www.unav.edu",
-      "aci_score": 3.184,
-      "profile": "wcag_strict",
-      "timestamp": 1779620988,
-      "report": "reports/www_unav_edu_Educatiu_1779620980_wcag_strict.html"
+      "category": "Educatiu",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.184,
+          "sub_scores": {
+            "wcag": 2.962,
+            "text": 2.75,
+            "elements": 3.487,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.5,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 0.928,
+            "audit_critical_violations": 0.7,
+            "audit_high_violations": 0.85,
+            "audit_medium_violations": 0.92,
+            "audit_low_violations": 0.99,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 0.6,
+            "alt_text_coverage": 0.193,
+            "landmark_coverage": 0.75,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/www_unav_edu_Educatiu_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.184
     },
     {
-      "url": "https://www.promofarma.com/; Comercial",
+      "url": "https://www.promofarma.com/",
       "domain": "www.promofarma.com",
-      "aci_score": 3.044,
-      "profile": "wcag_strict",
-      "timestamp": 1779621111,
-      "report": "reports/www_promofarma_com_Comercial_1779621107_wcag_strict.html"
+      "category": "Comercial",
+      "profiles": {
+        "wcag_strict": {
+          "aci_score": 3.044,
+          "sub_scores": {
+            "wcag": 2.439,
+            "text": 3.25,
+            "elements": 3.64,
+            "performance": 2.5
+          },
+          "normalized_metrics": {
+            "color_contrast_ratio": 0.067,
+            "focus_visible_ratio": 0.5,
+            "target_size_clean": 0.5,
+            "keyboard_clean": 0.5,
+            "aria_roles_valid": 1.0,
+            "accessible_names_coverage": 0.886,
+            "audit_critical_violations": 0.55,
+            "audit_high_violations": 0.9,
+            "audit_medium_violations": 0.96,
+            "audit_low_violations": 0.99,
+            "page_flesch": 0.5,
+            "text_complexity": 0.5,
+            "heading_hierarchy": 0.8,
+            "alt_text_coverage": 0.489,
+            "landmark_coverage": 0.5,
+            "performance_lcp": 0.5
+          },
+          "report": "reports/www_promofarma_com_Comercial_wcag_strict.html"
+        }
+      },
+      "aci_best": 3.044
     }
   ]
 }

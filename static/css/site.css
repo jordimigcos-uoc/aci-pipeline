@@ -1,0 +1,131 @@
+/*
+ * site.css — Variables i estils globals ACI Pipeline
+ * Referenciat per templates/report.html.j2 i templates/comparative.html.j2
+ * Des de docs/reports/<slug>.html el path és: ../static/css/site.css
+ */
+
+/* ── Variables de disseny ─────────────────────────────────────────────────── */
+:root {
+  --font-sans:        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-mono:        "Consolas", "Courier New", monospace;
+
+  --color-bg:         #ffffff;
+  --color-bg-alt:     #f8f9fa;
+  --color-text:       #212529;
+  --color-text-muted: #6c757d;
+  --color-border:     #dee2e6;
+  --color-primary:    #003366;
+  --color-accent:     #0056b3;
+
+  --shadow:           0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-sm:        0 1px 4px rgba(0, 0, 0, 0.06);
+  --radius:           8px;
+  --radius-sm:        4px;
+}
+
+/* ── Reset mínim ──────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* ── Capçalera del lloc (site-header) ────────────────────────────────────── */
+.site-header {
+  display:         flex;
+  align-items:     center;
+  gap:             1rem;
+  padding:         0.75rem 1.5rem;
+  background:      var(--color-primary);
+  color:           #fff;
+  flex-wrap:       wrap;
+}
+
+.site-header__logo {
+  display:         flex;
+  align-items:     center;
+  gap:             0.5rem;
+  text-decoration: none;
+  color:           #fff;
+}
+
+.site-header__wordmark {
+  font-weight:  800;
+  font-size:    1rem;
+  line-height:  1.2;
+  letter-spacing: 0.03em;
+}
+
+.site-header__nav ul {
+  display:      flex;
+  gap:          1rem;
+  list-style:   none;
+  padding:      0;
+  margin:       0;
+  flex-wrap:    wrap;
+}
+
+.site-header__nav a {
+  color:           rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size:       0.88rem;
+  font-weight:     500;
+  transition:      color 0.15s;
+}
+
+.site-header__nav a:hover,
+.site-header__nav a[aria-current="page"] {
+  color: #fff;
+}
+
+.site-header__actions {
+  margin-left: auto;
+}
+
+/* ── Selector de llengua ─────────────────────────────────────────────────── */
+.lang-selector {
+  display:    flex;
+  gap:        0.25rem;
+}
+
+.lang-btn {
+  padding:      0.2rem 0.5rem;
+  border:       1px solid rgba(255,255,255,0.4);
+  border-radius: var(--radius-sm);
+  background:   transparent;
+  color:        rgba(255,255,255,0.7);
+  font-size:    0.75rem;
+  font-weight:  600;
+  cursor:       pointer;
+  transition:   background 0.15s, color 0.15s;
+}
+
+.lang-btn[aria-pressed="true"],
+.lang-btn:hover {
+  background: rgba(255,255,255,0.2);
+  color:      #fff;
+}
+
+/* ── Peu de pàgina ───────────────────────────────────────────────────────── */
+.site-footer {
+  margin-top:   2rem;
+  padding:      1rem 1.5rem;
+  border-top:   1px solid var(--color-border);
+  text-align:   center;
+  font-size:    0.8rem;
+  color:        var(--color-text-muted);
+}
+
+/* ── Skip link d'accessibilitat ──────────────────────────────────────────── */
+.skip-link {
+  position:     absolute;
+  top:          -3rem;
+  left:         0.5rem;
+  padding:      0.4rem 0.8rem;
+  background:   var(--color-primary);
+  color:        #fff;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  font-size:    0.85rem;
+  font-weight:  600;
+  text-decoration: none;
+  z-index:      1000;
+  transition:   top 0.15s;
+}
+
+.skip-link:focus { top: 0; }
