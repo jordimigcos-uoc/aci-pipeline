@@ -1,0 +1,161 @@
+# =============================================================================
+# publish_reports.yml — Pipeline ACI complet + informes Jinja2/D3 → GitHub Pages
+#
+# Genera per a cada URL analitzada:
+#   - 3 informes HTML individuals (wcag_strict / readability_first / visual_first)
+#   - 1 informe comparatiu HTML amb gràfics D3 (radar + barres agrupades)
+#   - 1 índex global HTML amb D3 (ranking, categoria, heatmap) + taula filtrable
+#   - docs/results.json, docs/data/scores.csv, docs/data/reports_manifest.json
+#
+# Trigger:
+#   - workflow_dispatch: execució manual
+#   - push a main amb canvis a urls.sample.txt, src/ o configs/
+#
+# Secrets necessaris:
+#   - ANTHROPIC_API_KEY: clau API d'Anthropic (opcional; M5-IA s'omet si falta)
+#     → Settings → Secrets and variables → Actions → New repository secret
+# =============================================================================
+name: Publica informes ACI complets a GitHub Pages
+
+on:
+  workflow_dispatch:
+    inputs:
+      url_file:
+        description: "Fitxer d'URLs a analitzar"
+        required: false
+        default: "data/inputs/urls.sample.txt"
+      profile:
+        description: "Perfil de puntuació"
+        required: false
+        default: "wcag_strict"
+        type: choice
+        options:
+          - wcag_strict
+          - readability_first
+          - visual_first
+      all_profiles:
+        description: "Executa tots 3 perfils (ignora 'profile')"
+        required: false
+        default: "true"
+        type: choice
+        options:
+          - "true"
+          - "false"
+
+  push:
+    branches: [main]
+    paths:
+      - "data/inputs/urls.sample.txt"
+      - "src/**"
+      - "configs/**"
+      - "templates/**"
+      - "scripts/render_reports.py"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  run-pipeline-and-publish:
+    name: Pipeline ACI + render Jinja2/D3 + publica Pages
+    runs-on: ubuntu-22.04   # ubuntu-latest=24.04 trenca libasound2 amb Playwright 1.44
+
+    steps:
+      # ── 1. Checkout ─────────────────────────────────────────────────────────
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # ── 2. Python 3.11 ──────────────────────────────────────────────────────
+      - name: Configura Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      # ── 3. Dependències ─────────────────────────────────────────────────────
+      - name: Instal·la dependències
+        run: |
+          pip install --upgrade pip setuptools wheel
+          pip install -r requirements.txt
+          echo "PYTHONPATH=$GITHUB_WORKSPACE/src" >> $GITHUB_ENV
+
+      # ── 4. Playwright (Chromium) ─────────────────────────────────────────────
+      - name: Instal·la Chromium (Playwright)
+        run: playwright install chromium --with-deps
+
+      # ── 5. Executa el pipeline ACI ───────────────────────────────────────────
+      - name: Executa pipeline ACI
+        run: |
+          URL_FILE="${{ github.event.inputs.url_file || 'data/inputs/urls.sample.txt' }}"
+          PROFILE="${{ github.event.inputs.profile || 'wcag_strict' }}"
+          ALL="${{ github.event.inputs.all_profiles || 'true' }}"
+
+          if [ "$ALL" = "true" ]; then
+            EXTRA="--all-profiles"
+          else
+            EXTRA="--profile $PROFILE"
+          fi
+
+          python -m aci_pipeline.cli \
+            --url-file "$URL_FILE" \
+            $EXTRA \
+            --output results/gh-pages/ \
+            --log-level INFO
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY || '' }}
+
+      # ── 6. Renderitza informes Jinja2 + D3 ──────────────────────────────────
+      - name: Renderitza informes i genera lloc estàtic (render_reports.py)
+        run: |
+          python scripts/render_reports.py \
+            --results results/gh-pages \
+            --output  docs
+
+          # Còpia de logs (útil per a diagnosi des de Pages)
+          mkdir -p docs/logs
+          cp logs/*.log docs/logs/ 2>/dev/null || true
+
+          echo ""
+          echo "── Contingut de docs/ ──────────────────────────────"
+          ls -lh docs/
+          echo ""
+          echo "── Informes HTML generats ──────────────────────────"
+          ls docs/reports/ 2>/dev/null | head -30 || echo "  (cap informe)"
+          echo ""
+          echo "── Fitxers de dades ────────────────────────────────"
+          ls docs/data/ 2>/dev/null || echo "  (directori data/ buit)"
+
+      # ── 7. Comprova que l'índex s'ha generat ────────────────────────────────
+      - name: Verifica index.html
+        run: |
+          if [ ! -f docs/index.html ]; then
+            echo "ERROR: docs/index.html no s'ha generat" >&2
+            exit 1
+          fi
+          echo "✓ docs/index.html generat correctament"
+          wc -l docs/index.html
+
+      # ── 8. Publica a la branca gh-pages ─────────────────────────────────────
+      - name: Publica a GitHub Pages (gh-pages branch)
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token:   ${{ secrets.GITHUB_TOKEN }}
+          publish_dir:    ./docs
+          publish_branch: gh-pages
+          commit_message: "ci: publica informes ACI · run ${{ github.run_id }}"
+          keep_files:     false
+
+      # ── 9. Informa de la URL pública ─────────────────────────────────────────
+      - name: URL de GitHub Pages
+        run: |
+          echo ""
+          echo "╔══════════════════════════════════════════════════════════╗"
+          echo "║  Informes ACI publicats a GitHub Pages!                 ║"
+          echo "╚══════════════════════════════════════════════════════════╝"
+          REPO="${{ github.repository }}"
+          OWNER=$(echo "$REPO" | cut -d/ -f1)
+          NAME=$(echo "$REPO"  | cut -d/ -f2)
+          echo "  Dashboard: https://${OWNER}.github.io/${NAME}/"
+          echo "  Informes:  https://${OWNER}.github.io/${NAME}/reports/"
+          echo ""

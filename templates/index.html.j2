@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACI Pipeline — Dashboard d'accessibilitat web · TFM 2026</title>
+  <meta name="description" content="Dashboard global dels resultats d'accessibilitat web (ACI) per a {{ n_urls }} webs analitzades. TFM Jordi Miguel i Costal · UOC 2026.">
+  <link rel="stylesheet" href="static/css/site.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif); background: #f0f2f5; color: #1a1a2e; margin: 0; line-height: 1.55; }
+    .visually-hidden { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+    /* ── Capçalera ── */
+    .site-hero { background: linear-gradient(135deg, #001224 0%, #003366 55%, #004080 100%); color: #fff; padding: 2rem 2rem 1.75rem; }
+    .site-hero h1 { font-size: 1.75rem; font-weight: 900; margin: 0 0 0.4rem; letter-spacing: -0.5px; }
+    .site-hero p  { margin: 0.2rem 0; opacity: 0.82; font-size: 0.92rem; }
+    .hero-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 0.85rem; font-size: 0.76rem; opacity: 0.65; }
+
+    /* ── Category nav ── */
+    .cat-nav { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; padding: 0.6rem 1.25rem; background: #fff; border-bottom: 1px solid #e5e7eb; position: sticky; top: 0; z-index: 20; }
+    .cat-nav-label { font-size: 0.7rem; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.05em; }
+    .cat-btn { display: inline-flex; align-items: center; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.77rem; font-weight: 700; text-decoration: none; border: 2px solid; transition: all 0.15s; }
+    .cat-btn:hover { opacity: 0.85; }
+    .cat-btn.all { border-color: #374151; color: #374151; background: #f3f4f6; }
+    .run-btn { margin-left: auto; display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.3rem 0.9rem; border-radius: 20px; font-size: 0.77rem; font-weight: 700; text-decoration: none; background: #15803d; color: #fff; }
+    .run-btn:hover { background: #166534; }
+
+    /* ── Layout ── */
+    main { max-width: 1280px; margin: 0 auto; padding: 1.25rem 1rem 3rem; }
+
+    /* ── KPI cards ── */
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.85rem; margin-bottom: 1.25rem; }
+    .kpi { background: #fff; border-radius: 10px; padding: 1.1rem 1rem; text-align: center; box-shadow: 0 1px 8px rgba(0,0,0,.06); border-top: 4px solid var(--kc, #0056b3); }
+    .kpi-val { font-size: 2.1rem; font-weight: 900; color: var(--kc, #0056b3); line-height: 1; }
+    .kpi-lbl { font-size: 0.7rem; color: #6b7280; margin-top: 0.3rem; text-transform: uppercase; letter-spacing: .5px; }
+
+    /* ── Cards ── */
+    .card { background: #fff; border-radius: 10px; box-shadow: 0 1px 8px rgba(0,0,0,.06); margin-bottom: 1.25rem; overflow: hidden; }
+    .card-hd { display: flex; align-items: center; justify-content: space-between; padding: 0.8rem 1.25rem; border-bottom: 1px solid #f0f0f0; background: #fafafa; }
+    .card-hd h2 { font-size: 0.82rem; font-weight: 800; color: #374151; margin: 0; text-transform: uppercase; letter-spacing: 0.05em; }
+    .card-body { padding: 1.25rem; }
+
+    /* ── Charts ── */
+    .charts-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    @media (max-width: 860px) { .charts-2col { grid-template-columns: 1fr; } }
+    .chart-wrap { overflow-x: auto; }
+    .chart-label { font-size: 0.72rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.5rem; }
+    #ranking-chart, #category-chart, #heatmap-chart { min-height: 80px; }
+
+    /* ── Filter bar ── */
+    .filters { display: flex; gap: 0.6rem; flex-wrap: wrap; padding: 0.8rem 1.25rem; border-bottom: 1px solid #f5f5f5; align-items: center; background: #fdfeff; }
+    .filters label { font-size: 0.72rem; font-weight: 700; color: #6b7280; }
+    .filters input, .filters select {
+      padding: 0.38rem 0.65rem; border: 1px solid #e5e7eb; border-radius: 6px;
+      font-size: 0.83rem; background: #fff; outline: none; font-family: inherit;
+    }
+    .filters input:focus, .filters select:focus { border-color: #0056b3; }
+    .filters input[type="number"] { width: 68px; }
+    .btn-reset { padding: 0.38rem 0.75rem; border: 1px solid #e5e7eb; border-radius: 6px; font-size: 0.78rem; background: none; cursor: pointer; color: #6b7280; font-family: inherit; }
+    .btn-reset:hover { background: #f3f4f6; }
+    #f-count { font-size: 0.76rem; color: #9ca3af; margin-left: auto; }
+
+    /* ── Results table ── */
+    .tbl-wrap { overflow-x: auto; }
+    table.res { width: 100%; border-collapse: collapse; font-size: 0.84rem; min-width: 580px; }
+    table.res thead { background: #f0f4f8; }
+    table.res th { padding: 0.6rem 0.85rem; text-align: left; font-size: 0.7rem; font-weight: 700; color: #555; text-transform: uppercase; letter-spacing: .45px; cursor: pointer; user-select: none; white-space: nowrap; }
+    table.res th:hover { background: #e2eaf3; }
+    table.res th.sort-asc::after  { content: " ▲"; opacity: .55; }
+    table.res th.sort-desc::after { content: " ▼"; opacity: .55; }
+    table.res td { padding: 0.52rem 0.85rem; border-bottom: 1px solid #f3f4f6; vertical-align: middle; }
+    table.res tr:last-child td { border-bottom: none; }
+    table.res tr:hover td { background: #f5f9ff; }
+    td.num { text-align: right; color: #9ca3af; font-size: 0.8rem; font-variant-numeric: tabular-nums; }
+    .url-sm { font-size: 0.72rem; color: #9ca3af; display: block; }
+    .url-sm a { color: #0056b3; text-decoration: none; }
+    .url-sm a:hover { text-decoration: underline; }
+    .cat-chip { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 12px; font-size: 0.7rem; font-weight: 700; white-space: nowrap; }
+    .aci-num { font-size: 0.9rem; font-weight: 700; }
+    .aci-dash { color: #d1d5db; }
+    .mini-bar { height: 4px; background: #f3f4f6; border-radius: 2px; margin: 3px 0; overflow: hidden; min-width: 48px; }
+    .mini-bar div { height: 100%; border-radius: 2px; }
+    td a { color: #0056b3; text-decoration: none; font-size: 0.8rem; }
+    td a:hover { text-decoration: underline; }
+    .no-res { padding: 2rem; text-align: center; color: #9ca3af; font-size: 0.88rem; }
+
+    /* ── Methodology ── */
+    .method-section { margin-bottom: 1.75rem; }
+    .method-section h3 { font-size: 0.92rem; color: #001f3f; margin: 0 0 0.65rem; padding-bottom: 0.35rem; border-bottom: 2px solid #e5e7eb; }
+    .formula-box { background: #eff6ff; border-left: 4px solid #0056b3; padding: 0.85rem 1.2rem; border-radius: 0 8px 8px 0; font-family: Consolas, "Courier New", monospace; font-size: 0.98rem; margin: 0.65rem 0; }
+    .profiles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.85rem; margin: 0.65rem 0; }
+    .prof-card { border-radius: 8px; padding: 0.9rem; border: 2px solid #ddd; }
+    .prof-card.wcag        { background: #dbeafe; border-color: #1d4ed8; }
+    .prof-card.readability { background: #dcfce7; border-color: #15803d; }
+    .prof-card.visual      { background: #ffe4e6; border-color: #be123c; }
+    .prof-card h4 { font-size: 0.83rem; font-weight: 800; margin: 0 0 0.3rem; }
+    .prof-card.wcag h4        { color: #1d4ed8; }
+    .prof-card.readability h4 { color: #15803d; }
+    .prof-card.visual h4      { color: #be123c; }
+    .prof-card p { font-size: 0.78rem; color: #374151; line-height: 1.5; margin: 0; }
+    .met-ref { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+    .met-ref thead th { background: #001f3f; color: #f8fafc; padding: 0.45rem 0.7rem; text-align: left; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+    .met-ref td { padding: 0.38rem 0.7rem; border-bottom: 1px solid #f3f4f6; vertical-align: top; }
+    .met-ref tr:nth-child(even) td { background: #f8f9fa; }
+    .met-ref code { background: #f1f3f5; padding: 1px 4px; border-radius: 3px; font-size: 0.76em; font-family: Consolas, monospace; }
+    .met-ref td.num { text-align: right; font-variant-numeric: tabular-nums; color: #374151; }
+    .note-sm { font-size: 0.74rem; color: #6b7280; margin-top: 2px; line-height: 1.4; }
+
+    /* ── Downloads ── */
+    .dl-grid { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .dl-btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.5rem 1rem; border-radius: 7px; font-size: 0.83rem; font-weight: 700; text-decoration: none; border: 2px solid #0056b3; color: #0056b3; background: #fff; transition: all 0.15s; }
+    .dl-btn:hover { background: #0056b3; color: #fff; }
+
+    footer { text-align: center; padding: 2rem 1rem; font-size: 0.76rem; color: #9ca3af; }
+    footer a { color: #0056b3; text-decoration: none; }
+
+    /* ── Legend ── */
+    .legend { display: flex; gap: 0.85rem; flex-wrap: wrap; font-size: 0.76rem; color: #555; margin-top: 0.5rem; }
+    .legend-item { display: flex; align-items: center; gap: 5px; }
+    .legend-dot { width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0; }
+    @media (max-width: 600px) { .site-hero h1 { font-size: 1.4rem; } }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#main-content">Salta al contingut principal</a>
+
+  <!-- Header -->
+  <div class="site-hero" role="banner">
+    <h1>🌐 ACI Pipeline — Dashboard d'accessibilitat web</h1>
+    <p>Avaluació automatitzada WCAG 2.1 AA / EN 301 549 · {{ n_urls }} webs analitzades · TFM 2026</p>
+    <div class="hero-meta">
+      <span>Generat: {{ ts_build }}</span>
+      <span>Pipeline v{{ pipeline_version }}</span>
+      <span>3 perfils × 16 mètriques</span>
+    </div>
+  </div>
+
+  <!-- Category navigation -->
+  <nav class="cat-nav" aria-label="Navega per categoria de web">
+    <span class="cat-nav-label">Categoria:</span>
+    <a class="cat-btn all" href="#" onclick="filterCat('');return false"
+       id="cat-all" aria-pressed="true">Totes</a>
+    {% for cat in categories %}
+    <a class="cat-btn" href="#"
+       onclick="filterCat('{{ cat }}');return false"
+       id="cat-{{ cat | lower | replace(' ', '-') }}"
+       style="color:{{ category_colors.get(cat, '#374151') }};border-color:{{ category_colors.get(cat, '#374151') }};background:{{ category_colors.get(cat, '#374151') }}22"
+       aria-pressed="false">{{ cat }}</a>
+    {% endfor %}
+    <a class="run-btn" id="run-link" href="#" target="_blank" rel="noopener"
+       aria-label="Executa el pipeline via GitHub Actions">▶ Executa pipeline</a>
+  </nav>
+
+  <main id="main-content">
+
+    <!-- KPIs -->
+    <div class="kpi-grid" role="region" aria-label="Indicadors clau de rendiment">
+      <div class="kpi" style="--kc:#0056b3">
+        <div class="kpi-val">{{ n_urls }}</div>
+        <div class="kpi-lbl">URLs analitzades</div>
+      </div>
+      <div class="kpi" style="--kc:#27ae60">
+        <div class="kpi-val">{{ kpi_max if kpi_max is not none else '—' }}</div>
+        <div class="kpi-lbl">ACI màxim</div>
+      </div>
+      <div class="kpi" style="--kc:#e67e22">
+        <div class="kpi-val">{{ kpi_mean if kpi_mean is not none else '—' }}</div>
+        <div class="kpi-lbl">ACI mitjà</div>
+      </div>
+      <div class="kpi" style="--kc:#e74c3c">
+        <div class="kpi-val">{{ kpi_min if kpi_min is not none else '—' }}</div>
+        <div class="kpi-lbl">ACI mínim</div>
+      </div>
+      <div class="kpi" style="--kc:#7c3aed">
+        <div class="kpi-val">{{ categories|length }}</div>
+        <div class="kpi-lbl">Categories</div>
+      </div>
+    </div>
+
+    <!-- D3 Charts: Ranking + Category means -->
+    <div class="card charts-2col" role="region" aria-labelledby="charts-h" style="padding:1.25rem;gap:1.5rem">
+      <div>
+        <p class="chart-label" id="charts-h">Rànquing ACI per URL (perfil WCAG Strict)</p>
+        <div class="chart-wrap">
+          <div id="ranking-chart" aria-label="Gràfic de barres del rànquing ACI per URL"></div>
+        </div>
+      </div>
+      <div>
+        <p class="chart-label">ACI mitjà per categoria i perfil</p>
+        <div class="chart-wrap">
+          <div id="category-chart" aria-label="Gràfic de barres agrupades per categoria i perfil"></div>
+        </div>
+        <div class="legend" id="cat-legend"></div>
+      </div>
+    </div>
+
+    <!-- D3 Heatmap -->
+    <div class="card" role="region" aria-labelledby="heatmap-h">
+      <div class="card-hd">
+        <h2 id="heatmap-h">Mapa de calor de mètriques (WCAG Strict · 0=vermell, 1=verd)</h2>
+        <span style="font-size:0.72rem;color:#9ca3af">Passa el ratolí per al valor exacte</span>
+      </div>
+      <div class="card-body" style="overflow-x:auto;padding-bottom:0.5rem">
+        <div id="heatmap-chart" aria-label="Mapa de calor de les 16 mètriques per URL"></div>
+        <div id="hm-tooltip" style="display:none;position:fixed;background:#1e293b;color:#fff;padding:6px 10px;border-radius:5px;font-size:0.76rem;pointer-events:none;z-index:100"></div>
+      </div>
+    </div>
+
+    <!-- Results table -->
+    <div class="card" role="region" aria-labelledby="tbl-h">
+      <div class="card-hd">
+        <h2 id="tbl-h">📊 Resultats per URL</h2>
+      </div>
+      <div class="filters" role="search" aria-label="Filtres de la taula de resultats">
+        <label for="f-text">Cerca:</label>
+        <input type="search" id="f-text" placeholder="domini, URL…" aria-label="Cerca per domini o URL">
+        <label for="f-cat">Categoria:</label>
+        <select id="f-cat" aria-label="Filtra per categoria">
+          <option value="">Totes</option>
+          {% for cat in categories %}
+          <option value="{{ cat }}">{{ cat }}</option>
+          {% endfor %}
+        </select>
+        <label for="f-min">ACI ≥:</label>
+        <input type="number" id="f-min" min="0" max="5" step="0.1" value="0" aria-label="Puntuació ACI mínima">
+        <button class="btn-reset" onclick="resetFilters()" aria-label="Reinicia els filtres">✕ Reinicia</button>
+        <span id="f-count" aria-live="polite"></span>
+      </div>
+      <div class="tbl-wrap">
+        <table class="res" aria-label="Resultats d'accessibilitat ACI per URL">
+          <thead>
+            <tr>
+              <th onclick="sortBy(0)" aria-sort="none">#</th>
+              <th onclick="sortBy(1)" aria-sort="none">Domini / URL</th>
+              <th onclick="sortBy(2)" aria-sort="none">Categoria</th>
+              <th onclick="sortBy(3)" aria-sort="none" title="WCAG Strict">WCAG Strict</th>
+              <th onclick="sortBy(4)" aria-sort="none" title="Readability First">Readability</th>
+              <th onclick="sortBy(5)" aria-sort="none" title="Visual First">Visual First</th>
+              <th aria-sort="none">Comparatiu</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+      <p class="no-res" id="no-res" role="status" style="display:none">Cap resultat correspon als filtres aplicats.</p>
+    </div>
+
+    <!-- Methodology -->
+    <div class="card" role="region" aria-labelledby="method-h">
+      <div class="card-hd"><h2 id="method-h">📘 Metodologia — Índex ACI (TFM Cap. 3–4)</h2></div>
+      <div class="card-body">
+
+        <div class="method-section">
+          <h3>Fórmula de l'ACI</h3>
+          <p>L'<strong>Accessibility Computation Index (ACI)</strong> és un índex ponderat de 16 mètriques normalitzades:</p>
+          <div class="formula-box" role="math" aria-label="Fórmula ACI">
+            ACI = (Σ nᵢ · wᵢ) / (Σ wᵢ) × 5.0 &nbsp;∈ [0, 5]
+          </div>
+          <p style="font-size:0.82rem;color:#555;margin-top:0.5rem">
+            On <em>nᵢ ∈ [0,1]</em> és el valor normalitzat i <em>wᵢ</em> el pes en el perfil.
+            Escala: <span style="color:#27ae60;font-weight:700">Excel·lent ≥ 4.0</span> ·
+            <span style="color:#e67e22;font-weight:700">Bo ≥ 3.0</span> ·
+            <span style="color:#f59e0b;font-weight:700">Acceptable ≥ 2.5</span> ·
+            <span style="color:#e74c3c;font-weight:700">Insuficient &lt; 2.5</span>
+          </p>
+        </div>
+
+        <div class="method-section">
+          <h3>Perfils de puntuació</h3>
+          <div class="profiles-grid">
+            <div class="prof-card wcag">
+              <h4>WCAG Strict (Σw = 54)</h4>
+              <p>Prioritat màxima a conformitat normativa WCAG 2.1 AA i EN 301 549. Pes fort a contrast, teclat, noms accessibles i violacions crítiques. Recomanat per webs institucionals i administracions públiques.</p>
+            </div>
+            <div class="prof-card readability">
+              <h4>Readability First (Σw = 35)</h4>
+              <p>Prioritza la llegibilitat i comprensió del contingut textual. Pes fort a Flesch, complexitat textual i jerarquia de capçaleres. Recomanat per portals educatius i editorials.</p>
+            </div>
+            <div class="prof-card visual">
+              <h4>Visual First (Σw = 37)</h4>
+              <p>Prioritza la qualitat visual i l'accessibilitat d'imatges. Pes fort a contrast, alt text i LCP. Recomanat per webs multimèdia i comercials.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="method-section">
+          <h3>Les 16 mètriques del pipeline (TFM Cap. 4)</h3>
+          <p style="font-size:0.78rem;color:#6b7280;margin-bottom:0.6rem">
+            W = WCAG Strict &nbsp;|&nbsp; R = Readability First &nbsp;|&nbsp; V = Visual First
+          </p>
+          <div style="overflow-x:auto">
+            <table class="met-ref" aria-label="Les 16 mètriques del pipeline ACI amb pesos per perfil">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Mètrica</th>
+                  <th scope="col">Nom</th>
+                  <th scope="col">WCAG</th>
+                  <th scope="col" title="WCAG Strict">W</th>
+                  <th scope="col" title="Readability First">R</th>
+                  <th scope="col" title="Visual First">V</th>
+                  <th scope="col">Descripció breu (TFM)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for m in all_metrics %}
+                <tr>
+                  <td class="num">{{ loop.index }}</td>
+                  <td><code>{{ m }}</code></td>
+                  <td>{{ metric_labels[m] }}</td>
+                  <td><small style="color:#6b7280">{{ metric_wcag[m] }}</small></td>
+                  <td class="num">{{ profile_weights.wcag_strict[loop.index0] }}</td>
+                  <td class="num">{{ profile_weights.readability_first[loop.index0] }}</td>
+                  <td class="num">{{ profile_weights.visual_first[loop.index0] }}</td>
+                  <td><div class="note-sm">{{ metric_notes[m].description if m in metric_notes else '' }}</div></td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Downloads -->
+    <div class="card" role="region" aria-labelledby="dl-h">
+      <div class="card-hd"><h2 id="dl-h">⬇ Descàrregues</h2></div>
+      <div class="card-body">
+        <div class="dl-grid">
+          <a class="dl-btn" href="data/scores.csv" download aria-label="Descarrega les puntuacions ACI en CSV">📄 scores.csv</a>
+          <a class="dl-btn" href="results.json" download aria-label="Descarrega les dades consolidades en JSON">{} results.json</a>
+          <a class="dl-btn" href="data/reports_manifest.json" download aria-label="Descarrega el manifest d'informes">📋 reports_manifest.json</a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer role="contentinfo">
+    <p>ACI Pipeline v{{ pipeline_version }} · Jordi Miguel i Costal · TFM 2026 · UOC EEPSM ·
+       <a id="repo-link" href="https://github.com" rel="noopener">Repositori GitHub</a></p>
+    <p>Basat en WCAG 2.1/2.2, EN 301 549, axe-core i Core Web Vitals</p>
+  </footer>
+
+  <!-- D3 + dades embegudes -->
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+  <script>
+    var TABLE_ROWS    = {{ table_rows_json }};
+    var RANKING_DATA  = {{ ranking_data_json }};
+    var CATEGORY_DATA = {{ category_data_json }};
+    var HEATMAP_DATA  = {{ heatmap_data_json }};
+    var PROFILES      = ["wcag_strict", "readability_first", "visual_first"];
+    var PROFILE_LABELS = { wcag_strict: "WCAG Strict", readability_first: "Readability", visual_first: "Visual First" };
+    var PROFILE_COLORS = {
+      wcag_strict: "{{ profile_colors.wcag_strict }}",
+      readability_first: "{{ profile_colors.readability_first }}",
+      visual_first: "{{ profile_colors.visual_first }}"
+    };
+    var ALL_METRICS = {{ all_metrics | tojson }};
+    var METRIC_LABELS = {{ metric_labels | tojson }};
+    var CATEGORY_COLORS = {{ category_colors | tojson }};
+    var ACTIVE_CAT = "";
+    var sortCol = -1, sortAsc = true;
+  </script>
+  {% raw %}
+  <script>
+  /* ── Detecta repo GitHub ── */
+  (function () {
+    var h = location.hostname, p = (location.pathname.split('/')[1] || '');
+    if (h.endsWith('github.io') && p) {
+      var owner = h.replace('.github.io', '');
+      var repo = 'https://github.com/' + owner + '/' + p;
+      document.getElementById('repo-link').href = repo;
+      document.getElementById('run-link').href = repo + '/actions/workflows/publish_reports.yml';
+    }
+  }());
+
+  /* ── Utils ── */
+  function aciColor(s) {
+    if (s === null || s === undefined) return '#9ca3af';
+    return s >= 3.5 ? '#27ae60' : s >= 2.5 ? '#e67e22' : '#e74c3c';
+  }
+  function esc(s) {
+    return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  /* ── Ranking Chart (D3) ── */
+  (function () {
+    if (!window.d3 || !RANKING_DATA || !RANKING_DATA.length) return;
+    var data = RANKING_DATA.slice().reverse(); // ascending order for bottom-up display
+    var m = { top: 4, right: 55, bottom: 4, left: 155 };
+    var el = document.getElementById('ranking-chart');
+    if (!el) return;
+    var fullW = el.clientWidth || 500;
+    var W = Math.max(fullW - m.left - m.right, 100);
+    var BH = 18, GAP = 3;
+    var H = data.length * (BH + GAP);
+
+    var svg = d3.select('#ranking-chart').append('svg')
+      .attr('width', fullW).attr('height', H + m.top + m.bottom)
+      .attr('aria-hidden', 'true')
+      .append('g').attr('transform', 'translate(' + m.left + ',' + m.top + ')');
+
+    var xSc = d3.scaleLinear().domain([0, 5]).range([0, W]);
+    var ySc = d3.scaleBand()
+      .domain(data.map(function (_, i) { return i; }))
+      .range([0, H]).padding(0.15);
+
+    // Grid
+    [1, 2, 3, 4, 5].forEach(function (v) {
+      svg.append('line').attr('x1', xSc(v)).attr('x2', xSc(v))
+        .attr('y1', 0).attr('y2', H)
+        .attr('stroke', '#f3f4f6').attr('stroke-width', v === 5 ? 1 : 0.8);
+    });
+
+    // Bars
+    svg.selectAll('.bar').data(data).enter().append('rect')
+      .attr('x', 0).attr('y', function (d, i) { return ySc(i); })
+      .attr('width', function (d) { return xSc(d.aci || 0); })
+      .attr('height', ySc.bandwidth())
+      .attr('fill', function (d) { return d.color || '#888'; })
+      .attr('fill-opacity', 0.82).attr('rx', 2)
+      .style('cursor', 'pointer')
+      .on('click', function (event, d) { if (d.url) window.location.href = d.url; });
+
+    // Domain labels
+    svg.selectAll('.lbl').data(data).enter().append('text')
+      .attr('x', -6).attr('y', function (d, i) { return ySc(i) + ySc.bandwidth() / 2; })
+      .attr('dy', '0.35em').attr('text-anchor', 'end')
+      .attr('font-size', '10px').attr('fill', '#374151')
+      .text(function (d) { return d.domain.length > 23 ? d.domain.slice(0, 23) + '…' : d.domain; });
+
+    // Value labels
+    svg.selectAll('.val').data(data).enter().append('text')
+      .attr('x', function (d) { return xSc(d.aci || 0) + 4; })
+      .attr('y', function (d, i) { return ySc(i) + ySc.bandwidth() / 2; })
+      .attr('dy', '0.35em').attr('font-size', '10px').attr('font-weight', '700')
+      .attr('fill', function (d) { return d.color || '#888'; })
+      .text(function (d) { return (d.aci || 0).toFixed(2); });
+  }());
+
+  /* ── Category grouped bar chart ── */
+  (function () {
+    if (!window.d3 || !CATEGORY_DATA || !CATEGORY_DATA.length) return;
+    var m = { top: 16, right: 12, bottom: 60, left: 35 };
+    var el = document.getElementById('category-chart');
+    if (!el) return;
+    var fullW = el.clientWidth || 460;
+    var W = Math.max(fullW - m.left - m.right, 80), H = 200;
+    var profiles = ["wcag_strict", "readability_first", "visual_first"];
+
+    var svg = d3.select('#category-chart').append('svg')
+      .attr('width', fullW).attr('height', H + m.top + m.bottom)
+      .attr('aria-hidden', 'true')
+      .append('g').attr('transform', 'translate(' + m.left + ',' + m.top + ')');
+
+    var x0 = d3.scaleBand().domain(CATEGORY_DATA.map(function (d) { return d.category; }))
+      .range([0, W]).padding(0.22);
+    var x1 = d3.scaleBand().domain(profiles).range([0, x0.bandwidth()]).padding(0.06);
+    var y = d3.scaleLinear().domain([0, 5]).range([H, 0]);
+
+    svg.append('g').attr('transform', 'translate(0,' + H + ')')
+      .call(d3.axisBottom(x0).tickSize(0))
+      .call(function (g) {
+        g.select('.domain').remove();
+        g.selectAll('text').attr('font-size', '11px').attr('fill', '#374151').attr('font-weight', '600');
+      });
+
+    svg.append('g').call(d3.axisLeft(y).ticks(5).tickSize(-W))
+      .call(function (g) {
+        g.select('.domain').remove();
+        g.selectAll('.tick line').attr('stroke', '#f3f4f6');
+        g.selectAll('text').attr('font-size', '9px').attr('fill', '#9ca3af');
+      });
+
+    CATEGORY_DATA.forEach(function (d) {
+      profiles.forEach(function (p) {
+        if (d[p] === null || d[p] === undefined) return;
+        svg.append('rect')
+          .attr('x', x0(d.category) + x1(p))
+          .attr('y', y(d[p]))
+          .attr('width', x1.bandwidth())
+          .attr('height', H - y(d[p]))
+          .attr('fill', PROFILE_COLORS[p] || '#888')
+          .attr('fill-opacity', 0.82).attr('rx', 2);
+      });
+    });
+
+    // Legend
+    var leg = document.getElementById('cat-legend');
+    if (leg) {
+      profiles.forEach(function (p) {
+        leg.innerHTML += '<div class="legend-item"><div class="legend-dot" style="background:' + PROFILE_COLORS[p] + '"></div><span>' + PROFILE_LABELS[p] + '</span></div>';
+      });
+    }
+  }());
+
+  /* ── Heatmap ── */
+  (function () {
+    if (!window.d3 || !HEATMAP_DATA || !HEATMAP_DATA.length) return;
+    var domains = [];
+    var domainSet = {};
+    HEATMAP_DATA.forEach(function (d) {
+      if (!domainSet[d.domain]) { domainSet[d.domain] = true; domains.push(d.domain); }
+    });
+    var metrics = ALL_METRICS;
+    var cellW = 20, cellH = 17;
+    var m = { top: 4, right: 12, bottom: 120, left: 148 };
+    var W = metrics.length * cellW, H = domains.length * cellH;
+
+    var svg = d3.select('#heatmap-chart').append('svg')
+      .attr('width', W + m.left + m.right)
+      .attr('height', H + m.top + m.bottom)
+      .attr('aria-hidden', 'true')
+      .append('g').attr('transform', 'translate(' + m.left + ',' + m.top + ')');
+
+    var xSc = d3.scaleBand().domain(metrics).range([0, W]).padding(0.03);
+    var ySc = d3.scaleBand().domain(domains).range([0, H]).padding(0.03);
+    var colorSc = d3.scaleSequential(d3.interpolateRdYlGn).domain([0, 1]);
+
+    // Build lookup
+    var lookup = {};
+    HEATMAP_DATA.forEach(function (d) { lookup[d.domain + '|' + d.metric] = d.value; });
+
+    var tooltip = document.getElementById('hm-tooltip');
+
+    // Cells
+    domains.forEach(function (dom) {
+      metrics.forEach(function (met) {
+        var val = lookup[dom + '|' + met];
+        svg.append('rect')
+          .attr('x', xSc(met)).attr('y', ySc(dom))
+          .attr('width', xSc.bandwidth()).attr('height', ySc.bandwidth())
+          .attr('fill', (val !== undefined && val !== null) ? colorSc(val) : '#f3f4f6')
+          .attr('rx', 1)
+          .on('mousemove', function (event) {
+            if (!tooltip) return;
+            var ml = METRIC_LABELS[met] || met;
+            tooltip.style.display = 'block';
+            tooltip.style.left = (event.clientX + 12) + 'px';
+            tooltip.style.top  = (event.clientY - 28) + 'px';
+            tooltip.textContent = dom + ' · ' + ml + ': ' + (val != null ? val.toFixed(3) : '—');
+          })
+          .on('mouseleave', function () { if (tooltip) tooltip.style.display = 'none'; });
+      });
+    });
+
+    // Y axis
+    svg.append('g').call(d3.axisLeft(ySc).tickSize(0).tickPadding(5))
+      .call(function (g) {
+        g.select('.domain').remove();
+        g.selectAll('text').attr('font-size', '10px').attr('fill', '#374151');
+      });
+
+    // X axis (rotated metric labels)
+    var SHORT = {
+      color_contrast_ratio: "Contrast", focus_visible_ratio: "Focus",
+      target_size_clean: "Mida", keyboard_clean: "Teclat",
+      aria_roles_valid: "ARIA", accessible_names_coverage: "Noms",
+      audit_critical_violations: "Crít.", audit_high_violations: "Alt",
+      audit_medium_violations: "Mod.", audit_low_violations: "Baix",
+      page_flesch: "Flesch", text_complexity: "Compl.",
+      heading_hierarchy: "Jerarq.", alt_text_coverage: "AltTx",
+      landmark_coverage: "Land.", performance_lcp: "LCP"
+    };
+    svg.append('g').attr('transform', 'translate(0,' + H + ')')
+      .call(d3.axisBottom(xSc).tickFormat(function (k) { return SHORT[k] || k; }).tickSize(0).tickPadding(5))
+      .call(function (g) {
+        g.select('.domain').remove();
+        g.selectAll('text').attr('transform', 'rotate(-55)')
+          .style('text-anchor', 'end').attr('font-size', '9px').attr('fill', '#6b7280');
+      });
+  }());
+
+  /* ── Table rendering ── */
+  function aciCell(pd, rep) {
+    if (!pd || pd.aci === null || pd.aci === undefined) return '<td data-val="0"><span class="aci-dash">—</span></td>';
+    var c = aciColor(pd.aci), pct = Math.round(pd.aci / 5 * 100);
+    var lnk = rep ? ' <a href="' + esc(rep) + '" title="Informe">📄</a>' : '';
+    return '<td data-val="' + pd.aci.toFixed(3) + '">' +
+      '<span class="aci-num" style="color:' + c + '">' + pd.aci.toFixed(3) + '</span>' +
+      '<div class="mini-bar"><div style="width:' + pct + '%;background:' + c + '"></div></div>' + lnk + '</td>';
+  }
+
+  function renderRows(rows) {
+    var tbody = document.getElementById('tbody');
+    var noRes = document.getElementById('no-res');
+    var cnt   = document.getElementById('f-count');
+    cnt.textContent = rows.length + ' resultat' + (rows.length !== 1 ? 's' : '');
+    if (!rows.length) { tbody.innerHTML = ''; noRes.style.display = ''; return; }
+    noRes.style.display = 'none';
+    tbody.innerHTML = rows.map(function (r, i) {
+      var catColor = CATEGORY_COLORS[r.category] || '#374151';
+      var cells = [
+        '<td class="num">' + (i + 1) + '</td>',
+        '<td><strong>' + esc(r.domain) + '</strong>' +
+          '<span class="url-sm"><a href="' + esc(r.url) + '" target="_blank" rel="noopener">' + esc(r.url) + '</a></span></td>',
+        '<td><span class="cat-chip" style="background:' + catColor + '22;color:' + catColor + '">' + esc(r.category || '—') + '</span></td>',
+      ];
+      PROFILES.forEach(function (p) {
+        var pd = r.profiles[p] || {};
+        cells.push(aciCell({ aci: pd.aci }, pd.report));
+      });
+      var cmp = r.comparative ? '<a href="' + esc(r.comparative) + '">⇌</a>' : '—';
+      cells.push('<td style="text-align:center">' + cmp + '</td>');
+      return '<tr>' + cells.join('') + '</tr>';
+    }).join('');
+  }
+
+  function getFilters() {
+    return {
+      text:   document.getElementById('f-text').value.toLowerCase().trim(),
+      cat:    ACTIVE_CAT || document.getElementById('f-cat').value,
+      minAci: parseFloat(document.getElementById('f-min').value) || 0,
+    };
+  }
+
+  function applyFilters() {
+    var f = getFilters();
+    var filtered = TABLE_ROWS.filter(function (r) {
+      if (f.text && !r.domain.toLowerCase().includes(f.text) && !r.url.toLowerCase().includes(f.text)) return false;
+      if (f.cat && r.category !== f.cat) return false;
+      if (r.aci_best !== null && r.aci_best < f.minAci) return false;
+      return true;
+    });
+    renderRows(filtered);
+  }
+
+  function filterCat(cat) {
+    ACTIVE_CAT = cat;
+    document.getElementById('f-cat').value = cat;
+    // Update button states
+    document.querySelectorAll('.cat-btn').forEach(function (btn) {
+      btn.setAttribute('aria-pressed', 'false');
+      btn.style.opacity = '0.65';
+    });
+    var activeBtn = cat
+      ? document.getElementById('cat-' + cat.toLowerCase().replace(/ /g, '-'))
+      : document.getElementById('cat-all');
+    if (activeBtn) { activeBtn.setAttribute('aria-pressed', 'true'); activeBtn.style.opacity = '1'; }
+    applyFilters();
+  }
+
+  function resetFilters() {
+    document.getElementById('f-text').value = '';
+    document.getElementById('f-cat').value = '';
+    document.getElementById('f-min').value = '0';
+    ACTIVE_CAT = '';
+    document.querySelectorAll('.cat-btn').forEach(function (b) { b.setAttribute('aria-pressed', 'false'); b.style.opacity = '0.65'; });
+    var all = document.getElementById('cat-all');
+    if (all) { all.setAttribute('aria-pressed', 'true'); all.style.opacity = '1'; }
+    applyFilters();
+  }
+
+  /* ── Sorting ── */
+  function sortBy(col) {
+    var ths = document.querySelectorAll('table.res thead th');
+    ths.forEach(function (th) { th.classList.remove('sort-asc', 'sort-desc'); th.removeAttribute('aria-sort'); });
+    if (sortCol === col) { sortAsc = !sortAsc; } else { sortCol = col; sortAsc = col < 3; }
+    ths[col].classList.add(sortAsc ? 'sort-asc' : 'sort-desc');
+    ths[col].setAttribute('aria-sort', sortAsc ? 'ascending' : 'descending');
+    var rows = Array.from(document.querySelectorAll('#tbody tr'));
+    rows.sort(function (a, b) {
+      var av, bv, cmp;
+      if (col >= 3 && col <= 5) {
+        av = parseFloat((a.cells[col] && a.cells[col].dataset.val) || 0);
+        bv = parseFloat((b.cells[col] && b.cells[col].dataset.val) || 0);
+        cmp = av - bv;
+      } else {
+        av = (a.cells[col] && a.cells[col].textContent.trim()) || '';
+        bv = (b.cells[col] && b.cells[col].textContent.trim()) || '';
+        cmp = av.localeCompare(bv, 'ca');
+      }
+      return sortAsc ? cmp : -cmp;
+    });
+    var tbody = document.getElementById('tbody');
+    rows.forEach(function (r) { tbody.appendChild(r); });
+  }
+
+  /* ── Init ── */
+  document.getElementById('f-text').addEventListener('input', applyFilters);
+  document.getElementById('f-cat').addEventListener('change', function () { ACTIVE_CAT = ''; applyFilters(); });
+  document.getElementById('f-min').addEventListener('input', applyFilters);
+  document.getElementById('cat-all').style.opacity = '1';
+  renderRows(TABLE_ROWS);
+  </script>
+  {% endraw %}
+</body>
+</html>
