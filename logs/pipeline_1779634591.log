@@ -1,0 +1,1232 @@
+2026-05-24 14:56:31,421 INFO     aci_pipeline.cli: ACI Pipeline v0.1.0 · run_id=1779634591 · output=results/gh-pages
+2026-05-24 14:56:31,428 INFO     aci_pipeline.cli: URLs carregades (36): ['https://www.seg-social.es/wps/portal/wss/internet/Inicio', 'https://sede.agenciatributaria.gob.es/', 'https://www.educacionfpydeportes.gob.es/portada.html', 'https://www.sanidad.gob.es/', 'https://web.ub.edu/', 'https://www.uab.cat/', 'https://www.uv.es/', 'https://www.upc.edu/ca', 'https://www.ucm.es/', 'https://www.upf.edu/', 'https://www.uoc.edu/ca', 'https://www.url.edu/ca', 'https://www.unav.edu/', 'https://web.gencat.cat/ca/ciutadania/inici', 'https://educacio.gencat.cat/ca/inici', 'https://catsalut.gencat.cat/ca/inici/', 'https://www.meteo.cat/', 'https://serveiocupacio.gencat.cat/ca/inici', 'https://www.diba.cat/ca/inici', 'https://www.tnc.cat/ca', 'https://www.museunacional.cat/ca', 'https://sagradafamilia.org/', 'https://www.liceubarcelona.cat/ca', 'https://www.palaumusica.cat/ca/', 'https://www.3cat.cat/3cat/', 'https://www.rtve.es/', 'https://www.ara.cat/', 'https://www.rac1.cat/', 'https://terrassadigital.cat/', 'https://www.lavanguardia.com/', 'https://www.compraonline.bonpreuesclat.cat/', 'https://www.capraboacasa.com/ca/', 'https://es.wallapop.com/', 'https://www.promofarma.com/', 'https://www.fcbarcelona.cat/ca/', 'https://www.rcdespanyol.com/']
+2026-05-24 14:56:31,428 INFO     aci_pipeline.cli: ── Pipeline: https://www.seg-social.es/wps/portal/wss/internet/Inicio [perfil=wcag_strict] ──
+2026-05-24 14:56:38,696 INFO     aci_pipeline.m1: M1 completat per https://www.seg-social.es/wps/portal/wss/internet/Inicio; Institucional (mode=playwright)
+2026-05-24 14:56:38,758 INFO     aci_pipeline.m2: M2 completat per https://www.seg-social.es/wps/portal/wss/internet/Inicio; Institucional → results/gh-pages/processed/structure/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional_1779634591.json
+2026-05-24 14:56:38,760 INFO     aci_pipeline.m3: M3 completat per https://www.seg-social.es/wps/portal/wss/internet/Inicio; Institucional
+2026-05-24 14:56:38,761 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:56:38,761 INFO     aci_pipeline.m4: M4 completat per https://www.seg-social.es/wps/portal/wss/internet/Inicio; Institucional
+2026-05-24 14:56:39,064 ERROR    aci_pipeline.m5: Error cridant Claude per element img_74: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:56:39,065 ERROR    aci_pipeline.m5: Error cridant Claude per element img_87: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:56:39,065 INFO     aci_pipeline.m5: M5: processats 2 elements visuals
+2026-05-24 14:56:39,065 INFO     aci_pipeline.cli: M5-IA: 2 element(s) processats
+2026-05-24 14:56:39,065 INFO     aci_pipeline.m6: M6 completat per https://www.seg-social.es/wps/portal/wss/internet/Inicio; Institucional (profil=wcag_strict, ACI=3.49)
+2026-05-24 14:56:39,066 INFO     aci_pipeline.m7: M7 completat per https://www.seg-social.es/wps/portal/wss/internet/Inicio; Institucional: 15 intervencions prioritzades
+2026-05-24 14:56:39,179 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional_1779634591_wcag_strict.html
+2026-05-24 14:56:39,179 INFO     aci_pipeline.m8: M8 completat per https://www.seg-social.es/wps/portal/wss/internet/Inicio; Institucional -> results/gh-pages/reports/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional_1779634591_wcag_strict.html
+2026-05-24 14:56:39,179 INFO     aci_pipeline.cli: ACI=3.494/5.0 [wcag_strict] → results/gh-pages/reports/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional_1779634591_wcag_strict.html
+2026-05-24 14:56:39,179 INFO     aci_pipeline.cli: ── Pipeline: https://www.seg-social.es/wps/portal/wss/internet/Inicio [perfil=readability_first] ──
+2026-05-24 14:56:39,180 INFO     aci_pipeline.m6: M6 completat per https://www.seg-social.es/wps/portal/wss/internet/Inicio; Institucional (profil=readability_first, ACI=3.44)
+2026-05-24 14:56:39,180 INFO     aci_pipeline.m7: M7 completat per https://www.seg-social.es/wps/portal/wss/internet/Inicio; Institucional: 15 intervencions prioritzades
+2026-05-24 14:56:39,207 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional_1779634591_readability_first.html
+2026-05-24 14:56:39,207 INFO     aci_pipeline.m8: M8 completat per https://www.seg-social.es/wps/portal/wss/internet/Inicio; Institucional -> results/gh-pages/reports/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional_1779634591_readability_first.html
+2026-05-24 14:56:39,207 INFO     aci_pipeline.cli: ACI=3.436/5.0 [readability_first] → results/gh-pages/reports/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional_1779634591_readability_first.html
+2026-05-24 14:56:39,207 INFO     aci_pipeline.cli: ── Pipeline: https://www.seg-social.es/wps/portal/wss/internet/Inicio [perfil=visual_first] ──
+2026-05-24 14:56:39,207 INFO     aci_pipeline.m6: M6 completat per https://www.seg-social.es/wps/portal/wss/internet/Inicio; Institucional (profil=visual_first, ACI=3.28)
+2026-05-24 14:56:39,208 INFO     aci_pipeline.m7: M7 completat per https://www.seg-social.es/wps/portal/wss/internet/Inicio; Institucional: 15 intervencions prioritzades
+2026-05-24 14:56:39,235 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional_1779634591_visual_first.html
+2026-05-24 14:56:39,235 INFO     aci_pipeline.m8: M8 completat per https://www.seg-social.es/wps/portal/wss/internet/Inicio; Institucional -> results/gh-pages/reports/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional_1779634591_visual_first.html
+2026-05-24 14:56:39,235 INFO     aci_pipeline.cli: ACI=3.276/5.0 [visual_first] → results/gh-pages/reports/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional_1779634591_visual_first.html
+2026-05-24 14:56:39,235 INFO     aci_pipeline.cli: ── Pipeline: https://sede.agenciatributaria.gob.es/ [perfil=wcag_strict] ──
+2026-05-24 14:57:09,587 WARNING  aci_pipeline.m1: Timeout/error Playwright per https://sede.agenciatributaria.gob.es/; Institucional: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://sede.agenciatributaria.gob.es/;%20Institucional", waiting until "networkidle"
+
+2026-05-24 14:57:09,617 INFO     aci_pipeline.m1: Fallback HTTP per https://sede.agenciatributaria.gob.es/; Institucional
+2026-05-24 14:57:10,218 ERROR    aci_pipeline.m1: Error HTTP per https://sede.agenciatributaria.gob.es/; Institucional: 404 Client Error: Not Found for url: https://sede.agenciatributaria.gob.es/;%20Institucional
+2026-05-24 14:57:10,224 INFO     aci_pipeline.m1: M1 completat per https://sede.agenciatributaria.gob.es/; Institucional (mode=fallback)
+2026-05-24 14:57:10,225 INFO     aci_pipeline.m2: M2 completat per https://sede.agenciatributaria.gob.es/; Institucional → results/gh-pages/processed/structure/sede_agenciatributaria_gob_es_Institucional_1779634599.json
+2026-05-24 14:57:10,225 INFO     aci_pipeline.m3: M3 completat per https://sede.agenciatributaria.gob.es/; Institucional
+2026-05-24 14:57:10,226 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:57:10,226 INFO     aci_pipeline.m4: M4 completat per https://sede.agenciatributaria.gob.es/; Institucional
+2026-05-24 14:57:10,226 INFO     aci_pipeline.m5: M5: processats 0 elements visuals
+2026-05-24 14:57:10,227 INFO     aci_pipeline.m6: M6 completat per https://sede.agenciatributaria.gob.es/; Institucional (profil=wcag_strict, ACI=3.70)
+2026-05-24 14:57:10,227 INFO     aci_pipeline.m7: M7 completat per https://sede.agenciatributaria.gob.es/; Institucional: 15 intervencions prioritzades
+2026-05-24 14:57:10,253 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/sede_agenciatributaria_gob_es_Institucional/sede_agenciatributaria_gob_es_Institucional_1779634599_wcag_strict.html
+2026-05-24 14:57:10,253 INFO     aci_pipeline.m8: M8 completat per https://sede.agenciatributaria.gob.es/; Institucional -> results/gh-pages/reports/sede_agenciatributaria_gob_es_Institucional/sede_agenciatributaria_gob_es_Institucional_1779634599_wcag_strict.html
+2026-05-24 14:57:10,254 INFO     aci_pipeline.cli: ACI=3.704/5.0 [wcag_strict] → results/gh-pages/reports/sede_agenciatributaria_gob_es_Institucional/sede_agenciatributaria_gob_es_Institucional_1779634599_wcag_strict.html
+2026-05-24 14:57:10,254 INFO     aci_pipeline.cli: ── Pipeline: https://sede.agenciatributaria.gob.es/ [perfil=readability_first] ──
+2026-05-24 14:57:10,254 INFO     aci_pipeline.m6: M6 completat per https://sede.agenciatributaria.gob.es/; Institucional (profil=readability_first, ACI=3.57)
+2026-05-24 14:57:10,255 INFO     aci_pipeline.m7: M7 completat per https://sede.agenciatributaria.gob.es/; Institucional: 15 intervencions prioritzades
+2026-05-24 14:57:10,280 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/sede_agenciatributaria_gob_es_Institucional/sede_agenciatributaria_gob_es_Institucional_1779634599_readability_first.html
+2026-05-24 14:57:10,280 INFO     aci_pipeline.m8: M8 completat per https://sede.agenciatributaria.gob.es/; Institucional -> results/gh-pages/reports/sede_agenciatributaria_gob_es_Institucional/sede_agenciatributaria_gob_es_Institucional_1779634599_readability_first.html
+2026-05-24 14:57:10,280 INFO     aci_pipeline.cli: ACI=3.571/5.0 [readability_first] → results/gh-pages/reports/sede_agenciatributaria_gob_es_Institucional/sede_agenciatributaria_gob_es_Institucional_1779634599_readability_first.html
+2026-05-24 14:57:10,280 INFO     aci_pipeline.cli: ── Pipeline: https://sede.agenciatributaria.gob.es/ [perfil=visual_first] ──
+2026-05-24 14:57:10,280 INFO     aci_pipeline.m6: M6 completat per https://sede.agenciatributaria.gob.es/; Institucional (profil=visual_first, ACI=3.51)
+2026-05-24 14:57:10,281 INFO     aci_pipeline.m7: M7 completat per https://sede.agenciatributaria.gob.es/; Institucional: 15 intervencions prioritzades
+2026-05-24 14:57:10,307 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/sede_agenciatributaria_gob_es_Institucional/sede_agenciatributaria_gob_es_Institucional_1779634599_visual_first.html
+2026-05-24 14:57:10,307 INFO     aci_pipeline.m8: M8 completat per https://sede.agenciatributaria.gob.es/; Institucional -> results/gh-pages/reports/sede_agenciatributaria_gob_es_Institucional/sede_agenciatributaria_gob_es_Institucional_1779634599_visual_first.html
+2026-05-24 14:57:10,307 INFO     aci_pipeline.cli: ACI=3.514/5.0 [visual_first] → results/gh-pages/reports/sede_agenciatributaria_gob_es_Institucional/sede_agenciatributaria_gob_es_Institucional_1779634599_visual_first.html
+2026-05-24 14:57:10,307 INFO     aci_pipeline.cli: ── Pipeline: https://www.educacionfpydeportes.gob.es/portada.html [perfil=wcag_strict] ──
+2026-05-24 14:57:18,450 INFO     aci_pipeline.m1: M1 completat per https://www.educacionfpydeportes.gob.es/portada.html; Institucional (mode=playwright)
+2026-05-24 14:57:18,544 INFO     aci_pipeline.m2: M2 completat per https://www.educacionfpydeportes.gob.es/portada.html; Institucional → results/gh-pages/processed/structure/www_educacionfpydeportes_gob_es_portada_html_Institucional_1779634630.json
+2026-05-24 14:57:18,546 INFO     aci_pipeline.m3: M3 completat per https://www.educacionfpydeportes.gob.es/portada.html; Institucional
+2026-05-24 14:57:18,546 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:57:18,547 INFO     aci_pipeline.m4: M4 completat per https://www.educacionfpydeportes.gob.es/portada.html; Institucional
+2026-05-24 14:57:18,547 INFO     aci_pipeline.m5: M5: processats 0 elements visuals
+2026-05-24 14:57:18,548 INFO     aci_pipeline.m6: M6 completat per https://www.educacionfpydeportes.gob.es/portada.html; Institucional (profil=wcag_strict, ACI=3.74)
+2026-05-24 14:57:18,548 INFO     aci_pipeline.m7: M7 completat per https://www.educacionfpydeportes.gob.es/portada.html; Institucional: 15 intervencions prioritzades
+2026-05-24 14:57:18,574 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_educacionfpydeportes_gob_es_portada_html_Institucional/www_educacionfpydeportes_gob_es_portada_html_Institucional_1779634630_wcag_strict.html
+2026-05-24 14:57:18,574 INFO     aci_pipeline.m8: M8 completat per https://www.educacionfpydeportes.gob.es/portada.html; Institucional -> results/gh-pages/reports/www_educacionfpydeportes_gob_es_portada_html_Institucional/www_educacionfpydeportes_gob_es_portada_html_Institucional_1779634630_wcag_strict.html
+2026-05-24 14:57:18,574 INFO     aci_pipeline.cli: ACI=3.738/5.0 [wcag_strict] → results/gh-pages/reports/www_educacionfpydeportes_gob_es_portada_html_Institucional/www_educacionfpydeportes_gob_es_portada_html_Institucional_1779634630_wcag_strict.html
+2026-05-24 14:57:18,574 INFO     aci_pipeline.cli: ── Pipeline: https://www.educacionfpydeportes.gob.es/portada.html [perfil=readability_first] ──
+2026-05-24 14:57:18,575 INFO     aci_pipeline.m6: M6 completat per https://www.educacionfpydeportes.gob.es/portada.html; Institucional (profil=readability_first, ACI=3.63)
+2026-05-24 14:57:18,575 INFO     aci_pipeline.m7: M7 completat per https://www.educacionfpydeportes.gob.es/portada.html; Institucional: 15 intervencions prioritzades
+2026-05-24 14:57:18,602 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_educacionfpydeportes_gob_es_portada_html_Institucional/www_educacionfpydeportes_gob_es_portada_html_Institucional_1779634630_readability_first.html
+2026-05-24 14:57:18,602 INFO     aci_pipeline.m8: M8 completat per https://www.educacionfpydeportes.gob.es/portada.html; Institucional -> results/gh-pages/reports/www_educacionfpydeportes_gob_es_portada_html_Institucional/www_educacionfpydeportes_gob_es_portada_html_Institucional_1779634630_readability_first.html
+2026-05-24 14:57:18,602 INFO     aci_pipeline.cli: ACI=3.633/5.0 [readability_first] → results/gh-pages/reports/www_educacionfpydeportes_gob_es_portada_html_Institucional/www_educacionfpydeportes_gob_es_portada_html_Institucional_1779634630_readability_first.html
+2026-05-24 14:57:18,602 INFO     aci_pipeline.cli: ── Pipeline: https://www.educacionfpydeportes.gob.es/portada.html [perfil=visual_first] ──
+2026-05-24 14:57:18,603 INFO     aci_pipeline.m6: M6 completat per https://www.educacionfpydeportes.gob.es/portada.html; Institucional (profil=visual_first, ACI=3.49)
+2026-05-24 14:57:18,603 INFO     aci_pipeline.m7: M7 completat per https://www.educacionfpydeportes.gob.es/portada.html; Institucional: 15 intervencions prioritzades
+2026-05-24 14:57:18,629 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_educacionfpydeportes_gob_es_portada_html_Institucional/www_educacionfpydeportes_gob_es_portada_html_Institucional_1779634630_visual_first.html
+2026-05-24 14:57:18,629 INFO     aci_pipeline.m8: M8 completat per https://www.educacionfpydeportes.gob.es/portada.html; Institucional -> results/gh-pages/reports/www_educacionfpydeportes_gob_es_portada_html_Institucional/www_educacionfpydeportes_gob_es_portada_html_Institucional_1779634630_visual_first.html
+2026-05-24 14:57:18,629 INFO     aci_pipeline.cli: ACI=3.490/5.0 [visual_first] → results/gh-pages/reports/www_educacionfpydeportes_gob_es_portada_html_Institucional/www_educacionfpydeportes_gob_es_portada_html_Institucional_1779634630_visual_first.html
+2026-05-24 14:57:18,629 INFO     aci_pipeline.cli: ── Pipeline: https://www.sanidad.gob.es/ [perfil=wcag_strict] ──
+2026-05-24 14:57:26,155 INFO     aci_pipeline.m1: M1 completat per https://www.sanidad.gob.es/; Institucional (mode=playwright)
+2026-05-24 14:57:26,190 INFO     aci_pipeline.m2: M2 completat per https://www.sanidad.gob.es/; Institucional → results/gh-pages/processed/structure/www_sanidad_gob_es_Institucional_1779634638.json
+2026-05-24 14:57:26,191 INFO     aci_pipeline.m3: M3 completat per https://www.sanidad.gob.es/; Institucional
+2026-05-24 14:57:26,192 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:57:26,192 INFO     aci_pipeline.m4: M4 completat per https://www.sanidad.gob.es/; Institucional
+2026-05-24 14:57:26,192 INFO     aci_pipeline.m5: M5: processats 0 elements visuals
+2026-05-24 14:57:26,193 INFO     aci_pipeline.m6: M6 completat per https://www.sanidad.gob.es/; Institucional (profil=wcag_strict, ACI=3.76)
+2026-05-24 14:57:26,193 INFO     aci_pipeline.m7: M7 completat per https://www.sanidad.gob.es/; Institucional: 15 intervencions prioritzades
+2026-05-24 14:57:26,219 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_sanidad_gob_es_Institucional/www_sanidad_gob_es_Institucional_1779634638_wcag_strict.html
+2026-05-24 14:57:26,219 INFO     aci_pipeline.m8: M8 completat per https://www.sanidad.gob.es/; Institucional -> results/gh-pages/reports/www_sanidad_gob_es_Institucional/www_sanidad_gob_es_Institucional_1779634638_wcag_strict.html
+2026-05-24 14:57:26,219 INFO     aci_pipeline.cli: ACI=3.757/5.0 [wcag_strict] → results/gh-pages/reports/www_sanidad_gob_es_Institucional/www_sanidad_gob_es_Institucional_1779634638_wcag_strict.html
+2026-05-24 14:57:26,219 INFO     aci_pipeline.cli: ── Pipeline: https://www.sanidad.gob.es/ [perfil=readability_first] ──
+2026-05-24 14:57:26,219 INFO     aci_pipeline.m6: M6 completat per https://www.sanidad.gob.es/; Institucional (profil=readability_first, ACI=3.65)
+2026-05-24 14:57:26,220 INFO     aci_pipeline.m7: M7 completat per https://www.sanidad.gob.es/; Institucional: 15 intervencions prioritzades
+2026-05-24 14:57:26,246 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_sanidad_gob_es_Institucional/www_sanidad_gob_es_Institucional_1779634638_readability_first.html
+2026-05-24 14:57:26,246 INFO     aci_pipeline.m8: M8 completat per https://www.sanidad.gob.es/; Institucional -> results/gh-pages/reports/www_sanidad_gob_es_Institucional/www_sanidad_gob_es_Institucional_1779634638_readability_first.html
+2026-05-24 14:57:26,246 INFO     aci_pipeline.cli: ACI=3.648/5.0 [readability_first] → results/gh-pages/reports/www_sanidad_gob_es_Institucional/www_sanidad_gob_es_Institucional_1779634638_readability_first.html
+2026-05-24 14:57:26,246 INFO     aci_pipeline.cli: ── Pipeline: https://www.sanidad.gob.es/ [perfil=visual_first] ──
+2026-05-24 14:57:26,247 INFO     aci_pipeline.m6: M6 completat per https://www.sanidad.gob.es/; Institucional (profil=visual_first, ACI=3.57)
+2026-05-24 14:57:26,247 INFO     aci_pipeline.m7: M7 completat per https://www.sanidad.gob.es/; Institucional: 15 intervencions prioritzades
+2026-05-24 14:57:26,313 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_sanidad_gob_es_Institucional/www_sanidad_gob_es_Institucional_1779634638_visual_first.html
+2026-05-24 14:57:26,313 INFO     aci_pipeline.m8: M8 completat per https://www.sanidad.gob.es/; Institucional -> results/gh-pages/reports/www_sanidad_gob_es_Institucional/www_sanidad_gob_es_Institucional_1779634638_visual_first.html
+2026-05-24 14:57:26,313 INFO     aci_pipeline.cli: ACI=3.571/5.0 [visual_first] → results/gh-pages/reports/www_sanidad_gob_es_Institucional/www_sanidad_gob_es_Institucional_1779634638_visual_first.html
+2026-05-24 14:57:26,313 INFO     aci_pipeline.cli: ── Pipeline: https://web.ub.edu/ [perfil=wcag_strict] ──
+2026-05-24 14:57:33,584 INFO     aci_pipeline.m1: M1 completat per https://web.ub.edu/; Educatiu (mode=playwright)
+2026-05-24 14:57:33,786 INFO     aci_pipeline.m2: M2 completat per https://web.ub.edu/; Educatiu → results/gh-pages/processed/structure/web_ub_edu_Educatiu_1779634646.json
+2026-05-24 14:57:33,788 INFO     aci_pipeline.m3: M3 completat per https://web.ub.edu/; Educatiu
+2026-05-24 14:57:33,789 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:57:33,790 INFO     aci_pipeline.m4: M4 completat per https://web.ub.edu/; Educatiu
+2026-05-24 14:57:33,790 ERROR    aci_pipeline.m5: Error cridant Claude per element img_1: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:57:33,790 ERROR    aci_pipeline.m5: Error cridant Claude per element img_51: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:57:33,790 INFO     aci_pipeline.m5: M5: processats 2 elements visuals
+2026-05-24 14:57:33,790 INFO     aci_pipeline.cli: M5-IA: 2 element(s) processats
+2026-05-24 14:57:33,790 INFO     aci_pipeline.m6: M6 completat per https://web.ub.edu/; Educatiu (profil=wcag_strict, ACI=3.83)
+2026-05-24 14:57:33,791 INFO     aci_pipeline.m7: M7 completat per https://web.ub.edu/; Educatiu: 15 intervencions prioritzades
+2026-05-24 14:57:33,817 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/web_ub_edu_Educatiu/web_ub_edu_Educatiu_1779634646_wcag_strict.html
+2026-05-24 14:57:33,817 INFO     aci_pipeline.m8: M8 completat per https://web.ub.edu/; Educatiu -> results/gh-pages/reports/web_ub_edu_Educatiu/web_ub_edu_Educatiu_1779634646_wcag_strict.html
+2026-05-24 14:57:33,817 INFO     aci_pipeline.cli: ACI=3.830/5.0 [wcag_strict] → results/gh-pages/reports/web_ub_edu_Educatiu/web_ub_edu_Educatiu_1779634646_wcag_strict.html
+2026-05-24 14:57:33,817 INFO     aci_pipeline.cli: ── Pipeline: https://web.ub.edu/ [perfil=readability_first] ──
+2026-05-24 14:57:33,818 INFO     aci_pipeline.m6: M6 completat per https://web.ub.edu/; Educatiu (profil=readability_first, ACI=3.72)
+2026-05-24 14:57:33,818 INFO     aci_pipeline.m7: M7 completat per https://web.ub.edu/; Educatiu: 15 intervencions prioritzades
+2026-05-24 14:57:33,844 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/web_ub_edu_Educatiu/web_ub_edu_Educatiu_1779634646_readability_first.html
+2026-05-24 14:57:33,844 INFO     aci_pipeline.m8: M8 completat per https://web.ub.edu/; Educatiu -> results/gh-pages/reports/web_ub_edu_Educatiu/web_ub_edu_Educatiu_1779634646_readability_first.html
+2026-05-24 14:57:33,844 INFO     aci_pipeline.cli: ACI=3.720/5.0 [readability_first] → results/gh-pages/reports/web_ub_edu_Educatiu/web_ub_edu_Educatiu_1779634646_readability_first.html
+2026-05-24 14:57:33,844 INFO     aci_pipeline.cli: ── Pipeline: https://web.ub.edu/ [perfil=visual_first] ──
+2026-05-24 14:57:33,844 INFO     aci_pipeline.m6: M6 completat per https://web.ub.edu/; Educatiu (profil=visual_first, ACI=3.63)
+2026-05-24 14:57:33,845 INFO     aci_pipeline.m7: M7 completat per https://web.ub.edu/; Educatiu: 15 intervencions prioritzades
+2026-05-24 14:57:33,871 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/web_ub_edu_Educatiu/web_ub_edu_Educatiu_1779634646_visual_first.html
+2026-05-24 14:57:33,871 INFO     aci_pipeline.m8: M8 completat per https://web.ub.edu/; Educatiu -> results/gh-pages/reports/web_ub_edu_Educatiu/web_ub_edu_Educatiu_1779634646_visual_first.html
+2026-05-24 14:57:33,872 INFO     aci_pipeline.cli: ACI=3.626/5.0 [visual_first] → results/gh-pages/reports/web_ub_edu_Educatiu/web_ub_edu_Educatiu_1779634646_visual_first.html
+2026-05-24 14:57:33,872 INFO     aci_pipeline.cli: ── Pipeline: https://www.uab.cat/ [perfil=wcag_strict] ──
+2026-05-24 14:57:37,077 INFO     aci_pipeline.m1: M1 completat per https://www.uab.cat/; Educatiu (mode=playwright)
+2026-05-24 14:57:37,079 INFO     aci_pipeline.m2: M2 completat per https://www.uab.cat/; Educatiu → results/gh-pages/processed/structure/www_uab_cat_Educatiu_1779634653.json
+2026-05-24 14:57:37,080 INFO     aci_pipeline.m3: M3 completat per https://www.uab.cat/; Educatiu
+2026-05-24 14:57:37,080 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:57:37,081 INFO     aci_pipeline.m4: M4 completat per https://www.uab.cat/; Educatiu
+2026-05-24 14:57:37,081 INFO     aci_pipeline.m5: M5: processats 0 elements visuals
+2026-05-24 14:57:37,081 INFO     aci_pipeline.m6: M6 completat per https://www.uab.cat/; Educatiu (profil=wcag_strict, ACI=3.56)
+2026-05-24 14:57:37,082 INFO     aci_pipeline.m7: M7 completat per https://www.uab.cat/; Educatiu: 15 intervencions prioritzades
+2026-05-24 14:57:37,108 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_uab_cat_Educatiu/www_uab_cat_Educatiu_1779634653_wcag_strict.html
+2026-05-24 14:57:37,108 INFO     aci_pipeline.m8: M8 completat per https://www.uab.cat/; Educatiu -> results/gh-pages/reports/www_uab_cat_Educatiu/www_uab_cat_Educatiu_1779634653_wcag_strict.html
+2026-05-24 14:57:37,108 INFO     aci_pipeline.cli: ACI=3.558/5.0 [wcag_strict] → results/gh-pages/reports/www_uab_cat_Educatiu/www_uab_cat_Educatiu_1779634653_wcag_strict.html
+2026-05-24 14:57:37,108 INFO     aci_pipeline.cli: ── Pipeline: https://www.uab.cat/ [perfil=readability_first] ──
+2026-05-24 14:57:37,109 INFO     aci_pipeline.m6: M6 completat per https://www.uab.cat/; Educatiu (profil=readability_first, ACI=3.48)
+2026-05-24 14:57:37,109 INFO     aci_pipeline.m7: M7 completat per https://www.uab.cat/; Educatiu: 15 intervencions prioritzades
+2026-05-24 14:57:37,135 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_uab_cat_Educatiu/www_uab_cat_Educatiu_1779634653_readability_first.html
+2026-05-24 14:57:37,135 INFO     aci_pipeline.m8: M8 completat per https://www.uab.cat/; Educatiu -> results/gh-pages/reports/www_uab_cat_Educatiu/www_uab_cat_Educatiu_1779634653_readability_first.html
+2026-05-24 14:57:37,135 INFO     aci_pipeline.cli: ACI=3.477/5.0 [readability_first] → results/gh-pages/reports/www_uab_cat_Educatiu/www_uab_cat_Educatiu_1779634653_readability_first.html
+2026-05-24 14:57:37,135 INFO     aci_pipeline.cli: ── Pipeline: https://www.uab.cat/ [perfil=visual_first] ──
+2026-05-24 14:57:37,136 INFO     aci_pipeline.m6: M6 completat per https://www.uab.cat/; Educatiu (profil=visual_first, ACI=3.39)
+2026-05-24 14:57:37,136 INFO     aci_pipeline.m7: M7 completat per https://www.uab.cat/; Educatiu: 15 intervencions prioritzades
+2026-05-24 14:57:37,162 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_uab_cat_Educatiu/www_uab_cat_Educatiu_1779634653_visual_first.html
+2026-05-24 14:57:37,162 INFO     aci_pipeline.m8: M8 completat per https://www.uab.cat/; Educatiu -> results/gh-pages/reports/www_uab_cat_Educatiu/www_uab_cat_Educatiu_1779634653_visual_first.html
+2026-05-24 14:57:37,162 INFO     aci_pipeline.cli: ACI=3.391/5.0 [visual_first] → results/gh-pages/reports/www_uab_cat_Educatiu/www_uab_cat_Educatiu_1779634653_visual_first.html
+2026-05-24 14:57:37,162 INFO     aci_pipeline.cli: ── Pipeline: https://www.uv.es/ [perfil=wcag_strict] ──
+2026-05-24 14:57:38,903 INFO     aci_pipeline.m1: M1 completat per https://www.uv.es/; Educatiu (mode=playwright)
+2026-05-24 14:57:38,904 INFO     aci_pipeline.m2: M2 completat per https://www.uv.es/; Educatiu → results/gh-pages/processed/structure/www_uv_es_Educatiu_1779634657.json
+2026-05-24 14:57:38,904 INFO     aci_pipeline.m3: M3 completat per https://www.uv.es/; Educatiu
+2026-05-24 14:57:38,905 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:57:38,905 INFO     aci_pipeline.m4: M4 completat per https://www.uv.es/; Educatiu
+2026-05-24 14:57:38,905 INFO     aci_pipeline.m5: M5: processats 0 elements visuals
+2026-05-24 14:57:38,906 INFO     aci_pipeline.m6: M6 completat per https://www.uv.es/; Educatiu (profil=wcag_strict, ACI=3.68)
+2026-05-24 14:57:38,906 INFO     aci_pipeline.m7: M7 completat per https://www.uv.es/; Educatiu: 15 intervencions prioritzades
+2026-05-24 14:57:38,933 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_uv_es_Educatiu/www_uv_es_Educatiu_1779634657_wcag_strict.html
+2026-05-24 14:57:38,933 INFO     aci_pipeline.m8: M8 completat per https://www.uv.es/; Educatiu -> results/gh-pages/reports/www_uv_es_Educatiu/www_uv_es_Educatiu_1779634657_wcag_strict.html
+2026-05-24 14:57:38,933 INFO     aci_pipeline.cli: ACI=3.678/5.0 [wcag_strict] → results/gh-pages/reports/www_uv_es_Educatiu/www_uv_es_Educatiu_1779634657_wcag_strict.html
+2026-05-24 14:57:38,933 INFO     aci_pipeline.cli: ── Pipeline: https://www.uv.es/ [perfil=readability_first] ──
+2026-05-24 14:57:38,933 INFO     aci_pipeline.m6: M6 completat per https://www.uv.es/; Educatiu (profil=readability_first, ACI=3.55)
+2026-05-24 14:57:38,934 INFO     aci_pipeline.m7: M7 completat per https://www.uv.es/; Educatiu: 15 intervencions prioritzades
+2026-05-24 14:57:38,960 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_uv_es_Educatiu/www_uv_es_Educatiu_1779634657_readability_first.html
+2026-05-24 14:57:38,960 INFO     aci_pipeline.m8: M8 completat per https://www.uv.es/; Educatiu -> results/gh-pages/reports/www_uv_es_Educatiu/www_uv_es_Educatiu_1779634657_readability_first.html
+2026-05-24 14:57:38,960 INFO     aci_pipeline.cli: ACI=3.551/5.0 [readability_first] → results/gh-pages/reports/www_uv_es_Educatiu/www_uv_es_Educatiu_1779634657_readability_first.html
+2026-05-24 14:57:38,960 INFO     aci_pipeline.cli: ── Pipeline: https://www.uv.es/ [perfil=visual_first] ──
+2026-05-24 14:57:38,960 INFO     aci_pipeline.m6: M6 completat per https://www.uv.es/; Educatiu (profil=visual_first, ACI=3.50)
+2026-05-24 14:57:38,961 INFO     aci_pipeline.m7: M7 completat per https://www.uv.es/; Educatiu: 15 intervencions prioritzades
+2026-05-24 14:57:38,987 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_uv_es_Educatiu/www_uv_es_Educatiu_1779634657_visual_first.html
+2026-05-24 14:57:38,987 INFO     aci_pipeline.m8: M8 completat per https://www.uv.es/; Educatiu -> results/gh-pages/reports/www_uv_es_Educatiu/www_uv_es_Educatiu_1779634657_visual_first.html
+2026-05-24 14:57:38,987 INFO     aci_pipeline.cli: ACI=3.495/5.0 [visual_first] → results/gh-pages/reports/www_uv_es_Educatiu/www_uv_es_Educatiu_1779634657_visual_first.html
+2026-05-24 14:57:38,987 INFO     aci_pipeline.cli: ── Pipeline: https://www.upc.edu/ca [perfil=wcag_strict] ──
+2026-05-24 14:57:48,108 INFO     aci_pipeline.m1: M1 completat per https://www.upc.edu/ca; Educatiu (mode=playwright)
+2026-05-24 14:57:48,210 INFO     aci_pipeline.m2: M2 completat per https://www.upc.edu/ca; Educatiu → results/gh-pages/processed/structure/www_upc_edu_ca_Educatiu_1779634658.json
+2026-05-24 14:57:48,211 INFO     aci_pipeline.m3: M3 completat per https://www.upc.edu/ca; Educatiu
+2026-05-24 14:57:48,212 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:57:48,213 INFO     aci_pipeline.m4: M4 completat per https://www.upc.edu/ca; Educatiu
+2026-05-24 14:57:48,213 ERROR    aci_pipeline.m5: Error cridant Claude per element img_6: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:57:48,213 ERROR    aci_pipeline.m5: Error cridant Claude per element img_12: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:57:48,213 INFO     aci_pipeline.m5: M5: processats 2 elements visuals
+2026-05-24 14:57:48,213 INFO     aci_pipeline.cli: M5-IA: 2 element(s) processats
+2026-05-24 14:57:48,214 INFO     aci_pipeline.m6: M6 completat per https://www.upc.edu/ca; Educatiu (profil=wcag_strict, ACI=3.52)
+2026-05-24 14:57:48,214 INFO     aci_pipeline.m7: M7 completat per https://www.upc.edu/ca; Educatiu: 15 intervencions prioritzades
+2026-05-24 14:57:48,240 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_upc_edu_ca_Educatiu/www_upc_edu_ca_Educatiu_1779634658_wcag_strict.html
+2026-05-24 14:57:48,240 INFO     aci_pipeline.m8: M8 completat per https://www.upc.edu/ca; Educatiu -> results/gh-pages/reports/www_upc_edu_ca_Educatiu/www_upc_edu_ca_Educatiu_1779634658_wcag_strict.html
+2026-05-24 14:57:48,240 INFO     aci_pipeline.cli: ACI=3.517/5.0 [wcag_strict] → results/gh-pages/reports/www_upc_edu_ca_Educatiu/www_upc_edu_ca_Educatiu_1779634658_wcag_strict.html
+2026-05-24 14:57:48,241 INFO     aci_pipeline.cli: ── Pipeline: https://www.upc.edu/ca [perfil=readability_first] ──
+2026-05-24 14:57:48,241 INFO     aci_pipeline.m6: M6 completat per https://www.upc.edu/ca; Educatiu (profil=readability_first, ACI=3.47)
+2026-05-24 14:57:48,242 INFO     aci_pipeline.m7: M7 completat per https://www.upc.edu/ca; Educatiu: 15 intervencions prioritzades
+2026-05-24 14:57:48,267 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_upc_edu_ca_Educatiu/www_upc_edu_ca_Educatiu_1779634658_readability_first.html
+2026-05-24 14:57:48,267 INFO     aci_pipeline.m8: M8 completat per https://www.upc.edu/ca; Educatiu -> results/gh-pages/reports/www_upc_edu_ca_Educatiu/www_upc_edu_ca_Educatiu_1779634658_readability_first.html
+2026-05-24 14:57:48,267 INFO     aci_pipeline.cli: ACI=3.467/5.0 [readability_first] → results/gh-pages/reports/www_upc_edu_ca_Educatiu/www_upc_edu_ca_Educatiu_1779634658_readability_first.html
+2026-05-24 14:57:48,267 INFO     aci_pipeline.cli: ── Pipeline: https://www.upc.edu/ca [perfil=visual_first] ──
+2026-05-24 14:57:48,268 INFO     aci_pipeline.m6: M6 completat per https://www.upc.edu/ca; Educatiu (profil=visual_first, ACI=3.24)
+2026-05-24 14:57:48,269 INFO     aci_pipeline.m7: M7 completat per https://www.upc.edu/ca; Educatiu: 15 intervencions prioritzades
+2026-05-24 14:57:48,295 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_upc_edu_ca_Educatiu/www_upc_edu_ca_Educatiu_1779634658_visual_first.html
+2026-05-24 14:57:48,295 INFO     aci_pipeline.m8: M8 completat per https://www.upc.edu/ca; Educatiu -> results/gh-pages/reports/www_upc_edu_ca_Educatiu/www_upc_edu_ca_Educatiu_1779634658_visual_first.html
+2026-05-24 14:57:48,295 INFO     aci_pipeline.cli: ACI=3.236/5.0 [visual_first] → results/gh-pages/reports/www_upc_edu_ca_Educatiu/www_upc_edu_ca_Educatiu_1779634658_visual_first.html
+2026-05-24 14:57:48,295 INFO     aci_pipeline.cli: ── Pipeline: https://www.ucm.es/ [perfil=wcag_strict] ──
+2026-05-24 14:57:50,043 INFO     aci_pipeline.m1: M1 completat per https://www.ucm.es/; Educatiu (mode=playwright)
+2026-05-24 14:57:50,044 INFO     aci_pipeline.m2: M2 completat per https://www.ucm.es/; Educatiu → results/gh-pages/processed/structure/www_ucm_es_Educatiu_1779634668.json
+2026-05-24 14:57:50,045 INFO     aci_pipeline.m3: M3 completat per https://www.ucm.es/; Educatiu
+2026-05-24 14:57:50,045 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:57:50,046 INFO     aci_pipeline.m4: M4 completat per https://www.ucm.es/; Educatiu
+2026-05-24 14:57:50,046 INFO     aci_pipeline.m5: M5: processats 0 elements visuals
+2026-05-24 14:57:50,046 INFO     aci_pipeline.m6: M6 completat per https://www.ucm.es/; Educatiu (profil=wcag_strict, ACI=3.68)
+2026-05-24 14:57:50,047 INFO     aci_pipeline.m7: M7 completat per https://www.ucm.es/; Educatiu: 15 intervencions prioritzades
+2026-05-24 14:57:50,074 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_ucm_es_Educatiu/www_ucm_es_Educatiu_1779634668_wcag_strict.html
+2026-05-24 14:57:50,074 INFO     aci_pipeline.m8: M8 completat per https://www.ucm.es/; Educatiu -> results/gh-pages/reports/www_ucm_es_Educatiu/www_ucm_es_Educatiu_1779634668_wcag_strict.html
+2026-05-24 14:57:50,074 INFO     aci_pipeline.cli: ACI=3.678/5.0 [wcag_strict] → results/gh-pages/reports/www_ucm_es_Educatiu/www_ucm_es_Educatiu_1779634668_wcag_strict.html
+2026-05-24 14:57:50,074 INFO     aci_pipeline.cli: ── Pipeline: https://www.ucm.es/ [perfil=readability_first] ──
+2026-05-24 14:57:50,075 INFO     aci_pipeline.m6: M6 completat per https://www.ucm.es/; Educatiu (profil=readability_first, ACI=3.55)
+2026-05-24 14:57:50,075 INFO     aci_pipeline.m7: M7 completat per https://www.ucm.es/; Educatiu: 15 intervencions prioritzades
+2026-05-24 14:57:50,101 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_ucm_es_Educatiu/www_ucm_es_Educatiu_1779634668_readability_first.html
+2026-05-24 14:57:50,101 INFO     aci_pipeline.m8: M8 completat per https://www.ucm.es/; Educatiu -> results/gh-pages/reports/www_ucm_es_Educatiu/www_ucm_es_Educatiu_1779634668_readability_first.html
+2026-05-24 14:57:50,101 INFO     aci_pipeline.cli: ACI=3.551/5.0 [readability_first] → results/gh-pages/reports/www_ucm_es_Educatiu/www_ucm_es_Educatiu_1779634668_readability_first.html
+2026-05-24 14:57:50,101 INFO     aci_pipeline.cli: ── Pipeline: https://www.ucm.es/ [perfil=visual_first] ──
+2026-05-24 14:57:50,102 INFO     aci_pipeline.m6: M6 completat per https://www.ucm.es/; Educatiu (profil=visual_first, ACI=3.50)
+2026-05-24 14:57:50,102 INFO     aci_pipeline.m7: M7 completat per https://www.ucm.es/; Educatiu: 15 intervencions prioritzades
+2026-05-24 14:57:50,128 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_ucm_es_Educatiu/www_ucm_es_Educatiu_1779634668_visual_first.html
+2026-05-24 14:57:50,128 INFO     aci_pipeline.m8: M8 completat per https://www.ucm.es/; Educatiu -> results/gh-pages/reports/www_ucm_es_Educatiu/www_ucm_es_Educatiu_1779634668_visual_first.html
+2026-05-24 14:57:50,128 INFO     aci_pipeline.cli: ACI=3.495/5.0 [visual_first] → results/gh-pages/reports/www_ucm_es_Educatiu/www_ucm_es_Educatiu_1779634668_visual_first.html
+2026-05-24 14:57:50,128 INFO     aci_pipeline.cli: ── Pipeline: https://www.upf.edu/ [perfil=wcag_strict] ──
+2026-05-24 14:57:53,364 INFO     aci_pipeline.m1: M1 completat per https://www.upf.edu/; Educatiu (mode=playwright)
+2026-05-24 14:57:53,367 INFO     aci_pipeline.m2: M2 completat per https://www.upf.edu/; Educatiu → results/gh-pages/processed/structure/www_upf_edu_Educatiu_1779634670.json
+2026-05-24 14:57:53,367 INFO     aci_pipeline.m3: M3 completat per https://www.upf.edu/; Educatiu
+2026-05-24 14:57:53,368 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:57:53,369 INFO     aci_pipeline.m4: M4 completat per https://www.upf.edu/; Educatiu
+2026-05-24 14:57:53,369 INFO     aci_pipeline.m5: M5: processats 0 elements visuals
+2026-05-24 14:57:53,369 INFO     aci_pipeline.m6: M6 completat per https://www.upf.edu/; Educatiu (profil=wcag_strict, ACI=3.48)
+2026-05-24 14:57:53,370 INFO     aci_pipeline.m7: M7 completat per https://www.upf.edu/; Educatiu: 15 intervencions prioritzades
+2026-05-24 14:57:53,397 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_upf_edu_Educatiu/www_upf_edu_Educatiu_1779634670_wcag_strict.html
+2026-05-24 14:57:53,397 INFO     aci_pipeline.m8: M8 completat per https://www.upf.edu/; Educatiu -> results/gh-pages/reports/www_upf_edu_Educatiu/www_upf_edu_Educatiu_1779634670_wcag_strict.html
+2026-05-24 14:57:53,397 INFO     aci_pipeline.cli: ACI=3.480/5.0 [wcag_strict] → results/gh-pages/reports/www_upf_edu_Educatiu/www_upf_edu_Educatiu_1779634670_wcag_strict.html
+2026-05-24 14:57:53,397 INFO     aci_pipeline.cli: ── Pipeline: https://www.upf.edu/ [perfil=readability_first] ──
+2026-05-24 14:57:53,397 INFO     aci_pipeline.m6: M6 completat per https://www.upf.edu/; Educatiu (profil=readability_first, ACI=3.41)
+2026-05-24 14:57:53,398 INFO     aci_pipeline.m7: M7 completat per https://www.upf.edu/; Educatiu: 15 intervencions prioritzades
+2026-05-24 14:57:53,424 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_upf_edu_Educatiu/www_upf_edu_Educatiu_1779634670_readability_first.html
+2026-05-24 14:57:53,424 INFO     aci_pipeline.m8: M8 completat per https://www.upf.edu/; Educatiu -> results/gh-pages/reports/www_upf_edu_Educatiu/www_upf_edu_Educatiu_1779634670_readability_first.html
+2026-05-24 14:57:53,424 INFO     aci_pipeline.cli: ACI=3.412/5.0 [readability_first] → results/gh-pages/reports/www_upf_edu_Educatiu/www_upf_edu_Educatiu_1779634670_readability_first.html
+2026-05-24 14:57:53,424 INFO     aci_pipeline.cli: ── Pipeline: https://www.upf.edu/ [perfil=visual_first] ──
+2026-05-24 14:57:53,424 INFO     aci_pipeline.m6: M6 completat per https://www.upf.edu/; Educatiu (profil=visual_first, ACI=3.34)
+2026-05-24 14:57:53,425 INFO     aci_pipeline.m7: M7 completat per https://www.upf.edu/; Educatiu: 15 intervencions prioritzades
+2026-05-24 14:57:53,451 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_upf_edu_Educatiu/www_upf_edu_Educatiu_1779634670_visual_first.html
+2026-05-24 14:57:53,451 INFO     aci_pipeline.m8: M8 completat per https://www.upf.edu/; Educatiu -> results/gh-pages/reports/www_upf_edu_Educatiu/www_upf_edu_Educatiu_1779634670_visual_first.html
+2026-05-24 14:57:53,451 INFO     aci_pipeline.cli: ACI=3.338/5.0 [visual_first] → results/gh-pages/reports/www_upf_edu_Educatiu/www_upf_edu_Educatiu_1779634670_visual_first.html
+2026-05-24 14:57:53,451 INFO     aci_pipeline.cli: ── Pipeline: https://www.uoc.edu/ca [perfil=wcag_strict] ──
+2026-05-24 14:57:57,372 INFO     aci_pipeline.m1: M1 completat per https://www.uoc.edu/ca; Educatiu (mode=playwright)
+2026-05-24 14:57:57,414 INFO     aci_pipeline.m2: M2 completat per https://www.uoc.edu/ca; Educatiu → results/gh-pages/processed/structure/www_uoc_edu_ca_Educatiu_1779634673.json
+2026-05-24 14:57:57,414 INFO     aci_pipeline.m3: M3 completat per https://www.uoc.edu/ca; Educatiu
+2026-05-24 14:57:57,415 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:57:57,416 INFO     aci_pipeline.m4: M4 completat per https://www.uoc.edu/ca; Educatiu
+2026-05-24 14:57:57,416 ERROR    aci_pipeline.m5: Error cridant Claude per element img_0: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:57:57,416 ERROR    aci_pipeline.m5: Error cridant Claude per element img_2: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:57:57,416 ERROR    aci_pipeline.m5: Error cridant Claude per element img_3: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:57:57,416 ERROR    aci_pipeline.m5: Error cridant Claude per element img_4: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:57:57,416 ERROR    aci_pipeline.m5: Error cridant Claude per element img_5: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:57:57,417 INFO     aci_pipeline.m5: M5: processats 5 elements visuals
+2026-05-24 14:57:57,417 INFO     aci_pipeline.cli: M5-IA: 5 element(s) processats
+2026-05-24 14:57:57,417 INFO     aci_pipeline.m6: M6 completat per https://www.uoc.edu/ca; Educatiu (profil=wcag_strict, ACI=3.34)
+2026-05-24 14:57:57,418 INFO     aci_pipeline.m7: M7 completat per https://www.uoc.edu/ca; Educatiu: 15 intervencions prioritzades
+2026-05-24 14:57:57,443 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_uoc_edu_ca_Educatiu/www_uoc_edu_ca_Educatiu_1779634673_wcag_strict.html
+2026-05-24 14:57:57,443 INFO     aci_pipeline.m8: M8 completat per https://www.uoc.edu/ca; Educatiu -> results/gh-pages/reports/www_uoc_edu_ca_Educatiu/www_uoc_edu_ca_Educatiu_1779634673_wcag_strict.html
+2026-05-24 14:57:57,444 INFO     aci_pipeline.cli: ACI=3.342/5.0 [wcag_strict] → results/gh-pages/reports/www_uoc_edu_ca_Educatiu/www_uoc_edu_ca_Educatiu_1779634673_wcag_strict.html
+2026-05-24 14:57:57,444 INFO     aci_pipeline.cli: ── Pipeline: https://www.uoc.edu/ca [perfil=readability_first] ──
+2026-05-24 14:57:57,444 INFO     aci_pipeline.m6: M6 completat per https://www.uoc.edu/ca; Educatiu (profil=readability_first, ACI=3.07)
+2026-05-24 14:57:57,445 INFO     aci_pipeline.m7: M7 completat per https://www.uoc.edu/ca; Educatiu: 15 intervencions prioritzades
+2026-05-24 14:57:57,472 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_uoc_edu_ca_Educatiu/www_uoc_edu_ca_Educatiu_1779634673_readability_first.html
+2026-05-24 14:57:57,472 INFO     aci_pipeline.m8: M8 completat per https://www.uoc.edu/ca; Educatiu -> results/gh-pages/reports/www_uoc_edu_ca_Educatiu/www_uoc_edu_ca_Educatiu_1779634673_readability_first.html
+2026-05-24 14:57:57,472 INFO     aci_pipeline.cli: ACI=3.069/5.0 [readability_first] → results/gh-pages/reports/www_uoc_edu_ca_Educatiu/www_uoc_edu_ca_Educatiu_1779634673_readability_first.html
+2026-05-24 14:57:57,472 INFO     aci_pipeline.cli: ── Pipeline: https://www.uoc.edu/ca [perfil=visual_first] ──
+2026-05-24 14:57:57,473 INFO     aci_pipeline.m6: M6 completat per https://www.uoc.edu/ca; Educatiu (profil=visual_first, ACI=2.98)
+2026-05-24 14:57:57,473 INFO     aci_pipeline.m7: M7 completat per https://www.uoc.edu/ca; Educatiu: 15 intervencions prioritzades
+2026-05-24 14:57:57,499 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_uoc_edu_ca_Educatiu/www_uoc_edu_ca_Educatiu_1779634673_visual_first.html
+2026-05-24 14:57:57,499 INFO     aci_pipeline.m8: M8 completat per https://www.uoc.edu/ca; Educatiu -> results/gh-pages/reports/www_uoc_edu_ca_Educatiu/www_uoc_edu_ca_Educatiu_1779634673_visual_first.html
+2026-05-24 14:57:57,499 INFO     aci_pipeline.cli: ACI=2.975/5.0 [visual_first] → results/gh-pages/reports/www_uoc_edu_ca_Educatiu/www_uoc_edu_ca_Educatiu_1779634673_visual_first.html
+2026-05-24 14:57:57,499 INFO     aci_pipeline.cli: ── Pipeline: https://www.url.edu/ca [perfil=wcag_strict] ──
+2026-05-24 14:58:02,282 INFO     aci_pipeline.m1: M1 completat per https://www.url.edu/ca; Educatiu (mode=playwright)
+2026-05-24 14:58:02,301 INFO     aci_pipeline.m2: M2 completat per https://www.url.edu/ca; Educatiu → results/gh-pages/processed/structure/www_url_edu_ca_Educatiu_1779634677.json
+2026-05-24 14:58:02,302 INFO     aci_pipeline.m3: M3 completat per https://www.url.edu/ca; Educatiu
+2026-05-24 14:58:02,302 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:58:02,303 INFO     aci_pipeline.m4: M4 completat per https://www.url.edu/ca; Educatiu
+2026-05-24 14:58:02,303 ERROR    aci_pipeline.m5: Error cridant Claude per element img_0: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:02,303 ERROR    aci_pipeline.m5: Error cridant Claude per element img_1: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:02,303 ERROR    aci_pipeline.m5: Error cridant Claude per element img_2: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:02,303 ERROR    aci_pipeline.m5: Error cridant Claude per element img_3: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:02,303 ERROR    aci_pipeline.m5: Error cridant Claude per element img_4: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:02,303 ERROR    aci_pipeline.m5: Error cridant Claude per element img_5: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:02,303 INFO     aci_pipeline.m5: M5: processats 6 elements visuals
+2026-05-24 14:58:02,304 INFO     aci_pipeline.cli: M5-IA: 6 element(s) processats
+2026-05-24 14:58:02,304 INFO     aci_pipeline.m6: M6 completat per https://www.url.edu/ca; Educatiu (profil=wcag_strict, ACI=3.54)
+2026-05-24 14:58:02,304 INFO     aci_pipeline.m7: M7 completat per https://www.url.edu/ca; Educatiu: 15 intervencions prioritzades
+2026-05-24 14:58:02,330 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_url_edu_ca_Educatiu/www_url_edu_ca_Educatiu_1779634677_wcag_strict.html
+2026-05-24 14:58:02,330 INFO     aci_pipeline.m8: M8 completat per https://www.url.edu/ca; Educatiu -> results/gh-pages/reports/www_url_edu_ca_Educatiu/www_url_edu_ca_Educatiu_1779634677_wcag_strict.html
+2026-05-24 14:58:02,330 INFO     aci_pipeline.cli: ACI=3.544/5.0 [wcag_strict] → results/gh-pages/reports/www_url_edu_ca_Educatiu/www_url_edu_ca_Educatiu_1779634677_wcag_strict.html
+2026-05-24 14:58:02,330 INFO     aci_pipeline.cli: ── Pipeline: https://www.url.edu/ca [perfil=readability_first] ──
+2026-05-24 14:58:02,331 INFO     aci_pipeline.m6: M6 completat per https://www.url.edu/ca; Educatiu (profil=readability_first, ACI=3.30)
+2026-05-24 14:58:02,331 INFO     aci_pipeline.m7: M7 completat per https://www.url.edu/ca; Educatiu: 15 intervencions prioritzades
+2026-05-24 14:58:02,357 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_url_edu_ca_Educatiu/www_url_edu_ca_Educatiu_1779634677_readability_first.html
+2026-05-24 14:58:02,357 INFO     aci_pipeline.m8: M8 completat per https://www.url.edu/ca; Educatiu -> results/gh-pages/reports/www_url_edu_ca_Educatiu/www_url_edu_ca_Educatiu_1779634677_readability_first.html
+2026-05-24 14:58:02,357 INFO     aci_pipeline.cli: ACI=3.297/5.0 [readability_first] → results/gh-pages/reports/www_url_edu_ca_Educatiu/www_url_edu_ca_Educatiu_1779634677_readability_first.html
+2026-05-24 14:58:02,357 INFO     aci_pipeline.cli: ── Pipeline: https://www.url.edu/ca [perfil=visual_first] ──
+2026-05-24 14:58:02,357 INFO     aci_pipeline.m6: M6 completat per https://www.url.edu/ca; Educatiu (profil=visual_first, ACI=3.32)
+2026-05-24 14:58:02,358 INFO     aci_pipeline.m7: M7 completat per https://www.url.edu/ca; Educatiu: 15 intervencions prioritzades
+2026-05-24 14:58:02,383 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_url_edu_ca_Educatiu/www_url_edu_ca_Educatiu_1779634677_visual_first.html
+2026-05-24 14:58:02,383 INFO     aci_pipeline.m8: M8 completat per https://www.url.edu/ca; Educatiu -> results/gh-pages/reports/www_url_edu_ca_Educatiu/www_url_edu_ca_Educatiu_1779634677_visual_first.html
+2026-05-24 14:58:02,383 INFO     aci_pipeline.cli: ACI=3.324/5.0 [visual_first] → results/gh-pages/reports/www_url_edu_ca_Educatiu/www_url_edu_ca_Educatiu_1779634677_visual_first.html
+2026-05-24 14:58:02,384 INFO     aci_pipeline.cli: ── Pipeline: https://www.unav.edu/ [perfil=wcag_strict] ──
+2026-05-24 14:58:11,778 INFO     aci_pipeline.m1: M1 completat per https://www.unav.edu/; Educatiu (mode=playwright)
+2026-05-24 14:58:12,004 INFO     aci_pipeline.m2: M2 completat per https://www.unav.edu/; Educatiu → results/gh-pages/processed/structure/www_unav_edu_Educatiu_1779634682.json
+2026-05-24 14:58:12,005 INFO     aci_pipeline.m3: M3 completat per https://www.unav.edu/; Educatiu
+2026-05-24 14:58:12,006 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:58:12,007 INFO     aci_pipeline.m4: M4 completat per https://www.unav.edu/; Educatiu
+2026-05-24 14:58:12,007 ERROR    aci_pipeline.m5: Error cridant Claude per element img_15: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,007 ERROR    aci_pipeline.m5: Error cridant Claude per element img_16: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,007 ERROR    aci_pipeline.m5: Error cridant Claude per element img_17: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,007 ERROR    aci_pipeline.m5: Error cridant Claude per element img_18: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,007 ERROR    aci_pipeline.m5: Error cridant Claude per element img_19: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,007 ERROR    aci_pipeline.m5: Error cridant Claude per element img_21: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,007 ERROR    aci_pipeline.m5: Error cridant Claude per element img_22: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,007 ERROR    aci_pipeline.m5: Error cridant Claude per element img_23: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,007 ERROR    aci_pipeline.m5: Error cridant Claude per element img_24: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,007 ERROR    aci_pipeline.m5: Error cridant Claude per element img_25: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,007 ERROR    aci_pipeline.m5: Error cridant Claude per element img_26: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,007 ERROR    aci_pipeline.m5: Error cridant Claude per element img_27: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,008 ERROR    aci_pipeline.m5: Error cridant Claude per element img_28: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,008 ERROR    aci_pipeline.m5: Error cridant Claude per element img_29: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,008 ERROR    aci_pipeline.m5: Error cridant Claude per element img_30: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,008 ERROR    aci_pipeline.m5: Error cridant Claude per element img_31: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,008 ERROR    aci_pipeline.m5: Error cridant Claude per element img_32: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,008 ERROR    aci_pipeline.m5: Error cridant Claude per element img_33: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,008 ERROR    aci_pipeline.m5: Error cridant Claude per element img_34: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,008 ERROR    aci_pipeline.m5: Error cridant Claude per element img_35: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,008 ERROR    aci_pipeline.m5: Error cridant Claude per element img_36: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,008 ERROR    aci_pipeline.m5: Error cridant Claude per element img_37: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,008 ERROR    aci_pipeline.m5: Error cridant Claude per element img_38: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,008 ERROR    aci_pipeline.m5: Error cridant Claude per element img_39: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,008 ERROR    aci_pipeline.m5: Error cridant Claude per element img_40: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,008 ERROR    aci_pipeline.m5: Error cridant Claude per element img_41: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,008 ERROR    aci_pipeline.m5: Error cridant Claude per element img_42: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,008 ERROR    aci_pipeline.m5: Error cridant Claude per element img_43: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,008 ERROR    aci_pipeline.m5: Error cridant Claude per element img_44: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,009 ERROR    aci_pipeline.m5: Error cridant Claude per element img_45: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,009 ERROR    aci_pipeline.m5: Error cridant Claude per element img_46: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,009 ERROR    aci_pipeline.m5: Error cridant Claude per element img_47: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,009 ERROR    aci_pipeline.m5: Error cridant Claude per element img_48: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,009 ERROR    aci_pipeline.m5: Error cridant Claude per element img_52: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:12,009 INFO     aci_pipeline.m5: M5: processats 34 elements visuals
+2026-05-24 14:58:12,009 INFO     aci_pipeline.cli: M5-IA: 34 element(s) processats
+2026-05-24 14:58:12,009 INFO     aci_pipeline.m6: M6 completat per https://www.unav.edu/; Educatiu (profil=wcag_strict, ACI=3.18)
+2026-05-24 14:58:12,010 INFO     aci_pipeline.m7: M7 completat per https://www.unav.edu/; Educatiu: 15 intervencions prioritzades
+2026-05-24 14:58:12,036 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_unav_edu_Educatiu/www_unav_edu_Educatiu_1779634682_wcag_strict.html
+2026-05-24 14:58:12,036 INFO     aci_pipeline.m8: M8 completat per https://www.unav.edu/; Educatiu -> results/gh-pages/reports/www_unav_edu_Educatiu/www_unav_edu_Educatiu_1779634682_wcag_strict.html
+2026-05-24 14:58:12,036 INFO     aci_pipeline.cli: ACI=3.184/5.0 [wcag_strict] → results/gh-pages/reports/www_unav_edu_Educatiu/www_unav_edu_Educatiu_1779634682_wcag_strict.html
+2026-05-24 14:58:12,036 INFO     aci_pipeline.cli: ── Pipeline: https://www.unav.edu/ [perfil=readability_first] ──
+2026-05-24 14:58:12,037 INFO     aci_pipeline.m6: M6 completat per https://www.unav.edu/; Educatiu (profil=readability_first, ACI=2.95)
+2026-05-24 14:58:12,037 INFO     aci_pipeline.m7: M7 completat per https://www.unav.edu/; Educatiu: 15 intervencions prioritzades
+2026-05-24 14:58:12,065 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_unav_edu_Educatiu/www_unav_edu_Educatiu_1779634682_readability_first.html
+2026-05-24 14:58:12,065 INFO     aci_pipeline.m8: M8 completat per https://www.unav.edu/; Educatiu -> results/gh-pages/reports/www_unav_edu_Educatiu/www_unav_edu_Educatiu_1779634682_readability_first.html
+2026-05-24 14:58:12,065 INFO     aci_pipeline.cli: ACI=2.951/5.0 [readability_first] → results/gh-pages/reports/www_unav_edu_Educatiu/www_unav_edu_Educatiu_1779634682_readability_first.html
+2026-05-24 14:58:12,065 INFO     aci_pipeline.cli: ── Pipeline: https://www.unav.edu/ [perfil=visual_first] ──
+2026-05-24 14:58:12,065 INFO     aci_pipeline.m6: M6 completat per https://www.unav.edu/; Educatiu (profil=visual_first, ACI=2.90)
+2026-05-24 14:58:12,066 INFO     aci_pipeline.m7: M7 completat per https://www.unav.edu/; Educatiu: 15 intervencions prioritzades
+2026-05-24 14:58:12,092 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_unav_edu_Educatiu/www_unav_edu_Educatiu_1779634682_visual_first.html
+2026-05-24 14:58:12,092 INFO     aci_pipeline.m8: M8 completat per https://www.unav.edu/; Educatiu -> results/gh-pages/reports/www_unav_edu_Educatiu/www_unav_edu_Educatiu_1779634682_visual_first.html
+2026-05-24 14:58:12,092 INFO     aci_pipeline.cli: ACI=2.901/5.0 [visual_first] → results/gh-pages/reports/www_unav_edu_Educatiu/www_unav_edu_Educatiu_1779634682_visual_first.html
+2026-05-24 14:58:12,092 INFO     aci_pipeline.cli: ── Pipeline: https://web.gencat.cat/ca/ciutadania/inici [perfil=wcag_strict] ──
+2026-05-24 14:58:17,075 INFO     aci_pipeline.m1: M1 completat per https://web.gencat.cat/ca/ciutadania/inici; Institucional (mode=playwright)
+2026-05-24 14:58:17,176 INFO     aci_pipeline.m2: M2 completat per https://web.gencat.cat/ca/ciutadania/inici; Institucional → results/gh-pages/processed/structure/web_gencat_cat_ca_ciutadania_inici_Institucional_1779634692.json
+2026-05-24 14:58:17,177 INFO     aci_pipeline.m3: M3 completat per https://web.gencat.cat/ca/ciutadania/inici; Institucional
+2026-05-24 14:58:17,178 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:58:17,179 INFO     aci_pipeline.m4: M4 completat per https://web.gencat.cat/ca/ciutadania/inici; Institucional
+2026-05-24 14:58:17,179 ERROR    aci_pipeline.m5: Error cridant Claude per element img_29: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:17,179 ERROR    aci_pipeline.m5: Error cridant Claude per element img_34: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:17,179 ERROR    aci_pipeline.m5: Error cridant Claude per element img_35: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:17,179 ERROR    aci_pipeline.m5: Error cridant Claude per element img_36: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:17,179 INFO     aci_pipeline.m5: M5: processats 4 elements visuals
+2026-05-24 14:58:17,179 INFO     aci_pipeline.cli: M5-IA: 4 element(s) processats
+2026-05-24 14:58:17,180 INFO     aci_pipeline.m6: M6 completat per https://web.gencat.cat/ca/ciutadania/inici; Institucional (profil=wcag_strict, ACI=3.60)
+2026-05-24 14:58:17,180 INFO     aci_pipeline.m7: M7 completat per https://web.gencat.cat/ca/ciutadania/inici; Institucional: 15 intervencions prioritzades
+2026-05-24 14:58:17,207 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/web_gencat_cat_ca_ciutadania_inici_Institucional/web_gencat_cat_ca_ciutadania_inici_Institucional_1779634692_wcag_strict.html
+2026-05-24 14:58:17,207 INFO     aci_pipeline.m8: M8 completat per https://web.gencat.cat/ca/ciutadania/inici; Institucional -> results/gh-pages/reports/web_gencat_cat_ca_ciutadania_inici_Institucional/web_gencat_cat_ca_ciutadania_inici_Institucional_1779634692_wcag_strict.html
+2026-05-24 14:58:17,207 INFO     aci_pipeline.cli: ACI=3.605/5.0 [wcag_strict] → results/gh-pages/reports/web_gencat_cat_ca_ciutadania_inici_Institucional/web_gencat_cat_ca_ciutadania_inici_Institucional_1779634692_wcag_strict.html
+2026-05-24 14:58:17,207 INFO     aci_pipeline.cli: ── Pipeline: https://web.gencat.cat/ca/ciutadania/inici [perfil=readability_first] ──
+2026-05-24 14:58:17,208 INFO     aci_pipeline.m6: M6 completat per https://web.gencat.cat/ca/ciutadania/inici; Institucional (profil=readability_first, ACI=3.51)
+2026-05-24 14:58:17,208 INFO     aci_pipeline.m7: M7 completat per https://web.gencat.cat/ca/ciutadania/inici; Institucional: 15 intervencions prioritzades
+2026-05-24 14:58:17,235 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/web_gencat_cat_ca_ciutadania_inici_Institucional/web_gencat_cat_ca_ciutadania_inici_Institucional_1779634692_readability_first.html
+2026-05-24 14:58:17,235 INFO     aci_pipeline.m8: M8 completat per https://web.gencat.cat/ca/ciutadania/inici; Institucional -> results/gh-pages/reports/web_gencat_cat_ca_ciutadania_inici_Institucional/web_gencat_cat_ca_ciutadania_inici_Institucional_1779634692_readability_first.html
+2026-05-24 14:58:17,235 INFO     aci_pipeline.cli: ACI=3.507/5.0 [readability_first] → results/gh-pages/reports/web_gencat_cat_ca_ciutadania_inici_Institucional/web_gencat_cat_ca_ciutadania_inici_Institucional_1779634692_readability_first.html
+2026-05-24 14:58:17,235 INFO     aci_pipeline.cli: ── Pipeline: https://web.gencat.cat/ca/ciutadania/inici [perfil=visual_first] ──
+2026-05-24 14:58:17,235 INFO     aci_pipeline.m6: M6 completat per https://web.gencat.cat/ca/ciutadania/inici; Institucional (profil=visual_first, ACI=3.29)
+2026-05-24 14:58:17,236 INFO     aci_pipeline.m7: M7 completat per https://web.gencat.cat/ca/ciutadania/inici; Institucional: 15 intervencions prioritzades
+2026-05-24 14:58:17,262 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/web_gencat_cat_ca_ciutadania_inici_Institucional/web_gencat_cat_ca_ciutadania_inici_Institucional_1779634692_visual_first.html
+2026-05-24 14:58:17,262 INFO     aci_pipeline.m8: M8 completat per https://web.gencat.cat/ca/ciutadania/inici; Institucional -> results/gh-pages/reports/web_gencat_cat_ca_ciutadania_inici_Institucional/web_gencat_cat_ca_ciutadania_inici_Institucional_1779634692_visual_first.html
+2026-05-24 14:58:17,262 INFO     aci_pipeline.cli: ACI=3.288/5.0 [visual_first] → results/gh-pages/reports/web_gencat_cat_ca_ciutadania_inici_Institucional/web_gencat_cat_ca_ciutadania_inici_Institucional_1779634692_visual_first.html
+2026-05-24 14:58:17,262 INFO     aci_pipeline.cli: ── Pipeline: https://educacio.gencat.cat/ca/inici [perfil=wcag_strict] ──
+2026-05-24 14:58:26,226 INFO     aci_pipeline.m1: M1 completat per https://educacio.gencat.cat/ca/inici; Institucional (mode=playwright)
+2026-05-24 14:58:26,563 INFO     aci_pipeline.m2: M2 completat per https://educacio.gencat.cat/ca/inici; Institucional → results/gh-pages/processed/structure/educacio_gencat_cat_ca_inici_Institucional_1779634697.json
+2026-05-24 14:58:26,565 INFO     aci_pipeline.m3: M3 completat per https://educacio.gencat.cat/ca/inici; Institucional
+2026-05-24 14:58:26,566 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:58:26,566 INFO     aci_pipeline.m4: M4 completat per https://educacio.gencat.cat/ca/inici; Institucional
+2026-05-24 14:58:26,567 ERROR    aci_pipeline.m5: Error cridant Claude per element img_141: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:26,567 ERROR    aci_pipeline.m5: Error cridant Claude per element img_142: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:26,567 INFO     aci_pipeline.m5: M5: processats 2 elements visuals
+2026-05-24 14:58:26,567 INFO     aci_pipeline.cli: M5-IA: 2 element(s) processats
+2026-05-24 14:58:26,567 INFO     aci_pipeline.m6: M6 completat per https://educacio.gencat.cat/ca/inici; Institucional (profil=wcag_strict, ACI=3.54)
+2026-05-24 14:58:26,568 INFO     aci_pipeline.m7: M7 completat per https://educacio.gencat.cat/ca/inici; Institucional: 15 intervencions prioritzades
+2026-05-24 14:58:26,593 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/educacio_gencat_cat_ca_inici_Institucional/educacio_gencat_cat_ca_inici_Institucional_1779634697_wcag_strict.html
+2026-05-24 14:58:26,594 INFO     aci_pipeline.m8: M8 completat per https://educacio.gencat.cat/ca/inici; Institucional -> results/gh-pages/reports/educacio_gencat_cat_ca_inici_Institucional/educacio_gencat_cat_ca_inici_Institucional_1779634697_wcag_strict.html
+2026-05-24 14:58:26,594 INFO     aci_pipeline.cli: ACI=3.539/5.0 [wcag_strict] → results/gh-pages/reports/educacio_gencat_cat_ca_inici_Institucional/educacio_gencat_cat_ca_inici_Institucional_1779634697_wcag_strict.html
+2026-05-24 14:58:26,594 INFO     aci_pipeline.cli: ── Pipeline: https://educacio.gencat.cat/ca/inici [perfil=readability_first] ──
+2026-05-24 14:58:26,594 INFO     aci_pipeline.m6: M6 completat per https://educacio.gencat.cat/ca/inici; Institucional (profil=readability_first, ACI=3.46)
+2026-05-24 14:58:26,594 INFO     aci_pipeline.m7: M7 completat per https://educacio.gencat.cat/ca/inici; Institucional: 15 intervencions prioritzades
+2026-05-24 14:58:26,620 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/educacio_gencat_cat_ca_inici_Institucional/educacio_gencat_cat_ca_inici_Institucional_1779634697_readability_first.html
+2026-05-24 14:58:26,620 INFO     aci_pipeline.m8: M8 completat per https://educacio.gencat.cat/ca/inici; Institucional -> results/gh-pages/reports/educacio_gencat_cat_ca_inici_Institucional/educacio_gencat_cat_ca_inici_Institucional_1779634697_readability_first.html
+2026-05-24 14:58:26,621 INFO     aci_pipeline.cli: ACI=3.460/5.0 [readability_first] → results/gh-pages/reports/educacio_gencat_cat_ca_inici_Institucional/educacio_gencat_cat_ca_inici_Institucional_1779634697_readability_first.html
+2026-05-24 14:58:26,621 INFO     aci_pipeline.cli: ── Pipeline: https://educacio.gencat.cat/ca/inici [perfil=visual_first] ──
+2026-05-24 14:58:26,621 INFO     aci_pipeline.m6: M6 completat per https://educacio.gencat.cat/ca/inici; Institucional (profil=visual_first, ACI=3.19)
+2026-05-24 14:58:26,621 INFO     aci_pipeline.m7: M7 completat per https://educacio.gencat.cat/ca/inici; Institucional: 15 intervencions prioritzades
+2026-05-24 14:58:26,647 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/educacio_gencat_cat_ca_inici_Institucional/educacio_gencat_cat_ca_inici_Institucional_1779634697_visual_first.html
+2026-05-24 14:58:26,647 INFO     aci_pipeline.m8: M8 completat per https://educacio.gencat.cat/ca/inici; Institucional -> results/gh-pages/reports/educacio_gencat_cat_ca_inici_Institucional/educacio_gencat_cat_ca_inici_Institucional_1779634697_visual_first.html
+2026-05-24 14:58:26,647 INFO     aci_pipeline.cli: ACI=3.186/5.0 [visual_first] → results/gh-pages/reports/educacio_gencat_cat_ca_inici_Institucional/educacio_gencat_cat_ca_inici_Institucional_1779634697_visual_first.html
+2026-05-24 14:58:26,647 INFO     aci_pipeline.cli: ── Pipeline: https://catsalut.gencat.cat/ca/inici/ [perfil=wcag_strict] ──
+2026-05-24 14:58:36,709 INFO     aci_pipeline.m1: M1 completat per https://catsalut.gencat.cat/ca/inici/; Institucional (mode=playwright)
+2026-05-24 14:58:37,013 INFO     aci_pipeline.m2: M2 completat per https://catsalut.gencat.cat/ca/inici/; Institucional → results/gh-pages/processed/structure/catsalut_gencat_cat_ca_inici_Institucional_1779634706.json
+2026-05-24 14:58:37,014 INFO     aci_pipeline.m3: M3 completat per https://catsalut.gencat.cat/ca/inici/; Institucional
+2026-05-24 14:58:37,015 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:58:37,016 INFO     aci_pipeline.m4: M4 completat per https://catsalut.gencat.cat/ca/inici/; Institucional
+2026-05-24 14:58:37,016 ERROR    aci_pipeline.m5: Error cridant Claude per element img_102: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:37,016 ERROR    aci_pipeline.m5: Error cridant Claude per element img_103: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:37,016 ERROR    aci_pipeline.m5: Error cridant Claude per element img_113: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:37,016 ERROR    aci_pipeline.m5: Error cridant Claude per element img_137: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:37,016 ERROR    aci_pipeline.m5: Error cridant Claude per element img_138: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:37,016 ERROR    aci_pipeline.m5: Error cridant Claude per element img_139: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:37,017 ERROR    aci_pipeline.m5: Error cridant Claude per element img_140: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:37,017 ERROR    aci_pipeline.m5: Error cridant Claude per element img_141: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:37,017 ERROR    aci_pipeline.m5: Error cridant Claude per element img_142: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:37,017 ERROR    aci_pipeline.m5: Error cridant Claude per element img_143: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:37,017 ERROR    aci_pipeline.m5: Error cridant Claude per element img_144: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:37,017 INFO     aci_pipeline.m5: M5: processats 11 elements visuals
+2026-05-24 14:58:37,017 INFO     aci_pipeline.cli: M5-IA: 11 element(s) processats
+2026-05-24 14:58:37,017 INFO     aci_pipeline.m6: M6 completat per https://catsalut.gencat.cat/ca/inici/; Institucional (profil=wcag_strict, ACI=3.52)
+2026-05-24 14:58:37,018 INFO     aci_pipeline.m7: M7 completat per https://catsalut.gencat.cat/ca/inici/; Institucional: 15 intervencions prioritzades
+2026-05-24 14:58:37,044 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/catsalut_gencat_cat_ca_inici_Institucional/catsalut_gencat_cat_ca_inici_Institucional_1779634706_wcag_strict.html
+2026-05-24 14:58:37,044 INFO     aci_pipeline.m8: M8 completat per https://catsalut.gencat.cat/ca/inici/; Institucional -> results/gh-pages/reports/catsalut_gencat_cat_ca_inici_Institucional/catsalut_gencat_cat_ca_inici_Institucional_1779634706_wcag_strict.html
+2026-05-24 14:58:37,044 INFO     aci_pipeline.cli: ACI=3.521/5.0 [wcag_strict] → results/gh-pages/reports/catsalut_gencat_cat_ca_inici_Institucional/catsalut_gencat_cat_ca_inici_Institucional_1779634706_wcag_strict.html
+2026-05-24 14:58:37,044 INFO     aci_pipeline.cli: ── Pipeline: https://catsalut.gencat.cat/ca/inici/ [perfil=readability_first] ──
+2026-05-24 14:58:37,044 INFO     aci_pipeline.m6: M6 completat per https://catsalut.gencat.cat/ca/inici/; Institucional (profil=readability_first, ACI=3.45)
+2026-05-24 14:58:37,045 INFO     aci_pipeline.m7: M7 completat per https://catsalut.gencat.cat/ca/inici/; Institucional: 15 intervencions prioritzades
+2026-05-24 14:58:37,071 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/catsalut_gencat_cat_ca_inici_Institucional/catsalut_gencat_cat_ca_inici_Institucional_1779634706_readability_first.html
+2026-05-24 14:58:37,071 INFO     aci_pipeline.m8: M8 completat per https://catsalut.gencat.cat/ca/inici/; Institucional -> results/gh-pages/reports/catsalut_gencat_cat_ca_inici_Institucional/catsalut_gencat_cat_ca_inici_Institucional_1779634706_readability_first.html
+2026-05-24 14:58:37,071 INFO     aci_pipeline.cli: ACI=3.449/5.0 [readability_first] → results/gh-pages/reports/catsalut_gencat_cat_ca_inici_Institucional/catsalut_gencat_cat_ca_inici_Institucional_1779634706_readability_first.html
+2026-05-24 14:58:37,071 INFO     aci_pipeline.cli: ── Pipeline: https://catsalut.gencat.cat/ca/inici/ [perfil=visual_first] ──
+2026-05-24 14:58:37,071 INFO     aci_pipeline.m6: M6 completat per https://catsalut.gencat.cat/ca/inici/; Institucional (profil=visual_first, ACI=3.18)
+2026-05-24 14:58:37,072 INFO     aci_pipeline.m7: M7 completat per https://catsalut.gencat.cat/ca/inici/; Institucional: 15 intervencions prioritzades
+2026-05-24 14:58:37,097 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/catsalut_gencat_cat_ca_inici_Institucional/catsalut_gencat_cat_ca_inici_Institucional_1779634706_visual_first.html
+2026-05-24 14:58:37,097 INFO     aci_pipeline.m8: M8 completat per https://catsalut.gencat.cat/ca/inici/; Institucional -> results/gh-pages/reports/catsalut_gencat_cat_ca_inici_Institucional/catsalut_gencat_cat_ca_inici_Institucional_1779634706_visual_first.html
+2026-05-24 14:58:37,098 INFO     aci_pipeline.cli: ACI=3.180/5.0 [visual_first] → results/gh-pages/reports/catsalut_gencat_cat_ca_inici_Institucional/catsalut_gencat_cat_ca_inici_Institucional_1779634706_visual_first.html
+2026-05-24 14:58:37,098 INFO     aci_pipeline.cli: ── Pipeline: https://www.meteo.cat/ [perfil=wcag_strict] ──
+2026-05-24 14:58:43,156 INFO     aci_pipeline.m1: M1 completat per https://www.meteo.cat/; Institucional (mode=playwright)
+2026-05-24 14:58:43,229 INFO     aci_pipeline.m2: M2 completat per https://www.meteo.cat/; Institucional → results/gh-pages/processed/structure/www_meteo_cat_Institucional_1779634717.json
+2026-05-24 14:58:43,231 INFO     aci_pipeline.m3: M3 completat per https://www.meteo.cat/; Institucional
+2026-05-24 14:58:43,232 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:58:43,232 INFO     aci_pipeline.m4: M4 completat per https://www.meteo.cat/; Institucional
+2026-05-24 14:58:43,232 ERROR    aci_pipeline.m5: Error cridant Claude per element img_82: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:43,232 INFO     aci_pipeline.m5: M5: processats 1 elements visuals
+2026-05-24 14:58:43,232 INFO     aci_pipeline.cli: M5-IA: 1 element(s) processats
+2026-05-24 14:58:43,233 INFO     aci_pipeline.m6: M6 completat per https://www.meteo.cat/; Institucional (profil=wcag_strict, ACI=3.52)
+2026-05-24 14:58:43,233 INFO     aci_pipeline.m7: M7 completat per https://www.meteo.cat/; Institucional: 15 intervencions prioritzades
+2026-05-24 14:58:43,260 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_meteo_cat_Institucional/www_meteo_cat_Institucional_1779634717_wcag_strict.html
+2026-05-24 14:58:43,260 INFO     aci_pipeline.m8: M8 completat per https://www.meteo.cat/; Institucional -> results/gh-pages/reports/www_meteo_cat_Institucional/www_meteo_cat_Institucional_1779634717_wcag_strict.html
+2026-05-24 14:58:43,260 INFO     aci_pipeline.cli: ACI=3.522/5.0 [wcag_strict] → results/gh-pages/reports/www_meteo_cat_Institucional/www_meteo_cat_Institucional_1779634717_wcag_strict.html
+2026-05-24 14:58:43,260 INFO     aci_pipeline.cli: ── Pipeline: https://www.meteo.cat/ [perfil=readability_first] ──
+2026-05-24 14:58:43,260 INFO     aci_pipeline.m6: M6 completat per https://www.meteo.cat/; Institucional (profil=readability_first, ACI=3.44)
+2026-05-24 14:58:43,261 INFO     aci_pipeline.m7: M7 completat per https://www.meteo.cat/; Institucional: 15 intervencions prioritzades
+2026-05-24 14:58:43,287 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_meteo_cat_Institucional/www_meteo_cat_Institucional_1779634717_readability_first.html
+2026-05-24 14:58:43,287 INFO     aci_pipeline.m8: M8 completat per https://www.meteo.cat/; Institucional -> results/gh-pages/reports/www_meteo_cat_Institucional/www_meteo_cat_Institucional_1779634717_readability_first.html
+2026-05-24 14:58:43,287 INFO     aci_pipeline.cli: ACI=3.437/5.0 [readability_first] → results/gh-pages/reports/www_meteo_cat_Institucional/www_meteo_cat_Institucional_1779634717_readability_first.html
+2026-05-24 14:58:43,287 INFO     aci_pipeline.cli: ── Pipeline: https://www.meteo.cat/ [perfil=visual_first] ──
+2026-05-24 14:58:43,287 INFO     aci_pipeline.m6: M6 completat per https://www.meteo.cat/; Institucional (profil=visual_first, ACI=3.19)
+2026-05-24 14:58:43,288 INFO     aci_pipeline.m7: M7 completat per https://www.meteo.cat/; Institucional: 15 intervencions prioritzades
+2026-05-24 14:58:43,315 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_meteo_cat_Institucional/www_meteo_cat_Institucional_1779634717_visual_first.html
+2026-05-24 14:58:43,315 INFO     aci_pipeline.m8: M8 completat per https://www.meteo.cat/; Institucional -> results/gh-pages/reports/www_meteo_cat_Institucional/www_meteo_cat_Institucional_1779634717_visual_first.html
+2026-05-24 14:58:43,315 INFO     aci_pipeline.cli: ACI=3.191/5.0 [visual_first] → results/gh-pages/reports/www_meteo_cat_Institucional/www_meteo_cat_Institucional_1779634717_visual_first.html
+2026-05-24 14:58:43,315 INFO     aci_pipeline.cli: ── Pipeline: https://serveiocupacio.gencat.cat/ca/inici [perfil=wcag_strict] ──
+2026-05-24 14:58:52,335 INFO     aci_pipeline.m1: M1 completat per https://serveiocupacio.gencat.cat/ca/inici; Institucional (mode=playwright)
+2026-05-24 14:58:52,526 INFO     aci_pipeline.m2: M2 completat per https://serveiocupacio.gencat.cat/ca/inici; Institucional → results/gh-pages/processed/structure/serveiocupacio_gencat_cat_ca_inici_Institucional_1779634723.json
+2026-05-24 14:58:52,528 INFO     aci_pipeline.m3: M3 completat per https://serveiocupacio.gencat.cat/ca/inici; Institucional
+2026-05-24 14:58:52,529 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:58:52,529 INFO     aci_pipeline.m4: M4 completat per https://serveiocupacio.gencat.cat/ca/inici; Institucional
+2026-05-24 14:58:52,529 ERROR    aci_pipeline.m5: Error cridant Claude per element img_78: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:52,529 ERROR    aci_pipeline.m5: Error cridant Claude per element img_79: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:52,530 ERROR    aci_pipeline.m5: Error cridant Claude per element img_99: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:52,530 ERROR    aci_pipeline.m5: Error cridant Claude per element img_100: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:52,530 ERROR    aci_pipeline.m5: Error cridant Claude per element img_101: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:52,530 ERROR    aci_pipeline.m5: Error cridant Claude per element img_104: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:52,530 ERROR    aci_pipeline.m5: Error cridant Claude per element img_105: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:52,530 ERROR    aci_pipeline.m5: Error cridant Claude per element img_106: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:52,530 ERROR    aci_pipeline.m5: Error cridant Claude per element img_107: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:52,530 ERROR    aci_pipeline.m5: Error cridant Claude per element img_108: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:58:52,530 INFO     aci_pipeline.m5: M5: processats 10 elements visuals
+2026-05-24 14:58:52,530 INFO     aci_pipeline.cli: M5-IA: 10 element(s) processats
+2026-05-24 14:58:52,531 INFO     aci_pipeline.m6: M6 completat per https://serveiocupacio.gencat.cat/ca/inici; Institucional (profil=wcag_strict, ACI=3.55)
+2026-05-24 14:58:52,531 INFO     aci_pipeline.m7: M7 completat per https://serveiocupacio.gencat.cat/ca/inici; Institucional: 15 intervencions prioritzades
+2026-05-24 14:58:52,557 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/serveiocupacio_gencat_cat_ca_inici_Institucional/serveiocupacio_gencat_cat_ca_inici_Institucional_1779634723_wcag_strict.html
+2026-05-24 14:58:52,557 INFO     aci_pipeline.m8: M8 completat per https://serveiocupacio.gencat.cat/ca/inici; Institucional -> results/gh-pages/reports/serveiocupacio_gencat_cat_ca_inici_Institucional/serveiocupacio_gencat_cat_ca_inici_Institucional_1779634723_wcag_strict.html
+2026-05-24 14:58:52,557 INFO     aci_pipeline.cli: ACI=3.546/5.0 [wcag_strict] → results/gh-pages/reports/serveiocupacio_gencat_cat_ca_inici_Institucional/serveiocupacio_gencat_cat_ca_inici_Institucional_1779634723_wcag_strict.html
+2026-05-24 14:58:52,557 INFO     aci_pipeline.cli: ── Pipeline: https://serveiocupacio.gencat.cat/ca/inici [perfil=readability_first] ──
+2026-05-24 14:58:52,558 INFO     aci_pipeline.m6: M6 completat per https://serveiocupacio.gencat.cat/ca/inici; Institucional (profil=readability_first, ACI=3.48)
+2026-05-24 14:58:52,558 INFO     aci_pipeline.m7: M7 completat per https://serveiocupacio.gencat.cat/ca/inici; Institucional: 15 intervencions prioritzades
+2026-05-24 14:58:52,584 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/serveiocupacio_gencat_cat_ca_inici_Institucional/serveiocupacio_gencat_cat_ca_inici_Institucional_1779634723_readability_first.html
+2026-05-24 14:58:52,584 INFO     aci_pipeline.m8: M8 completat per https://serveiocupacio.gencat.cat/ca/inici; Institucional -> results/gh-pages/reports/serveiocupacio_gencat_cat_ca_inici_Institucional/serveiocupacio_gencat_cat_ca_inici_Institucional_1779634723_readability_first.html
+2026-05-24 14:58:52,584 INFO     aci_pipeline.cli: ACI=3.475/5.0 [readability_first] → results/gh-pages/reports/serveiocupacio_gencat_cat_ca_inici_Institucional/serveiocupacio_gencat_cat_ca_inici_Institucional_1779634723_readability_first.html
+2026-05-24 14:58:52,584 INFO     aci_pipeline.cli: ── Pipeline: https://serveiocupacio.gencat.cat/ca/inici [perfil=visual_first] ──
+2026-05-24 14:58:52,585 INFO     aci_pipeline.m6: M6 completat per https://serveiocupacio.gencat.cat/ca/inici; Institucional (profil=visual_first, ACI=3.22)
+2026-05-24 14:58:52,585 INFO     aci_pipeline.m7: M7 completat per https://serveiocupacio.gencat.cat/ca/inici; Institucional: 15 intervencions prioritzades
+2026-05-24 14:58:52,612 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/serveiocupacio_gencat_cat_ca_inici_Institucional/serveiocupacio_gencat_cat_ca_inici_Institucional_1779634723_visual_first.html
+2026-05-24 14:58:52,612 INFO     aci_pipeline.m8: M8 completat per https://serveiocupacio.gencat.cat/ca/inici; Institucional -> results/gh-pages/reports/serveiocupacio_gencat_cat_ca_inici_Institucional/serveiocupacio_gencat_cat_ca_inici_Institucional_1779634723_visual_first.html
+2026-05-24 14:58:52,612 INFO     aci_pipeline.cli: ACI=3.222/5.0 [visual_first] → results/gh-pages/reports/serveiocupacio_gencat_cat_ca_inici_Institucional/serveiocupacio_gencat_cat_ca_inici_Institucional_1779634723_visual_first.html
+2026-05-24 14:58:52,612 INFO     aci_pipeline.cli: ── Pipeline: https://www.diba.cat/ca/inici [perfil=wcag_strict] ──
+2026-05-24 14:59:09,010 INFO     aci_pipeline.m1: M1 completat per https://www.diba.cat/ca/inici; Institucional (mode=playwright)
+2026-05-24 14:59:09,092 INFO     aci_pipeline.m2: M2 completat per https://www.diba.cat/ca/inici; Institucional → results/gh-pages/processed/structure/www_diba_cat_ca_inici_Institucional_1779634732.json
+2026-05-24 14:59:09,093 INFO     aci_pipeline.m3: M3 completat per https://www.diba.cat/ca/inici; Institucional
+2026-05-24 14:59:09,094 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:59:09,094 INFO     aci_pipeline.m4: M4 completat per https://www.diba.cat/ca/inici; Institucional
+2026-05-24 14:59:09,095 INFO     aci_pipeline.m5: M5: processats 0 elements visuals
+2026-05-24 14:59:09,095 INFO     aci_pipeline.m6: M6 completat per https://www.diba.cat/ca/inici; Institucional (profil=wcag_strict, ACI=3.68)
+2026-05-24 14:59:09,096 INFO     aci_pipeline.m7: M7 completat per https://www.diba.cat/ca/inici; Institucional: 15 intervencions prioritzades
+2026-05-24 14:59:09,122 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_diba_cat_ca_inici_Institucional/www_diba_cat_ca_inici_Institucional_1779634732_wcag_strict.html
+2026-05-24 14:59:09,122 INFO     aci_pipeline.m8: M8 completat per https://www.diba.cat/ca/inici; Institucional -> results/gh-pages/reports/www_diba_cat_ca_inici_Institucional/www_diba_cat_ca_inici_Institucional_1779634732_wcag_strict.html
+2026-05-24 14:59:09,122 INFO     aci_pipeline.cli: ACI=3.676/5.0 [wcag_strict] → results/gh-pages/reports/www_diba_cat_ca_inici_Institucional/www_diba_cat_ca_inici_Institucional_1779634732_wcag_strict.html
+2026-05-24 14:59:09,122 INFO     aci_pipeline.cli: ── Pipeline: https://www.diba.cat/ca/inici [perfil=readability_first] ──
+2026-05-24 14:59:09,123 INFO     aci_pipeline.m6: M6 completat per https://www.diba.cat/ca/inici; Institucional (profil=readability_first, ACI=3.59)
+2026-05-24 14:59:09,123 INFO     aci_pipeline.m7: M7 completat per https://www.diba.cat/ca/inici; Institucional: 15 intervencions prioritzades
+2026-05-24 14:59:09,149 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_diba_cat_ca_inici_Institucional/www_diba_cat_ca_inici_Institucional_1779634732_readability_first.html
+2026-05-24 14:59:09,149 INFO     aci_pipeline.m8: M8 completat per https://www.diba.cat/ca/inici; Institucional -> results/gh-pages/reports/www_diba_cat_ca_inici_Institucional/www_diba_cat_ca_inici_Institucional_1779634732_readability_first.html
+2026-05-24 14:59:09,149 INFO     aci_pipeline.cli: ACI=3.588/5.0 [readability_first] → results/gh-pages/reports/www_diba_cat_ca_inici_Institucional/www_diba_cat_ca_inici_Institucional_1779634732_readability_first.html
+2026-05-24 14:59:09,149 INFO     aci_pipeline.cli: ── Pipeline: https://www.diba.cat/ca/inici [perfil=visual_first] ──
+2026-05-24 14:59:09,150 INFO     aci_pipeline.m6: M6 completat per https://www.diba.cat/ca/inici; Institucional (profil=visual_first, ACI=3.43)
+2026-05-24 14:59:09,150 INFO     aci_pipeline.m7: M7 completat per https://www.diba.cat/ca/inici; Institucional: 15 intervencions prioritzades
+2026-05-24 14:59:09,176 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_diba_cat_ca_inici_Institucional/www_diba_cat_ca_inici_Institucional_1779634732_visual_first.html
+2026-05-24 14:59:09,176 INFO     aci_pipeline.m8: M8 completat per https://www.diba.cat/ca/inici; Institucional -> results/gh-pages/reports/www_diba_cat_ca_inici_Institucional/www_diba_cat_ca_inici_Institucional_1779634732_visual_first.html
+2026-05-24 14:59:09,176 INFO     aci_pipeline.cli: ACI=3.434/5.0 [visual_first] → results/gh-pages/reports/www_diba_cat_ca_inici_Institucional/www_diba_cat_ca_inici_Institucional_1779634732_visual_first.html
+2026-05-24 14:59:09,176 INFO     aci_pipeline.cli: ── Pipeline: https://www.tnc.cat/ca [perfil=wcag_strict] ──
+2026-05-24 14:59:13,462 INFO     aci_pipeline.m1: M1 completat per https://www.tnc.cat/ca; Cultural (mode=playwright)
+2026-05-24 14:59:13,536 INFO     aci_pipeline.m2: M2 completat per https://www.tnc.cat/ca; Cultural → results/gh-pages/processed/structure/www_tnc_cat_ca_Cultural_1779634749.json
+2026-05-24 14:59:13,538 INFO     aci_pipeline.m3: M3 completat per https://www.tnc.cat/ca; Cultural
+2026-05-24 14:59:13,538 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:59:13,539 INFO     aci_pipeline.m4: M4 completat per https://www.tnc.cat/ca; Cultural
+2026-05-24 14:59:13,539 ERROR    aci_pipeline.m5: Error cridant Claude per element img_1: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:13,539 ERROR    aci_pipeline.m5: Error cridant Claude per element img_11: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:13,539 ERROR    aci_pipeline.m5: Error cridant Claude per element img_12: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:13,540 ERROR    aci_pipeline.m5: Error cridant Claude per element img_13: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:13,540 ERROR    aci_pipeline.m5: Error cridant Claude per element img_19: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:13,540 ERROR    aci_pipeline.m5: Error cridant Claude per element img_20: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:13,540 ERROR    aci_pipeline.m5: Error cridant Claude per element img_21: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:13,540 ERROR    aci_pipeline.m5: Error cridant Claude per element img_32: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:13,540 ERROR    aci_pipeline.m5: Error cridant Claude per element img_33: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:13,540 ERROR    aci_pipeline.m5: Error cridant Claude per element img_34: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:13,540 INFO     aci_pipeline.m5: M5: processats 10 elements visuals
+2026-05-24 14:59:13,540 INFO     aci_pipeline.cli: M5-IA: 10 element(s) processats
+2026-05-24 14:59:13,541 INFO     aci_pipeline.m6: M6 completat per https://www.tnc.cat/ca; Cultural (profil=wcag_strict, ACI=3.84)
+2026-05-24 14:59:13,541 INFO     aci_pipeline.m7: M7 completat per https://www.tnc.cat/ca; Cultural: 15 intervencions prioritzades
+2026-05-24 14:59:13,567 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_tnc_cat_ca_Cultural/www_tnc_cat_ca_Cultural_1779634749_wcag_strict.html
+2026-05-24 14:59:13,568 INFO     aci_pipeline.m8: M8 completat per https://www.tnc.cat/ca; Cultural -> results/gh-pages/reports/www_tnc_cat_ca_Cultural/www_tnc_cat_ca_Cultural_1779634749_wcag_strict.html
+2026-05-24 14:59:13,568 INFO     aci_pipeline.cli: ACI=3.844/5.0 [wcag_strict] → results/gh-pages/reports/www_tnc_cat_ca_Cultural/www_tnc_cat_ca_Cultural_1779634749_wcag_strict.html
+2026-05-24 14:59:13,568 INFO     aci_pipeline.cli: ── Pipeline: https://www.tnc.cat/ca [perfil=readability_first] ──
+2026-05-24 14:59:13,568 INFO     aci_pipeline.m6: M6 completat per https://www.tnc.cat/ca; Cultural (profil=readability_first, ACI=3.74)
+2026-05-24 14:59:13,569 INFO     aci_pipeline.m7: M7 completat per https://www.tnc.cat/ca; Cultural: 15 intervencions prioritzades
+2026-05-24 14:59:13,595 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_tnc_cat_ca_Cultural/www_tnc_cat_ca_Cultural_1779634749_readability_first.html
+2026-05-24 14:59:13,595 INFO     aci_pipeline.m8: M8 completat per https://www.tnc.cat/ca; Cultural -> results/gh-pages/reports/www_tnc_cat_ca_Cultural/www_tnc_cat_ca_Cultural_1779634749_readability_first.html
+2026-05-24 14:59:13,595 INFO     aci_pipeline.cli: ACI=3.737/5.0 [readability_first] → results/gh-pages/reports/www_tnc_cat_ca_Cultural/www_tnc_cat_ca_Cultural_1779634749_readability_first.html
+2026-05-24 14:59:13,595 INFO     aci_pipeline.cli: ── Pipeline: https://www.tnc.cat/ca [perfil=visual_first] ──
+2026-05-24 14:59:13,595 INFO     aci_pipeline.m6: M6 completat per https://www.tnc.cat/ca; Cultural (profil=visual_first, ACI=3.61)
+2026-05-24 14:59:13,596 INFO     aci_pipeline.m7: M7 completat per https://www.tnc.cat/ca; Cultural: 15 intervencions prioritzades
+2026-05-24 14:59:13,622 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_tnc_cat_ca_Cultural/www_tnc_cat_ca_Cultural_1779634749_visual_first.html
+2026-05-24 14:59:13,622 INFO     aci_pipeline.m8: M8 completat per https://www.tnc.cat/ca; Cultural -> results/gh-pages/reports/www_tnc_cat_ca_Cultural/www_tnc_cat_ca_Cultural_1779634749_visual_first.html
+2026-05-24 14:59:13,622 INFO     aci_pipeline.cli: ACI=3.609/5.0 [visual_first] → results/gh-pages/reports/www_tnc_cat_ca_Cultural/www_tnc_cat_ca_Cultural_1779634749_visual_first.html
+2026-05-24 14:59:13,622 INFO     aci_pipeline.cli: ── Pipeline: https://www.museunacional.cat/ca [perfil=wcag_strict] ──
+2026-05-24 14:59:19,015 INFO     aci_pipeline.m1: M1 completat per https://www.museunacional.cat/ca; Cultural (mode=playwright)
+2026-05-24 14:59:19,052 INFO     aci_pipeline.m2: M2 completat per https://www.museunacional.cat/ca; Cultural → results/gh-pages/processed/structure/www_museunacional_cat_ca_Cultural_1779634753.json
+2026-05-24 14:59:19,052 INFO     aci_pipeline.m3: M3 completat per https://www.museunacional.cat/ca; Cultural
+2026-05-24 14:59:19,053 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:59:19,054 INFO     aci_pipeline.m4: M4 completat per https://www.museunacional.cat/ca; Cultural
+2026-05-24 14:59:19,054 ERROR    aci_pipeline.m5: Error cridant Claude per element img_10: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:19,054 INFO     aci_pipeline.m5: M5: processats 1 elements visuals
+2026-05-24 14:59:19,054 INFO     aci_pipeline.cli: M5-IA: 1 element(s) processats
+2026-05-24 14:59:19,055 INFO     aci_pipeline.m6: M6 completat per https://www.museunacional.cat/ca; Cultural (profil=wcag_strict, ACI=3.53)
+2026-05-24 14:59:19,055 INFO     aci_pipeline.m7: M7 completat per https://www.museunacional.cat/ca; Cultural: 15 intervencions prioritzades
+2026-05-24 14:59:19,081 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_museunacional_cat_ca_Cultural/www_museunacional_cat_ca_Cultural_1779634753_wcag_strict.html
+2026-05-24 14:59:19,081 INFO     aci_pipeline.m8: M8 completat per https://www.museunacional.cat/ca; Cultural -> results/gh-pages/reports/www_museunacional_cat_ca_Cultural/www_museunacional_cat_ca_Cultural_1779634753_wcag_strict.html
+2026-05-24 14:59:19,081 INFO     aci_pipeline.cli: ACI=3.531/5.0 [wcag_strict] → results/gh-pages/reports/www_museunacional_cat_ca_Cultural/www_museunacional_cat_ca_Cultural_1779634753_wcag_strict.html
+2026-05-24 14:59:19,082 INFO     aci_pipeline.cli: ── Pipeline: https://www.museunacional.cat/ca [perfil=readability_first] ──
+2026-05-24 14:59:19,082 INFO     aci_pipeline.m6: M6 completat per https://www.museunacional.cat/ca; Cultural (profil=readability_first, ACI=3.45)
+2026-05-24 14:59:19,083 INFO     aci_pipeline.m7: M7 completat per https://www.museunacional.cat/ca; Cultural: 15 intervencions prioritzades
+2026-05-24 14:59:19,108 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_museunacional_cat_ca_Cultural/www_museunacional_cat_ca_Cultural_1779634753_readability_first.html
+2026-05-24 14:59:19,108 INFO     aci_pipeline.m8: M8 completat per https://www.museunacional.cat/ca; Cultural -> results/gh-pages/reports/www_museunacional_cat_ca_Cultural/www_museunacional_cat_ca_Cultural_1779634753_readability_first.html
+2026-05-24 14:59:19,109 INFO     aci_pipeline.cli: ACI=3.447/5.0 [readability_first] → results/gh-pages/reports/www_museunacional_cat_ca_Cultural/www_museunacional_cat_ca_Cultural_1779634753_readability_first.html
+2026-05-24 14:59:19,109 INFO     aci_pipeline.cli: ── Pipeline: https://www.museunacional.cat/ca [perfil=visual_first] ──
+2026-05-24 14:59:19,109 INFO     aci_pipeline.m6: M6 completat per https://www.museunacional.cat/ca; Cultural (profil=visual_first, ACI=3.30)
+2026-05-24 14:59:19,110 INFO     aci_pipeline.m7: M7 completat per https://www.museunacional.cat/ca; Cultural: 15 intervencions prioritzades
+2026-05-24 14:59:19,135 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_museunacional_cat_ca_Cultural/www_museunacional_cat_ca_Cultural_1779634753_visual_first.html
+2026-05-24 14:59:19,135 INFO     aci_pipeline.m8: M8 completat per https://www.museunacional.cat/ca; Cultural -> results/gh-pages/reports/www_museunacional_cat_ca_Cultural/www_museunacional_cat_ca_Cultural_1779634753_visual_first.html
+2026-05-24 14:59:19,136 INFO     aci_pipeline.cli: ACI=3.298/5.0 [visual_first] → results/gh-pages/reports/www_museunacional_cat_ca_Cultural/www_museunacional_cat_ca_Cultural_1779634753_visual_first.html
+2026-05-24 14:59:19,136 INFO     aci_pipeline.cli: ── Pipeline: https://sagradafamilia.org/ [perfil=wcag_strict] ──
+2026-05-24 14:59:25,766 INFO     aci_pipeline.m1: M1 completat per https://sagradafamilia.org/; Cultural (mode=playwright)
+2026-05-24 14:59:25,904 INFO     aci_pipeline.m2: M2 completat per https://sagradafamilia.org/; Cultural → results/gh-pages/processed/structure/sagradafamilia_org_Cultural_1779634759.json
+2026-05-24 14:59:25,906 INFO     aci_pipeline.m3: M3 completat per https://sagradafamilia.org/; Cultural
+2026-05-24 14:59:25,907 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:59:25,907 INFO     aci_pipeline.m4: M4 completat per https://sagradafamilia.org/; Cultural
+2026-05-24 14:59:25,907 ERROR    aci_pipeline.m5: Error cridant Claude per element img_14: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:25,908 ERROR    aci_pipeline.m5: Error cridant Claude per element img_84: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:25,908 ERROR    aci_pipeline.m5: Error cridant Claude per element img_85: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:25,908 INFO     aci_pipeline.m5: M5: processats 3 elements visuals
+2026-05-24 14:59:25,908 INFO     aci_pipeline.cli: M5-IA: 3 element(s) processats
+2026-05-24 14:59:25,908 INFO     aci_pipeline.m6: M6 completat per https://sagradafamilia.org/; Cultural (profil=wcag_strict, ACI=3.41)
+2026-05-24 14:59:25,909 INFO     aci_pipeline.m7: M7 completat per https://sagradafamilia.org/; Cultural: 15 intervencions prioritzades
+2026-05-24 14:59:25,936 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/sagradafamilia_org_Cultural/sagradafamilia_org_Cultural_1779634759_wcag_strict.html
+2026-05-24 14:59:25,937 INFO     aci_pipeline.m8: M8 completat per https://sagradafamilia.org/; Cultural -> results/gh-pages/reports/sagradafamilia_org_Cultural/sagradafamilia_org_Cultural_1779634759_wcag_strict.html
+2026-05-24 14:59:25,937 INFO     aci_pipeline.cli: ACI=3.413/5.0 [wcag_strict] → results/gh-pages/reports/sagradafamilia_org_Cultural/sagradafamilia_org_Cultural_1779634759_wcag_strict.html
+2026-05-24 14:59:25,937 INFO     aci_pipeline.cli: ── Pipeline: https://sagradafamilia.org/ [perfil=readability_first] ──
+2026-05-24 14:59:25,937 INFO     aci_pipeline.m6: M6 completat per https://sagradafamilia.org/; Cultural (profil=readability_first, ACI=2.90)
+2026-05-24 14:59:25,938 INFO     aci_pipeline.m7: M7 completat per https://sagradafamilia.org/; Cultural: 15 intervencions prioritzades
+2026-05-24 14:59:25,963 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/sagradafamilia_org_Cultural/sagradafamilia_org_Cultural_1779634759_readability_first.html
+2026-05-24 14:59:25,964 INFO     aci_pipeline.m8: M8 completat per https://sagradafamilia.org/; Cultural -> results/gh-pages/reports/sagradafamilia_org_Cultural/sagradafamilia_org_Cultural_1779634759_readability_first.html
+2026-05-24 14:59:25,964 INFO     aci_pipeline.cli: ACI=2.905/5.0 [readability_first] → results/gh-pages/reports/sagradafamilia_org_Cultural/sagradafamilia_org_Cultural_1779634759_readability_first.html
+2026-05-24 14:59:25,964 INFO     aci_pipeline.cli: ── Pipeline: https://sagradafamilia.org/ [perfil=visual_first] ──
+2026-05-24 14:59:25,964 INFO     aci_pipeline.m6: M6 completat per https://sagradafamilia.org/; Cultural (profil=visual_first, ACI=3.23)
+2026-05-24 14:59:25,965 INFO     aci_pipeline.m7: M7 completat per https://sagradafamilia.org/; Cultural: 15 intervencions prioritzades
+2026-05-24 14:59:25,991 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/sagradafamilia_org_Cultural/sagradafamilia_org_Cultural_1779634759_visual_first.html
+2026-05-24 14:59:25,991 INFO     aci_pipeline.m8: M8 completat per https://sagradafamilia.org/; Cultural -> results/gh-pages/reports/sagradafamilia_org_Cultural/sagradafamilia_org_Cultural_1779634759_visual_first.html
+2026-05-24 14:59:25,991 INFO     aci_pipeline.cli: ACI=3.225/5.0 [visual_first] → results/gh-pages/reports/sagradafamilia_org_Cultural/sagradafamilia_org_Cultural_1779634759_visual_first.html
+2026-05-24 14:59:25,991 INFO     aci_pipeline.cli: ── Pipeline: https://www.liceubarcelona.cat/ca [perfil=wcag_strict] ──
+2026-05-24 14:59:33,198 INFO     aci_pipeline.m1: M1 completat per https://www.liceubarcelona.cat/ca; Cultural (mode=playwright)
+2026-05-24 14:59:33,317 INFO     aci_pipeline.m2: M2 completat per https://www.liceubarcelona.cat/ca; Cultural → results/gh-pages/processed/structure/www_liceubarcelona_cat_ca_Cultural_1779634765.json
+2026-05-24 14:59:33,320 INFO     aci_pipeline.m3: M3 completat per https://www.liceubarcelona.cat/ca; Cultural
+2026-05-24 14:59:33,321 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:59:33,322 INFO     aci_pipeline.m4: M4 completat per https://www.liceubarcelona.cat/ca; Cultural
+2026-05-24 14:59:33,322 ERROR    aci_pipeline.m5: Error cridant Claude per element img_12: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:33,322 ERROR    aci_pipeline.m5: Error cridant Claude per element img_70: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:33,322 ERROR    aci_pipeline.m5: Error cridant Claude per element img_81: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:33,322 ERROR    aci_pipeline.m5: Error cridant Claude per element img_118: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:33,322 ERROR    aci_pipeline.m5: Error cridant Claude per element img_124: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:33,322 ERROR    aci_pipeline.m5: Error cridant Claude per element img_153: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:33,323 ERROR    aci_pipeline.m5: Error cridant Claude per element img_161: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:33,323 ERROR    aci_pipeline.m5: Error cridant Claude per element img_219: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:33,323 ERROR    aci_pipeline.m5: Error cridant Claude per element img_230: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:33,323 ERROR    aci_pipeline.m5: Error cridant Claude per element img_267: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:33,323 ERROR    aci_pipeline.m5: Error cridant Claude per element img_273: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:33,323 ERROR    aci_pipeline.m5: Error cridant Claude per element img_302: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:33,323 INFO     aci_pipeline.m5: M5: processats 12 elements visuals
+2026-05-24 14:59:33,323 INFO     aci_pipeline.cli: M5-IA: 12 element(s) processats
+2026-05-24 14:59:33,323 INFO     aci_pipeline.m6: M6 completat per https://www.liceubarcelona.cat/ca; Cultural (profil=wcag_strict, ACI=3.44)
+2026-05-24 14:59:33,324 INFO     aci_pipeline.m7: M7 completat per https://www.liceubarcelona.cat/ca; Cultural: 15 intervencions prioritzades
+2026-05-24 14:59:33,350 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_liceubarcelona_cat_ca_Cultural/www_liceubarcelona_cat_ca_Cultural_1779634765_wcag_strict.html
+2026-05-24 14:59:33,350 INFO     aci_pipeline.m8: M8 completat per https://www.liceubarcelona.cat/ca; Cultural -> results/gh-pages/reports/www_liceubarcelona_cat_ca_Cultural/www_liceubarcelona_cat_ca_Cultural_1779634765_wcag_strict.html
+2026-05-24 14:59:33,350 INFO     aci_pipeline.cli: ACI=3.435/5.0 [wcag_strict] → results/gh-pages/reports/www_liceubarcelona_cat_ca_Cultural/www_liceubarcelona_cat_ca_Cultural_1779634765_wcag_strict.html
+2026-05-24 14:59:33,350 INFO     aci_pipeline.cli: ── Pipeline: https://www.liceubarcelona.cat/ca [perfil=readability_first] ──
+2026-05-24 14:59:33,351 INFO     aci_pipeline.m6: M6 completat per https://www.liceubarcelona.cat/ca; Cultural (profil=readability_first, ACI=3.47)
+2026-05-24 14:59:33,351 INFO     aci_pipeline.m7: M7 completat per https://www.liceubarcelona.cat/ca; Cultural: 15 intervencions prioritzades
+2026-05-24 14:59:33,377 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_liceubarcelona_cat_ca_Cultural/www_liceubarcelona_cat_ca_Cultural_1779634765_readability_first.html
+2026-05-24 14:59:33,377 INFO     aci_pipeline.m8: M8 completat per https://www.liceubarcelona.cat/ca; Cultural -> results/gh-pages/reports/www_liceubarcelona_cat_ca_Cultural/www_liceubarcelona_cat_ca_Cultural_1779634765_readability_first.html
+2026-05-24 14:59:33,377 INFO     aci_pipeline.cli: ACI=3.473/5.0 [readability_first] → results/gh-pages/reports/www_liceubarcelona_cat_ca_Cultural/www_liceubarcelona_cat_ca_Cultural_1779634765_readability_first.html
+2026-05-24 14:59:33,377 INFO     aci_pipeline.cli: ── Pipeline: https://www.liceubarcelona.cat/ca [perfil=visual_first] ──
+2026-05-24 14:59:33,378 INFO     aci_pipeline.m6: M6 completat per https://www.liceubarcelona.cat/ca; Cultural (profil=visual_first, ACI=3.30)
+2026-05-24 14:59:33,378 INFO     aci_pipeline.m7: M7 completat per https://www.liceubarcelona.cat/ca; Cultural: 15 intervencions prioritzades
+2026-05-24 14:59:33,404 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_liceubarcelona_cat_ca_Cultural/www_liceubarcelona_cat_ca_Cultural_1779634765_visual_first.html
+2026-05-24 14:59:33,404 INFO     aci_pipeline.m8: M8 completat per https://www.liceubarcelona.cat/ca; Cultural -> results/gh-pages/reports/www_liceubarcelona_cat_ca_Cultural/www_liceubarcelona_cat_ca_Cultural_1779634765_visual_first.html
+2026-05-24 14:59:33,404 INFO     aci_pipeline.cli: ACI=3.296/5.0 [visual_first] → results/gh-pages/reports/www_liceubarcelona_cat_ca_Cultural/www_liceubarcelona_cat_ca_Cultural_1779634765_visual_first.html
+2026-05-24 14:59:33,404 INFO     aci_pipeline.cli: ── Pipeline: https://www.palaumusica.cat/ca/ [perfil=wcag_strict] ──
+2026-05-24 14:59:38,895 INFO     aci_pipeline.m1: M1 completat per https://www.palaumusica.cat/ca/; Cultural (mode=playwright)
+2026-05-24 14:59:39,047 INFO     aci_pipeline.m2: M2 completat per https://www.palaumusica.cat/ca/; Cultural → results/gh-pages/processed/structure/www_palaumusica_cat_ca_Cultural_1779634773.json
+2026-05-24 14:59:39,049 INFO     aci_pipeline.m3: M3 completat per https://www.palaumusica.cat/ca/; Cultural
+2026-05-24 14:59:39,050 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:59:39,050 INFO     aci_pipeline.m4: M4 completat per https://www.palaumusica.cat/ca/; Cultural
+2026-05-24 14:59:39,050 ERROR    aci_pipeline.m5: Error cridant Claude per element img_1: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:39,050 ERROR    aci_pipeline.m5: Error cridant Claude per element img_33: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:39,051 ERROR    aci_pipeline.m5: Error cridant Claude per element img_38: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:39,051 ERROR    aci_pipeline.m5: Error cridant Claude per element img_45: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:39,051 ERROR    aci_pipeline.m5: Error cridant Claude per element img_46: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:39,051 ERROR    aci_pipeline.m5: Error cridant Claude per element img_76: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:39,051 ERROR    aci_pipeline.m5: Error cridant Claude per element img_91: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:39,051 INFO     aci_pipeline.m5: M5: processats 7 elements visuals
+2026-05-24 14:59:39,051 INFO     aci_pipeline.cli: M5-IA: 7 element(s) processats
+2026-05-24 14:59:39,051 INFO     aci_pipeline.m6: M6 completat per https://www.palaumusica.cat/ca/; Cultural (profil=wcag_strict, ACI=3.88)
+2026-05-24 14:59:39,052 INFO     aci_pipeline.m7: M7 completat per https://www.palaumusica.cat/ca/; Cultural: 15 intervencions prioritzades
+2026-05-24 14:59:39,079 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_palaumusica_cat_ca_Cultural/www_palaumusica_cat_ca_Cultural_1779634773_wcag_strict.html
+2026-05-24 14:59:39,079 INFO     aci_pipeline.m8: M8 completat per https://www.palaumusica.cat/ca/; Cultural -> results/gh-pages/reports/www_palaumusica_cat_ca_Cultural/www_palaumusica_cat_ca_Cultural_1779634773_wcag_strict.html
+2026-05-24 14:59:39,079 INFO     aci_pipeline.cli: ACI=3.885/5.0 [wcag_strict] → results/gh-pages/reports/www_palaumusica_cat_ca_Cultural/www_palaumusica_cat_ca_Cultural_1779634773_wcag_strict.html
+2026-05-24 14:59:39,080 INFO     aci_pipeline.cli: ── Pipeline: https://www.palaumusica.cat/ca/ [perfil=readability_first] ──
+2026-05-24 14:59:39,080 INFO     aci_pipeline.m6: M6 completat per https://www.palaumusica.cat/ca/; Cultural (profil=readability_first, ACI=3.79)
+2026-05-24 14:59:39,081 INFO     aci_pipeline.m7: M7 completat per https://www.palaumusica.cat/ca/; Cultural: 15 intervencions prioritzades
+2026-05-24 14:59:39,106 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_palaumusica_cat_ca_Cultural/www_palaumusica_cat_ca_Cultural_1779634773_readability_first.html
+2026-05-24 14:59:39,106 INFO     aci_pipeline.m8: M8 completat per https://www.palaumusica.cat/ca/; Cultural -> results/gh-pages/reports/www_palaumusica_cat_ca_Cultural/www_palaumusica_cat_ca_Cultural_1779634773_readability_first.html
+2026-05-24 14:59:39,106 INFO     aci_pipeline.cli: ACI=3.786/5.0 [readability_first] → results/gh-pages/reports/www_palaumusica_cat_ca_Cultural/www_palaumusica_cat_ca_Cultural_1779634773_readability_first.html
+2026-05-24 14:59:39,106 INFO     aci_pipeline.cli: ── Pipeline: https://www.palaumusica.cat/ca/ [perfil=visual_first] ──
+2026-05-24 14:59:39,107 INFO     aci_pipeline.m6: M6 completat per https://www.palaumusica.cat/ca/; Cultural (profil=visual_first, ACI=3.68)
+2026-05-24 14:59:39,107 INFO     aci_pipeline.m7: M7 completat per https://www.palaumusica.cat/ca/; Cultural: 15 intervencions prioritzades
+2026-05-24 14:59:39,133 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_palaumusica_cat_ca_Cultural/www_palaumusica_cat_ca_Cultural_1779634773_visual_first.html
+2026-05-24 14:59:39,133 INFO     aci_pipeline.m8: M8 completat per https://www.palaumusica.cat/ca/; Cultural -> results/gh-pages/reports/www_palaumusica_cat_ca_Cultural/www_palaumusica_cat_ca_Cultural_1779634773_visual_first.html
+2026-05-24 14:59:39,133 INFO     aci_pipeline.cli: ACI=3.676/5.0 [visual_first] → results/gh-pages/reports/www_palaumusica_cat_ca_Cultural/www_palaumusica_cat_ca_Cultural_1779634773_visual_first.html
+2026-05-24 14:59:39,133 INFO     aci_pipeline.cli: ── Pipeline: https://www.3cat.cat/3cat/ [perfil=wcag_strict] ──
+2026-05-24 14:59:44,560 INFO     aci_pipeline.m1: M1 completat per https://www.3cat.cat/3cat/; Mitjans (mode=playwright)
+2026-05-24 14:59:44,565 INFO     aci_pipeline.m2: M2 completat per https://www.3cat.cat/3cat/; Mitjans → results/gh-pages/processed/structure/www_3cat_cat_3cat_Mitjans_1779634779.json
+2026-05-24 14:59:44,566 INFO     aci_pipeline.m3: M3 completat per https://www.3cat.cat/3cat/; Mitjans
+2026-05-24 14:59:44,566 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:59:44,567 INFO     aci_pipeline.m4: M4 completat per https://www.3cat.cat/3cat/; Mitjans
+2026-05-24 14:59:44,567 INFO     aci_pipeline.m5: M5: processats 0 elements visuals
+2026-05-24 14:59:44,567 INFO     aci_pipeline.m6: M6 completat per https://www.3cat.cat/3cat/; Mitjans (profil=wcag_strict, ACI=3.55)
+2026-05-24 14:59:44,568 INFO     aci_pipeline.m7: M7 completat per https://www.3cat.cat/3cat/; Mitjans: 15 intervencions prioritzades
+2026-05-24 14:59:44,594 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_3cat_cat_3cat_Mitjans/www_3cat_cat_3cat_Mitjans_1779634779_wcag_strict.html
+2026-05-24 14:59:44,594 INFO     aci_pipeline.m8: M8 completat per https://www.3cat.cat/3cat/; Mitjans -> results/gh-pages/reports/www_3cat_cat_3cat_Mitjans/www_3cat_cat_3cat_Mitjans_1779634779_wcag_strict.html
+2026-05-24 14:59:44,594 INFO     aci_pipeline.cli: ACI=3.547/5.0 [wcag_strict] → results/gh-pages/reports/www_3cat_cat_3cat_Mitjans/www_3cat_cat_3cat_Mitjans_1779634779_wcag_strict.html
+2026-05-24 14:59:44,594 INFO     aci_pipeline.cli: ── Pipeline: https://www.3cat.cat/3cat/ [perfil=readability_first] ──
+2026-05-24 14:59:44,595 INFO     aci_pipeline.m6: M6 completat per https://www.3cat.cat/3cat/; Mitjans (profil=readability_first, ACI=3.47)
+2026-05-24 14:59:44,595 INFO     aci_pipeline.m7: M7 completat per https://www.3cat.cat/3cat/; Mitjans: 15 intervencions prioritzades
+2026-05-24 14:59:44,621 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_3cat_cat_3cat_Mitjans/www_3cat_cat_3cat_Mitjans_1779634779_readability_first.html
+2026-05-24 14:59:44,621 INFO     aci_pipeline.m8: M8 completat per https://www.3cat.cat/3cat/; Mitjans -> results/gh-pages/reports/www_3cat_cat_3cat_Mitjans/www_3cat_cat_3cat_Mitjans_1779634779_readability_first.html
+2026-05-24 14:59:44,621 INFO     aci_pipeline.cli: ACI=3.469/5.0 [readability_first] → results/gh-pages/reports/www_3cat_cat_3cat_Mitjans/www_3cat_cat_3cat_Mitjans_1779634779_readability_first.html
+2026-05-24 14:59:44,621 INFO     aci_pipeline.cli: ── Pipeline: https://www.3cat.cat/3cat/ [perfil=visual_first] ──
+2026-05-24 14:59:44,622 INFO     aci_pipeline.m6: M6 completat per https://www.3cat.cat/3cat/; Mitjans (profil=visual_first, ACI=3.38)
+2026-05-24 14:59:44,622 INFO     aci_pipeline.m7: M7 completat per https://www.3cat.cat/3cat/; Mitjans: 15 intervencions prioritzades
+2026-05-24 14:59:44,648 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_3cat_cat_3cat_Mitjans/www_3cat_cat_3cat_Mitjans_1779634779_visual_first.html
+2026-05-24 14:59:44,648 INFO     aci_pipeline.m8: M8 completat per https://www.3cat.cat/3cat/; Mitjans -> results/gh-pages/reports/www_3cat_cat_3cat_Mitjans/www_3cat_cat_3cat_Mitjans_1779634779_visual_first.html
+2026-05-24 14:59:44,648 INFO     aci_pipeline.cli: ACI=3.382/5.0 [visual_first] → results/gh-pages/reports/www_3cat_cat_3cat_Mitjans/www_3cat_cat_3cat_Mitjans_1779634779_visual_first.html
+2026-05-24 14:59:44,648 INFO     aci_pipeline.cli: ── Pipeline: https://www.rtve.es/ [perfil=wcag_strict] ──
+2026-05-24 14:59:49,162 INFO     aci_pipeline.m1: M1 completat per https://www.rtve.es/; Mitjans (mode=playwright)
+2026-05-24 14:59:49,187 INFO     aci_pipeline.m2: M2 completat per https://www.rtve.es/; Mitjans → results/gh-pages/processed/structure/www_rtve_es_Mitjans_1779634784.json
+2026-05-24 14:59:49,188 INFO     aci_pipeline.m3: M3 completat per https://www.rtve.es/; Mitjans
+2026-05-24 14:59:49,189 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:59:49,189 INFO     aci_pipeline.m4: M4 completat per https://www.rtve.es/; Mitjans
+2026-05-24 14:59:49,189 ERROR    aci_pipeline.m5: Error cridant Claude per element img_14: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:49,189 INFO     aci_pipeline.m5: M5: processats 1 elements visuals
+2026-05-24 14:59:49,189 INFO     aci_pipeline.cli: M5-IA: 1 element(s) processats
+2026-05-24 14:59:49,190 INFO     aci_pipeline.m6: M6 completat per https://www.rtve.es/; Mitjans (profil=wcag_strict, ACI=3.42)
+2026-05-24 14:59:49,190 INFO     aci_pipeline.m7: M7 completat per https://www.rtve.es/; Mitjans: 15 intervencions prioritzades
+2026-05-24 14:59:49,216 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_rtve_es_Mitjans/www_rtve_es_Mitjans_1779634784_wcag_strict.html
+2026-05-24 14:59:49,216 INFO     aci_pipeline.m8: M8 completat per https://www.rtve.es/; Mitjans -> results/gh-pages/reports/www_rtve_es_Mitjans/www_rtve_es_Mitjans_1779634784_wcag_strict.html
+2026-05-24 14:59:49,216 INFO     aci_pipeline.cli: ACI=3.415/5.0 [wcag_strict] → results/gh-pages/reports/www_rtve_es_Mitjans/www_rtve_es_Mitjans_1779634784_wcag_strict.html
+2026-05-24 14:59:49,217 INFO     aci_pipeline.cli: ── Pipeline: https://www.rtve.es/ [perfil=readability_first] ──
+2026-05-24 14:59:49,217 INFO     aci_pipeline.m6: M6 completat per https://www.rtve.es/; Mitjans (profil=readability_first, ACI=3.38)
+2026-05-24 14:59:49,217 INFO     aci_pipeline.m7: M7 completat per https://www.rtve.es/; Mitjans: 15 intervencions prioritzades
+2026-05-24 14:59:49,243 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_rtve_es_Mitjans/www_rtve_es_Mitjans_1779634784_readability_first.html
+2026-05-24 14:59:49,243 INFO     aci_pipeline.m8: M8 completat per https://www.rtve.es/; Mitjans -> results/gh-pages/reports/www_rtve_es_Mitjans/www_rtve_es_Mitjans_1779634784_readability_first.html
+2026-05-24 14:59:49,243 INFO     aci_pipeline.cli: ACI=3.381/5.0 [readability_first] → results/gh-pages/reports/www_rtve_es_Mitjans/www_rtve_es_Mitjans_1779634784_readability_first.html
+2026-05-24 14:59:49,244 INFO     aci_pipeline.cli: ── Pipeline: https://www.rtve.es/ [perfil=visual_first] ──
+2026-05-24 14:59:49,244 INFO     aci_pipeline.m6: M6 completat per https://www.rtve.es/; Mitjans (profil=visual_first, ACI=3.06)
+2026-05-24 14:59:49,244 INFO     aci_pipeline.m7: M7 completat per https://www.rtve.es/; Mitjans: 15 intervencions prioritzades
+2026-05-24 14:59:49,270 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_rtve_es_Mitjans/www_rtve_es_Mitjans_1779634784_visual_first.html
+2026-05-24 14:59:49,270 INFO     aci_pipeline.m8: M8 completat per https://www.rtve.es/; Mitjans -> results/gh-pages/reports/www_rtve_es_Mitjans/www_rtve_es_Mitjans_1779634784_visual_first.html
+2026-05-24 14:59:49,270 INFO     aci_pipeline.cli: ACI=3.056/5.0 [visual_first] → results/gh-pages/reports/www_rtve_es_Mitjans/www_rtve_es_Mitjans_1779634784_visual_first.html
+2026-05-24 14:59:49,271 INFO     aci_pipeline.cli: ── Pipeline: https://www.ara.cat/ [perfil=wcag_strict] ──
+2026-05-24 14:59:51,832 INFO     aci_pipeline.m1: M1 completat per https://www.ara.cat/; Mitjans (mode=playwright)
+2026-05-24 14:59:51,846 INFO     aci_pipeline.m2: M2 completat per https://www.ara.cat/; Mitjans → results/gh-pages/processed/structure/www_ara_cat_Mitjans_1779634789.json
+2026-05-24 14:59:51,846 INFO     aci_pipeline.m3: M3 completat per https://www.ara.cat/; Mitjans
+2026-05-24 14:59:51,847 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:59:51,847 INFO     aci_pipeline.m4: M4 completat per https://www.ara.cat/; Mitjans
+2026-05-24 14:59:51,847 ERROR    aci_pipeline.m5: Error cridant Claude per element img_0: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:51,847 ERROR    aci_pipeline.m5: Error cridant Claude per element img_1: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:51,848 ERROR    aci_pipeline.m5: Error cridant Claude per element img_2: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:51,848 ERROR    aci_pipeline.m5: Error cridant Claude per element img_4: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:51,848 ERROR    aci_pipeline.m5: Error cridant Claude per element img_6: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:51,848 ERROR    aci_pipeline.m5: Error cridant Claude per element img_7: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:51,848 ERROR    aci_pipeline.m5: Error cridant Claude per element img_8: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:51,848 ERROR    aci_pipeline.m5: Error cridant Claude per element img_9: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:51,848 ERROR    aci_pipeline.m5: Error cridant Claude per element img_10: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:51,848 ERROR    aci_pipeline.m5: Error cridant Claude per element img_11: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:51,848 ERROR    aci_pipeline.m5: Error cridant Claude per element img_12: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:51,848 ERROR    aci_pipeline.m5: Error cridant Claude per element img_13: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:51,848 ERROR    aci_pipeline.m5: Error cridant Claude per element img_20: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:51,848 ERROR    aci_pipeline.m5: Error cridant Claude per element img_21: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:51,848 ERROR    aci_pipeline.m5: Error cridant Claude per element img_22: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:51,849 ERROR    aci_pipeline.m5: Error cridant Claude per element img_23: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:51,849 ERROR    aci_pipeline.m5: Error cridant Claude per element img_24: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 14:59:51,849 INFO     aci_pipeline.m5: M5: processats 17 elements visuals
+2026-05-24 14:59:51,849 INFO     aci_pipeline.cli: M5-IA: 17 element(s) processats
+2026-05-24 14:59:51,849 INFO     aci_pipeline.m6: M6 completat per https://www.ara.cat/; Mitjans (profil=wcag_strict, ACI=3.49)
+2026-05-24 14:59:51,850 INFO     aci_pipeline.m7: M7 completat per https://www.ara.cat/; Mitjans: 15 intervencions prioritzades
+2026-05-24 14:59:51,875 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_ara_cat_Mitjans/www_ara_cat_Mitjans_1779634789_wcag_strict.html
+2026-05-24 14:59:51,876 INFO     aci_pipeline.m8: M8 completat per https://www.ara.cat/; Mitjans -> results/gh-pages/reports/www_ara_cat_Mitjans/www_ara_cat_Mitjans_1779634789_wcag_strict.html
+2026-05-24 14:59:51,876 INFO     aci_pipeline.cli: ACI=3.494/5.0 [wcag_strict] → results/gh-pages/reports/www_ara_cat_Mitjans/www_ara_cat_Mitjans_1779634789_wcag_strict.html
+2026-05-24 14:59:51,876 INFO     aci_pipeline.cli: ── Pipeline: https://www.ara.cat/ [perfil=readability_first] ──
+2026-05-24 14:59:51,876 INFO     aci_pipeline.m6: M6 completat per https://www.ara.cat/; Mitjans (profil=readability_first, ACI=3.34)
+2026-05-24 14:59:51,877 INFO     aci_pipeline.m7: M7 completat per https://www.ara.cat/; Mitjans: 15 intervencions prioritzades
+2026-05-24 14:59:51,902 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_ara_cat_Mitjans/www_ara_cat_Mitjans_1779634789_readability_first.html
+2026-05-24 14:59:51,902 INFO     aci_pipeline.m8: M8 completat per https://www.ara.cat/; Mitjans -> results/gh-pages/reports/www_ara_cat_Mitjans/www_ara_cat_Mitjans_1779634789_readability_first.html
+2026-05-24 14:59:51,903 INFO     aci_pipeline.cli: ACI=3.343/5.0 [readability_first] → results/gh-pages/reports/www_ara_cat_Mitjans/www_ara_cat_Mitjans_1779634789_readability_first.html
+2026-05-24 14:59:51,903 INFO     aci_pipeline.cli: ── Pipeline: https://www.ara.cat/ [perfil=visual_first] ──
+2026-05-24 14:59:51,903 INFO     aci_pipeline.m6: M6 completat per https://www.ara.cat/; Mitjans (profil=visual_first, ACI=3.17)
+2026-05-24 14:59:51,903 INFO     aci_pipeline.m7: M7 completat per https://www.ara.cat/; Mitjans: 15 intervencions prioritzades
+2026-05-24 14:59:51,929 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_ara_cat_Mitjans/www_ara_cat_Mitjans_1779634789_visual_first.html
+2026-05-24 14:59:51,929 INFO     aci_pipeline.m8: M8 completat per https://www.ara.cat/; Mitjans -> results/gh-pages/reports/www_ara_cat_Mitjans/www_ara_cat_Mitjans_1779634789_visual_first.html
+2026-05-24 14:59:51,929 INFO     aci_pipeline.cli: ACI=3.175/5.0 [visual_first] → results/gh-pages/reports/www_ara_cat_Mitjans/www_ara_cat_Mitjans_1779634789_visual_first.html
+2026-05-24 14:59:51,929 INFO     aci_pipeline.cli: ── Pipeline: https://www.rac1.cat/ [perfil=wcag_strict] ──
+2026-05-24 14:59:53,592 INFO     aci_pipeline.m1: M1 completat per https://www.rac1.cat/; Mitjans (mode=playwright)
+2026-05-24 14:59:53,593 INFO     aci_pipeline.m2: M2 completat per https://www.rac1.cat/; Mitjans → results/gh-pages/processed/structure/www_rac1_cat_Mitjans_1779634791.json
+2026-05-24 14:59:53,593 INFO     aci_pipeline.m3: M3 completat per https://www.rac1.cat/; Mitjans
+2026-05-24 14:59:53,594 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:59:53,595 INFO     aci_pipeline.m4: M4 completat per https://www.rac1.cat/; Mitjans
+2026-05-24 14:59:53,595 INFO     aci_pipeline.m5: M5: processats 0 elements visuals
+2026-05-24 14:59:53,595 INFO     aci_pipeline.m6: M6 completat per https://www.rac1.cat/; Mitjans (profil=wcag_strict, ACI=3.66)
+2026-05-24 14:59:53,595 INFO     aci_pipeline.m7: M7 completat per https://www.rac1.cat/; Mitjans: 15 intervencions prioritzades
+2026-05-24 14:59:53,622 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_rac1_cat_Mitjans/www_rac1_cat_Mitjans_1779634791_wcag_strict.html
+2026-05-24 14:59:53,622 INFO     aci_pipeline.m8: M8 completat per https://www.rac1.cat/; Mitjans -> results/gh-pages/reports/www_rac1_cat_Mitjans/www_rac1_cat_Mitjans_1779634791_wcag_strict.html
+2026-05-24 14:59:53,622 INFO     aci_pipeline.cli: ACI=3.659/5.0 [wcag_strict] → results/gh-pages/reports/www_rac1_cat_Mitjans/www_rac1_cat_Mitjans_1779634791_wcag_strict.html
+2026-05-24 14:59:53,622 INFO     aci_pipeline.cli: ── Pipeline: https://www.rac1.cat/ [perfil=readability_first] ──
+2026-05-24 14:59:53,622 INFO     aci_pipeline.m6: M6 completat per https://www.rac1.cat/; Mitjans (profil=readability_first, ACI=3.54)
+2026-05-24 14:59:53,623 INFO     aci_pipeline.m7: M7 completat per https://www.rac1.cat/; Mitjans: 15 intervencions prioritzades
+2026-05-24 14:59:53,649 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_rac1_cat_Mitjans/www_rac1_cat_Mitjans_1779634791_readability_first.html
+2026-05-24 14:59:53,649 INFO     aci_pipeline.m8: M8 completat per https://www.rac1.cat/; Mitjans -> results/gh-pages/reports/www_rac1_cat_Mitjans/www_rac1_cat_Mitjans_1779634791_readability_first.html
+2026-05-24 14:59:53,649 INFO     aci_pipeline.cli: ACI=3.537/5.0 [readability_first] → results/gh-pages/reports/www_rac1_cat_Mitjans/www_rac1_cat_Mitjans_1779634791_readability_first.html
+2026-05-24 14:59:53,649 INFO     aci_pipeline.cli: ── Pipeline: https://www.rac1.cat/ [perfil=visual_first] ──
+2026-05-24 14:59:53,650 INFO     aci_pipeline.m6: M6 completat per https://www.rac1.cat/; Mitjans (profil=visual_first, ACI=3.48)
+2026-05-24 14:59:53,650 INFO     aci_pipeline.m7: M7 completat per https://www.rac1.cat/; Mitjans: 15 intervencions prioritzades
+2026-05-24 14:59:53,677 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_rac1_cat_Mitjans/www_rac1_cat_Mitjans_1779634791_visual_first.html
+2026-05-24 14:59:53,677 INFO     aci_pipeline.m8: M8 completat per https://www.rac1.cat/; Mitjans -> results/gh-pages/reports/www_rac1_cat_Mitjans/www_rac1_cat_Mitjans_1779634791_visual_first.html
+2026-05-24 14:59:53,677 INFO     aci_pipeline.cli: ACI=3.481/5.0 [visual_first] → results/gh-pages/reports/www_rac1_cat_Mitjans/www_rac1_cat_Mitjans_1779634791_visual_first.html
+2026-05-24 14:59:53,677 INFO     aci_pipeline.cli: ── Pipeline: https://terrassadigital.cat/ [perfil=wcag_strict] ──
+2026-05-24 14:59:56,424 INFO     aci_pipeline.m1: M1 completat per https://terrassadigital.cat/; Mitjans (mode=playwright)
+2026-05-24 14:59:56,425 INFO     aci_pipeline.m2: M2 completat per https://terrassadigital.cat/; Mitjans → results/gh-pages/processed/structure/terrassadigital_cat_Mitjans_1779634793.json
+2026-05-24 14:59:56,426 INFO     aci_pipeline.m3: M3 completat per https://terrassadigital.cat/; Mitjans
+2026-05-24 14:59:56,426 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:59:56,427 INFO     aci_pipeline.m4: M4 completat per https://terrassadigital.cat/; Mitjans
+2026-05-24 14:59:56,427 INFO     aci_pipeline.m5: M5: processats 0 elements visuals
+2026-05-24 14:59:56,427 INFO     aci_pipeline.m6: M6 completat per https://terrassadigital.cat/; Mitjans (profil=wcag_strict, ACI=3.77)
+2026-05-24 14:59:56,428 INFO     aci_pipeline.m7: M7 completat per https://terrassadigital.cat/; Mitjans: 15 intervencions prioritzades
+2026-05-24 14:59:56,454 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/terrassadigital_cat_Mitjans/terrassadigital_cat_Mitjans_1779634793_wcag_strict.html
+2026-05-24 14:59:56,454 INFO     aci_pipeline.m8: M8 completat per https://terrassadigital.cat/; Mitjans -> results/gh-pages/reports/terrassadigital_cat_Mitjans/terrassadigital_cat_Mitjans_1779634793_wcag_strict.html
+2026-05-24 14:59:56,454 INFO     aci_pipeline.cli: ACI=3.766/5.0 [wcag_strict] → results/gh-pages/reports/terrassadigital_cat_Mitjans/terrassadigital_cat_Mitjans_1779634793_wcag_strict.html
+2026-05-24 14:59:56,454 INFO     aci_pipeline.cli: ── Pipeline: https://terrassadigital.cat/ [perfil=readability_first] ──
+2026-05-24 14:59:56,455 INFO     aci_pipeline.m6: M6 completat per https://terrassadigital.cat/; Mitjans (profil=readability_first, ACI=3.64)
+2026-05-24 14:59:56,455 INFO     aci_pipeline.m7: M7 completat per https://terrassadigital.cat/; Mitjans: 15 intervencions prioritzades
+2026-05-24 14:59:56,481 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/terrassadigital_cat_Mitjans/terrassadigital_cat_Mitjans_1779634793_readability_first.html
+2026-05-24 14:59:56,481 INFO     aci_pipeline.m8: M8 completat per https://terrassadigital.cat/; Mitjans -> results/gh-pages/reports/terrassadigital_cat_Mitjans/terrassadigital_cat_Mitjans_1779634793_readability_first.html
+2026-05-24 14:59:56,481 INFO     aci_pipeline.cli: ACI=3.637/5.0 [readability_first] → results/gh-pages/reports/terrassadigital_cat_Mitjans/terrassadigital_cat_Mitjans_1779634793_readability_first.html
+2026-05-24 14:59:56,481 INFO     aci_pipeline.cli: ── Pipeline: https://terrassadigital.cat/ [perfil=visual_first] ──
+2026-05-24 14:59:56,482 INFO     aci_pipeline.m6: M6 completat per https://terrassadigital.cat/; Mitjans (profil=visual_first, ACI=3.58)
+2026-05-24 14:59:56,482 INFO     aci_pipeline.m7: M7 completat per https://terrassadigital.cat/; Mitjans: 15 intervencions prioritzades
+2026-05-24 14:59:56,508 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/terrassadigital_cat_Mitjans/terrassadigital_cat_Mitjans_1779634793_visual_first.html
+2026-05-24 14:59:56,508 INFO     aci_pipeline.m8: M8 completat per https://terrassadigital.cat/; Mitjans -> results/gh-pages/reports/terrassadigital_cat_Mitjans/terrassadigital_cat_Mitjans_1779634793_visual_first.html
+2026-05-24 14:59:56,508 INFO     aci_pipeline.cli: ACI=3.576/5.0 [visual_first] → results/gh-pages/reports/terrassadigital_cat_Mitjans/terrassadigital_cat_Mitjans_1779634793_visual_first.html
+2026-05-24 14:59:56,508 INFO     aci_pipeline.cli: ── Pipeline: https://www.lavanguardia.com/ [perfil=wcag_strict] ──
+2026-05-24 14:59:59,369 INFO     aci_pipeline.m1: M1 completat per https://www.lavanguardia.com/; Mitjans (mode=playwright)
+2026-05-24 14:59:59,377 INFO     aci_pipeline.m2: M2 completat per https://www.lavanguardia.com/; Mitjans → results/gh-pages/processed/structure/www_lavanguardia_com_Mitjans_1779634796.json
+2026-05-24 14:59:59,377 INFO     aci_pipeline.m3: M3 completat per https://www.lavanguardia.com/; Mitjans
+2026-05-24 14:59:59,378 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 14:59:59,378 INFO     aci_pipeline.m4: M4 completat per https://www.lavanguardia.com/; Mitjans
+2026-05-24 14:59:59,378 INFO     aci_pipeline.m5: M5: processats 0 elements visuals
+2026-05-24 14:59:59,379 INFO     aci_pipeline.m6: M6 completat per https://www.lavanguardia.com/; Mitjans (profil=wcag_strict, ACI=3.79)
+2026-05-24 14:59:59,379 INFO     aci_pipeline.m7: M7 completat per https://www.lavanguardia.com/; Mitjans: 15 intervencions prioritzades
+2026-05-24 14:59:59,405 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_lavanguardia_com_Mitjans/www_lavanguardia_com_Mitjans_1779634796_wcag_strict.html
+2026-05-24 14:59:59,405 INFO     aci_pipeline.m8: M8 completat per https://www.lavanguardia.com/; Mitjans -> results/gh-pages/reports/www_lavanguardia_com_Mitjans/www_lavanguardia_com_Mitjans_1779634796_wcag_strict.html
+2026-05-24 14:59:59,405 INFO     aci_pipeline.cli: ACI=3.788/5.0 [wcag_strict] → results/gh-pages/reports/www_lavanguardia_com_Mitjans/www_lavanguardia_com_Mitjans_1779634796_wcag_strict.html
+2026-05-24 14:59:59,405 INFO     aci_pipeline.cli: ── Pipeline: https://www.lavanguardia.com/ [perfil=readability_first] ──
+2026-05-24 14:59:59,406 INFO     aci_pipeline.m6: M6 completat per https://www.lavanguardia.com/; Mitjans (profil=readability_first, ACI=3.69)
+2026-05-24 14:59:59,407 INFO     aci_pipeline.m7: M7 completat per https://www.lavanguardia.com/; Mitjans: 15 intervencions prioritzades
+2026-05-24 14:59:59,432 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_lavanguardia_com_Mitjans/www_lavanguardia_com_Mitjans_1779634796_readability_first.html
+2026-05-24 14:59:59,432 INFO     aci_pipeline.m8: M8 completat per https://www.lavanguardia.com/; Mitjans -> results/gh-pages/reports/www_lavanguardia_com_Mitjans/www_lavanguardia_com_Mitjans_1779634796_readability_first.html
+2026-05-24 14:59:59,432 INFO     aci_pipeline.cli: ACI=3.685/5.0 [readability_first] → results/gh-pages/reports/www_lavanguardia_com_Mitjans/www_lavanguardia_com_Mitjans_1779634796_readability_first.html
+2026-05-24 14:59:59,433 INFO     aci_pipeline.cli: ── Pipeline: https://www.lavanguardia.com/ [perfil=visual_first] ──
+2026-05-24 14:59:59,433 INFO     aci_pipeline.m6: M6 completat per https://www.lavanguardia.com/; Mitjans (profil=visual_first, ACI=3.63)
+2026-05-24 14:59:59,433 INFO     aci_pipeline.m7: M7 completat per https://www.lavanguardia.com/; Mitjans: 15 intervencions prioritzades
+2026-05-24 14:59:59,459 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_lavanguardia_com_Mitjans/www_lavanguardia_com_Mitjans_1779634796_visual_first.html
+2026-05-24 14:59:59,459 INFO     aci_pipeline.m8: M8 completat per https://www.lavanguardia.com/; Mitjans -> results/gh-pages/reports/www_lavanguardia_com_Mitjans/www_lavanguardia_com_Mitjans_1779634796_visual_first.html
+2026-05-24 14:59:59,459 INFO     aci_pipeline.cli: ACI=3.631/5.0 [visual_first] → results/gh-pages/reports/www_lavanguardia_com_Mitjans/www_lavanguardia_com_Mitjans_1779634796_visual_first.html
+2026-05-24 14:59:59,459 INFO     aci_pipeline.cli: ── Pipeline: https://www.compraonline.bonpreuesclat.cat/ [perfil=wcag_strict] ──
+2026-05-24 15:00:05,598 INFO     aci_pipeline.m1: M1 completat per https://www.compraonline.bonpreuesclat.cat/; Comercial (mode=playwright)
+2026-05-24 15:00:05,636 INFO     aci_pipeline.m2: M2 completat per https://www.compraonline.bonpreuesclat.cat/; Comercial → results/gh-pages/processed/structure/www_compraonline_bonpreuesclat_cat_Comercial_1779634799.json
+2026-05-24 15:00:05,636 INFO     aci_pipeline.m3: M3 completat per https://www.compraonline.bonpreuesclat.cat/; Comercial
+2026-05-24 15:00:05,637 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 15:00:05,638 INFO     aci_pipeline.m4: M4 completat per https://www.compraonline.bonpreuesclat.cat/; Comercial
+2026-05-24 15:00:05,638 ERROR    aci_pipeline.m5: Error cridant Claude per element img_9: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,638 ERROR    aci_pipeline.m5: Error cridant Claude per element img_10: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,638 ERROR    aci_pipeline.m5: Error cridant Claude per element img_11: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,638 ERROR    aci_pipeline.m5: Error cridant Claude per element img_12: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,638 ERROR    aci_pipeline.m5: Error cridant Claude per element img_13: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,638 ERROR    aci_pipeline.m5: Error cridant Claude per element img_14: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,639 ERROR    aci_pipeline.m5: Error cridant Claude per element img_15: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,639 ERROR    aci_pipeline.m5: Error cridant Claude per element img_17: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,639 ERROR    aci_pipeline.m5: Error cridant Claude per element img_19: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,639 ERROR    aci_pipeline.m5: Error cridant Claude per element img_21: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,639 ERROR    aci_pipeline.m5: Error cridant Claude per element img_22: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,639 ERROR    aci_pipeline.m5: Error cridant Claude per element img_23: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,639 ERROR    aci_pipeline.m5: Error cridant Claude per element img_24: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,639 ERROR    aci_pipeline.m5: Error cridant Claude per element img_25: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,639 ERROR    aci_pipeline.m5: Error cridant Claude per element img_26: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,639 ERROR    aci_pipeline.m5: Error cridant Claude per element img_27: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,639 ERROR    aci_pipeline.m5: Error cridant Claude per element img_28: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,639 ERROR    aci_pipeline.m5: Error cridant Claude per element img_29: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,639 ERROR    aci_pipeline.m5: Error cridant Claude per element img_30: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,640 ERROR    aci_pipeline.m5: Error cridant Claude per element img_31: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,640 ERROR    aci_pipeline.m5: Error cridant Claude per element img_32: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,640 ERROR    aci_pipeline.m5: Error cridant Claude per element img_33: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,640 ERROR    aci_pipeline.m5: Error cridant Claude per element img_34: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,640 ERROR    aci_pipeline.m5: Error cridant Claude per element img_35: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,640 ERROR    aci_pipeline.m5: Error cridant Claude per element img_36: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,640 ERROR    aci_pipeline.m5: Error cridant Claude per element img_37: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,640 ERROR    aci_pipeline.m5: Error cridant Claude per element img_38: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,640 ERROR    aci_pipeline.m5: Error cridant Claude per element img_39: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,640 ERROR    aci_pipeline.m5: Error cridant Claude per element img_40: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,640 ERROR    aci_pipeline.m5: Error cridant Claude per element img_41: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,640 ERROR    aci_pipeline.m5: Error cridant Claude per element img_42: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,640 ERROR    aci_pipeline.m5: Error cridant Claude per element img_49: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:05,640 INFO     aci_pipeline.m5: M5: processats 32 elements visuals
+2026-05-24 15:00:05,640 INFO     aci_pipeline.cli: M5-IA: 32 element(s) processats
+2026-05-24 15:00:05,641 INFO     aci_pipeline.m6: M6 completat per https://www.compraonline.bonpreuesclat.cat/; Comercial (profil=wcag_strict, ACI=3.61)
+2026-05-24 15:00:05,641 INFO     aci_pipeline.m7: M7 completat per https://www.compraonline.bonpreuesclat.cat/; Comercial: 15 intervencions prioritzades
+2026-05-24 15:00:05,668 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_compraonline_bonpreuesclat_cat_Comercial/www_compraonline_bonpreuesclat_cat_Comercial_1779634799_wcag_strict.html
+2026-05-24 15:00:05,668 INFO     aci_pipeline.m8: M8 completat per https://www.compraonline.bonpreuesclat.cat/; Comercial -> results/gh-pages/reports/www_compraonline_bonpreuesclat_cat_Comercial/www_compraonline_bonpreuesclat_cat_Comercial_1779634799_wcag_strict.html
+2026-05-24 15:00:05,668 INFO     aci_pipeline.cli: ACI=3.608/5.0 [wcag_strict] → results/gh-pages/reports/www_compraonline_bonpreuesclat_cat_Comercial/www_compraonline_bonpreuesclat_cat_Comercial_1779634799_wcag_strict.html
+2026-05-24 15:00:05,668 INFO     aci_pipeline.cli: ── Pipeline: https://www.compraonline.bonpreuesclat.cat/ [perfil=readability_first] ──
+2026-05-24 15:00:05,668 INFO     aci_pipeline.m6: M6 completat per https://www.compraonline.bonpreuesclat.cat/; Comercial (profil=readability_first, ACI=3.52)
+2026-05-24 15:00:05,669 INFO     aci_pipeline.m7: M7 completat per https://www.compraonline.bonpreuesclat.cat/; Comercial: 15 intervencions prioritzades
+2026-05-24 15:00:05,694 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_compraonline_bonpreuesclat_cat_Comercial/www_compraonline_bonpreuesclat_cat_Comercial_1779634799_readability_first.html
+2026-05-24 15:00:05,695 INFO     aci_pipeline.m8: M8 completat per https://www.compraonline.bonpreuesclat.cat/; Comercial -> results/gh-pages/reports/www_compraonline_bonpreuesclat_cat_Comercial/www_compraonline_bonpreuesclat_cat_Comercial_1779634799_readability_first.html
+2026-05-24 15:00:05,695 INFO     aci_pipeline.cli: ACI=3.515/5.0 [readability_first] → results/gh-pages/reports/www_compraonline_bonpreuesclat_cat_Comercial/www_compraonline_bonpreuesclat_cat_Comercial_1779634799_readability_first.html
+2026-05-24 15:00:05,695 INFO     aci_pipeline.cli: ── Pipeline: https://www.compraonline.bonpreuesclat.cat/ [perfil=visual_first] ──
+2026-05-24 15:00:05,695 INFO     aci_pipeline.m6: M6 completat per https://www.compraonline.bonpreuesclat.cat/; Comercial (profil=visual_first, ACI=3.25)
+2026-05-24 15:00:05,696 INFO     aci_pipeline.m7: M7 completat per https://www.compraonline.bonpreuesclat.cat/; Comercial: 15 intervencions prioritzades
+2026-05-24 15:00:05,722 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_compraonline_bonpreuesclat_cat_Comercial/www_compraonline_bonpreuesclat_cat_Comercial_1779634799_visual_first.html
+2026-05-24 15:00:05,722 INFO     aci_pipeline.m8: M8 completat per https://www.compraonline.bonpreuesclat.cat/; Comercial -> results/gh-pages/reports/www_compraonline_bonpreuesclat_cat_Comercial/www_compraonline_bonpreuesclat_cat_Comercial_1779634799_visual_first.html
+2026-05-24 15:00:05,722 INFO     aci_pipeline.cli: ACI=3.254/5.0 [visual_first] → results/gh-pages/reports/www_compraonline_bonpreuesclat_cat_Comercial/www_compraonline_bonpreuesclat_cat_Comercial_1779634799_visual_first.html
+2026-05-24 15:00:05,722 INFO     aci_pipeline.cli: ── Pipeline: https://www.capraboacasa.com/ca/ [perfil=wcag_strict] ──
+2026-05-24 15:00:13,879 INFO     aci_pipeline.m1: M1 completat per https://www.capraboacasa.com/ca/; Comercial (mode=playwright)
+2026-05-24 15:00:14,205 INFO     aci_pipeline.m2: M2 completat per https://www.capraboacasa.com/ca/; Comercial → results/gh-pages/processed/structure/www_capraboacasa_com_ca_Comercial_1779634805.json
+2026-05-24 15:00:14,209 INFO     aci_pipeline.m3: M3 completat per https://www.capraboacasa.com/ca/; Comercial
+2026-05-24 15:00:14,209 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 15:00:14,210 INFO     aci_pipeline.m4: M4 completat per https://www.capraboacasa.com/ca/; Comercial
+2026-05-24 15:00:14,210 ERROR    aci_pipeline.m5: Error cridant Claude per element img_3: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:14,211 ERROR    aci_pipeline.m5: Error cridant Claude per element img_4: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:14,211 ERROR    aci_pipeline.m5: Error cridant Claude per element img_5: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:14,211 ERROR    aci_pipeline.m5: Error cridant Claude per element img_11: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:14,211 ERROR    aci_pipeline.m5: Error cridant Claude per element img_504: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:14,211 ERROR    aci_pipeline.m5: Error cridant Claude per element img_505: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:14,211 ERROR    aci_pipeline.m5: Error cridant Claude per element img_506: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:14,211 ERROR    aci_pipeline.m5: Error cridant Claude per element img_515: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:14,211 ERROR    aci_pipeline.m5: Error cridant Claude per element img_529: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:14,211 ERROR    aci_pipeline.m5: Error cridant Claude per element img_530: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:14,211 ERROR    aci_pipeline.m5: Error cridant Claude per element img_532: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:14,211 ERROR    aci_pipeline.m5: Error cridant Claude per element img_534: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:14,212 INFO     aci_pipeline.m5: M5: processats 12 elements visuals
+2026-05-24 15:00:14,212 INFO     aci_pipeline.cli: M5-IA: 12 element(s) processats
+2026-05-24 15:00:14,212 INFO     aci_pipeline.m6: M6 completat per https://www.capraboacasa.com/ca/; Comercial (profil=wcag_strict, ACI=3.68)
+2026-05-24 15:00:14,212 INFO     aci_pipeline.m7: M7 completat per https://www.capraboacasa.com/ca/; Comercial: 15 intervencions prioritzades
+2026-05-24 15:00:14,238 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_capraboacasa_com_ca_Comercial/www_capraboacasa_com_ca_Comercial_1779634805_wcag_strict.html
+2026-05-24 15:00:14,239 INFO     aci_pipeline.m8: M8 completat per https://www.capraboacasa.com/ca/; Comercial -> results/gh-pages/reports/www_capraboacasa_com_ca_Comercial/www_capraboacasa_com_ca_Comercial_1779634805_wcag_strict.html
+2026-05-24 15:00:14,239 INFO     aci_pipeline.cli: ACI=3.682/5.0 [wcag_strict] → results/gh-pages/reports/www_capraboacasa_com_ca_Comercial/www_capraboacasa_com_ca_Comercial_1779634805_wcag_strict.html
+2026-05-24 15:00:14,239 INFO     aci_pipeline.cli: ── Pipeline: https://www.capraboacasa.com/ca/ [perfil=readability_first] ──
+2026-05-24 15:00:14,239 INFO     aci_pipeline.m6: M6 completat per https://www.capraboacasa.com/ca/; Comercial (profil=readability_first, ACI=3.61)
+2026-05-24 15:00:14,240 INFO     aci_pipeline.m7: M7 completat per https://www.capraboacasa.com/ca/; Comercial: 15 intervencions prioritzades
+2026-05-24 15:00:14,266 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_capraboacasa_com_ca_Comercial/www_capraboacasa_com_ca_Comercial_1779634805_readability_first.html
+2026-05-24 15:00:14,266 INFO     aci_pipeline.m8: M8 completat per https://www.capraboacasa.com/ca/; Comercial -> results/gh-pages/reports/www_capraboacasa_com_ca_Comercial/www_capraboacasa_com_ca_Comercial_1779634805_readability_first.html
+2026-05-24 15:00:14,266 INFO     aci_pipeline.cli: ACI=3.607/5.0 [readability_first] → results/gh-pages/reports/www_capraboacasa_com_ca_Comercial/www_capraboacasa_com_ca_Comercial_1779634805_readability_first.html
+2026-05-24 15:00:14,266 INFO     aci_pipeline.cli: ── Pipeline: https://www.capraboacasa.com/ca/ [perfil=visual_first] ──
+2026-05-24 15:00:14,267 INFO     aci_pipeline.m6: M6 completat per https://www.capraboacasa.com/ca/; Comercial (profil=visual_first, ACI=3.51)
+2026-05-24 15:00:14,267 INFO     aci_pipeline.m7: M7 completat per https://www.capraboacasa.com/ca/; Comercial: 15 intervencions prioritzades
+2026-05-24 15:00:14,293 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_capraboacasa_com_ca_Comercial/www_capraboacasa_com_ca_Comercial_1779634805_visual_first.html
+2026-05-24 15:00:14,293 INFO     aci_pipeline.m8: M8 completat per https://www.capraboacasa.com/ca/; Comercial -> results/gh-pages/reports/www_capraboacasa_com_ca_Comercial/www_capraboacasa_com_ca_Comercial_1779634805_visual_first.html
+2026-05-24 15:00:14,293 INFO     aci_pipeline.cli: ACI=3.511/5.0 [visual_first] → results/gh-pages/reports/www_capraboacasa_com_ca_Comercial/www_capraboacasa_com_ca_Comercial_1779634805_visual_first.html
+2026-05-24 15:00:14,293 INFO     aci_pipeline.cli: ── Pipeline: https://es.wallapop.com/ [perfil=wcag_strict] ──
+2026-05-24 15:00:15,615 INFO     aci_pipeline.m1: M1 completat per https://es.wallapop.com/; Comercial (mode=playwright)
+2026-05-24 15:00:15,616 INFO     aci_pipeline.m2: M2 completat per https://es.wallapop.com/; Comercial → results/gh-pages/processed/structure/es_wallapop_com_Comercial_1779634814.json
+2026-05-24 15:00:15,617 INFO     aci_pipeline.m3: M3 completat per https://es.wallapop.com/; Comercial
+2026-05-24 15:00:15,617 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 15:00:15,618 INFO     aci_pipeline.m4: M4 completat per https://es.wallapop.com/; Comercial
+2026-05-24 15:00:15,618 INFO     aci_pipeline.m5: M5: processats 0 elements visuals
+2026-05-24 15:00:15,618 INFO     aci_pipeline.m6: M6 completat per https://es.wallapop.com/; Comercial (profil=wcag_strict, ACI=3.68)
+2026-05-24 15:00:15,618 INFO     aci_pipeline.m7: M7 completat per https://es.wallapop.com/; Comercial: 15 intervencions prioritzades
+2026-05-24 15:00:15,645 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/es_wallapop_com_Comercial/es_wallapop_com_Comercial_1779634814_wcag_strict.html
+2026-05-24 15:00:15,645 INFO     aci_pipeline.m8: M8 completat per https://es.wallapop.com/; Comercial -> results/gh-pages/reports/es_wallapop_com_Comercial/es_wallapop_com_Comercial_1779634814_wcag_strict.html
+2026-05-24 15:00:15,645 INFO     aci_pipeline.cli: ACI=3.678/5.0 [wcag_strict] → results/gh-pages/reports/es_wallapop_com_Comercial/es_wallapop_com_Comercial_1779634814_wcag_strict.html
+2026-05-24 15:00:15,645 INFO     aci_pipeline.cli: ── Pipeline: https://es.wallapop.com/ [perfil=readability_first] ──
+2026-05-24 15:00:15,645 INFO     aci_pipeline.m6: M6 completat per https://es.wallapop.com/; Comercial (profil=readability_first, ACI=3.55)
+2026-05-24 15:00:15,646 INFO     aci_pipeline.m7: M7 completat per https://es.wallapop.com/; Comercial: 15 intervencions prioritzades
+2026-05-24 15:00:15,672 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/es_wallapop_com_Comercial/es_wallapop_com_Comercial_1779634814_readability_first.html
+2026-05-24 15:00:15,672 INFO     aci_pipeline.m8: M8 completat per https://es.wallapop.com/; Comercial -> results/gh-pages/reports/es_wallapop_com_Comercial/es_wallapop_com_Comercial_1779634814_readability_first.html
+2026-05-24 15:00:15,672 INFO     aci_pipeline.cli: ACI=3.551/5.0 [readability_first] → results/gh-pages/reports/es_wallapop_com_Comercial/es_wallapop_com_Comercial_1779634814_readability_first.html
+2026-05-24 15:00:15,672 INFO     aci_pipeline.cli: ── Pipeline: https://es.wallapop.com/ [perfil=visual_first] ──
+2026-05-24 15:00:15,672 INFO     aci_pipeline.m6: M6 completat per https://es.wallapop.com/; Comercial (profil=visual_first, ACI=3.50)
+2026-05-24 15:00:15,673 INFO     aci_pipeline.m7: M7 completat per https://es.wallapop.com/; Comercial: 15 intervencions prioritzades
+2026-05-24 15:00:15,698 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/es_wallapop_com_Comercial/es_wallapop_com_Comercial_1779634814_visual_first.html
+2026-05-24 15:00:15,699 INFO     aci_pipeline.m8: M8 completat per https://es.wallapop.com/; Comercial -> results/gh-pages/reports/es_wallapop_com_Comercial/es_wallapop_com_Comercial_1779634814_visual_first.html
+2026-05-24 15:00:15,699 INFO     aci_pipeline.cli: ACI=3.495/5.0 [visual_first] → results/gh-pages/reports/es_wallapop_com_Comercial/es_wallapop_com_Comercial_1779634814_visual_first.html
+2026-05-24 15:00:15,699 INFO     aci_pipeline.cli: ── Pipeline: https://www.promofarma.com/ [perfil=wcag_strict] ──
+2026-05-24 15:00:19,828 INFO     aci_pipeline.m1: M1 completat per https://www.promofarma.com/; Comercial (mode=playwright)
+2026-05-24 15:00:19,890 INFO     aci_pipeline.m2: M2 completat per https://www.promofarma.com/; Comercial → results/gh-pages/processed/structure/www_promofarma_com_Comercial_1779634815.json
+2026-05-24 15:00:19,891 INFO     aci_pipeline.m3: M3 completat per https://www.promofarma.com/; Comercial
+2026-05-24 15:00:19,891 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 15:00:19,892 INFO     aci_pipeline.m4: M4 completat per https://www.promofarma.com/; Comercial
+2026-05-24 15:00:19,892 ERROR    aci_pipeline.m5: Error cridant Claude per element img_1: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:19,892 ERROR    aci_pipeline.m5: Error cridant Claude per element img_2: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:19,892 ERROR    aci_pipeline.m5: Error cridant Claude per element img_3: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:19,892 ERROR    aci_pipeline.m5: Error cridant Claude per element img_4: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:19,893 ERROR    aci_pipeline.m5: Error cridant Claude per element img_5: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:19,893 ERROR    aci_pipeline.m5: Error cridant Claude per element img_6: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:19,893 ERROR    aci_pipeline.m5: Error cridant Claude per element img_7: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:19,893 ERROR    aci_pipeline.m5: Error cridant Claude per element img_8: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:19,893 ERROR    aci_pipeline.m5: Error cridant Claude per element img_9: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:19,893 ERROR    aci_pipeline.m5: Error cridant Claude per element img_10: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:19,893 ERROR    aci_pipeline.m5: Error cridant Claude per element img_11: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:19,893 ERROR    aci_pipeline.m5: Error cridant Claude per element img_12: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:19,893 ERROR    aci_pipeline.m5: Error cridant Claude per element img_13: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:19,893 ERROR    aci_pipeline.m5: Error cridant Claude per element img_14: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:19,893 ERROR    aci_pipeline.m5: Error cridant Claude per element img_15: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:19,893 ERROR    aci_pipeline.m5: Error cridant Claude per element img_16: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:19,893 ERROR    aci_pipeline.m5: Error cridant Claude per element img_28: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:19,894 ERROR    aci_pipeline.m5: Error cridant Claude per element img_29: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:19,894 ERROR    aci_pipeline.m5: Error cridant Claude per element img_30: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:19,894 ERROR    aci_pipeline.m5: Error cridant Claude per element img_31: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:19,894 ERROR    aci_pipeline.m5: Error cridant Claude per element img_32: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:19,894 ERROR    aci_pipeline.m5: Error cridant Claude per element img_43: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:19,894 ERROR    aci_pipeline.m5: Error cridant Claude per element img_44: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:19,894 INFO     aci_pipeline.m5: M5: processats 23 elements visuals
+2026-05-24 15:00:19,894 INFO     aci_pipeline.cli: M5-IA: 23 element(s) processats
+2026-05-24 15:00:19,894 INFO     aci_pipeline.m6: M6 completat per https://www.promofarma.com/; Comercial (profil=wcag_strict, ACI=3.04)
+2026-05-24 15:00:19,895 INFO     aci_pipeline.m7: M7 completat per https://www.promofarma.com/; Comercial: 15 intervencions prioritzades
+2026-05-24 15:00:19,920 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_promofarma_com_Comercial/www_promofarma_com_Comercial_1779634815_wcag_strict.html
+2026-05-24 15:00:19,921 INFO     aci_pipeline.m8: M8 completat per https://www.promofarma.com/; Comercial -> results/gh-pages/reports/www_promofarma_com_Comercial/www_promofarma_com_Comercial_1779634815_wcag_strict.html
+2026-05-24 15:00:19,921 INFO     aci_pipeline.cli: ACI=3.044/5.0 [wcag_strict] → results/gh-pages/reports/www_promofarma_com_Comercial/www_promofarma_com_Comercial_1779634815_wcag_strict.html
+2026-05-24 15:00:19,921 INFO     aci_pipeline.cli: ── Pipeline: https://www.promofarma.com/ [perfil=readability_first] ──
+2026-05-24 15:00:19,921 INFO     aci_pipeline.m6: M6 completat per https://www.promofarma.com/; Comercial (profil=readability_first, ACI=2.97)
+2026-05-24 15:00:19,922 INFO     aci_pipeline.m7: M7 completat per https://www.promofarma.com/; Comercial: 15 intervencions prioritzades
+2026-05-24 15:00:19,947 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_promofarma_com_Comercial/www_promofarma_com_Comercial_1779634815_readability_first.html
+2026-05-24 15:00:19,947 INFO     aci_pipeline.m8: M8 completat per https://www.promofarma.com/; Comercial -> results/gh-pages/reports/www_promofarma_com_Comercial/www_promofarma_com_Comercial_1779634815_readability_first.html
+2026-05-24 15:00:19,947 INFO     aci_pipeline.cli: ACI=2.969/5.0 [readability_first] → results/gh-pages/reports/www_promofarma_com_Comercial/www_promofarma_com_Comercial_1779634815_readability_first.html
+2026-05-24 15:00:19,947 INFO     aci_pipeline.cli: ── Pipeline: https://www.promofarma.com/ [perfil=visual_first] ──
+2026-05-24 15:00:19,947 INFO     aci_pipeline.m6: M6 completat per https://www.promofarma.com/; Comercial (profil=visual_first, ACI=2.81)
+2026-05-24 15:00:19,948 INFO     aci_pipeline.m7: M7 completat per https://www.promofarma.com/; Comercial: 15 intervencions prioritzades
+2026-05-24 15:00:19,973 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_promofarma_com_Comercial/www_promofarma_com_Comercial_1779634815_visual_first.html
+2026-05-24 15:00:19,973 INFO     aci_pipeline.m8: M8 completat per https://www.promofarma.com/; Comercial -> results/gh-pages/reports/www_promofarma_com_Comercial/www_promofarma_com_Comercial_1779634815_visual_first.html
+2026-05-24 15:00:19,973 INFO     aci_pipeline.cli: ACI=2.815/5.0 [visual_first] → results/gh-pages/reports/www_promofarma_com_Comercial/www_promofarma_com_Comercial_1779634815_visual_first.html
+2026-05-24 15:00:19,973 INFO     aci_pipeline.cli: ── Pipeline: https://www.fcbarcelona.cat/ca/ [perfil=wcag_strict] ──
+2026-05-24 15:00:29,329 INFO     aci_pipeline.m1: M1 completat per https://www.fcbarcelona.cat/ca/; Comercial (mode=playwright)
+2026-05-24 15:00:29,520 INFO     aci_pipeline.m2: M2 completat per https://www.fcbarcelona.cat/ca/; Comercial → results/gh-pages/processed/structure/www_fcbarcelona_cat_ca_Comercial_1779634819.json
+2026-05-24 15:00:29,522 INFO     aci_pipeline.m3: M3 completat per https://www.fcbarcelona.cat/ca/; Comercial
+2026-05-24 15:00:29,523 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 15:00:29,524 INFO     aci_pipeline.m4: M4 completat per https://www.fcbarcelona.cat/ca/; Comercial
+2026-05-24 15:00:29,524 ERROR    aci_pipeline.m5: Error cridant Claude per element img_1: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,524 ERROR    aci_pipeline.m5: Error cridant Claude per element img_2: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,524 ERROR    aci_pipeline.m5: Error cridant Claude per element img_3: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,524 ERROR    aci_pipeline.m5: Error cridant Claude per element img_4: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,524 ERROR    aci_pipeline.m5: Error cridant Claude per element img_5: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,524 ERROR    aci_pipeline.m5: Error cridant Claude per element img_6: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,525 ERROR    aci_pipeline.m5: Error cridant Claude per element img_7: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,525 ERROR    aci_pipeline.m5: Error cridant Claude per element img_8: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,525 ERROR    aci_pipeline.m5: Error cridant Claude per element img_9: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,525 ERROR    aci_pipeline.m5: Error cridant Claude per element img_10: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,525 ERROR    aci_pipeline.m5: Error cridant Claude per element img_11: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,525 ERROR    aci_pipeline.m5: Error cridant Claude per element img_26: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,525 ERROR    aci_pipeline.m5: Error cridant Claude per element img_27: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,525 ERROR    aci_pipeline.m5: Error cridant Claude per element img_28: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,525 ERROR    aci_pipeline.m5: Error cridant Claude per element img_29: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,525 ERROR    aci_pipeline.m5: Error cridant Claude per element img_30: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,525 ERROR    aci_pipeline.m5: Error cridant Claude per element img_31: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,525 ERROR    aci_pipeline.m5: Error cridant Claude per element img_32: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,526 ERROR    aci_pipeline.m5: Error cridant Claude per element img_33: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,526 ERROR    aci_pipeline.m5: Error cridant Claude per element img_36: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,526 ERROR    aci_pipeline.m5: Error cridant Claude per element img_37: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,526 ERROR    aci_pipeline.m5: Error cridant Claude per element img_38: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,526 ERROR    aci_pipeline.m5: Error cridant Claude per element img_39: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,526 ERROR    aci_pipeline.m5: Error cridant Claude per element img_40: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,526 ERROR    aci_pipeline.m5: Error cridant Claude per element img_41: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,526 ERROR    aci_pipeline.m5: Error cridant Claude per element img_42: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,526 ERROR    aci_pipeline.m5: Error cridant Claude per element img_43: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,526 ERROR    aci_pipeline.m5: Error cridant Claude per element img_44: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,526 ERROR    aci_pipeline.m5: Error cridant Claude per element img_45: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,526 ERROR    aci_pipeline.m5: Error cridant Claude per element img_46: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,526 ERROR    aci_pipeline.m5: Error cridant Claude per element img_47: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,527 ERROR    aci_pipeline.m5: Error cridant Claude per element img_48: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,527 ERROR    aci_pipeline.m5: Error cridant Claude per element img_49: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,527 ERROR    aci_pipeline.m5: Error cridant Claude per element img_50: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,527 ERROR    aci_pipeline.m5: Error cridant Claude per element img_51: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,527 ERROR    aci_pipeline.m5: Error cridant Claude per element img_52: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,527 ERROR    aci_pipeline.m5: Error cridant Claude per element img_53: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,527 ERROR    aci_pipeline.m5: Error cridant Claude per element img_54: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,527 ERROR    aci_pipeline.m5: Error cridant Claude per element img_55: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,527 ERROR    aci_pipeline.m5: Error cridant Claude per element img_56: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,527 ERROR    aci_pipeline.m5: Error cridant Claude per element img_57: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,527 ERROR    aci_pipeline.m5: Error cridant Claude per element img_58: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,527 ERROR    aci_pipeline.m5: Error cridant Claude per element img_59: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,527 ERROR    aci_pipeline.m5: Error cridant Claude per element img_60: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,527 ERROR    aci_pipeline.m5: Error cridant Claude per element img_61: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,528 ERROR    aci_pipeline.m5: Error cridant Claude per element img_62: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,528 ERROR    aci_pipeline.m5: Error cridant Claude per element img_63: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,528 ERROR    aci_pipeline.m5: Error cridant Claude per element img_64: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,528 ERROR    aci_pipeline.m5: Error cridant Claude per element img_65: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,528 ERROR    aci_pipeline.m5: Error cridant Claude per element img_66: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,528 ERROR    aci_pipeline.m5: Error cridant Claude per element img_67: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,528 ERROR    aci_pipeline.m5: Error cridant Claude per element img_68: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,528 ERROR    aci_pipeline.m5: Error cridant Claude per element img_69: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,528 ERROR    aci_pipeline.m5: Error cridant Claude per element img_70: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,528 ERROR    aci_pipeline.m5: Error cridant Claude per element img_71: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,528 ERROR    aci_pipeline.m5: Error cridant Claude per element img_72: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,528 ERROR    aci_pipeline.m5: Error cridant Claude per element img_73: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,528 ERROR    aci_pipeline.m5: Error cridant Claude per element img_74: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,528 ERROR    aci_pipeline.m5: Error cridant Claude per element img_75: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,529 ERROR    aci_pipeline.m5: Error cridant Claude per element img_76: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,529 ERROR    aci_pipeline.m5: Error cridant Claude per element img_77: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,529 ERROR    aci_pipeline.m5: Error cridant Claude per element img_78: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,529 ERROR    aci_pipeline.m5: Error cridant Claude per element img_79: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,529 ERROR    aci_pipeline.m5: Error cridant Claude per element img_80: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,529 ERROR    aci_pipeline.m5: Error cridant Claude per element img_81: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,529 ERROR    aci_pipeline.m5: Error cridant Claude per element img_82: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,529 ERROR    aci_pipeline.m5: Error cridant Claude per element img_83: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,529 ERROR    aci_pipeline.m5: Error cridant Claude per element img_84: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,529 ERROR    aci_pipeline.m5: Error cridant Claude per element img_85: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,529 ERROR    aci_pipeline.m5: Error cridant Claude per element img_86: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,529 ERROR    aci_pipeline.m5: Error cridant Claude per element img_87: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,529 ERROR    aci_pipeline.m5: Error cridant Claude per element img_89: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,530 ERROR    aci_pipeline.m5: Error cridant Claude per element img_90: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,530 ERROR    aci_pipeline.m5: Error cridant Claude per element img_92: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,530 ERROR    aci_pipeline.m5: Error cridant Claude per element img_93: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,530 ERROR    aci_pipeline.m5: Error cridant Claude per element img_95: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,530 ERROR    aci_pipeline.m5: Error cridant Claude per element img_96: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,530 ERROR    aci_pipeline.m5: Error cridant Claude per element img_98: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,530 ERROR    aci_pipeline.m5: Error cridant Claude per element img_99: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,530 ERROR    aci_pipeline.m5: Error cridant Claude per element img_100: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,530 ERROR    aci_pipeline.m5: Error cridant Claude per element img_101: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,530 ERROR    aci_pipeline.m5: Error cridant Claude per element img_102: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,530 ERROR    aci_pipeline.m5: Error cridant Claude per element img_103: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,530 ERROR    aci_pipeline.m5: Error cridant Claude per element img_104: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,530 ERROR    aci_pipeline.m5: Error cridant Claude per element img_105: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,530 ERROR    aci_pipeline.m5: Error cridant Claude per element img_106: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,531 ERROR    aci_pipeline.m5: Error cridant Claude per element img_107: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,531 ERROR    aci_pipeline.m5: Error cridant Claude per element img_114: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,531 ERROR    aci_pipeline.m5: Error cridant Claude per element img_129: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,531 ERROR    aci_pipeline.m5: Error cridant Claude per element img_130: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,531 ERROR    aci_pipeline.m5: Error cridant Claude per element img_131: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,531 ERROR    aci_pipeline.m5: Error cridant Claude per element img_132: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,531 ERROR    aci_pipeline.m5: Error cridant Claude per element img_133: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,531 ERROR    aci_pipeline.m5: Error cridant Claude per element img_134: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,531 ERROR    aci_pipeline.m5: Error cridant Claude per element img_135: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,531 ERROR    aci_pipeline.m5: Error cridant Claude per element img_137: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,531 ERROR    aci_pipeline.m5: Error cridant Claude per element img_138: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,531 ERROR    aci_pipeline.m5: Error cridant Claude per element img_140: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,531 ERROR    aci_pipeline.m5: Error cridant Claude per element img_141: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,532 ERROR    aci_pipeline.m5: Error cridant Claude per element img_143: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,532 ERROR    aci_pipeline.m5: Error cridant Claude per element img_144: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,532 ERROR    aci_pipeline.m5: Error cridant Claude per element img_146: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,532 ERROR    aci_pipeline.m5: Error cridant Claude per element img_147: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,532 ERROR    aci_pipeline.m5: Error cridant Claude per element img_149: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,532 ERROR    aci_pipeline.m5: Error cridant Claude per element img_150: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,532 ERROR    aci_pipeline.m5: Error cridant Claude per element img_152: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,532 ERROR    aci_pipeline.m5: Error cridant Claude per element img_153: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,532 ERROR    aci_pipeline.m5: Error cridant Claude per element img_155: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,532 ERROR    aci_pipeline.m5: Error cridant Claude per element img_156: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,532 ERROR    aci_pipeline.m5: Error cridant Claude per element img_158: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,532 ERROR    aci_pipeline.m5: Error cridant Claude per element img_159: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,532 ERROR    aci_pipeline.m5: Error cridant Claude per element img_161: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,533 ERROR    aci_pipeline.m5: Error cridant Claude per element img_162: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,533 ERROR    aci_pipeline.m5: Error cridant Claude per element img_163: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,533 ERROR    aci_pipeline.m5: Error cridant Claude per element img_164: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,533 ERROR    aci_pipeline.m5: Error cridant Claude per element img_174: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,533 ERROR    aci_pipeline.m5: Error cridant Claude per element img_175: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,533 ERROR    aci_pipeline.m5: Error cridant Claude per element img_176: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,533 ERROR    aci_pipeline.m5: Error cridant Claude per element img_177: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,533 ERROR    aci_pipeline.m5: Error cridant Claude per element img_178: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,533 ERROR    aci_pipeline.m5: Error cridant Claude per element img_179: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,533 ERROR    aci_pipeline.m5: Error cridant Claude per element img_180: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,533 ERROR    aci_pipeline.m5: Error cridant Claude per element img_181: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,533 ERROR    aci_pipeline.m5: Error cridant Claude per element img_182: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,533 ERROR    aci_pipeline.m5: Error cridant Claude per element img_183: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,533 ERROR    aci_pipeline.m5: Error cridant Claude per element img_187: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,534 ERROR    aci_pipeline.m5: Error cridant Claude per element img_193: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,534 ERROR    aci_pipeline.m5: Error cridant Claude per element img_194: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,534 ERROR    aci_pipeline.m5: Error cridant Claude per element img_195: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,534 ERROR    aci_pipeline.m5: Error cridant Claude per element img_196: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,534 ERROR    aci_pipeline.m5: Error cridant Claude per element img_197: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,534 ERROR    aci_pipeline.m5: Error cridant Claude per element img_198: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,534 ERROR    aci_pipeline.m5: Error cridant Claude per element img_199: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,534 ERROR    aci_pipeline.m5: Error cridant Claude per element img_200: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,534 ERROR    aci_pipeline.m5: Error cridant Claude per element img_201: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,534 ERROR    aci_pipeline.m5: Error cridant Claude per element img_202: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,534 ERROR    aci_pipeline.m5: Error cridant Claude per element img_203: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,534 ERROR    aci_pipeline.m5: Error cridant Claude per element img_204: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,534 ERROR    aci_pipeline.m5: Error cridant Claude per element img_205: Client.__init__() got an unexpected keyword argument 'proxies'
+2026-05-24 15:00:29,534 INFO     aci_pipeline.m5: M5: processats 139 elements visuals
+2026-05-24 15:00:29,535 INFO     aci_pipeline.cli: M5-IA: 139 element(s) processats
+2026-05-24 15:00:29,535 INFO     aci_pipeline.m6: M6 completat per https://www.fcbarcelona.cat/ca/; Comercial (profil=wcag_strict, ACI=3.35)
+2026-05-24 15:00:29,535 INFO     aci_pipeline.m7: M7 completat per https://www.fcbarcelona.cat/ca/; Comercial: 15 intervencions prioritzades
+2026-05-24 15:00:29,561 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_fcbarcelona_cat_ca_Comercial/www_fcbarcelona_cat_ca_Comercial_1779634819_wcag_strict.html
+2026-05-24 15:00:29,561 INFO     aci_pipeline.m8: M8 completat per https://www.fcbarcelona.cat/ca/; Comercial -> results/gh-pages/reports/www_fcbarcelona_cat_ca_Comercial/www_fcbarcelona_cat_ca_Comercial_1779634819_wcag_strict.html
+2026-05-24 15:00:29,561 INFO     aci_pipeline.cli: ACI=3.349/5.0 [wcag_strict] → results/gh-pages/reports/www_fcbarcelona_cat_ca_Comercial/www_fcbarcelona_cat_ca_Comercial_1779634819_wcag_strict.html
+2026-05-24 15:00:29,562 INFO     aci_pipeline.cli: ── Pipeline: https://www.fcbarcelona.cat/ca/ [perfil=readability_first] ──
+2026-05-24 15:00:29,562 INFO     aci_pipeline.m6: M6 completat per https://www.fcbarcelona.cat/ca/; Comercial (profil=readability_first, ACI=3.29)
+2026-05-24 15:00:29,562 INFO     aci_pipeline.m7: M7 completat per https://www.fcbarcelona.cat/ca/; Comercial: 15 intervencions prioritzades
+2026-05-24 15:00:29,588 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_fcbarcelona_cat_ca_Comercial/www_fcbarcelona_cat_ca_Comercial_1779634819_readability_first.html
+2026-05-24 15:00:29,588 INFO     aci_pipeline.m8: M8 completat per https://www.fcbarcelona.cat/ca/; Comercial -> results/gh-pages/reports/www_fcbarcelona_cat_ca_Comercial/www_fcbarcelona_cat_ca_Comercial_1779634819_readability_first.html
+2026-05-24 15:00:29,588 INFO     aci_pipeline.cli: ACI=3.292/5.0 [readability_first] → results/gh-pages/reports/www_fcbarcelona_cat_ca_Comercial/www_fcbarcelona_cat_ca_Comercial_1779634819_readability_first.html
+2026-05-24 15:00:29,588 INFO     aci_pipeline.cli: ── Pipeline: https://www.fcbarcelona.cat/ca/ [perfil=visual_first] ──
+2026-05-24 15:00:29,589 INFO     aci_pipeline.m6: M6 completat per https://www.fcbarcelona.cat/ca/; Comercial (profil=visual_first, ACI=3.12)
+2026-05-24 15:00:29,589 INFO     aci_pipeline.m7: M7 completat per https://www.fcbarcelona.cat/ca/; Comercial: 15 intervencions prioritzades
+2026-05-24 15:00:29,615 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_fcbarcelona_cat_ca_Comercial/www_fcbarcelona_cat_ca_Comercial_1779634819_visual_first.html
+2026-05-24 15:00:29,615 INFO     aci_pipeline.m8: M8 completat per https://www.fcbarcelona.cat/ca/; Comercial -> results/gh-pages/reports/www_fcbarcelona_cat_ca_Comercial/www_fcbarcelona_cat_ca_Comercial_1779634819_visual_first.html
+2026-05-24 15:00:29,616 INFO     aci_pipeline.cli: ACI=3.125/5.0 [visual_first] → results/gh-pages/reports/www_fcbarcelona_cat_ca_Comercial/www_fcbarcelona_cat_ca_Comercial_1779634819_visual_first.html
+2026-05-24 15:00:29,616 INFO     aci_pipeline.cli: ── Pipeline: https://www.rcdespanyol.com/ [perfil=wcag_strict] ──
+2026-05-24 15:00:33,363 INFO     aci_pipeline.m1: M1 completat per https://www.rcdespanyol.com/; Comercial (mode=playwright)
+2026-05-24 15:00:33,366 INFO     aci_pipeline.m2: M2 completat per https://www.rcdespanyol.com/; Comercial → results/gh-pages/processed/structure/www_rcdespanyol_com_Comercial_1779634829.json
+2026-05-24 15:00:33,366 INFO     aci_pipeline.m3: M3 completat per https://www.rcdespanyol.com/; Comercial
+2026-05-24 15:00:33,367 WARNING  aci_pipeline.m4: textstat no disponible; mètriques textuals omeses.
+2026-05-24 15:00:33,367 INFO     aci_pipeline.m4: M4 completat per https://www.rcdespanyol.com/; Comercial
+2026-05-24 15:00:33,367 INFO     aci_pipeline.m5: M5: processats 0 elements visuals
+2026-05-24 15:00:33,368 INFO     aci_pipeline.m6: M6 completat per https://www.rcdespanyol.com/; Comercial (profil=wcag_strict, ACI=3.58)
+2026-05-24 15:00:33,368 INFO     aci_pipeline.m7: M7 completat per https://www.rcdespanyol.com/; Comercial: 15 intervencions prioritzades
+2026-05-24 15:00:33,394 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_rcdespanyol_com_Comercial/www_rcdespanyol_com_Comercial_1779634829_wcag_strict.html
+2026-05-24 15:00:33,394 INFO     aci_pipeline.m8: M8 completat per https://www.rcdespanyol.com/; Comercial -> results/gh-pages/reports/www_rcdespanyol_com_Comercial/www_rcdespanyol_com_Comercial_1779634829_wcag_strict.html
+2026-05-24 15:00:33,394 INFO     aci_pipeline.cli: ACI=3.575/5.0 [wcag_strict] → results/gh-pages/reports/www_rcdespanyol_com_Comercial/www_rcdespanyol_com_Comercial_1779634829_wcag_strict.html
+2026-05-24 15:00:33,394 INFO     aci_pipeline.cli: ── Pipeline: https://www.rcdespanyol.com/ [perfil=readability_first] ──
+2026-05-24 15:00:33,394 INFO     aci_pipeline.m6: M6 completat per https://www.rcdespanyol.com/; Comercial (profil=readability_first, ACI=3.49)
+2026-05-24 15:00:33,395 INFO     aci_pipeline.m7: M7 completat per https://www.rcdespanyol.com/; Comercial: 15 intervencions prioritzades
+2026-05-24 15:00:33,421 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_rcdespanyol_com_Comercial/www_rcdespanyol_com_Comercial_1779634829_readability_first.html
+2026-05-24 15:00:33,421 INFO     aci_pipeline.m8: M8 completat per https://www.rcdespanyol.com/; Comercial -> results/gh-pages/reports/www_rcdespanyol_com_Comercial/www_rcdespanyol_com_Comercial_1779634829_readability_first.html
+2026-05-24 15:00:33,421 INFO     aci_pipeline.cli: ACI=3.491/5.0 [readability_first] → results/gh-pages/reports/www_rcdespanyol_com_Comercial/www_rcdespanyol_com_Comercial_1779634829_readability_first.html
+2026-05-24 15:00:33,421 INFO     aci_pipeline.cli: ── Pipeline: https://www.rcdespanyol.com/ [perfil=visual_first] ──
+2026-05-24 15:00:33,421 INFO     aci_pipeline.m6: M6 completat per https://www.rcdespanyol.com/; Comercial (profil=visual_first, ACI=3.41)
+2026-05-24 15:00:33,422 INFO     aci_pipeline.m7: M7 completat per https://www.rcdespanyol.com/; Comercial: 15 intervencions prioritzades
+2026-05-24 15:00:33,448 INFO     aci_pipeline.m8: Informe HTML desat a: results/gh-pages/reports/www_rcdespanyol_com_Comercial/www_rcdespanyol_com_Comercial_1779634829_visual_first.html
+2026-05-24 15:00:33,448 INFO     aci_pipeline.m8: M8 completat per https://www.rcdespanyol.com/; Comercial -> results/gh-pages/reports/www_rcdespanyol_com_Comercial/www_rcdespanyol_com_Comercial_1779634829_visual_first.html
+2026-05-24 15:00:33,448 INFO     aci_pipeline.cli: ACI=3.412/5.0 [visual_first] → results/gh-pages/reports/www_rcdespanyol_com_Comercial/www_rcdespanyol_com_Comercial_1779634829_visual_first.html
+2026-05-24 15:00:33,448 WARNING  aci_pipeline.cli: No s'ha pogut generar l'informe comparatiu: generate_comparative_report() missing 1 required positional argument: 'profile_results'
+2026-05-24 15:00:33,449 INFO     aci_pipeline.cli: Pipeline completat sense errors.

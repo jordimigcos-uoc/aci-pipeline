@@ -1,290 +1,362 @@
 [
   {
-    "url": "https://catsalut.gencat.cat/ca/inici/",
-    "domain": "catsalut.gencat.cat",
-    "profile_reports": {
-      "wcag_strict": "reports/catsalut_gencat_cat_ca_inici_Institucional_wcag_strict.html"
-    },
-    "comparative_report": null
-  },
-  {
-    "url": "https://educacio.gencat.cat/ca/inici",
-    "domain": "educacio.gencat.cat",
-    "profile_reports": {
-      "wcag_strict": "reports/educacio_gencat_cat_ca_inici_Institucional_wcag_strict.html"
-    },
-    "comparative_report": null
-  },
-  {
-    "url": "https://es.wallapop.com/",
-    "domain": "es.wallapop.com",
-    "profile_reports": {
-      "wcag_strict": "reports/es_wallapop_com_Comercial_wcag_strict.html"
-    },
-    "comparative_report": null
-  },
-  {
-    "url": "https://sagradafamilia.org/",
-    "domain": "sagradafamilia.org",
-    "profile_reports": {
-      "wcag_strict": "reports/sagradafamilia_org_Cultural_wcag_strict.html"
-    },
-    "comparative_report": null
-  },
-  {
-    "url": "https://sede.agenciatributaria.gob.es/",
-    "domain": "sede.agenciatributaria.gob.es",
-    "profile_reports": {
-      "wcag_strict": "reports/sede_agenciatributaria_gob_es_Institucional_wcag_strict.html"
-    },
-    "comparative_report": null
-  },
-  {
-    "url": "https://serveiocupacio.gencat.cat/ca/inici",
-    "domain": "serveiocupacio.gencat.cat",
-    "profile_reports": {
-      "wcag_strict": "reports/serveiocupacio_gencat_cat_ca_inici_Institucional_wcag_strict.html"
-    },
-    "comparative_report": null
-  },
-  {
-    "url": "https://terrassadigital.cat/",
-    "domain": "terrassadigital.cat",
-    "profile_reports": {
-      "wcag_strict": "reports/terrassadigital_cat_Mitjans_wcag_strict.html"
-    },
-    "comparative_report": null
-  },
-  {
-    "url": "https://web.gencat.cat/ca/ciutadania/inici",
-    "domain": "web.gencat.cat",
-    "profile_reports": {
-      "wcag_strict": "reports/web_gencat_cat_ca_ciutadania_inici_Institucional_wcag_strict.html"
-    },
-    "comparative_report": null
-  },
-  {
-    "url": "https://web.ub.edu/",
-    "domain": "web.ub.edu",
-    "profile_reports": {
-      "wcag_strict": "reports/web_ub_edu_Educatiu_wcag_strict.html"
-    },
-    "comparative_report": null
-  },
-  {
-    "url": "https://www.3cat.cat/3cat/",
-    "domain": "www.3cat.cat",
-    "profile_reports": {
-      "wcag_strict": "reports/www_3cat_cat_3cat_Mitjans_wcag_strict.html"
-    },
-    "comparative_report": null
-  },
-  {
-    "url": "https://www.ara.cat/",
-    "domain": "www.ara.cat",
-    "profile_reports": {
-      "wcag_strict": "reports/www_ara_cat_Mitjans_wcag_strict.html"
-    },
-    "comparative_report": null
-  },
-  {
-    "url": "https://www.capraboacasa.com/ca/",
-    "domain": "www.capraboacasa.com",
-    "profile_reports": {
-      "wcag_strict": "reports/www_capraboacasa_com_ca_Comercial_wcag_strict.html"
-    },
-    "comparative_report": null
-  },
-  {
-    "url": "https://www.compraonline.bonpreuesclat.cat/",
-    "domain": "www.compraonline.bonpreuesclat.cat",
-    "profile_reports": {
-      "wcag_strict": "reports/www_compraonline_bonpreuesclat_cat_Comercial_wcag_strict.html"
-    },
-    "comparative_report": null
-  },
-  {
-    "url": "https://www.diba.cat/ca/inici",
-    "domain": "www.diba.cat",
-    "profile_reports": {
-      "wcag_strict": "reports/www_diba_cat_ca_inici_Institucional_wcag_strict.html"
-    },
-    "comparative_report": null
-  },
-  {
-    "url": "https://www.educacionfpydeportes.gob.es/portada.html",
-    "domain": "www.educacionfpydeportes.gob.es",
-    "profile_reports": {
-      "wcag_strict": "reports/www_educacionfpydeportes_gob_es_portada_html_Institucional_wcag_strict.html"
-    },
-    "comparative_report": null
-  },
-  {
-    "url": "https://www.fcbarcelona.cat/ca/",
-    "domain": "www.fcbarcelona.cat",
-    "profile_reports": {
-      "wcag_strict": "reports/www_fcbarcelona_cat_ca_Comercial_wcag_strict.html"
-    },
-    "comparative_report": null
-  },
-  {
-    "url": "https://www.lavanguardia.com/",
-    "domain": "www.lavanguardia.com",
-    "profile_reports": {
-      "wcag_strict": "reports/www_lavanguardia_com_Mitjans_wcag_strict.html"
-    },
-    "comparative_report": null
-  },
-  {
-    "url": "https://www.liceubarcelona.cat/ca",
-    "domain": "www.liceubarcelona.cat",
-    "profile_reports": {
-      "wcag_strict": "reports/www_liceubarcelona_cat_ca_Cultural_wcag_strict.html"
-    },
-    "comparative_report": null
-  },
-  {
-    "url": "https://www.meteo.cat/",
-    "domain": "www.meteo.cat",
-    "profile_reports": {
-      "wcag_strict": "reports/www_meteo_cat_Institucional_wcag_strict.html"
-    },
-    "comparative_report": null
-  },
-  {
-    "url": "https://www.museunacional.cat/ca",
-    "domain": "www.museunacional.cat",
-    "profile_reports": {
-      "wcag_strict": "reports/www_museunacional_cat_ca_Cultural_wcag_strict.html"
-    },
-    "comparative_report": null
-  },
-  {
     "url": "https://www.palaumusica.cat/ca/",
     "domain": "www.palaumusica.cat",
     "profile_reports": {
+      "readability_first": "reports/www_palaumusica_cat_ca_Cultural_readability_first.html",
+      "visual_first": "reports/www_palaumusica_cat_ca_Cultural_visual_first.html",
       "wcag_strict": "reports/www_palaumusica_cat_ca_Cultural_wcag_strict.html"
     },
-    "comparative_report": null
-  },
-  {
-    "url": "https://www.promofarma.com/",
-    "domain": "www.promofarma.com",
-    "profile_reports": {
-      "wcag_strict": "reports/www_promofarma_com_Comercial_wcag_strict.html"
-    },
-    "comparative_report": null
-  },
-  {
-    "url": "https://www.rac1.cat/",
-    "domain": "www.rac1.cat",
-    "profile_reports": {
-      "wcag_strict": "reports/www_rac1_cat_Mitjans_wcag_strict.html"
-    },
-    "comparative_report": null
-  },
-  {
-    "url": "https://www.rcdespanyol.com/",
-    "domain": "www.rcdespanyol.com",
-    "profile_reports": {
-      "wcag_strict": "reports/www_rcdespanyol_com_Comercial_wcag_strict.html"
-    },
-    "comparative_report": null
-  },
-  {
-    "url": "https://www.rtve.es/",
-    "domain": "www.rtve.es",
-    "profile_reports": {
-      "wcag_strict": "reports/www_rtve_es_Mitjans_wcag_strict.html"
-    },
-    "comparative_report": null
-  },
-  {
-    "url": "https://www.sanidad.gob.es/",
-    "domain": "www.sanidad.gob.es",
-    "profile_reports": {
-      "wcag_strict": "reports/www_sanidad_gob_es_Institucional_wcag_strict.html"
-    },
-    "comparative_report": null
-  },
-  {
-    "url": "https://www.seg-social.es/wps/portal/wss/internet/Inicio",
-    "domain": "www.seg-social.es",
-    "profile_reports": {
-      "wcag_strict": "reports/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional_wcag_strict.html"
-    },
-    "comparative_report": null
+    "comparative_report": "reports/www_palaumusica_cat_ca_Cultural_comparative.html"
   },
   {
     "url": "https://www.tnc.cat/ca",
     "domain": "www.tnc.cat",
     "profile_reports": {
+      "readability_first": "reports/www_tnc_cat_ca_Cultural_readability_first.html",
+      "visual_first": "reports/www_tnc_cat_ca_Cultural_visual_first.html",
       "wcag_strict": "reports/www_tnc_cat_ca_Cultural_wcag_strict.html"
     },
-    "comparative_report": null
+    "comparative_report": "reports/www_tnc_cat_ca_Cultural_comparative.html"
   },
   {
-    "url": "https://www.uab.cat/",
-    "domain": "www.uab.cat",
+    "url": "https://web.ub.edu/",
+    "domain": "web.ub.edu",
     "profile_reports": {
-      "wcag_strict": "reports/www_uab_cat_Educatiu_wcag_strict.html"
+      "readability_first": "reports/web_ub_edu_Educatiu_readability_first.html",
+      "visual_first": "reports/web_ub_edu_Educatiu_visual_first.html",
+      "wcag_strict": "reports/web_ub_edu_Educatiu_wcag_strict.html"
     },
-    "comparative_report": null
+    "comparative_report": "reports/web_ub_edu_Educatiu_comparative.html"
+  },
+  {
+    "url": "https://www.lavanguardia.com/",
+    "domain": "www.lavanguardia.com",
+    "profile_reports": {
+      "readability_first": "reports/www_lavanguardia_com_Mitjans_readability_first.html",
+      "visual_first": "reports/www_lavanguardia_com_Mitjans_visual_first.html",
+      "wcag_strict": "reports/www_lavanguardia_com_Mitjans_wcag_strict.html"
+    },
+    "comparative_report": "reports/www_lavanguardia_com_Mitjans_comparative.html"
+  },
+  {
+    "url": "https://terrassadigital.cat/",
+    "domain": "terrassadigital.cat",
+    "profile_reports": {
+      "readability_first": "reports/terrassadigital_cat_Mitjans_readability_first.html",
+      "visual_first": "reports/terrassadigital_cat_Mitjans_visual_first.html",
+      "wcag_strict": "reports/terrassadigital_cat_Mitjans_wcag_strict.html"
+    },
+    "comparative_report": "reports/terrassadigital_cat_Mitjans_comparative.html"
+  },
+  {
+    "url": "https://www.sanidad.gob.es/",
+    "domain": "www.sanidad.gob.es",
+    "profile_reports": {
+      "readability_first": "reports/www_sanidad_gob_es_Institucional_readability_first.html",
+      "visual_first": "reports/www_sanidad_gob_es_Institucional_visual_first.html",
+      "wcag_strict": "reports/www_sanidad_gob_es_Institucional_wcag_strict.html"
+    },
+    "comparative_report": "reports/www_sanidad_gob_es_Institucional_comparative.html"
+  },
+  {
+    "url": "https://www.educacionfpydeportes.gob.es/portada.html",
+    "domain": "www.educacionfpydeportes.gob.es",
+    "profile_reports": {
+      "readability_first": "reports/www_educacionfpydeportes_gob_es_portada_html_Institucional_readability_first.html",
+      "visual_first": "reports/www_educacionfpydeportes_gob_es_portada_html_Institucional_visual_first.html",
+      "wcag_strict": "reports/www_educacionfpydeportes_gob_es_portada_html_Institucional_wcag_strict.html"
+    },
+    "comparative_report": "reports/www_educacionfpydeportes_gob_es_portada_html_Institucional_comparative.html"
+  },
+  {
+    "url": "https://sede.agenciatributaria.gob.es/",
+    "domain": "sede.agenciatributaria.gob.es",
+    "profile_reports": {
+      "readability_first": "reports/sede_agenciatributaria_gob_es_Institucional_readability_first.html",
+      "visual_first": "reports/sede_agenciatributaria_gob_es_Institucional_visual_first.html",
+      "wcag_strict": "reports/sede_agenciatributaria_gob_es_Institucional_wcag_strict.html"
+    },
+    "comparative_report": "reports/sede_agenciatributaria_gob_es_Institucional_comparative.html"
+  },
+  {
+    "url": "https://www.capraboacasa.com/ca/",
+    "domain": "www.capraboacasa.com",
+    "profile_reports": {
+      "readability_first": "reports/www_capraboacasa_com_ca_Comercial_readability_first.html",
+      "visual_first": "reports/www_capraboacasa_com_ca_Comercial_visual_first.html",
+      "wcag_strict": "reports/www_capraboacasa_com_ca_Comercial_wcag_strict.html"
+    },
+    "comparative_report": "reports/www_capraboacasa_com_ca_Comercial_comparative.html"
+  },
+  {
+    "url": "https://es.wallapop.com/",
+    "domain": "es.wallapop.com",
+    "profile_reports": {
+      "readability_first": "reports/es_wallapop_com_Comercial_readability_first.html",
+      "visual_first": "reports/es_wallapop_com_Comercial_visual_first.html",
+      "wcag_strict": "reports/es_wallapop_com_Comercial_wcag_strict.html"
+    },
+    "comparative_report": "reports/es_wallapop_com_Comercial_comparative.html"
   },
   {
     "url": "https://www.ucm.es/",
     "domain": "www.ucm.es",
     "profile_reports": {
+      "readability_first": "reports/www_ucm_es_Educatiu_readability_first.html",
+      "visual_first": "reports/www_ucm_es_Educatiu_visual_first.html",
       "wcag_strict": "reports/www_ucm_es_Educatiu_wcag_strict.html"
     },
-    "comparative_report": null
-  },
-  {
-    "url": "https://www.unav.edu/",
-    "domain": "www.unav.edu",
-    "profile_reports": {
-      "wcag_strict": "reports/www_unav_edu_Educatiu_wcag_strict.html"
-    },
-    "comparative_report": null
-  },
-  {
-    "url": "https://www.uoc.edu/ca",
-    "domain": "www.uoc.edu",
-    "profile_reports": {
-      "wcag_strict": "reports/www_uoc_edu_ca_Educatiu_wcag_strict.html"
-    },
-    "comparative_report": null
-  },
-  {
-    "url": "https://www.upc.edu/ca",
-    "domain": "www.upc.edu",
-    "profile_reports": {
-      "wcag_strict": "reports/www_upc_edu_ca_Educatiu_wcag_strict.html"
-    },
-    "comparative_report": null
-  },
-  {
-    "url": "https://www.upf.edu/",
-    "domain": "www.upf.edu",
-    "profile_reports": {
-      "wcag_strict": "reports/www_upf_edu_Educatiu_wcag_strict.html"
-    },
-    "comparative_report": null
-  },
-  {
-    "url": "https://www.url.edu/ca",
-    "domain": "www.url.edu",
-    "profile_reports": {
-      "wcag_strict": "reports/www_url_edu_ca_Educatiu_wcag_strict.html"
-    },
-    "comparative_report": null
+    "comparative_report": "reports/www_ucm_es_Educatiu_comparative.html"
   },
   {
     "url": "https://www.uv.es/",
     "domain": "www.uv.es",
     "profile_reports": {
+      "readability_first": "reports/www_uv_es_Educatiu_readability_first.html",
+      "visual_first": "reports/www_uv_es_Educatiu_visual_first.html",
       "wcag_strict": "reports/www_uv_es_Educatiu_wcag_strict.html"
     },
-    "comparative_report": null
+    "comparative_report": "reports/www_uv_es_Educatiu_comparative.html"
+  },
+  {
+    "url": "https://www.diba.cat/ca/inici",
+    "domain": "www.diba.cat",
+    "profile_reports": {
+      "readability_first": "reports/www_diba_cat_ca_inici_Institucional_readability_first.html",
+      "visual_first": "reports/www_diba_cat_ca_inici_Institucional_visual_first.html",
+      "wcag_strict": "reports/www_diba_cat_ca_inici_Institucional_wcag_strict.html"
+    },
+    "comparative_report": "reports/www_diba_cat_ca_inici_Institucional_comparative.html"
+  },
+  {
+    "url": "https://www.rac1.cat/",
+    "domain": "www.rac1.cat",
+    "profile_reports": {
+      "readability_first": "reports/www_rac1_cat_Mitjans_readability_first.html",
+      "visual_first": "reports/www_rac1_cat_Mitjans_visual_first.html",
+      "wcag_strict": "reports/www_rac1_cat_Mitjans_wcag_strict.html"
+    },
+    "comparative_report": "reports/www_rac1_cat_Mitjans_comparative.html"
+  },
+  {
+    "url": "https://www.compraonline.bonpreuesclat.cat/",
+    "domain": "www.compraonline.bonpreuesclat.cat",
+    "profile_reports": {
+      "readability_first": "reports/www_compraonline_bonpreuesclat_cat_Comercial_readability_first.html",
+      "visual_first": "reports/www_compraonline_bonpreuesclat_cat_Comercial_visual_first.html",
+      "wcag_strict": "reports/www_compraonline_bonpreuesclat_cat_Comercial_wcag_strict.html"
+    },
+    "comparative_report": "reports/www_compraonline_bonpreuesclat_cat_Comercial_comparative.html"
+  },
+  {
+    "url": "https://web.gencat.cat/ca/ciutadania/inici",
+    "domain": "web.gencat.cat",
+    "profile_reports": {
+      "readability_first": "reports/web_gencat_cat_ca_ciutadania_inici_Institucional_readability_first.html",
+      "visual_first": "reports/web_gencat_cat_ca_ciutadania_inici_Institucional_visual_first.html",
+      "wcag_strict": "reports/web_gencat_cat_ca_ciutadania_inici_Institucional_wcag_strict.html"
+    },
+    "comparative_report": "reports/web_gencat_cat_ca_ciutadania_inici_Institucional_comparative.html"
+  },
+  {
+    "url": "https://www.rcdespanyol.com/",
+    "domain": "www.rcdespanyol.com",
+    "profile_reports": {
+      "readability_first": "reports/www_rcdespanyol_com_Comercial_readability_first.html",
+      "visual_first": "reports/www_rcdespanyol_com_Comercial_visual_first.html",
+      "wcag_strict": "reports/www_rcdespanyol_com_Comercial_wcag_strict.html"
+    },
+    "comparative_report": "reports/www_rcdespanyol_com_Comercial_comparative.html"
+  },
+  {
+    "url": "https://www.uab.cat/",
+    "domain": "www.uab.cat",
+    "profile_reports": {
+      "readability_first": "reports/www_uab_cat_Educatiu_readability_first.html",
+      "visual_first": "reports/www_uab_cat_Educatiu_visual_first.html",
+      "wcag_strict": "reports/www_uab_cat_Educatiu_wcag_strict.html"
+    },
+    "comparative_report": "reports/www_uab_cat_Educatiu_comparative.html"
+  },
+  {
+    "url": "https://www.3cat.cat/3cat/",
+    "domain": "www.3cat.cat",
+    "profile_reports": {
+      "readability_first": "reports/www_3cat_cat_3cat_Mitjans_readability_first.html",
+      "visual_first": "reports/www_3cat_cat_3cat_Mitjans_visual_first.html",
+      "wcag_strict": "reports/www_3cat_cat_3cat_Mitjans_wcag_strict.html"
+    },
+    "comparative_report": "reports/www_3cat_cat_3cat_Mitjans_comparative.html"
+  },
+  {
+    "url": "https://serveiocupacio.gencat.cat/ca/inici",
+    "domain": "serveiocupacio.gencat.cat",
+    "profile_reports": {
+      "readability_first": "reports/serveiocupacio_gencat_cat_ca_inici_Institucional_readability_first.html",
+      "visual_first": "reports/serveiocupacio_gencat_cat_ca_inici_Institucional_visual_first.html",
+      "wcag_strict": "reports/serveiocupacio_gencat_cat_ca_inici_Institucional_wcag_strict.html"
+    },
+    "comparative_report": "reports/serveiocupacio_gencat_cat_ca_inici_Institucional_comparative.html"
+  },
+  {
+    "url": "https://www.url.edu/ca",
+    "domain": "www.url.edu",
+    "profile_reports": {
+      "readability_first": "reports/www_url_edu_ca_Educatiu_readability_first.html",
+      "visual_first": "reports/www_url_edu_ca_Educatiu_visual_first.html",
+      "wcag_strict": "reports/www_url_edu_ca_Educatiu_wcag_strict.html"
+    },
+    "comparative_report": "reports/www_url_edu_ca_Educatiu_comparative.html"
+  },
+  {
+    "url": "https://educacio.gencat.cat/ca/inici",
+    "domain": "educacio.gencat.cat",
+    "profile_reports": {
+      "readability_first": "reports/educacio_gencat_cat_ca_inici_Institucional_readability_first.html",
+      "visual_first": "reports/educacio_gencat_cat_ca_inici_Institucional_visual_first.html",
+      "wcag_strict": "reports/educacio_gencat_cat_ca_inici_Institucional_wcag_strict.html"
+    },
+    "comparative_report": "reports/educacio_gencat_cat_ca_inici_Institucional_comparative.html"
+  },
+  {
+    "url": "https://www.museunacional.cat/ca",
+    "domain": "www.museunacional.cat",
+    "profile_reports": {
+      "readability_first": "reports/www_museunacional_cat_ca_Cultural_readability_first.html",
+      "visual_first": "reports/www_museunacional_cat_ca_Cultural_visual_first.html",
+      "wcag_strict": "reports/www_museunacional_cat_ca_Cultural_wcag_strict.html"
+    },
+    "comparative_report": "reports/www_museunacional_cat_ca_Cultural_comparative.html"
+  },
+  {
+    "url": "https://www.meteo.cat/",
+    "domain": "www.meteo.cat",
+    "profile_reports": {
+      "readability_first": "reports/www_meteo_cat_Institucional_readability_first.html",
+      "visual_first": "reports/www_meteo_cat_Institucional_visual_first.html",
+      "wcag_strict": "reports/www_meteo_cat_Institucional_wcag_strict.html"
+    },
+    "comparative_report": "reports/www_meteo_cat_Institucional_comparative.html"
+  },
+  {
+    "url": "https://catsalut.gencat.cat/ca/inici/",
+    "domain": "catsalut.gencat.cat",
+    "profile_reports": {
+      "readability_first": "reports/catsalut_gencat_cat_ca_inici_Institucional_readability_first.html",
+      "visual_first": "reports/catsalut_gencat_cat_ca_inici_Institucional_visual_first.html",
+      "wcag_strict": "reports/catsalut_gencat_cat_ca_inici_Institucional_wcag_strict.html"
+    },
+    "comparative_report": "reports/catsalut_gencat_cat_ca_inici_Institucional_comparative.html"
+  },
+  {
+    "url": "https://www.upc.edu/ca",
+    "domain": "www.upc.edu",
+    "profile_reports": {
+      "readability_first": "reports/www_upc_edu_ca_Educatiu_readability_first.html",
+      "visual_first": "reports/www_upc_edu_ca_Educatiu_visual_first.html",
+      "wcag_strict": "reports/www_upc_edu_ca_Educatiu_wcag_strict.html"
+    },
+    "comparative_report": "reports/www_upc_edu_ca_Educatiu_comparative.html"
+  },
+  {
+    "url": "https://www.ara.cat/",
+    "domain": "www.ara.cat",
+    "profile_reports": {
+      "readability_first": "reports/www_ara_cat_Mitjans_readability_first.html",
+      "visual_first": "reports/www_ara_cat_Mitjans_visual_first.html",
+      "wcag_strict": "reports/www_ara_cat_Mitjans_wcag_strict.html"
+    },
+    "comparative_report": "reports/www_ara_cat_Mitjans_comparative.html"
+  },
+  {
+    "url": "https://www.seg-social.es/wps/portal/wss/internet/Inicio",
+    "domain": "www.seg-social.es",
+    "profile_reports": {
+      "readability_first": "reports/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional_readability_first.html",
+      "visual_first": "reports/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional_visual_first.html",
+      "wcag_strict": "reports/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional_wcag_strict.html"
+    },
+    "comparative_report": "reports/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional_comparative.html"
+  },
+  {
+    "url": "https://www.upf.edu/",
+    "domain": "www.upf.edu",
+    "profile_reports": {
+      "readability_first": "reports/www_upf_edu_Educatiu_readability_first.html",
+      "visual_first": "reports/www_upf_edu_Educatiu_visual_first.html",
+      "wcag_strict": "reports/www_upf_edu_Educatiu_wcag_strict.html"
+    },
+    "comparative_report": "reports/www_upf_edu_Educatiu_comparative.html"
+  },
+  {
+    "url": "https://www.liceubarcelona.cat/ca",
+    "domain": "www.liceubarcelona.cat",
+    "profile_reports": {
+      "readability_first": "reports/www_liceubarcelona_cat_ca_Cultural_readability_first.html",
+      "visual_first": "reports/www_liceubarcelona_cat_ca_Cultural_visual_first.html",
+      "wcag_strict": "reports/www_liceubarcelona_cat_ca_Cultural_wcag_strict.html"
+    },
+    "comparative_report": "reports/www_liceubarcelona_cat_ca_Cultural_comparative.html"
+  },
+  {
+    "url": "https://www.rtve.es/",
+    "domain": "www.rtve.es",
+    "profile_reports": {
+      "readability_first": "reports/www_rtve_es_Mitjans_readability_first.html",
+      "visual_first": "reports/www_rtve_es_Mitjans_visual_first.html",
+      "wcag_strict": "reports/www_rtve_es_Mitjans_wcag_strict.html"
+    },
+    "comparative_report": "reports/www_rtve_es_Mitjans_comparative.html"
+  },
+  {
+    "url": "https://sagradafamilia.org/",
+    "domain": "sagradafamilia.org",
+    "profile_reports": {
+      "readability_first": "reports/sagradafamilia_org_Cultural_readability_first.html",
+      "visual_first": "reports/sagradafamilia_org_Cultural_visual_first.html",
+      "wcag_strict": "reports/sagradafamilia_org_Cultural_wcag_strict.html"
+    },
+    "comparative_report": "reports/sagradafamilia_org_Cultural_comparative.html"
+  },
+  {
+    "url": "https://www.fcbarcelona.cat/ca/",
+    "domain": "www.fcbarcelona.cat",
+    "profile_reports": {
+      "readability_first": "reports/www_fcbarcelona_cat_ca_Comercial_readability_first.html",
+      "visual_first": "reports/www_fcbarcelona_cat_ca_Comercial_visual_first.html",
+      "wcag_strict": "reports/www_fcbarcelona_cat_ca_Comercial_wcag_strict.html"
+    },
+    "comparative_report": "reports/www_fcbarcelona_cat_ca_Comercial_comparative.html"
+  },
+  {
+    "url": "https://www.uoc.edu/ca",
+    "domain": "www.uoc.edu",
+    "profile_reports": {
+      "readability_first": "reports/www_uoc_edu_ca_Educatiu_readability_first.html",
+      "visual_first": "reports/www_uoc_edu_ca_Educatiu_visual_first.html",
+      "wcag_strict": "reports/www_uoc_edu_ca_Educatiu_wcag_strict.html"
+    },
+    "comparative_report": "reports/www_uoc_edu_ca_Educatiu_comparative.html"
+  },
+  {
+    "url": "https://www.unav.edu/",
+    "domain": "www.unav.edu",
+    "profile_reports": {
+      "readability_first": "reports/www_unav_edu_Educatiu_readability_first.html",
+      "visual_first": "reports/www_unav_edu_Educatiu_visual_first.html",
+      "wcag_strict": "reports/www_unav_edu_Educatiu_wcag_strict.html"
+    },
+    "comparative_report": "reports/www_unav_edu_Educatiu_comparative.html"
+  },
+  {
+    "url": "https://www.promofarma.com/",
+    "domain": "www.promofarma.com",
+    "profile_reports": {
+      "readability_first": "reports/www_promofarma_com_Comercial_readability_first.html",
+      "visual_first": "reports/www_promofarma_com_Comercial_visual_first.html",
+      "wcag_strict": "reports/www_promofarma_com_Comercial_wcag_strict.html"
+    },
+    "comparative_report": "reports/www_promofarma_com_Comercial_comparative.html"
   }
 ]

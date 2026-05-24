@@ -3,518 +3,857 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ACI Pipeline — Dashboard de resultats</title>
+  <title>ACI Pipeline — Dashboard d'accessibilitat web · TFM 2026</title>
+  <meta name="description" content="Dashboard global dels resultats d'accessibilitat web (ACI) per a 36 webs analitzades. TFM Jordi Miguel i Costal · UOC 2026.">
+  <link rel="stylesheet" href="static/css/site.css">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: #f0f2f5; color: #1a1a2e; line-height: 1.5;
-    }
-    /* Header */
-    header {
-      background: linear-gradient(135deg, #001f3f 0%, #0056b3 100%);
-      color: #fff; padding: 1.75rem 2rem 1.5rem;
-    }
-    header h1 { font-size: 1.65rem; font-weight: 800; letter-spacing: -0.5px; }
-    header p  { margin-top: 0.35rem; opacity: 0.85; font-size: 0.93rem; }
-    .header-meta {
-      display: flex; gap: 1.5rem; flex-wrap: wrap;
-      margin-top: 0.9rem; font-size: 0.78rem; opacity: 0.7;
-    }
-    /* Layout */
-    main { max-width: 1200px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
-    /* Cards */
-    .card {
-      background: #fff; border-radius: 10px;
-      box-shadow: 0 1px 8px rgba(0,0,0,.07); margin-bottom: 1.5rem; overflow: hidden;
-    }
-    .card-hd {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0.9rem 1.25rem; border-bottom: 1px solid #eee; background: #fafafa;
-    }
-    .card-hd h2 { font-size: 0.95rem; font-weight: 700; color: #333; }
-    .card-body  { padding: 1.25rem; }
-    /* KPIs */
-    .kpi-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 1rem; margin-bottom: 1.5rem;
-    }
-    .kpi {
-      background: #fff; border-radius: 10px; padding: 1.1rem 1rem; text-align: center;
-      box-shadow: 0 1px 8px rgba(0,0,0,.07); border-top: 4px solid var(--kc, #0056b3);
-    }
-    .kpi-val { font-size: 2rem; font-weight: 800; color: var(--kc, #0056b3); }
-    .kpi-lbl { font-size: 0.72rem; color: #777; margin-top: 0.3rem; text-transform: uppercase; letter-spacing: .5px; }
-    /* Filtres */
-    .filters {
-      display: flex; gap: 0.75rem; flex-wrap: wrap; padding: 0.9rem 1.25rem;
-      border-bottom: 1px solid #f0f0f0; align-items: center;
-    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif); background: #f0f2f5; color: #1a1a2e; margin: 0; line-height: 1.55; }
+    .visually-hidden { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+    /* ── Capçalera ── */
+    .site-hero { background: linear-gradient(135deg, #001224 0%, #003366 55%, #004080 100%); color: #fff; padding: 2rem 2rem 1.75rem; }
+    .site-hero h1 { font-size: 1.75rem; font-weight: 900; margin: 0 0 0.4rem; letter-spacing: -0.5px; }
+    .site-hero p  { margin: 0.2rem 0; opacity: 0.82; font-size: 0.92rem; }
+    .hero-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 0.85rem; font-size: 0.76rem; opacity: 0.65; }
+
+    /* ── Category nav ── */
+    .cat-nav { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; padding: 0.6rem 1.25rem; background: #fff; border-bottom: 1px solid #e5e7eb; position: sticky; top: 0; z-index: 20; }
+    .cat-nav-label { font-size: 0.7rem; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.05em; }
+    .cat-btn { display: inline-flex; align-items: center; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.77rem; font-weight: 700; text-decoration: none; border: 2px solid; transition: all 0.15s; }
+    .cat-btn:hover { opacity: 0.85; }
+    .cat-btn.all { border-color: #374151; color: #374151; background: #f3f4f6; }
+    .run-btn { margin-left: auto; display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.3rem 0.9rem; border-radius: 20px; font-size: 0.77rem; font-weight: 700; text-decoration: none; background: #15803d; color: #fff; }
+    .run-btn:hover { background: #166534; }
+
+    /* ── Layout ── */
+    main { max-width: 1280px; margin: 0 auto; padding: 1.25rem 1rem 3rem; }
+
+    /* ── KPI cards ── */
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.85rem; margin-bottom: 1.25rem; }
+    .kpi { background: #fff; border-radius: 10px; padding: 1.1rem 1rem; text-align: center; box-shadow: 0 1px 8px rgba(0,0,0,.06); border-top: 4px solid var(--kc, #0056b3); }
+    .kpi-val { font-size: 2.1rem; font-weight: 900; color: var(--kc, #0056b3); line-height: 1; }
+    .kpi-lbl { font-size: 0.7rem; color: #6b7280; margin-top: 0.3rem; text-transform: uppercase; letter-spacing: .5px; }
+
+    /* ── Cards ── */
+    .card { background: #fff; border-radius: 10px; box-shadow: 0 1px 8px rgba(0,0,0,.06); margin-bottom: 1.25rem; overflow: hidden; }
+    .card-hd { display: flex; align-items: center; justify-content: space-between; padding: 0.8rem 1.25rem; border-bottom: 1px solid #f0f0f0; background: #fafafa; }
+    .card-hd h2 { font-size: 0.82rem; font-weight: 800; color: #374151; margin: 0; text-transform: uppercase; letter-spacing: 0.05em; }
+    .card-body { padding: 1.25rem; }
+
+    /* ── Charts ── */
+    .charts-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    @media (max-width: 860px) { .charts-2col { grid-template-columns: 1fr; } }
+    .chart-wrap { overflow-x: auto; }
+    .chart-label { font-size: 0.72rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.5rem; }
+    #ranking-chart, #category-chart, #heatmap-chart { min-height: 80px; }
+
+    /* ── Filter bar ── */
+    .filters { display: flex; gap: 0.6rem; flex-wrap: wrap; padding: 0.8rem 1.25rem; border-bottom: 1px solid #f5f5f5; align-items: center; background: #fdfeff; }
+    .filters label { font-size: 0.72rem; font-weight: 700; color: #6b7280; }
     .filters input, .filters select {
-      padding: 0.4rem 0.75rem; border: 1px solid #ddd; border-radius: 6px;
-      font-size: 0.85rem; background: #fafafa; outline: none;
+      padding: 0.38rem 0.65rem; border: 1px solid #e5e7eb; border-radius: 6px;
+      font-size: 0.83rem; background: #fff; outline: none; font-family: inherit;
     }
-    .filters input:focus, .filters select:focus { border-color: #0056b3; background: #fff; }
-    .filters label { font-size: 0.78rem; color: #666; font-weight: 600; }
-    .btn-reset {
-      padding: 0.4rem 0.8rem; border: 1px solid #ddd; border-radius: 6px;
-      font-size: 0.78rem; background: none; cursor: pointer; color: #666;
-    }
-    .btn-reset:hover { background: #f0f0f0; }
-    /* Taula */
+    .filters input:focus, .filters select:focus { border-color: #0056b3; }
+    .filters input[type="number"] { width: 68px; }
+    .btn-reset { padding: 0.38rem 0.75rem; border: 1px solid #e5e7eb; border-radius: 6px; font-size: 0.78rem; background: none; cursor: pointer; color: #6b7280; font-family: inherit; }
+    .btn-reset:hover { background: #f3f4f6; }
+    #f-count { font-size: 0.76rem; color: #9ca3af; margin-left: auto; }
+
+    /* ── Results table ── */
     .tbl-wrap { overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 560px; }
-    thead { background: #f0f4f8; }
-    th {
-      padding: 0.65rem 0.85rem; text-align: left; font-size: 0.72rem;
-      font-weight: 700; color: #444; text-transform: uppercase;
-      letter-spacing: .5px; cursor: pointer; user-select: none; white-space: nowrap;
-    }
-    th:hover { background: #e2eaf3; }
-    th.sort-asc::after  { content: " ▲"; opacity: .6; }
-    th.sort-desc::after { content: " ▼"; opacity: .6; }
-    td { padding: 0.55rem 0.85rem; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
-    tr:last-child td { border-bottom: none; }
-    tr:hover td { background: #f5f9ff; }
-    td.num { text-align: right; color: #999; font-size: 0.8rem; font-variant-numeric: tabular-nums; }
-    .url-small { font-size: 0.72rem; color: #888; }
-    .url-small a { color: #0056b3; text-decoration: none; }
-    .url-small a:hover { text-decoration: underline; }
-    .cat-chip {
-      display: inline-block; padding: 0.15rem 0.5rem; border-radius: 12px;
-      background: #e8f0fe; color: #1a56b3; font-size: 0.72rem;
-      font-weight: 600; white-space: nowrap;
-    }
-    .aci-num  { font-size: 0.92rem; font-weight: 700; }
-    .aci-dash { color: #bbb; }
-    .mini-bar { height: 4px; background: #eee; border-radius: 2px; margin: 3px 0; overflow: hidden; }
+    table.res { width: 100%; border-collapse: collapse; font-size: 0.84rem; min-width: 580px; }
+    table.res thead { background: #f0f4f8; }
+    table.res th { padding: 0.6rem 0.85rem; text-align: left; font-size: 0.7rem; font-weight: 700; color: #555; text-transform: uppercase; letter-spacing: .45px; cursor: pointer; user-select: none; white-space: nowrap; }
+    table.res th:hover { background: #e2eaf3; }
+    table.res th.sort-asc::after  { content: " ▲"; opacity: .55; }
+    table.res th.sort-desc::after { content: " ▼"; opacity: .55; }
+    table.res td { padding: 0.52rem 0.85rem; border-bottom: 1px solid #f3f4f6; vertical-align: middle; }
+    table.res tr:last-child td { border-bottom: none; }
+    table.res tr:hover td { background: #f5f9ff; }
+    td.num { text-align: right; color: #9ca3af; font-size: 0.8rem; font-variant-numeric: tabular-nums; }
+    .url-sm { font-size: 0.72rem; color: #9ca3af; display: block; }
+    .url-sm a { color: #0056b3; text-decoration: none; }
+    .url-sm a:hover { text-decoration: underline; }
+    .cat-chip { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 12px; font-size: 0.7rem; font-weight: 700; white-space: nowrap; }
+    .aci-num { font-size: 0.9rem; font-weight: 700; }
+    .aci-dash { color: #d1d5db; }
+    .mini-bar { height: 4px; background: #f3f4f6; border-radius: 2px; margin: 3px 0; overflow: hidden; min-width: 48px; }
     .mini-bar div { height: 100%; border-radius: 2px; }
-    td a { color: #0056b3; text-decoration: none; }
+    td a { color: #0056b3; text-decoration: none; font-size: 0.8rem; }
     td a:hover { text-decoration: underline; }
-    .no-results { padding: 2rem; text-align: center; color: #aaa; }
-    /* Metodologia */
-    .method-section { margin-bottom: 2rem; }
-    .method-section h3 {
-      font-size: 1rem; color: #001f3f; margin-bottom: 0.75rem;
-      padding-bottom: 0.4rem; border-bottom: 2px solid #e0e8f0;
-    }
-    .formula-box {
-      background: #f0f4f8; border-left: 4px solid #0056b3;
-      padding: 0.9rem 1.2rem; border-radius: 0 8px 8px 0;
-      font-family: 'Consolas', 'Courier New', monospace; font-size: 1rem; margin: 0.75rem 0;
-    }
-    .profiles-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 1rem; margin: 0.75rem 0;
-    }
-    .profile-card { border-radius: 8px; padding: 1rem; border: 2px solid #ddd; }
-    .profile-card.wcag        { background: #dbeafe; border-color: #1d4ed8; }
-    .profile-card.readability { background: #dcfce7; border-color: #15803d; }
-    .profile-card.visual      { background: #ffe4e6; border-color: #be123c; }
-    .profile-card h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.35rem; }
-    .profile-card.wcag h4        { color: #1d4ed8; }
-    .profile-card.readability h4 { color: #15803d; }
-    .profile-card.visual h4      { color: #be123c; }
-    .profile-card p { font-size: 0.8rem; color: #444; line-height: 1.5; }
-    .met-table { font-size: 0.82rem; width: 100%; border-collapse: collapse; }
-    .met-table thead th { background: #001f3f; color: #fff; padding: 0.5rem 0.75rem; text-align: left; }
-    .met-table td { padding: 0.4rem 0.75rem; border-bottom: 1px solid #eee; }
-    .met-table tr:nth-child(even) td { background: #f8f9fa; }
-    .met-table code { font-size: 0.76rem; background: #f0f0f0; padding: 1px 4px; border-radius: 3px; }
-    .met-table td.num { text-align: right; font-variant-numeric: tabular-nums; color: #333; }
-    /* Descàrregues */
+    .no-res { padding: 2rem; text-align: center; color: #9ca3af; font-size: 0.88rem; }
+
+    /* ── Methodology ── */
+    .method-section { margin-bottom: 1.75rem; }
+    .method-section h3 { font-size: 0.92rem; color: #001f3f; margin: 0 0 0.65rem; padding-bottom: 0.35rem; border-bottom: 2px solid #e5e7eb; }
+    .formula-box { background: #eff6ff; border-left: 4px solid #0056b3; padding: 0.85rem 1.2rem; border-radius: 0 8px 8px 0; font-family: Consolas, "Courier New", monospace; font-size: 0.98rem; margin: 0.65rem 0; }
+    .profiles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.85rem; margin: 0.65rem 0; }
+    .prof-card { border-radius: 8px; padding: 0.9rem; border: 2px solid #ddd; }
+    .prof-card.wcag        { background: #dbeafe; border-color: #1d4ed8; }
+    .prof-card.readability { background: #dcfce7; border-color: #15803d; }
+    .prof-card.visual      { background: #ffe4e6; border-color: #be123c; }
+    .prof-card h4 { font-size: 0.83rem; font-weight: 800; margin: 0 0 0.3rem; }
+    .prof-card.wcag h4        { color: #1d4ed8; }
+    .prof-card.readability h4 { color: #15803d; }
+    .prof-card.visual h4      { color: #be123c; }
+    .prof-card p { font-size: 0.78rem; color: #374151; line-height: 1.5; margin: 0; }
+    .met-ref { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+    .met-ref thead th { background: #001f3f; color: #f8fafc; padding: 0.45rem 0.7rem; text-align: left; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+    .met-ref td { padding: 0.38rem 0.7rem; border-bottom: 1px solid #f3f4f6; vertical-align: top; }
+    .met-ref tr:nth-child(even) td { background: #f8f9fa; }
+    .met-ref code { background: #f1f3f5; padding: 1px 4px; border-radius: 3px; font-size: 0.76em; font-family: Consolas, monospace; }
+    .met-ref td.num { text-align: right; font-variant-numeric: tabular-nums; color: #374151; }
+    .note-sm { font-size: 0.74rem; color: #6b7280; margin-top: 2px; line-height: 1.4; }
+
+    /* ── Downloads ── */
     .dl-grid { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-    .dl-btn {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; font-weight: 600;
-      text-decoration: none; border: 2px solid #0056b3; color: #0056b3;
-      background: #fff; transition: background 0.15s;
-    }
+    .dl-btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.5rem 1rem; border-radius: 7px; font-size: 0.83rem; font-weight: 700; text-decoration: none; border: 2px solid #0056b3; color: #0056b3; background: #fff; transition: all 0.15s; }
     .dl-btn:hover { background: #0056b3; color: #fff; }
-    /* Botó execució */
-    .btn-run {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      padding: 0.45rem 1rem; border-radius: 6px; font-size: 0.83rem;
-      font-weight: 600; text-decoration: none; background: #27ae60;
-      color: #fff; border: none; cursor: pointer; transition: background 0.15s;
-    }
-    .btn-run:hover { background: #1e8449; color: #fff; }
-    /* Footer */
-    footer { text-align: center; padding: 2rem 1rem; font-size: 0.78rem; color: #aaa; }
+
+    footer { text-align: center; padding: 2rem 1rem; font-size: 0.76rem; color: #9ca3af; }
     footer a { color: #0056b3; text-decoration: none; }
-    @media (max-width: 700px) { header h1 { font-size: 1.3rem; } }
+
+    /* ── Legend ── */
+    .legend { display: flex; gap: 0.85rem; flex-wrap: wrap; font-size: 0.76rem; color: #555; margin-top: 0.5rem; }
+    .legend-item { display: flex; align-items: center; gap: 5px; }
+    .legend-dot { width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0; }
+    @media (max-width: 600px) { .site-hero h1 { font-size: 1.4rem; } }
   </style>
 </head>
 <body>
 
-<header role="banner">
-  <h1>&#127760; ACI Pipeline &#8212; Dashboard de resultats</h1>
-  <p>Avaluació automatitzada d&#39;accessibilitat web &middot; WCAG 2.1 AA / EN 301 549</p>
-  <div class="header-meta">
-    <span>Generat: 2026-05-24T14:05:37Z</span>
-    <span>Pipeline v0.1.0</span>
-    <span>36 URLs analitzades</span>
-  </div>
-</header>
+  <a class="skip-link" href="#main-content">Salta al contingut principal</a>
 
-<main>
-
-  <!-- KPIs -->
-  <div class="kpi-grid" role="region" aria-label="Indicadors clau de rendiment">
-    <div class="kpi" style="--kc:#0056b3">
-      <div class="kpi-val">36</div>
-      <div class="kpi-lbl">URLs analitzades</div>
-    </div>
-    <div class="kpi" style="--kc:#27ae60">
-      <div class="kpi-val">3.885</div>
-      <div class="kpi-lbl">ACI m&agrave;xim</div>
-    </div>
-    <div class="kpi" style="--kc:#e67e22">
-      <div class="kpi-val">3.563</div>
-      <div class="kpi-lbl">ACI mitj&agrave;</div>
-    </div>
-    <div class="kpi" style="--kc:#e74c3c">
-      <div class="kpi-val">3.044</div>
-      <div class="kpi-lbl">ACI m&iacute;nim</div>
+  <!-- Header -->
+  <div class="site-hero" role="banner">
+    <h1>🌐 ACI Pipeline — Dashboard d'accessibilitat web</h1>
+    <p>Avaluació automatitzada WCAG 2.1 AA / EN 301 549 · 36 webs analitzades · TFM 2026</p>
+    <div class="hero-meta">
+      <span>Generat: 2026-05-24T15:00:33Z</span>
+      <span>Pipeline v0.1.0</span>
+      <span>3 perfils × 16 mètriques</span>
     </div>
   </div>
 
-  <!-- Taula de resultats -->
-  <div class="card" role="region" aria-labelledby="tbl-title">
-    <div class="card-hd">
-      <h2 id="tbl-title">&#128202; Resultats per URL</h2>
-      <a id="btn-run" class="btn-run" href="#" target="_blank" rel="noopener"
-         aria-label="Executa el pipeline des de GitHub Actions">
-        &#9654; Executa pipeline
-      </a>
-    </div>
+  <!-- Category navigation -->
+  <nav class="cat-nav" aria-label="Navega per categoria de web">
+    <span class="cat-nav-label">Categoria:</span>
+    <a class="cat-btn all" href="#" onclick="filterCat('');return false"
+       id="cat-all" aria-pressed="true">Totes</a>
+    <a class="cat-btn" href="#"
+       onclick="filterCat('Institucional');return false"
+       id="cat-institucional"
+       style="color:#1d4ed8;border-color:#1d4ed8;background:#1d4ed822"
+       aria-pressed="false">Institucional</a>
+    <a class="cat-btn" href="#"
+       onclick="filterCat('Educatiu');return false"
+       id="cat-educatiu"
+       style="color:#15803d;border-color:#15803d;background:#15803d22"
+       aria-pressed="false">Educatiu</a>
+    <a class="cat-btn" href="#"
+       onclick="filterCat('Cultural');return false"
+       id="cat-cultural"
+       style="color:#7c3aed;border-color:#7c3aed;background:#7c3aed22"
+       aria-pressed="false">Cultural</a>
+    <a class="cat-btn" href="#"
+       onclick="filterCat('Mitjans');return false"
+       id="cat-mitjans"
+       style="color:#c2410c;border-color:#c2410c;background:#c2410c22"
+       aria-pressed="false">Mitjans</a>
+    <a class="cat-btn" href="#"
+       onclick="filterCat('Comercial');return false"
+       id="cat-comercial"
+       style="color:#0e7490;border-color:#0e7490;background:#0e749022"
+       aria-pressed="false">Comercial</a>
+    <a class="run-btn" id="run-link" href="#" target="_blank" rel="noopener"
+       aria-label="Executa el pipeline via GitHub Actions">▶ Executa pipeline</a>
+  </nav>
 
-    <div class="filters" role="search" aria-label="Filtres">
-      <label for="f-text">Cerca:</label>
-      <input type="search" id="f-text" placeholder="domini, URL&hellip;"
-             aria-label="Cerca per domini o URL">
+  <main id="main-content">
 
-      <label for="f-cat">Categoria:</label>
-      <select id="f-cat" aria-label="Filtra per categoria">
-        <option value="">Totes</option>
-        <option value="Comercial">Comercial</option>
-<option value="Cultural">Cultural</option>
-<option value="Educatiu">Educatiu</option>
-<option value="Institucional">Institucional</option>
-<option value="Mitjans">Mitjans</option>
-      </select>
-
-      <label for="f-min">ACI &ge;:</label>
-      <input type="number" id="f-min" min="0" max="5" step="0.1" value="0"
-             style="width:70px" aria-label="Puntuaci&oacute; ACI m&iacute;nima">
-
-      <button class="btn-reset" onclick="resetFilters()"
-              aria-label="Reinicia els filtres">&#10005; Reinicia</button>
-      <span id="f-count" style="font-size:0.78rem;color:#888;margin-left:auto"
-            aria-live="polite"></span>
-    </div>
-
-    <div class="tbl-wrap">
-      <table aria-label="Resultats d'accessibilitat per URL">
-        <thead>
-          <tr>
-            <th onclick="sortBy(0)" aria-sort="none">#</th>
-            <th onclick="sortBy(1)" aria-sort="none">Domini / URL</th>
-            <th onclick="sortBy(2)" aria-sort="none">Categoria</th>
-            <th onclick="sortBy(3)" aria-sort="none"
-                title="WCAG Strict">WCAG</th>
-            <th onclick="sortBy(4)" aria-sort="none"
-                title="Readability First">Read.</th>
-            <th onclick="sortBy(5)" aria-sort="none"
-                title="Visual First">Visual</th>
-          </tr>
-        </thead>
-        <tbody id="tbody">
-          <tr data-cat="Cultural" data-url="https://www.palaumusica.cat/ca/"><td class="num">1</td><td><strong>www.palaumusica.cat</strong><br><small class="url-small"><a href="https://www.palaumusica.cat/ca/" target="_blank" rel="noopener">https://www.palaumusica.cat/ca/</a></small></td><td><span class="cat-chip">Cultural</span></td><td data-val="3.885"><span class="aci-num" style="color:#27ae60">3.885</span><div class="mini-bar"><div style="width:77%;background:#27ae60"></div></div> <a href="reports/www_palaumusica_cat_ca_Cultural_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Cultural" data-url="https://www.tnc.cat/ca"><td class="num">2</td><td><strong>www.tnc.cat</strong><br><small class="url-small"><a href="https://www.tnc.cat/ca" target="_blank" rel="noopener">https://www.tnc.cat/ca</a></small></td><td><span class="cat-chip">Cultural</span></td><td data-val="3.844"><span class="aci-num" style="color:#27ae60">3.844</span><div class="mini-bar"><div style="width:76%;background:#27ae60"></div></div> <a href="reports/www_tnc_cat_ca_Cultural_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Educatiu" data-url="https://web.ub.edu/"><td class="num">3</td><td><strong>web.ub.edu</strong><br><small class="url-small"><a href="https://web.ub.edu/" target="_blank" rel="noopener">https://web.ub.edu/</a></small></td><td><span class="cat-chip">Educatiu</span></td><td data-val="3.830"><span class="aci-num" style="color:#27ae60">3.830</span><div class="mini-bar"><div style="width:76%;background:#27ae60"></div></div> <a href="reports/web_ub_edu_Educatiu_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Mitjans" data-url="https://www.lavanguardia.com/"><td class="num">4</td><td><strong>www.lavanguardia.com</strong><br><small class="url-small"><a href="https://www.lavanguardia.com/" target="_blank" rel="noopener">https://www.lavanguardia.com/</a></small></td><td><span class="cat-chip">Mitjans</span></td><td data-val="3.788"><span class="aci-num" style="color:#27ae60">3.788</span><div class="mini-bar"><div style="width:75%;background:#27ae60"></div></div> <a href="reports/www_lavanguardia_com_Mitjans_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Institucional" data-url="https://www.educacionfpydeportes.gob.es/portada.html"><td class="num">5</td><td><strong>www.educacionfpydeportes.gob.es</strong><br><small class="url-small"><a href="https://www.educacionfpydeportes.gob.es/portada.html" target="_blank" rel="noopener">https://www.educacionfpydeportes.gob.es/portada.html</a></small></td><td><span class="cat-chip">Institucional</span></td><td data-val="3.738"><span class="aci-num" style="color:#27ae60">3.738</span><div class="mini-bar"><div style="width:74%;background:#27ae60"></div></div> <a href="reports/www_educacionfpydeportes_gob_es_portada_html_Institucional_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Institucional" data-url="https://sede.agenciatributaria.gob.es/"><td class="num">6</td><td><strong>sede.agenciatributaria.gob.es</strong><br><small class="url-small"><a href="https://sede.agenciatributaria.gob.es/" target="_blank" rel="noopener">https://sede.agenciatributaria.gob.es/</a></small></td><td><span class="cat-chip">Institucional</span></td><td data-val="3.704"><span class="aci-num" style="color:#27ae60">3.704</span><div class="mini-bar"><div style="width:74%;background:#27ae60"></div></div> <a href="reports/sede_agenciatributaria_gob_es_Institucional_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Comercial" data-url="https://www.capraboacasa.com/ca/"><td class="num">7</td><td><strong>www.capraboacasa.com</strong><br><small class="url-small"><a href="https://www.capraboacasa.com/ca/" target="_blank" rel="noopener">https://www.capraboacasa.com/ca/</a></small></td><td><span class="cat-chip">Comercial</span></td><td data-val="3.682"><span class="aci-num" style="color:#27ae60">3.682</span><div class="mini-bar"><div style="width:73%;background:#27ae60"></div></div> <a href="reports/www_capraboacasa_com_ca_Comercial_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Educatiu" data-url="https://www.ucm.es/"><td class="num">8</td><td><strong>www.ucm.es</strong><br><small class="url-small"><a href="https://www.ucm.es/" target="_blank" rel="noopener">https://www.ucm.es/</a></small></td><td><span class="cat-chip">Educatiu</span></td><td data-val="3.678"><span class="aci-num" style="color:#27ae60">3.678</span><div class="mini-bar"><div style="width:73%;background:#27ae60"></div></div> <a href="reports/www_ucm_es_Educatiu_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Educatiu" data-url="https://www.uv.es/"><td class="num">9</td><td><strong>www.uv.es</strong><br><small class="url-small"><a href="https://www.uv.es/" target="_blank" rel="noopener">https://www.uv.es/</a></small></td><td><span class="cat-chip">Educatiu</span></td><td data-val="3.678"><span class="aci-num" style="color:#27ae60">3.678</span><div class="mini-bar"><div style="width:73%;background:#27ae60"></div></div> <a href="reports/www_uv_es_Educatiu_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Institucional" data-url="https://www.diba.cat/ca/inici"><td class="num">10</td><td><strong>www.diba.cat</strong><br><small class="url-small"><a href="https://www.diba.cat/ca/inici" target="_blank" rel="noopener">https://www.diba.cat/ca/inici</a></small></td><td><span class="cat-chip">Institucional</span></td><td data-val="3.676"><span class="aci-num" style="color:#27ae60">3.676</span><div class="mini-bar"><div style="width:73%;background:#27ae60"></div></div> <a href="reports/www_diba_cat_ca_inici_Institucional_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Institucional" data-url="https://www.sanidad.gob.es/"><td class="num">11</td><td><strong>www.sanidad.gob.es</strong><br><small class="url-small"><a href="https://www.sanidad.gob.es/" target="_blank" rel="noopener">https://www.sanidad.gob.es/</a></small></td><td><span class="cat-chip">Institucional</span></td><td data-val="3.670"><span class="aci-num" style="color:#27ae60">3.670</span><div class="mini-bar"><div style="width:73%;background:#27ae60"></div></div> <a href="reports/www_sanidad_gob_es_Institucional_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Mitjans" data-url="https://www.rac1.cat/"><td class="num">12</td><td><strong>www.rac1.cat</strong><br><small class="url-small"><a href="https://www.rac1.cat/" target="_blank" rel="noopener">https://www.rac1.cat/</a></small></td><td><span class="cat-chip">Mitjans</span></td><td data-val="3.659"><span class="aci-num" style="color:#27ae60">3.659</span><div class="mini-bar"><div style="width:73%;background:#27ae60"></div></div> <a href="reports/www_rac1_cat_Mitjans_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Comercial" data-url="https://www.compraonline.bonpreuesclat.cat/"><td class="num">13</td><td><strong>www.compraonline.bonpreuesclat.cat</strong><br><small class="url-small"><a href="https://www.compraonline.bonpreuesclat.cat/" target="_blank" rel="noopener">https://www.compraonline.bonpreuesclat.cat/</a></small></td><td><span class="cat-chip">Comercial</span></td><td data-val="3.606"><span class="aci-num" style="color:#27ae60">3.606</span><div class="mini-bar"><div style="width:72%;background:#27ae60"></div></div> <a href="reports/www_compraonline_bonpreuesclat_cat_Comercial_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Institucional" data-url="https://web.gencat.cat/ca/ciutadania/inici"><td class="num">14</td><td><strong>web.gencat.cat</strong><br><small class="url-small"><a href="https://web.gencat.cat/ca/ciutadania/inici" target="_blank" rel="noopener">https://web.gencat.cat/ca/ciutadania/inici</a></small></td><td><span class="cat-chip">Institucional</span></td><td data-val="3.605"><span class="aci-num" style="color:#27ae60">3.605</span><div class="mini-bar"><div style="width:72%;background:#27ae60"></div></div> <a href="reports/web_gencat_cat_ca_ciutadania_inici_Institucional_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Mitjans" data-url="https://terrassadigital.cat/"><td class="num">15</td><td><strong>terrassadigital.cat</strong><br><small class="url-small"><a href="https://terrassadigital.cat/" target="_blank" rel="noopener">https://terrassadigital.cat/</a></small></td><td><span class="cat-chip">Mitjans</span></td><td data-val="3.604"><span class="aci-num" style="color:#27ae60">3.604</span><div class="mini-bar"><div style="width:72%;background:#27ae60"></div></div> <a href="reports/terrassadigital_cat_Mitjans_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Comercial" data-url="https://es.wallapop.com/"><td class="num">16</td><td><strong>es.wallapop.com</strong><br><small class="url-small"><a href="https://es.wallapop.com/" target="_blank" rel="noopener">https://es.wallapop.com/</a></small></td><td><span class="cat-chip">Comercial</span></td><td data-val="3.591"><span class="aci-num" style="color:#27ae60">3.591</span><div class="mini-bar"><div style="width:71%;background:#27ae60"></div></div> <a href="reports/es_wallapop_com_Comercial_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Comercial" data-url="https://www.rcdespanyol.com/"><td class="num">17</td><td><strong>www.rcdespanyol.com</strong><br><small class="url-small"><a href="https://www.rcdespanyol.com/" target="_blank" rel="noopener">https://www.rcdespanyol.com/</a></small></td><td><span class="cat-chip">Comercial</span></td><td data-val="3.575"><span class="aci-num" style="color:#27ae60">3.575</span><div class="mini-bar"><div style="width:71%;background:#27ae60"></div></div> <a href="reports/www_rcdespanyol_com_Comercial_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Educatiu" data-url="https://www.uab.cat/"><td class="num">18</td><td><strong>www.uab.cat</strong><br><small class="url-small"><a href="https://www.uab.cat/" target="_blank" rel="noopener">https://www.uab.cat/</a></small></td><td><span class="cat-chip">Educatiu</span></td><td data-val="3.558"><span class="aci-num" style="color:#27ae60">3.558</span><div class="mini-bar"><div style="width:71%;background:#27ae60"></div></div> <a href="reports/www_uab_cat_Educatiu_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Mitjans" data-url="https://www.3cat.cat/3cat/"><td class="num">19</td><td><strong>www.3cat.cat</strong><br><small class="url-small"><a href="https://www.3cat.cat/3cat/" target="_blank" rel="noopener">https://www.3cat.cat/3cat/</a></small></td><td><span class="cat-chip">Mitjans</span></td><td data-val="3.547"><span class="aci-num" style="color:#27ae60">3.547</span><div class="mini-bar"><div style="width:70%;background:#27ae60"></div></div> <a href="reports/www_3cat_cat_3cat_Mitjans_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Institucional" data-url="https://serveiocupacio.gencat.cat/ca/inici"><td class="num">20</td><td><strong>serveiocupacio.gencat.cat</strong><br><small class="url-small"><a href="https://serveiocupacio.gencat.cat/ca/inici" target="_blank" rel="noopener">https://serveiocupacio.gencat.cat/ca/inici</a></small></td><td><span class="cat-chip">Institucional</span></td><td data-val="3.546"><span class="aci-num" style="color:#27ae60">3.546</span><div class="mini-bar"><div style="width:70%;background:#27ae60"></div></div> <a href="reports/serveiocupacio_gencat_cat_ca_inici_Institucional_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Educatiu" data-url="https://www.url.edu/ca"><td class="num">21</td><td><strong>www.url.edu</strong><br><small class="url-small"><a href="https://www.url.edu/ca" target="_blank" rel="noopener">https://www.url.edu/ca</a></small></td><td><span class="cat-chip">Educatiu</span></td><td data-val="3.544"><span class="aci-num" style="color:#27ae60">3.544</span><div class="mini-bar"><div style="width:70%;background:#27ae60"></div></div> <a href="reports/www_url_edu_ca_Educatiu_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Cultural" data-url="https://www.museunacional.cat/ca"><td class="num">22</td><td><strong>www.museunacional.cat</strong><br><small class="url-small"><a href="https://www.museunacional.cat/ca" target="_blank" rel="noopener">https://www.museunacional.cat/ca</a></small></td><td><span class="cat-chip">Cultural</span></td><td data-val="3.531"><span class="aci-num" style="color:#27ae60">3.531</span><div class="mini-bar"><div style="width:70%;background:#27ae60"></div></div> <a href="reports/www_museunacional_cat_ca_Cultural_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Institucional" data-url="https://www.meteo.cat/"><td class="num">23</td><td><strong>www.meteo.cat</strong><br><small class="url-small"><a href="https://www.meteo.cat/" target="_blank" rel="noopener">https://www.meteo.cat/</a></small></td><td><span class="cat-chip">Institucional</span></td><td data-val="3.522"><span class="aci-num" style="color:#27ae60">3.522</span><div class="mini-bar"><div style="width:70%;background:#27ae60"></div></div> <a href="reports/www_meteo_cat_Institucional_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Institucional" data-url="https://catsalut.gencat.cat/ca/inici/"><td class="num">24</td><td><strong>catsalut.gencat.cat</strong><br><small class="url-small"><a href="https://catsalut.gencat.cat/ca/inici/" target="_blank" rel="noopener">https://catsalut.gencat.cat/ca/inici/</a></small></td><td><span class="cat-chip">Institucional</span></td><td data-val="3.521"><span class="aci-num" style="color:#27ae60">3.521</span><div class="mini-bar"><div style="width:70%;background:#27ae60"></div></div> <a href="reports/catsalut_gencat_cat_ca_inici_Institucional_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Institucional" data-url="https://educacio.gencat.cat/ca/inici"><td class="num">25</td><td><strong>educacio.gencat.cat</strong><br><small class="url-small"><a href="https://educacio.gencat.cat/ca/inici" target="_blank" rel="noopener">https://educacio.gencat.cat/ca/inici</a></small></td><td><span class="cat-chip">Institucional</span></td><td data-val="3.517"><span class="aci-num" style="color:#27ae60">3.517</span><div class="mini-bar"><div style="width:70%;background:#27ae60"></div></div> <a href="reports/educacio_gencat_cat_ca_inici_Institucional_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Educatiu" data-url="https://www.upc.edu/ca"><td class="num">26</td><td><strong>www.upc.edu</strong><br><small class="url-small"><a href="https://www.upc.edu/ca" target="_blank" rel="noopener">https://www.upc.edu/ca</a></small></td><td><span class="cat-chip">Educatiu</span></td><td data-val="3.517"><span class="aci-num" style="color:#27ae60">3.517</span><div class="mini-bar"><div style="width:70%;background:#27ae60"></div></div> <a href="reports/www_upc_edu_ca_Educatiu_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Mitjans" data-url="https://www.ara.cat/"><td class="num">27</td><td><strong>www.ara.cat</strong><br><small class="url-small"><a href="https://www.ara.cat/" target="_blank" rel="noopener">https://www.ara.cat/</a></small></td><td><span class="cat-chip">Mitjans</span></td><td data-val="3.500"><span class="aci-num" style="color:#27ae60">3.500</span><div class="mini-bar"><div style="width:70%;background:#27ae60"></div></div> <a href="reports/www_ara_cat_Mitjans_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Institucional" data-url="https://www.seg-social.es/wps/portal/wss/internet/Inicio"><td class="num">28</td><td><strong>www.seg-social.es</strong><br><small class="url-small"><a href="https://www.seg-social.es/wps/portal/wss/internet/Inicio" target="_blank" rel="noopener">https://www.seg-social.es/wps/portal/wss/internet/Inicio</a></small></td><td><span class="cat-chip">Institucional</span></td><td data-val="3.494"><span class="aci-num" style="color:#e67e22">3.494</span><div class="mini-bar"><div style="width:69%;background:#e67e22"></div></div> <a href="reports/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Educatiu" data-url="https://www.upf.edu/"><td class="num">29</td><td><strong>www.upf.edu</strong><br><small class="url-small"><a href="https://www.upf.edu/" target="_blank" rel="noopener">https://www.upf.edu/</a></small></td><td><span class="cat-chip">Educatiu</span></td><td data-val="3.480"><span class="aci-num" style="color:#e67e22">3.480</span><div class="mini-bar"><div style="width:69%;background:#e67e22"></div></div> <a href="reports/www_upf_edu_Educatiu_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Cultural" data-url="https://www.liceubarcelona.cat/ca"><td class="num">30</td><td><strong>www.liceubarcelona.cat</strong><br><small class="url-small"><a href="https://www.liceubarcelona.cat/ca" target="_blank" rel="noopener">https://www.liceubarcelona.cat/ca</a></small></td><td><span class="cat-chip">Cultural</span></td><td data-val="3.435"><span class="aci-num" style="color:#e67e22">3.435</span><div class="mini-bar"><div style="width:68%;background:#e67e22"></div></div> <a href="reports/www_liceubarcelona_cat_ca_Cultural_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Mitjans" data-url="https://www.rtve.es/"><td class="num">31</td><td><strong>www.rtve.es</strong><br><small class="url-small"><a href="https://www.rtve.es/" target="_blank" rel="noopener">https://www.rtve.es/</a></small></td><td><span class="cat-chip">Mitjans</span></td><td data-val="3.415"><span class="aci-num" style="color:#e67e22">3.415</span><div class="mini-bar"><div style="width:68%;background:#e67e22"></div></div> <a href="reports/www_rtve_es_Mitjans_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Cultural" data-url="https://sagradafamilia.org/"><td class="num">32</td><td><strong>sagradafamilia.org</strong><br><small class="url-small"><a href="https://sagradafamilia.org/" target="_blank" rel="noopener">https://sagradafamilia.org/</a></small></td><td><span class="cat-chip">Cultural</span></td><td data-val="3.413"><span class="aci-num" style="color:#e67e22">3.413</span><div class="mini-bar"><div style="width:68%;background:#e67e22"></div></div> <a href="reports/sagradafamilia_org_Cultural_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Comercial" data-url="https://www.fcbarcelona.cat/ca/"><td class="num">33</td><td><strong>www.fcbarcelona.cat</strong><br><small class="url-small"><a href="https://www.fcbarcelona.cat/ca/" target="_blank" rel="noopener">https://www.fcbarcelona.cat/ca/</a></small></td><td><span class="cat-chip">Comercial</span></td><td data-val="3.349"><span class="aci-num" style="color:#e67e22">3.349</span><div class="mini-bar"><div style="width:66%;background:#e67e22"></div></div> <a href="reports/www_fcbarcelona_cat_ca_Comercial_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Educatiu" data-url="https://www.uoc.edu/ca"><td class="num">34</td><td><strong>www.uoc.edu</strong><br><small class="url-small"><a href="https://www.uoc.edu/ca" target="_blank" rel="noopener">https://www.uoc.edu/ca</a></small></td><td><span class="cat-chip">Educatiu</span></td><td data-val="3.342"><span class="aci-num" style="color:#e67e22">3.342</span><div class="mini-bar"><div style="width:66%;background:#e67e22"></div></div> <a href="reports/www_uoc_edu_ca_Educatiu_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Educatiu" data-url="https://www.unav.edu/"><td class="num">35</td><td><strong>www.unav.edu</strong><br><small class="url-small"><a href="https://www.unav.edu/" target="_blank" rel="noopener">https://www.unav.edu/</a></small></td><td><span class="cat-chip">Educatiu</span></td><td data-val="3.184"><span class="aci-num" style="color:#e67e22">3.184</span><div class="mini-bar"><div style="width:63%;background:#e67e22"></div></div> <a href="reports/www_unav_edu_Educatiu_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-<tr data-cat="Comercial" data-url="https://www.promofarma.com/"><td class="num">36</td><td><strong>www.promofarma.com</strong><br><small class="url-small"><a href="https://www.promofarma.com/" target="_blank" rel="noopener">https://www.promofarma.com/</a></small></td><td><span class="cat-chip">Comercial</span></td><td data-val="3.044"><span class="aci-num" style="color:#e67e22">3.044</span><div class="mini-bar"><div style="width:60%;background:#e67e22"></div></div> <a href="reports/www_promofarma_com_Comercial_wcag_strict.html" title="Informe WCAG Strict">📄</a></td><td data-val="0"><span class="aci-dash">—</span></td><td data-val="0"><span class="aci-dash">—</span></td></tr>
-
-        </tbody>
-      </table>
-    </div>
-    <p class="no-results" id="no-results" role="status" style="display:none">
-      Cap resultat correspon als filtres aplicats.
-    </p>
-  </div>
-
-  <!-- Metodologia -->
-  <div class="card" role="region" aria-labelledby="method-title">
-    <div class="card-hd">
-      <h2 id="method-title">&#128208; Metodologia &#8212; &Iacute;ndex ACI</h2>
-    </div>
-    <div class="card-body">
-
-      <div class="method-section">
-        <h3>F&oacute;rmula de l&#39;ACI</h3>
-        <p>L&#39;<strong>Accessibility Computation Index (ACI)</strong> pondera 16 m&egrave;triques
-           normalitzades amb els pesos del perfil actiu:</p>
-        <div class="formula-box" role="math" aria-label="F&oacute;rmula ACI">
-          ACI = (&Sigma; n&shy;&sup1; &middot; w&shy;&sup1;) / (&Sigma; w&shy;&sup1;) &times; 5.0
-          &nbsp;&isin; [0, 5]
-        </div>
-        <p style="font-size:0.85rem;color:#555;margin-top:0.5rem">
-          On <em>n&#7522; &isin; [0,1]</em> &eacute;s el valor normalitzat de la m&egrave;trica
-          <em>i</em> i <em>w&#7522;</em> &eacute;s el seu pes en el perfil seleccionat.
-          Escala de qualitat:
-          <span style="color:#27ae60">&#10003; Excel&middot;lent &ge; 4.0</span> &nbsp;&#183;&nbsp;
-          <span style="color:#e67e22">&#9650; Acceptable &ge; 2.5</span> &nbsp;&#183;&nbsp;
-          <span style="color:#e74c3c">&#10007; Insuficient &lt; 2.5</span>
-        </p>
+    <!-- KPIs -->
+    <div class="kpi-grid" role="region" aria-label="Indicadors clau de rendiment">
+      <div class="kpi" style="--kc:#0056b3">
+        <div class="kpi-val">36</div>
+        <div class="kpi-lbl">URLs analitzades</div>
       </div>
+      <div class="kpi" style="--kc:#27ae60">
+        <div class="kpi-val">3.885</div>
+        <div class="kpi-lbl">ACI màxim</div>
+      </div>
+      <div class="kpi" style="--kc:#e67e22">
+        <div class="kpi-val">3.574</div>
+        <div class="kpi-lbl">ACI mitjà</div>
+      </div>
+      <div class="kpi" style="--kc:#e74c3c">
+        <div class="kpi-val">3.044</div>
+        <div class="kpi-lbl">ACI mínim</div>
+      </div>
+      <div class="kpi" style="--kc:#7c3aed">
+        <div class="kpi-val">5</div>
+        <div class="kpi-lbl">Categories</div>
+      </div>
+    </div>
 
-      <div class="method-section">
-        <h3>Perfils de puntuaci&oacute;</h3>
-        <div class="profiles-grid">
-          <div class="profile-card wcag">
-            <h4>WCAG Strict (&Sigma;w&nbsp;=&nbsp;54)</h4>
-            <p>M&agrave;xima prioritat per a conformitat normativa WCAG 2.1 AA i EN&nbsp;301&nbsp;549.
-               Pes fort a contrast, teclat, noms accessibles i violacions cr&iacute;tiques.
-               Recomanat per a webs institucionals i administracions p&uacute;bliques.</p>
-          </div>
-          <div class="profile-card readability">
-            <h4>Readability First (&Sigma;w&nbsp;=&nbsp;35)</h4>
-            <p>Prioritza la llegibilitat i comprens&iacute; del contingut textual.
-               Pes fort a Flesch, complexitat textual i jerarquia de cap&ccedil;aleres.
-               Recomanat per a portals educatius i editorials.</p>
-          </div>
-          <div class="profile-card visual">
-            <h4>Visual First (&Sigma;w&nbsp;=&nbsp;37)</h4>
-            <p>Prioritza la qualitat visual i l&#39;accessibilitat d&#39;imatges.
-               Pes fort a contrast, alt text i LCP de rendiment.
-               Recomanat per a webs multim&egrave;dia i comercials.</p>
-          </div>
+    <!-- D3 Charts: Ranking + Category means -->
+    <div class="card charts-2col" role="region" aria-labelledby="charts-h" style="padding:1.25rem;gap:1.5rem">
+      <div>
+        <p class="chart-label" id="charts-h">Rànquing ACI per URL (perfil WCAG Strict)</p>
+        <div class="chart-wrap">
+          <div id="ranking-chart" aria-label="Gràfic de barres del rànquing ACI per URL"></div>
         </div>
       </div>
-
-      <div class="method-section">
-        <h3>Les 16 m&egrave;triques del pipeline</h3>
-        <p style="font-size:0.8rem;color:#666;margin-bottom:0.6rem">
-          W&nbsp;=&nbsp;WCAG Strict &nbsp;|&nbsp;
-          R&nbsp;=&nbsp;Readability First &nbsp;|&nbsp;
-          V&nbsp;=&nbsp;Visual First
-        </p>
-        <table class="met-table" aria-label="Descripció de les 16 mètriques ACI"><thead><tr><th>#</th><th>Mètrica</th><th>Nom</th><th>WCAG</th><th title='WCAG Strict'>W</th><th title='Readability First'>R</th><th title='Visual First'>V</th></tr></thead><tbody>
-<tr><td class="num">1</td><td><code>color_contrast_ratio</code></td><td>Contrast de color</td><td><small>1.4.3 AA</small></td><td class="num">5</td><td class="num">2</td><td class="num">4</td></tr>
-<tr><td class="num">2</td><td><code>focus_visible_ratio</code></td><td>Visibilitat del focus</td><td><small>2.4.7 AA</small></td><td class="num">4</td><td class="num">1</td><td class="num">2</td></tr>
-<tr><td class="num">3</td><td><code>target_size_clean</code></td><td>Mida objectiu tàctil</td><td><small>2.5.8 AA</small></td><td class="num">3</td><td class="num">1</td><td class="num">3</td></tr>
-<tr><td class="num">4</td><td><code>keyboard_clean</code></td><td>Navegació per teclat</td><td><small>2.1.1 A</small></td><td class="num">5</td><td class="num">1</td><td class="num">1</td></tr>
-<tr><td class="num">5</td><td><code>aria_roles_valid</code></td><td>Rols ARIA vàlids</td><td><small>4.1.2 AA</small></td><td class="num">4</td><td class="num">1</td><td class="num">2</td></tr>
-<tr><td class="num">6</td><td><code>accessible_names_coverage</code></td><td>Noms accessibles</td><td><small>4.1.2 AA</small></td><td class="num">5</td><td class="num">2</td><td class="num">3</td></tr>
-<tr><td class="num">7</td><td><code>audit_critical_violations</code></td><td>Violacions crítiques (axe)</td><td><small>Múltiples</small></td><td class="num">5</td><td class="num">3</td><td class="num">2</td></tr>
-<tr><td class="num">8</td><td><code>audit_high_violations</code></td><td>Violacions altes (axe)</td><td><small>Múltiples</small></td><td class="num">4</td><td class="num">2</td><td class="num">2</td></tr>
-<tr><td class="num">9</td><td><code>audit_medium_violations</code></td><td>Violacions mitjanes (axe)</td><td><small>Múltiples</small></td><td class="num">2</td><td class="num">1</td><td class="num">1</td></tr>
-<tr><td class="num">10</td><td><code>audit_low_violations</code></td><td>Violacions baixes (axe)</td><td><small>Múltiples</small></td><td class="num">1</td><td class="num">0</td><td class="num">0</td></tr>
-<tr><td class="num">11</td><td><code>page_flesch</code></td><td>Llegibilitat Flesch</td><td><small>3.1.5 AAA</small></td><td class="num">2</td><td class="num">5</td><td class="num">2</td></tr>
-<tr><td class="num">12</td><td><code>text_complexity</code></td><td>Complexitat textual</td><td><small>3.1 AA</small></td><td class="num">1</td><td class="num">5</td><td class="num">2</td></tr>
-<tr><td class="num">13</td><td><code>heading_hierarchy</code></td><td>Jerarquia de capçaleres</td><td><small>1.3.1 A</small></td><td class="num">3</td><td class="num">5</td><td class="num">2</td></tr>
-<tr><td class="num">14</td><td><code>alt_text_coverage</code></td><td>Alt text d'imatges</td><td><small>1.1.1 A</small></td><td class="num">5</td><td class="num">3</td><td class="num">5</td></tr>
-<tr><td class="num">15</td><td><code>landmark_coverage</code></td><td>Landmarks de navegació</td><td><small>1.3.6 AAA</small></td><td class="num">3</td><td class="num">2</td><td class="num">2</td></tr>
-<tr><td class="num">16</td><td><code>performance_lcp</code></td><td>LCP (Core Web Vitals)</td><td><small>EN 301 549</small></td><td class="num">2</td><td class="num">1</td><td class="num">4</td></tr>
-</tbody></table>
-
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Desc&#224;rregues -->
-  <div class="card" role="region" aria-labelledby="dl-title">
-    <div class="card-hd"><h2 id="dl-title">&#8595; Desc&agrave;rregues</h2></div>
-    <div class="card-body">
-      <div class="dl-grid">
-        <a class="dl-btn" href="data/scores.csv" download
-           aria-label="Descarrega les puntuacions en format CSV">
-          &#128196; scores.csv
-        </a>
-        <a class="dl-btn" href="results.json" download
-           aria-label="Descarrega les dades consolidades en format JSON">
-          &#x7B;&#x7D; results.json
-        </a>
-        <a class="dl-btn" href="data/reports_manifest.json" download
-           aria-label="Descarrega el manifest d'informes">
-          &#128203; reports_manifest.json
-        </a>
+      <div>
+        <p class="chart-label">ACI mitjà per categoria i perfil</p>
+        <div class="chart-wrap">
+          <div id="category-chart" aria-label="Gràfic de barres agrupades per categoria i perfil"></div>
+        </div>
+        <div class="legend" id="cat-legend"></div>
       </div>
     </div>
-  </div>
 
-</main>
+    <!-- D3 Heatmap -->
+    <div class="card" role="region" aria-labelledby="heatmap-h">
+      <div class="card-hd">
+        <h2 id="heatmap-h">Mapa de calor de mètriques (WCAG Strict · 0=vermell, 1=verd)</h2>
+        <span style="font-size:0.72rem;color:#9ca3af">Passa el ratolí per al valor exacte</span>
+      </div>
+      <div class="card-body" style="overflow-x:auto;padding-bottom:0.5rem">
+        <div id="heatmap-chart" aria-label="Mapa de calor de les 16 mètriques per URL"></div>
+        <div id="hm-tooltip" style="display:none;position:fixed;background:#1e293b;color:#fff;padding:6px 10px;border-radius:5px;font-size:0.76rem;pointer-events:none;z-index:100"></div>
+      </div>
+    </div>
 
-<footer role="contentinfo">
-  <p>ACI Pipeline v0.1.0 &middot; Jordi Miguel i Costal &middot; TFM 2026 &middot;
-     <a id="repo-link" href="https://github.com" rel="noopener">Repositori GitHub</a></p>
-  <p>Basat en WCAG 2.1/2.2, EN 301 549 i axe-core</p>
-</footer>
+    <!-- Results table -->
+    <div class="card" role="region" aria-labelledby="tbl-h">
+      <div class="card-hd">
+        <h2 id="tbl-h">📊 Resultats per URL</h2>
+      </div>
+      <div class="filters" role="search" aria-label="Filtres de la taula de resultats">
+        <label for="f-text">Cerca:</label>
+        <input type="search" id="f-text" placeholder="domini, URL…" aria-label="Cerca per domini o URL">
+        <label for="f-cat">Categoria:</label>
+        <select id="f-cat" aria-label="Filtra per categoria">
+          <option value="">Totes</option>
+          <option value="Institucional">Institucional</option>
+          <option value="Educatiu">Educatiu</option>
+          <option value="Cultural">Cultural</option>
+          <option value="Mitjans">Mitjans</option>
+          <option value="Comercial">Comercial</option>
+        </select>
+        <label for="f-min">ACI ≥:</label>
+        <input type="number" id="f-min" min="0" max="5" step="0.1" value="0" aria-label="Puntuació ACI mínima">
+        <button class="btn-reset" onclick="resetFilters()" aria-label="Reinicia els filtres">✕ Reinicia</button>
+        <span id="f-count" aria-live="polite"></span>
+      </div>
+      <div class="tbl-wrap">
+        <table class="res" aria-label="Resultats d'accessibilitat ACI per URL">
+          <thead>
+            <tr>
+              <th onclick="sortBy(0)" aria-sort="none">#</th>
+              <th onclick="sortBy(1)" aria-sort="none">Domini / URL</th>
+              <th onclick="sortBy(2)" aria-sort="none">Categoria</th>
+              <th onclick="sortBy(3)" aria-sort="none" title="WCAG Strict">WCAG Strict</th>
+              <th onclick="sortBy(4)" aria-sort="none" title="Readability First">Readability</th>
+              <th onclick="sortBy(5)" aria-sort="none" title="Visual First">Visual First</th>
+              <th aria-sort="none">Comparatiu</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+      <p class="no-res" id="no-res" role="status" style="display:none">Cap resultat correspon als filtres aplicats.</p>
+    </div>
 
-<script>
-// Dades embegudes (generades per build_site.py — no cal fetch)
-const ALL_ROWS = [{"url": "https://www.palaumusica.cat/ca/", "domain": "www.palaumusica.cat", "category": "Cultural", "profiles": {"wcag_strict": {"aci": 3.885, "report": "reports/www_palaumusica_cat_ca_Cultural_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.885}, {"url": "https://www.tnc.cat/ca", "domain": "www.tnc.cat", "category": "Cultural", "profiles": {"wcag_strict": {"aci": 3.844, "report": "reports/www_tnc_cat_ca_Cultural_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.844}, {"url": "https://web.ub.edu/", "domain": "web.ub.edu", "category": "Educatiu", "profiles": {"wcag_strict": {"aci": 3.83, "report": "reports/web_ub_edu_Educatiu_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.83}, {"url": "https://www.lavanguardia.com/", "domain": "www.lavanguardia.com", "category": "Mitjans", "profiles": {"wcag_strict": {"aci": 3.788, "report": "reports/www_lavanguardia_com_Mitjans_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.788}, {"url": "https://www.educacionfpydeportes.gob.es/portada.html", "domain": "www.educacionfpydeportes.gob.es", "category": "Institucional", "profiles": {"wcag_strict": {"aci": 3.738, "report": "reports/www_educacionfpydeportes_gob_es_portada_html_Institucional_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.738}, {"url": "https://sede.agenciatributaria.gob.es/", "domain": "sede.agenciatributaria.gob.es", "category": "Institucional", "profiles": {"wcag_strict": {"aci": 3.704, "report": "reports/sede_agenciatributaria_gob_es_Institucional_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.704}, {"url": "https://www.capraboacasa.com/ca/", "domain": "www.capraboacasa.com", "category": "Comercial", "profiles": {"wcag_strict": {"aci": 3.682, "report": "reports/www_capraboacasa_com_ca_Comercial_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.682}, {"url": "https://www.ucm.es/", "domain": "www.ucm.es", "category": "Educatiu", "profiles": {"wcag_strict": {"aci": 3.678, "report": "reports/www_ucm_es_Educatiu_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.678}, {"url": "https://www.uv.es/", "domain": "www.uv.es", "category": "Educatiu", "profiles": {"wcag_strict": {"aci": 3.678, "report": "reports/www_uv_es_Educatiu_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.678}, {"url": "https://www.diba.cat/ca/inici", "domain": "www.diba.cat", "category": "Institucional", "profiles": {"wcag_strict": {"aci": 3.676, "report": "reports/www_diba_cat_ca_inici_Institucional_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.676}, {"url": "https://www.sanidad.gob.es/", "domain": "www.sanidad.gob.es", "category": "Institucional", "profiles": {"wcag_strict": {"aci": 3.67, "report": "reports/www_sanidad_gob_es_Institucional_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.67}, {"url": "https://www.rac1.cat/", "domain": "www.rac1.cat", "category": "Mitjans", "profiles": {"wcag_strict": {"aci": 3.659, "report": "reports/www_rac1_cat_Mitjans_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.659}, {"url": "https://www.compraonline.bonpreuesclat.cat/", "domain": "www.compraonline.bonpreuesclat.cat", "category": "Comercial", "profiles": {"wcag_strict": {"aci": 3.606, "report": "reports/www_compraonline_bonpreuesclat_cat_Comercial_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.606}, {"url": "https://web.gencat.cat/ca/ciutadania/inici", "domain": "web.gencat.cat", "category": "Institucional", "profiles": {"wcag_strict": {"aci": 3.605, "report": "reports/web_gencat_cat_ca_ciutadania_inici_Institucional_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.605}, {"url": "https://terrassadigital.cat/", "domain": "terrassadigital.cat", "category": "Mitjans", "profiles": {"wcag_strict": {"aci": 3.604, "report": "reports/terrassadigital_cat_Mitjans_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.604}, {"url": "https://es.wallapop.com/", "domain": "es.wallapop.com", "category": "Comercial", "profiles": {"wcag_strict": {"aci": 3.591, "report": "reports/es_wallapop_com_Comercial_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.591}, {"url": "https://www.rcdespanyol.com/", "domain": "www.rcdespanyol.com", "category": "Comercial", "profiles": {"wcag_strict": {"aci": 3.575, "report": "reports/www_rcdespanyol_com_Comercial_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.575}, {"url": "https://www.uab.cat/", "domain": "www.uab.cat", "category": "Educatiu", "profiles": {"wcag_strict": {"aci": 3.558, "report": "reports/www_uab_cat_Educatiu_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.558}, {"url": "https://www.3cat.cat/3cat/", "domain": "www.3cat.cat", "category": "Mitjans", "profiles": {"wcag_strict": {"aci": 3.547, "report": "reports/www_3cat_cat_3cat_Mitjans_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.547}, {"url": "https://serveiocupacio.gencat.cat/ca/inici", "domain": "serveiocupacio.gencat.cat", "category": "Institucional", "profiles": {"wcag_strict": {"aci": 3.546, "report": "reports/serveiocupacio_gencat_cat_ca_inici_Institucional_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.546}, {"url": "https://www.url.edu/ca", "domain": "www.url.edu", "category": "Educatiu", "profiles": {"wcag_strict": {"aci": 3.544, "report": "reports/www_url_edu_ca_Educatiu_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.544}, {"url": "https://www.museunacional.cat/ca", "domain": "www.museunacional.cat", "category": "Cultural", "profiles": {"wcag_strict": {"aci": 3.531, "report": "reports/www_museunacional_cat_ca_Cultural_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.531}, {"url": "https://www.meteo.cat/", "domain": "www.meteo.cat", "category": "Institucional", "profiles": {"wcag_strict": {"aci": 3.522, "report": "reports/www_meteo_cat_Institucional_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.522}, {"url": "https://catsalut.gencat.cat/ca/inici/", "domain": "catsalut.gencat.cat", "category": "Institucional", "profiles": {"wcag_strict": {"aci": 3.521, "report": "reports/catsalut_gencat_cat_ca_inici_Institucional_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.521}, {"url": "https://educacio.gencat.cat/ca/inici", "domain": "educacio.gencat.cat", "category": "Institucional", "profiles": {"wcag_strict": {"aci": 3.517, "report": "reports/educacio_gencat_cat_ca_inici_Institucional_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.517}, {"url": "https://www.upc.edu/ca", "domain": "www.upc.edu", "category": "Educatiu", "profiles": {"wcag_strict": {"aci": 3.517, "report": "reports/www_upc_edu_ca_Educatiu_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.517}, {"url": "https://www.ara.cat/", "domain": "www.ara.cat", "category": "Mitjans", "profiles": {"wcag_strict": {"aci": 3.5, "report": "reports/www_ara_cat_Mitjans_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.5}, {"url": "https://www.seg-social.es/wps/portal/wss/internet/Inicio", "domain": "www.seg-social.es", "category": "Institucional", "profiles": {"wcag_strict": {"aci": 3.494, "report": "reports/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.494}, {"url": "https://www.upf.edu/", "domain": "www.upf.edu", "category": "Educatiu", "profiles": {"wcag_strict": {"aci": 3.48, "report": "reports/www_upf_edu_Educatiu_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.48}, {"url": "https://www.liceubarcelona.cat/ca", "domain": "www.liceubarcelona.cat", "category": "Cultural", "profiles": {"wcag_strict": {"aci": 3.435, "report": "reports/www_liceubarcelona_cat_ca_Cultural_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.435}, {"url": "https://www.rtve.es/", "domain": "www.rtve.es", "category": "Mitjans", "profiles": {"wcag_strict": {"aci": 3.415, "report": "reports/www_rtve_es_Mitjans_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.415}, {"url": "https://sagradafamilia.org/", "domain": "sagradafamilia.org", "category": "Cultural", "profiles": {"wcag_strict": {"aci": 3.413, "report": "reports/sagradafamilia_org_Cultural_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.413}, {"url": "https://www.fcbarcelona.cat/ca/", "domain": "www.fcbarcelona.cat", "category": "Comercial", "profiles": {"wcag_strict": {"aci": 3.349, "report": "reports/www_fcbarcelona_cat_ca_Comercial_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.349}, {"url": "https://www.uoc.edu/ca", "domain": "www.uoc.edu", "category": "Educatiu", "profiles": {"wcag_strict": {"aci": 3.342, "report": "reports/www_uoc_edu_ca_Educatiu_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.342}, {"url": "https://www.unav.edu/", "domain": "www.unav.edu", "category": "Educatiu", "profiles": {"wcag_strict": {"aci": 3.184, "report": "reports/www_unav_edu_Educatiu_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.184}, {"url": "https://www.promofarma.com/", "domain": "www.promofarma.com", "category": "Comercial", "profiles": {"wcag_strict": {"aci": 3.044, "report": "reports/www_promofarma_com_Comercial_wcag_strict.html"}, "readability_first": {"aci": null, "report": null}, "visual_first": {"aci": null, "report": null}}, "aci_max": 3.044}];
-const PROFILES = ["wcag_strict", "readability_first", "visual_first"];
-let sortCol = -1, sortAsc = true;
+    <!-- Methodology -->
+    <div class="card" role="region" aria-labelledby="method-h">
+      <div class="card-hd"><h2 id="method-h">📘 Metodologia — Índex ACI (TFM Cap. 3–4)</h2></div>
+      <div class="card-body">
 
-// Detecta repo GitHub des de l'URL de Pages
-(function () {
-  var h = window.location.hostname;
-  var p = (window.location.pathname.split('/')[1] || '');
-  if (h.endsWith('github.io') && p) {
-    var owner = h.replace('.github.io', '');
-    var repo  = 'https://github.com/' + owner + '/' + p;
-    document.getElementById('repo-link').href = repo;
-    document.getElementById('btn-run').href   =
-      repo + '/actions/workflows/publish_results.yml';
-  }
-}());
+        <div class="method-section">
+          <h3>Fórmula de l'ACI</h3>
+          <p>L'<strong>Accessibility Computation Index (ACI)</strong> és un índex ponderat de 16 mètriques normalitzades:</p>
+          <div class="formula-box" role="math" aria-label="Fórmula ACI">
+            ACI = (Σ nᵢ · wᵢ) / (Σ wᵢ) × 5.0 &nbsp;∈ [0, 5]
+          </div>
+          <p style="font-size:0.82rem;color:#555;margin-top:0.5rem">
+            On <em>nᵢ ∈ [0,1]</em> és el valor normalitzat i <em>wᵢ</em> el pes en el perfil.
+            Escala: <span style="color:#27ae60;font-weight:700">Excel·lent ≥ 4.0</span> ·
+            <span style="color:#e67e22;font-weight:700">Bo ≥ 3.0</span> ·
+            <span style="color:#f59e0b;font-weight:700">Acceptable ≥ 2.5</span> ·
+            <span style="color:#e74c3c;font-weight:700">Insuficient &lt; 2.5</span>
+          </p>
+        </div>
 
-// Filtrat
-function getFilters() {
-  return {
-    text:   document.getElementById('f-text').value.toLowerCase().trim(),
-    cat:    document.getElementById('f-cat').value,
-    minAci: parseFloat(document.getElementById('f-min').value) || 0,
-  };
-}
+        <div class="method-section">
+          <h3>Perfils de puntuació</h3>
+          <div class="profiles-grid">
+            <div class="prof-card wcag">
+              <h4>WCAG Strict (Σw = 54)</h4>
+              <p>Prioritat màxima a conformitat normativa WCAG 2.1 AA i EN 301 549. Pes fort a contrast, teclat, noms accessibles i violacions crítiques. Recomanat per webs institucionals i administracions públiques.</p>
+            </div>
+            <div class="prof-card readability">
+              <h4>Readability First (Σw = 35)</h4>
+              <p>Prioritza la llegibilitat i comprensió del contingut textual. Pes fort a Flesch, complexitat textual i jerarquia de capçaleres. Recomanat per portals educatius i editorials.</p>
+            </div>
+            <div class="prof-card visual">
+              <h4>Visual First (Σw = 37)</h4>
+              <p>Prioritza la qualitat visual i l'accessibilitat d'imatges. Pes fort a contrast, alt text i LCP. Recomanat per webs multimèdia i comercials.</p>
+            </div>
+          </div>
+        </div>
 
-function applyFilters() {
-  var f = getFilters();
-  var filtered = ALL_ROWS.filter(function (r) {
-    if (f.text && !r.domain.toLowerCase().includes(f.text) &&
-        !r.url.toLowerCase().includes(f.text)) return false;
-    if (f.cat && r.category !== f.cat) return false;
-    var best = r.aci_max;
-    if (best !== null && best < f.minAci) return false;
-    return true;
-  });
-  renderRows(filtered);
-}
+        <div class="method-section">
+          <h3>Les 16 mètriques del pipeline (TFM Cap. 4)</h3>
+          <p style="font-size:0.78rem;color:#6b7280;margin-bottom:0.6rem">
+            W = WCAG Strict &nbsp;|&nbsp; R = Readability First &nbsp;|&nbsp; V = Visual First
+          </p>
+          <div style="overflow-x:auto">
+            <table class="met-ref" aria-label="Les 16 mètriques del pipeline ACI amb pesos per perfil">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Mètrica</th>
+                  <th scope="col">Nom</th>
+                  <th scope="col">WCAG</th>
+                  <th scope="col" title="WCAG Strict">W</th>
+                  <th scope="col" title="Readability First">R</th>
+                  <th scope="col" title="Visual First">V</th>
+                  <th scope="col">Descripció breu (TFM)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="num">1</td>
+                  <td><code>color_contrast_ratio</code></td>
+                  <td>Contrast de color</td>
+                  <td><small style="color:#6b7280">1.4.3 AA</small></td>
+                  <td class="num">5</td>
+                  <td class="num">2</td>
+                  <td class="num">4</td>
+                  <td><div class="note-sm">Proporció de contrast entre el text/elements d'interfície i el fons de la pàgina.</div></td>
+                </tr>
+                <tr>
+                  <td class="num">2</td>
+                  <td><code>focus_visible_ratio</code></td>
+                  <td>Visibilitat del focus</td>
+                  <td><small style="color:#6b7280">2.4.7 AA</small></td>
+                  <td class="num">4</td>
+                  <td class="num">1</td>
+                  <td class="num">2</td>
+                  <td><div class="note-sm">Fracció d'elements interactius amb indicador de focus visible en la navegació per teclat.</div></td>
+                </tr>
+                <tr>
+                  <td class="num">3</td>
+                  <td><code>target_size_clean</code></td>
+                  <td>Mida objectiu tàctil</td>
+                  <td><small style="color:#6b7280">2.5.8 AA</small></td>
+                  <td class="num">3</td>
+                  <td class="num">1</td>
+                  <td class="num">3</td>
+                  <td><div class="note-sm">Proporció d'elements interactius (botons, enllaços, formularis) que superen la mida mínima de 24×24 px.</div></td>
+                </tr>
+                <tr>
+                  <td class="num">4</td>
+                  <td><code>keyboard_clean</code></td>
+                  <td>Navegació per teclat</td>
+                  <td><small style="color:#6b7280">2.1.1 A</small></td>
+                  <td class="num">5</td>
+                  <td class="num">1</td>
+                  <td class="num">1</td>
+                  <td><div class="note-sm">Ràtio d'elements interactius navegables per teclat sense trampes ni bloqueigs de focus.</div></td>
+                </tr>
+                <tr>
+                  <td class="num">5</td>
+                  <td><code>aria_roles_valid</code></td>
+                  <td>Rols ARIA vàlids</td>
+                  <td><small style="color:#6b7280">4.1.2 AA</small></td>
+                  <td class="num">4</td>
+                  <td class="num">1</td>
+                  <td class="num">2</td>
+                  <td><div class="note-sm">Proporció de rols i atributs ARIA correctament implementats respecte al total detectat.</div></td>
+                </tr>
+                <tr>
+                  <td class="num">6</td>
+                  <td><code>accessible_names_coverage</code></td>
+                  <td>Noms accessibles</td>
+                  <td><small style="color:#6b7280">4.1.2 AA</small></td>
+                  <td class="num">5</td>
+                  <td class="num">2</td>
+                  <td class="num">3</td>
+                  <td><div class="note-sm">Fracció d'elements interactius i imatges amb nom accessible (label, aria-label, aria-labelledby, alt).</div></td>
+                </tr>
+                <tr>
+                  <td class="num">7</td>
+                  <td><code>audit_critical_violations</code></td>
+                  <td>Violacions crítiques (axe)</td>
+                  <td><small style="color:#6b7280">Múltiples</small></td>
+                  <td class="num">5</td>
+                  <td class="num">3</td>
+                  <td class="num">2</td>
+                  <td><div class="note-sm">Nombre de violacions WCAG de nivell crític detectades per axe-core. Penalització: −0.15 per violació.</div></td>
+                </tr>
+                <tr>
+                  <td class="num">8</td>
+                  <td><code>audit_high_violations</code></td>
+                  <td>Violacions altes (axe)</td>
+                  <td><small style="color:#6b7280">Múltiples</small></td>
+                  <td class="num">4</td>
+                  <td class="num">2</td>
+                  <td class="num">2</td>
+                  <td><div class="note-sm">Nombre de violacions WCAG greus detectades per axe-core. Penalització: −0.05 per violació.</div></td>
+                </tr>
+                <tr>
+                  <td class="num">9</td>
+                  <td><code>audit_medium_violations</code></td>
+                  <td>Violacions mitjanes (axe)</td>
+                  <td><small style="color:#6b7280">Múltiples</small></td>
+                  <td class="num">2</td>
+                  <td class="num">1</td>
+                  <td class="num">1</td>
+                  <td><div class="note-sm">Nombre de violacions WCAG moderades detectades per axe-core. Penalització: −0.02 per violació.</div></td>
+                </tr>
+                <tr>
+                  <td class="num">10</td>
+                  <td><code>audit_low_violations</code></td>
+                  <td>Violacions baixes (axe)</td>
+                  <td><small style="color:#6b7280">Múltiples</small></td>
+                  <td class="num">1</td>
+                  <td class="num">0</td>
+                  <td class="num">0</td>
+                  <td><div class="note-sm">Nombre de violacions WCAG de baixa severitat per axe-core. Penalització: −0.01 per violació.</div></td>
+                </tr>
+                <tr>
+                  <td class="num">11</td>
+                  <td><code>page_flesch</code></td>
+                  <td>Llegibilitat Flesch</td>
+                  <td><small style="color:#6b7280">3.1.5 AAA</small></td>
+                  <td class="num">2</td>
+                  <td class="num">5</td>
+                  <td class="num">2</td>
+                  <td><div class="note-sm">Índex Flesch Reading Ease del contingut textual principal. Escala 0–100: >60 llegible; >80 molt fàcil.</div></td>
+                </tr>
+                <tr>
+                  <td class="num">12</td>
+                  <td><code>text_complexity</code></td>
+                  <td>Complexitat textual</td>
+                  <td><small style="color:#6b7280">3.1 AA</small></td>
+                  <td class="num">1</td>
+                  <td class="num">5</td>
+                  <td class="num">2</td>
+                  <td><div class="note-sm">Mesura composta de complexitat textual: longitud de frases, proporció de paraules difícils i estructura.</div></td>
+                </tr>
+                <tr>
+                  <td class="num">13</td>
+                  <td><code>heading_hierarchy</code></td>
+                  <td>Jerarquia de capçaleres</td>
+                  <td><small style="color:#6b7280">1.3.1 A</small></td>
+                  <td class="num">3</td>
+                  <td class="num">5</td>
+                  <td class="num">2</td>
+                  <td><div class="note-sm">Correctesa de la jerarquia de capçaleres HTML (H1 → H2 → H3... sense salts ni redundàncies).</div></td>
+                </tr>
+                <tr>
+                  <td class="num">14</td>
+                  <td><code>alt_text_coverage</code></td>
+                  <td>Alt text d'imatges</td>
+                  <td><small style="color:#6b7280">1.1.1 A</small></td>
+                  <td class="num">5</td>
+                  <td class="num">3</td>
+                  <td class="num">5</td>
+                  <td><div class="note-sm">Fracció d'imatges i SVGs informatius amb text alternatiu significatiu i no genèric.</div></td>
+                </tr>
+                <tr>
+                  <td class="num">15</td>
+                  <td><code>landmark_coverage</code></td>
+                  <td>Landmarks de navegació</td>
+                  <td><small style="color:#6b7280">1.3.6 AAA</small></td>
+                  <td class="num">3</td>
+                  <td class="num">2</td>
+                  <td class="num">2</td>
+                  <td><div class="note-sm">Presència i cobertura dels landmarks HTML5/ARIA principals (main, nav, header, footer, aside).</div></td>
+                </tr>
+                <tr>
+                  <td class="num">16</td>
+                  <td><code>performance_lcp</code></td>
+                  <td>LCP (Core Web Vitals)</td>
+                  <td><small style="color:#6b7280">EN 301 549</small></td>
+                  <td class="num">2</td>
+                  <td class="num">1</td>
+                  <td class="num">4</td>
+                  <td><div class="note-sm">Largest Contentful Paint (LCP): temps fins al renderitzat de l'element principal visible (en ms).</div></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-function aciColor(s) {
-  if (s === null) return '#888';
-  return s >= 3.5 ? '#27ae60' : s >= 2.5 ? '#e67e22' : '#e74c3c';
-}
+      </div>
+    </div>
 
-function esc(s) {
-  return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
+    <!-- Downloads -->
+    <div class="card" role="region" aria-labelledby="dl-h">
+      <div class="card-hd"><h2 id="dl-h">⬇ Descàrregues</h2></div>
+      <div class="card-body">
+        <div class="dl-grid">
+          <a class="dl-btn" href="data/scores.csv" download aria-label="Descarrega les puntuacions ACI en CSV">📄 scores.csv</a>
+          <a class="dl-btn" href="results.json" download aria-label="Descarrega les dades consolidades en JSON">{} results.json</a>
+          <a class="dl-btn" href="data/reports_manifest.json" download aria-label="Descarrega el manifest d'informes">📋 reports_manifest.json</a>
+        </div>
+      </div>
+    </div>
 
-function renderRows(rows) {
-  var tbody  = document.getElementById('tbody');
-  var noRes  = document.getElementById('no-results');
-  var fCount = document.getElementById('f-count');
-  fCount.textContent = rows.length + ' resultat' + (rows.length !== 1 ? 's' : '');
+  </main>
 
-  if (!rows.length) { tbody.innerHTML = ''; noRes.style.display = ''; return; }
-  noRes.style.display = 'none';
+  <footer role="contentinfo">
+    <p>ACI Pipeline v0.1.0 · Jordi Miguel i Costal · TFM 2026 · UOC EEPSM ·
+       <a id="repo-link" href="https://github.com" rel="noopener">Repositori GitHub</a></p>
+    <p>Basat en WCAG 2.1/2.2, EN 301 549, axe-core i Core Web Vitals</p>
+  </footer>
 
-  tbody.innerHTML = rows.map(function (r, i) {
-    var cells = [
-      '<td class="num">' + (i + 1) + '</td>',
-      '<td><strong>' + esc(r.domain) + '</strong><br>' +
-        '<small class="url-small"><a href="' + esc(r.url) + '" target="_blank" rel="noopener">' +
-        esc(r.url) + '</a></small></td>',
-      '<td><span class="cat-chip">' + esc(r.category || '—') + '</span></td>',
-    ];
-    PROFILES.forEach(function (p) {
-      var pd    = r.profiles[p] || {};
-      var aci   = pd.aci !== undefined ? pd.aci : null;
-      var rep   = pd.report || null;
-      if (aci !== null) {
-        var pct   = Math.round(aci / 5 * 100);
-        var color = aciColor(aci);
-        var link  = rep ? ' <a href="' + rep + '" title="Informe">&#128196;</a>' : '';
-        cells.push(
-          '<td data-val="' + aci.toFixed(3) + '">' +
-          '<span class="aci-num" style="color:' + color + '">' + aci.toFixed(3) + '</span>' +
-          '<div class="mini-bar"><div style="width:' + pct + '%;background:' + color + '"></div></div>' +
-          link + '</td>'
-        );
-      } else {
-        cells.push('<td data-val="0"><span class="aci-dash">—</span></td>');
-      }
-    });
-    return '<tr>' + cells.join('') + '</tr>';
-  }).join('');
-}
+  <!-- D3 + dades embegudes -->
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+  <script>
+    var TABLE_ROWS    = [{"url": "https://www.palaumusica.cat/ca/", "domain": "www.palaumusica.cat", "category": "Cultural", "aci_best": 3.885, "profiles": {"wcag_strict": {"aci": 3.885, "report": "reports/www_palaumusica_cat_ca_Cultural_wcag_strict.html"}, "readability_first": {"aci": 3.786, "report": "reports/www_palaumusica_cat_ca_Cultural_readability_first.html"}, "visual_first": {"aci": 3.676, "report": "reports/www_palaumusica_cat_ca_Cultural_visual_first.html"}}, "comparative": "reports/www_palaumusica_cat_ca_Cultural_comparative.html"}, {"url": "https://www.tnc.cat/ca", "domain": "www.tnc.cat", "category": "Cultural", "aci_best": 3.844, "profiles": {"wcag_strict": {"aci": 3.844, "report": "reports/www_tnc_cat_ca_Cultural_wcag_strict.html"}, "readability_first": {"aci": 3.737, "report": "reports/www_tnc_cat_ca_Cultural_readability_first.html"}, "visual_first": {"aci": 3.609, "report": "reports/www_tnc_cat_ca_Cultural_visual_first.html"}}, "comparative": "reports/www_tnc_cat_ca_Cultural_comparative.html"}, {"url": "https://web.ub.edu/", "domain": "web.ub.edu", "category": "Educatiu", "aci_best": 3.83, "profiles": {"wcag_strict": {"aci": 3.83, "report": "reports/web_ub_edu_Educatiu_wcag_strict.html"}, "readability_first": {"aci": 3.72, "report": "reports/web_ub_edu_Educatiu_readability_first.html"}, "visual_first": {"aci": 3.626, "report": "reports/web_ub_edu_Educatiu_visual_first.html"}}, "comparative": "reports/web_ub_edu_Educatiu_comparative.html"}, {"url": "https://www.lavanguardia.com/", "domain": "www.lavanguardia.com", "category": "Mitjans", "aci_best": 3.788, "profiles": {"wcag_strict": {"aci": 3.788, "report": "reports/www_lavanguardia_com_Mitjans_wcag_strict.html"}, "readability_first": {"aci": 3.685, "report": "reports/www_lavanguardia_com_Mitjans_readability_first.html"}, "visual_first": {"aci": 3.631, "report": "reports/www_lavanguardia_com_Mitjans_visual_first.html"}}, "comparative": "reports/www_lavanguardia_com_Mitjans_comparative.html"}, {"url": "https://terrassadigital.cat/", "domain": "terrassadigital.cat", "category": "Mitjans", "aci_best": 3.766, "profiles": {"wcag_strict": {"aci": 3.766, "report": "reports/terrassadigital_cat_Mitjans_wcag_strict.html"}, "readability_first": {"aci": 3.637, "report": "reports/terrassadigital_cat_Mitjans_readability_first.html"}, "visual_first": {"aci": 3.576, "report": "reports/terrassadigital_cat_Mitjans_visual_first.html"}}, "comparative": "reports/terrassadigital_cat_Mitjans_comparative.html"}, {"url": "https://www.sanidad.gob.es/", "domain": "www.sanidad.gob.es", "category": "Institucional", "aci_best": 3.757, "profiles": {"wcag_strict": {"aci": 3.757, "report": "reports/www_sanidad_gob_es_Institucional_wcag_strict.html"}, "readability_first": {"aci": 3.648, "report": "reports/www_sanidad_gob_es_Institucional_readability_first.html"}, "visual_first": {"aci": 3.571, "report": "reports/www_sanidad_gob_es_Institucional_visual_first.html"}}, "comparative": "reports/www_sanidad_gob_es_Institucional_comparative.html"}, {"url": "https://www.educacionfpydeportes.gob.es/portada.html", "domain": "www.educacionfpydeportes.gob.es", "category": "Institucional", "aci_best": 3.738, "profiles": {"wcag_strict": {"aci": 3.738, "report": "reports/www_educacionfpydeportes_gob_es_portada_html_Institucional_wcag_strict.html"}, "readability_first": {"aci": 3.633, "report": "reports/www_educacionfpydeportes_gob_es_portada_html_Institucional_readability_first.html"}, "visual_first": {"aci": 3.49, "report": "reports/www_educacionfpydeportes_gob_es_portada_html_Institucional_visual_first.html"}}, "comparative": "reports/www_educacionfpydeportes_gob_es_portada_html_Institucional_comparative.html"}, {"url": "https://sede.agenciatributaria.gob.es/", "domain": "sede.agenciatributaria.gob.es", "category": "Institucional", "aci_best": 3.704, "profiles": {"wcag_strict": {"aci": 3.704, "report": "reports/sede_agenciatributaria_gob_es_Institucional_wcag_strict.html"}, "readability_first": {"aci": 3.571, "report": "reports/sede_agenciatributaria_gob_es_Institucional_readability_first.html"}, "visual_first": {"aci": 3.514, "report": "reports/sede_agenciatributaria_gob_es_Institucional_visual_first.html"}}, "comparative": "reports/sede_agenciatributaria_gob_es_Institucional_comparative.html"}, {"url": "https://www.capraboacasa.com/ca/", "domain": "www.capraboacasa.com", "category": "Comercial", "aci_best": 3.682, "profiles": {"wcag_strict": {"aci": 3.682, "report": "reports/www_capraboacasa_com_ca_Comercial_wcag_strict.html"}, "readability_first": {"aci": 3.607, "report": "reports/www_capraboacasa_com_ca_Comercial_readability_first.html"}, "visual_first": {"aci": 3.511, "report": "reports/www_capraboacasa_com_ca_Comercial_visual_first.html"}}, "comparative": "reports/www_capraboacasa_com_ca_Comercial_comparative.html"}, {"url": "https://es.wallapop.com/", "domain": "es.wallapop.com", "category": "Comercial", "aci_best": 3.678, "profiles": {"wcag_strict": {"aci": 3.678, "report": "reports/es_wallapop_com_Comercial_wcag_strict.html"}, "readability_first": {"aci": 3.551, "report": "reports/es_wallapop_com_Comercial_readability_first.html"}, "visual_first": {"aci": 3.495, "report": "reports/es_wallapop_com_Comercial_visual_first.html"}}, "comparative": "reports/es_wallapop_com_Comercial_comparative.html"}, {"url": "https://www.ucm.es/", "domain": "www.ucm.es", "category": "Educatiu", "aci_best": 3.678, "profiles": {"wcag_strict": {"aci": 3.678, "report": "reports/www_ucm_es_Educatiu_wcag_strict.html"}, "readability_first": {"aci": 3.551, "report": "reports/www_ucm_es_Educatiu_readability_first.html"}, "visual_first": {"aci": 3.495, "report": "reports/www_ucm_es_Educatiu_visual_first.html"}}, "comparative": "reports/www_ucm_es_Educatiu_comparative.html"}, {"url": "https://www.uv.es/", "domain": "www.uv.es", "category": "Educatiu", "aci_best": 3.678, "profiles": {"wcag_strict": {"aci": 3.678, "report": "reports/www_uv_es_Educatiu_wcag_strict.html"}, "readability_first": {"aci": 3.551, "report": "reports/www_uv_es_Educatiu_readability_first.html"}, "visual_first": {"aci": 3.495, "report": "reports/www_uv_es_Educatiu_visual_first.html"}}, "comparative": "reports/www_uv_es_Educatiu_comparative.html"}, {"url": "https://www.diba.cat/ca/inici", "domain": "www.diba.cat", "category": "Institucional", "aci_best": 3.676, "profiles": {"wcag_strict": {"aci": 3.676, "report": "reports/www_diba_cat_ca_inici_Institucional_wcag_strict.html"}, "readability_first": {"aci": 3.588, "report": "reports/www_diba_cat_ca_inici_Institucional_readability_first.html"}, "visual_first": {"aci": 3.434, "report": "reports/www_diba_cat_ca_inici_Institucional_visual_first.html"}}, "comparative": "reports/www_diba_cat_ca_inici_Institucional_comparative.html"}, {"url": "https://www.rac1.cat/", "domain": "www.rac1.cat", "category": "Mitjans", "aci_best": 3.659, "profiles": {"wcag_strict": {"aci": 3.659, "report": "reports/www_rac1_cat_Mitjans_wcag_strict.html"}, "readability_first": {"aci": 3.537, "report": "reports/www_rac1_cat_Mitjans_readability_first.html"}, "visual_first": {"aci": 3.481, "report": "reports/www_rac1_cat_Mitjans_visual_first.html"}}, "comparative": "reports/www_rac1_cat_Mitjans_comparative.html"}, {"url": "https://www.compraonline.bonpreuesclat.cat/", "domain": "www.compraonline.bonpreuesclat.cat", "category": "Comercial", "aci_best": 3.608, "profiles": {"wcag_strict": {"aci": 3.608, "report": "reports/www_compraonline_bonpreuesclat_cat_Comercial_wcag_strict.html"}, "readability_first": {"aci": 3.515, "report": "reports/www_compraonline_bonpreuesclat_cat_Comercial_readability_first.html"}, "visual_first": {"aci": 3.254, "report": "reports/www_compraonline_bonpreuesclat_cat_Comercial_visual_first.html"}}, "comparative": "reports/www_compraonline_bonpreuesclat_cat_Comercial_comparative.html"}, {"url": "https://web.gencat.cat/ca/ciutadania/inici", "domain": "web.gencat.cat", "category": "Institucional", "aci_best": 3.605, "profiles": {"wcag_strict": {"aci": 3.605, "report": "reports/web_gencat_cat_ca_ciutadania_inici_Institucional_wcag_strict.html"}, "readability_first": {"aci": 3.507, "report": "reports/web_gencat_cat_ca_ciutadania_inici_Institucional_readability_first.html"}, "visual_first": {"aci": 3.288, "report": "reports/web_gencat_cat_ca_ciutadania_inici_Institucional_visual_first.html"}}, "comparative": "reports/web_gencat_cat_ca_ciutadania_inici_Institucional_comparative.html"}, {"url": "https://www.rcdespanyol.com/", "domain": "www.rcdespanyol.com", "category": "Comercial", "aci_best": 3.575, "profiles": {"wcag_strict": {"aci": 3.575, "report": "reports/www_rcdespanyol_com_Comercial_wcag_strict.html"}, "readability_first": {"aci": 3.491, "report": "reports/www_rcdespanyol_com_Comercial_readability_first.html"}, "visual_first": {"aci": 3.412, "report": "reports/www_rcdespanyol_com_Comercial_visual_first.html"}}, "comparative": "reports/www_rcdespanyol_com_Comercial_comparative.html"}, {"url": "https://www.uab.cat/", "domain": "www.uab.cat", "category": "Educatiu", "aci_best": 3.558, "profiles": {"wcag_strict": {"aci": 3.558, "report": "reports/www_uab_cat_Educatiu_wcag_strict.html"}, "readability_first": {"aci": 3.477, "report": "reports/www_uab_cat_Educatiu_readability_first.html"}, "visual_first": {"aci": 3.391, "report": "reports/www_uab_cat_Educatiu_visual_first.html"}}, "comparative": "reports/www_uab_cat_Educatiu_comparative.html"}, {"url": "https://www.3cat.cat/3cat/", "domain": "www.3cat.cat", "category": "Mitjans", "aci_best": 3.547, "profiles": {"wcag_strict": {"aci": 3.547, "report": "reports/www_3cat_cat_3cat_Mitjans_wcag_strict.html"}, "readability_first": {"aci": 3.469, "report": "reports/www_3cat_cat_3cat_Mitjans_readability_first.html"}, "visual_first": {"aci": 3.382, "report": "reports/www_3cat_cat_3cat_Mitjans_visual_first.html"}}, "comparative": "reports/www_3cat_cat_3cat_Mitjans_comparative.html"}, {"url": "https://serveiocupacio.gencat.cat/ca/inici", "domain": "serveiocupacio.gencat.cat", "category": "Institucional", "aci_best": 3.546, "profiles": {"wcag_strict": {"aci": 3.546, "report": "reports/serveiocupacio_gencat_cat_ca_inici_Institucional_wcag_strict.html"}, "readability_first": {"aci": 3.475, "report": "reports/serveiocupacio_gencat_cat_ca_inici_Institucional_readability_first.html"}, "visual_first": {"aci": 3.222, "report": "reports/serveiocupacio_gencat_cat_ca_inici_Institucional_visual_first.html"}}, "comparative": "reports/serveiocupacio_gencat_cat_ca_inici_Institucional_comparative.html"}, {"url": "https://www.url.edu/ca", "domain": "www.url.edu", "category": "Educatiu", "aci_best": 3.544, "profiles": {"wcag_strict": {"aci": 3.544, "report": "reports/www_url_edu_ca_Educatiu_wcag_strict.html"}, "readability_first": {"aci": 3.297, "report": "reports/www_url_edu_ca_Educatiu_readability_first.html"}, "visual_first": {"aci": 3.324, "report": "reports/www_url_edu_ca_Educatiu_visual_first.html"}}, "comparative": "reports/www_url_edu_ca_Educatiu_comparative.html"}, {"url": "https://educacio.gencat.cat/ca/inici", "domain": "educacio.gencat.cat", "category": "Institucional", "aci_best": 3.539, "profiles": {"wcag_strict": {"aci": 3.539, "report": "reports/educacio_gencat_cat_ca_inici_Institucional_wcag_strict.html"}, "readability_first": {"aci": 3.46, "report": "reports/educacio_gencat_cat_ca_inici_Institucional_readability_first.html"}, "visual_first": {"aci": 3.186, "report": "reports/educacio_gencat_cat_ca_inici_Institucional_visual_first.html"}}, "comparative": "reports/educacio_gencat_cat_ca_inici_Institucional_comparative.html"}, {"url": "https://www.museunacional.cat/ca", "domain": "www.museunacional.cat", "category": "Cultural", "aci_best": 3.531, "profiles": {"wcag_strict": {"aci": 3.531, "report": "reports/www_museunacional_cat_ca_Cultural_wcag_strict.html"}, "readability_first": {"aci": 3.447, "report": "reports/www_museunacional_cat_ca_Cultural_readability_first.html"}, "visual_first": {"aci": 3.298, "report": "reports/www_museunacional_cat_ca_Cultural_visual_first.html"}}, "comparative": "reports/www_museunacional_cat_ca_Cultural_comparative.html"}, {"url": "https://www.meteo.cat/", "domain": "www.meteo.cat", "category": "Institucional", "aci_best": 3.522, "profiles": {"wcag_strict": {"aci": 3.522, "report": "reports/www_meteo_cat_Institucional_wcag_strict.html"}, "readability_first": {"aci": 3.437, "report": "reports/www_meteo_cat_Institucional_readability_first.html"}, "visual_first": {"aci": 3.191, "report": "reports/www_meteo_cat_Institucional_visual_first.html"}}, "comparative": "reports/www_meteo_cat_Institucional_comparative.html"}, {"url": "https://catsalut.gencat.cat/ca/inici/", "domain": "catsalut.gencat.cat", "category": "Institucional", "aci_best": 3.521, "profiles": {"wcag_strict": {"aci": 3.521, "report": "reports/catsalut_gencat_cat_ca_inici_Institucional_wcag_strict.html"}, "readability_first": {"aci": 3.449, "report": "reports/catsalut_gencat_cat_ca_inici_Institucional_readability_first.html"}, "visual_first": {"aci": 3.18, "report": "reports/catsalut_gencat_cat_ca_inici_Institucional_visual_first.html"}}, "comparative": "reports/catsalut_gencat_cat_ca_inici_Institucional_comparative.html"}, {"url": "https://www.upc.edu/ca", "domain": "www.upc.edu", "category": "Educatiu", "aci_best": 3.517, "profiles": {"wcag_strict": {"aci": 3.517, "report": "reports/www_upc_edu_ca_Educatiu_wcag_strict.html"}, "readability_first": {"aci": 3.467, "report": "reports/www_upc_edu_ca_Educatiu_readability_first.html"}, "visual_first": {"aci": 3.236, "report": "reports/www_upc_edu_ca_Educatiu_visual_first.html"}}, "comparative": "reports/www_upc_edu_ca_Educatiu_comparative.html"}, {"url": "https://www.ara.cat/", "domain": "www.ara.cat", "category": "Mitjans", "aci_best": 3.494, "profiles": {"wcag_strict": {"aci": 3.494, "report": "reports/www_ara_cat_Mitjans_wcag_strict.html"}, "readability_first": {"aci": 3.343, "report": "reports/www_ara_cat_Mitjans_readability_first.html"}, "visual_first": {"aci": 3.175, "report": "reports/www_ara_cat_Mitjans_visual_first.html"}}, "comparative": "reports/www_ara_cat_Mitjans_comparative.html"}, {"url": "https://www.seg-social.es/wps/portal/wss/internet/Inicio", "domain": "www.seg-social.es", "category": "Institucional", "aci_best": 3.494, "profiles": {"wcag_strict": {"aci": 3.494, "report": "reports/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional_wcag_strict.html"}, "readability_first": {"aci": 3.436, "report": "reports/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional_readability_first.html"}, "visual_first": {"aci": 3.276, "report": "reports/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional_visual_first.html"}}, "comparative": "reports/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional_comparative.html"}, {"url": "https://www.upf.edu/", "domain": "www.upf.edu", "category": "Educatiu", "aci_best": 3.48, "profiles": {"wcag_strict": {"aci": 3.48, "report": "reports/www_upf_edu_Educatiu_wcag_strict.html"}, "readability_first": {"aci": 3.412, "report": "reports/www_upf_edu_Educatiu_readability_first.html"}, "visual_first": {"aci": 3.338, "report": "reports/www_upf_edu_Educatiu_visual_first.html"}}, "comparative": "reports/www_upf_edu_Educatiu_comparative.html"}, {"url": "https://www.liceubarcelona.cat/ca", "domain": "www.liceubarcelona.cat", "category": "Cultural", "aci_best": 3.473, "profiles": {"wcag_strict": {"aci": 3.435, "report": "reports/www_liceubarcelona_cat_ca_Cultural_wcag_strict.html"}, "readability_first": {"aci": 3.473, "report": "reports/www_liceubarcelona_cat_ca_Cultural_readability_first.html"}, "visual_first": {"aci": 3.296, "report": "reports/www_liceubarcelona_cat_ca_Cultural_visual_first.html"}}, "comparative": "reports/www_liceubarcelona_cat_ca_Cultural_comparative.html"}, {"url": "https://www.rtve.es/", "domain": "www.rtve.es", "category": "Mitjans", "aci_best": 3.415, "profiles": {"wcag_strict": {"aci": 3.415, "report": "reports/www_rtve_es_Mitjans_wcag_strict.html"}, "readability_first": {"aci": 3.381, "report": "reports/www_rtve_es_Mitjans_readability_first.html"}, "visual_first": {"aci": 3.056, "report": "reports/www_rtve_es_Mitjans_visual_first.html"}}, "comparative": "reports/www_rtve_es_Mitjans_comparative.html"}, {"url": "https://sagradafamilia.org/", "domain": "sagradafamilia.org", "category": "Cultural", "aci_best": 3.413, "profiles": {"wcag_strict": {"aci": 3.413, "report": "reports/sagradafamilia_org_Cultural_wcag_strict.html"}, "readability_first": {"aci": 2.905, "report": "reports/sagradafamilia_org_Cultural_readability_first.html"}, "visual_first": {"aci": 3.225, "report": "reports/sagradafamilia_org_Cultural_visual_first.html"}}, "comparative": "reports/sagradafamilia_org_Cultural_comparative.html"}, {"url": "https://www.fcbarcelona.cat/ca/", "domain": "www.fcbarcelona.cat", "category": "Comercial", "aci_best": 3.349, "profiles": {"wcag_strict": {"aci": 3.349, "report": "reports/www_fcbarcelona_cat_ca_Comercial_wcag_strict.html"}, "readability_first": {"aci": 3.292, "report": "reports/www_fcbarcelona_cat_ca_Comercial_readability_first.html"}, "visual_first": {"aci": 3.125, "report": "reports/www_fcbarcelona_cat_ca_Comercial_visual_first.html"}}, "comparative": "reports/www_fcbarcelona_cat_ca_Comercial_comparative.html"}, {"url": "https://www.uoc.edu/ca", "domain": "www.uoc.edu", "category": "Educatiu", "aci_best": 3.342, "profiles": {"wcag_strict": {"aci": 3.342, "report": "reports/www_uoc_edu_ca_Educatiu_wcag_strict.html"}, "readability_first": {"aci": 3.069, "report": "reports/www_uoc_edu_ca_Educatiu_readability_first.html"}, "visual_first": {"aci": 2.975, "report": "reports/www_uoc_edu_ca_Educatiu_visual_first.html"}}, "comparative": "reports/www_uoc_edu_ca_Educatiu_comparative.html"}, {"url": "https://www.unav.edu/", "domain": "www.unav.edu", "category": "Educatiu", "aci_best": 3.184, "profiles": {"wcag_strict": {"aci": 3.184, "report": "reports/www_unav_edu_Educatiu_wcag_strict.html"}, "readability_first": {"aci": 2.951, "report": "reports/www_unav_edu_Educatiu_readability_first.html"}, "visual_first": {"aci": 2.901, "report": "reports/www_unav_edu_Educatiu_visual_first.html"}}, "comparative": "reports/www_unav_edu_Educatiu_comparative.html"}, {"url": "https://www.promofarma.com/", "domain": "www.promofarma.com", "category": "Comercial", "aci_best": 3.044, "profiles": {"wcag_strict": {"aci": 3.044, "report": "reports/www_promofarma_com_Comercial_wcag_strict.html"}, "readability_first": {"aci": 2.969, "report": "reports/www_promofarma_com_Comercial_readability_first.html"}, "visual_first": {"aci": 2.815, "report": "reports/www_promofarma_com_Comercial_visual_first.html"}}, "comparative": "reports/www_promofarma_com_Comercial_comparative.html"}];
+    var RANKING_DATA  = [{"domain": "www.palaumusica.cat", "category": "Cultural", "color": "#7c3aed", "aci": 3.885, "url": "reports/www_palaumusica_cat_ca_Cultural_comparative.html"}, {"domain": "www.tnc.cat", "category": "Cultural", "color": "#7c3aed", "aci": 3.844, "url": "reports/www_tnc_cat_ca_Cultural_comparative.html"}, {"domain": "web.ub.edu", "category": "Educatiu", "color": "#15803d", "aci": 3.83, "url": "reports/web_ub_edu_Educatiu_comparative.html"}, {"domain": "www.lavanguardia.com", "category": "Mitjans", "color": "#c2410c", "aci": 3.788, "url": "reports/www_lavanguardia_com_Mitjans_comparative.html"}, {"domain": "terrassadigital.cat", "category": "Mitjans", "color": "#c2410c", "aci": 3.766, "url": "reports/terrassadigital_cat_Mitjans_comparative.html"}, {"domain": "www.sanidad.gob.es", "category": "Institucional", "color": "#1d4ed8", "aci": 3.757, "url": "reports/www_sanidad_gob_es_Institucional_comparative.html"}, {"domain": "www.educacionfpydeportes.gob.es", "category": "Institucional", "color": "#1d4ed8", "aci": 3.738, "url": "reports/www_educacionfpydeportes_gob_es_portada_html_Institucional_comparative.html"}, {"domain": "sede.agenciatributaria.gob.es", "category": "Institucional", "color": "#1d4ed8", "aci": 3.704, "url": "reports/sede_agenciatributaria_gob_es_Institucional_comparative.html"}, {"domain": "www.capraboacasa.com", "category": "Comercial", "color": "#0e7490", "aci": 3.682, "url": "reports/www_capraboacasa_com_ca_Comercial_comparative.html"}, {"domain": "es.wallapop.com", "category": "Comercial", "color": "#0e7490", "aci": 3.678, "url": "reports/es_wallapop_com_Comercial_comparative.html"}, {"domain": "www.ucm.es", "category": "Educatiu", "color": "#15803d", "aci": 3.678, "url": "reports/www_ucm_es_Educatiu_comparative.html"}, {"domain": "www.uv.es", "category": "Educatiu", "color": "#15803d", "aci": 3.678, "url": "reports/www_uv_es_Educatiu_comparative.html"}, {"domain": "www.diba.cat", "category": "Institucional", "color": "#1d4ed8", "aci": 3.676, "url": "reports/www_diba_cat_ca_inici_Institucional_comparative.html"}, {"domain": "www.rac1.cat", "category": "Mitjans", "color": "#c2410c", "aci": 3.659, "url": "reports/www_rac1_cat_Mitjans_comparative.html"}, {"domain": "www.compraonline.bonpreuesclat.cat", "category": "Comercial", "color": "#0e7490", "aci": 3.608, "url": "reports/www_compraonline_bonpreuesclat_cat_Comercial_comparative.html"}, {"domain": "web.gencat.cat", "category": "Institucional", "color": "#1d4ed8", "aci": 3.605, "url": "reports/web_gencat_cat_ca_ciutadania_inici_Institucional_comparative.html"}, {"domain": "www.rcdespanyol.com", "category": "Comercial", "color": "#0e7490", "aci": 3.575, "url": "reports/www_rcdespanyol_com_Comercial_comparative.html"}, {"domain": "www.uab.cat", "category": "Educatiu", "color": "#15803d", "aci": 3.558, "url": "reports/www_uab_cat_Educatiu_comparative.html"}, {"domain": "www.3cat.cat", "category": "Mitjans", "color": "#c2410c", "aci": 3.547, "url": "reports/www_3cat_cat_3cat_Mitjans_comparative.html"}, {"domain": "serveiocupacio.gencat.cat", "category": "Institucional", "color": "#1d4ed8", "aci": 3.546, "url": "reports/serveiocupacio_gencat_cat_ca_inici_Institucional_comparative.html"}, {"domain": "www.url.edu", "category": "Educatiu", "color": "#15803d", "aci": 3.544, "url": "reports/www_url_edu_ca_Educatiu_comparative.html"}, {"domain": "educacio.gencat.cat", "category": "Institucional", "color": "#1d4ed8", "aci": 3.539, "url": "reports/educacio_gencat_cat_ca_inici_Institucional_comparative.html"}, {"domain": "www.museunacional.cat", "category": "Cultural", "color": "#7c3aed", "aci": 3.531, "url": "reports/www_museunacional_cat_ca_Cultural_comparative.html"}, {"domain": "www.meteo.cat", "category": "Institucional", "color": "#1d4ed8", "aci": 3.522, "url": "reports/www_meteo_cat_Institucional_comparative.html"}, {"domain": "catsalut.gencat.cat", "category": "Institucional", "color": "#1d4ed8", "aci": 3.521, "url": "reports/catsalut_gencat_cat_ca_inici_Institucional_comparative.html"}, {"domain": "www.upc.edu", "category": "Educatiu", "color": "#15803d", "aci": 3.517, "url": "reports/www_upc_edu_ca_Educatiu_comparative.html"}, {"domain": "www.ara.cat", "category": "Mitjans", "color": "#c2410c", "aci": 3.494, "url": "reports/www_ara_cat_Mitjans_comparative.html"}, {"domain": "www.seg-social.es", "category": "Institucional", "color": "#1d4ed8", "aci": 3.494, "url": "reports/www_seg-social_es_wps_portal_wss_internet_Inicio_Institucional_comparative.html"}, {"domain": "www.upf.edu", "category": "Educatiu", "color": "#15803d", "aci": 3.48, "url": "reports/www_upf_edu_Educatiu_comparative.html"}, {"domain": "www.liceubarcelona.cat", "category": "Cultural", "color": "#7c3aed", "aci": 3.473, "url": "reports/www_liceubarcelona_cat_ca_Cultural_comparative.html"}, {"domain": "www.rtve.es", "category": "Mitjans", "color": "#c2410c", "aci": 3.415, "url": "reports/www_rtve_es_Mitjans_comparative.html"}, {"domain": "sagradafamilia.org", "category": "Cultural", "color": "#7c3aed", "aci": 3.413, "url": "reports/sagradafamilia_org_Cultural_comparative.html"}, {"domain": "www.fcbarcelona.cat", "category": "Comercial", "color": "#0e7490", "aci": 3.349, "url": "reports/www_fcbarcelona_cat_ca_Comercial_comparative.html"}, {"domain": "www.uoc.edu", "category": "Educatiu", "color": "#15803d", "aci": 3.342, "url": "reports/www_uoc_edu_ca_Educatiu_comparative.html"}, {"domain": "www.unav.edu", "category": "Educatiu", "color": "#15803d", "aci": 3.184, "url": "reports/www_unav_edu_Educatiu_comparative.html"}, {"domain": "www.promofarma.com", "category": "Comercial", "color": "#0e7490", "aci": 3.044, "url": "reports/www_promofarma_com_Comercial_comparative.html"}];
+    var CATEGORY_DATA = [{"category": "Institucional", "color": "#1d4ed8", "wcag_strict": 3.61, "readability_first": 3.52, "visual_first": 3.335}, {"category": "Educatiu", "color": "#15803d", "wcag_strict": 3.535, "readability_first": 3.388, "visual_first": 3.309}, {"category": "Cultural", "color": "#7c3aed", "wcag_strict": 3.622, "readability_first": 3.47, "visual_first": 3.421}, {"category": "Mitjans", "color": "#c2410c", "wcag_strict": 3.611, "readability_first": 3.509, "visual_first": 3.383}, {"category": "Comercial", "color": "#0e7490", "wcag_strict": 3.489, "readability_first": 3.404, "visual_first": 3.269}];
+    var HEATMAP_DATA  = [{"domain": "www.palaumusica.cat", "metric": "color_contrast_ratio", "value": 0.5, "category": "Cultural"}, {"domain": "www.palaumusica.cat", "metric": "focus_visible_ratio", "value": 0.5, "category": "Cultural"}, {"domain": "www.palaumusica.cat", "metric": "target_size_clean", "value": 0.5, "category": "Cultural"}, {"domain": "www.palaumusica.cat", "metric": "keyboard_clean", "value": 0.5, "category": "Cultural"}, {"domain": "www.palaumusica.cat", "metric": "aria_roles_valid", "value": 0.997, "category": "Cultural"}, {"domain": "www.palaumusica.cat", "metric": "accessible_names_coverage", "value": 0.879, "category": "Cultural"}, {"domain": "www.palaumusica.cat", "metric": "audit_critical_violations", "value": 1.0, "category": "Cultural"}, {"domain": "www.palaumusica.cat", "metric": "audit_high_violations", "value": 1.0, "category": "Cultural"}, {"domain": "www.palaumusica.cat", "metric": "audit_medium_violations", "value": 1.0, "category": "Cultural"}, {"domain": "www.palaumusica.cat", "metric": "audit_low_violations", "value": 1.0, "category": "Cultural"}, {"domain": "www.palaumusica.cat", "metric": "page_flesch", "value": 0.5, "category": "Cultural"}, {"domain": "www.palaumusica.cat", "metric": "text_complexity", "value": 0.5, "category": "Cultural"}, {"domain": "www.palaumusica.cat", "metric": "heading_hierarchy", "value": 1.0, "category": "Cultural"}, {"domain": "www.palaumusica.cat", "metric": "alt_text_coverage", "value": 0.915, "category": "Cultural"}, {"domain": "www.palaumusica.cat", "metric": "landmark_coverage", "value": 1.0, "category": "Cultural"}, {"domain": "www.palaumusica.cat", "metric": "performance_lcp", "value": 0.5, "category": "Cultural"}, {"domain": "www.tnc.cat", "metric": "color_contrast_ratio", "value": 0.5, "category": "Cultural"}, {"domain": "www.tnc.cat", "metric": "focus_visible_ratio", "value": 0.5, "category": "Cultural"}, {"domain": "www.tnc.cat", "metric": "target_size_clean", "value": 0.5, "category": "Cultural"}, {"domain": "www.tnc.cat", "metric": "keyboard_clean", "value": 0.5, "category": "Cultural"}, {"domain": "www.tnc.cat", "metric": "aria_roles_valid", "value": 0.994, "category": "Cultural"}, {"domain": "www.tnc.cat", "metric": "accessible_names_coverage", "value": 0.992, "category": "Cultural"}, {"domain": "www.tnc.cat", "metric": "audit_critical_violations", "value": 1.0, "category": "Cultural"}, {"domain": "www.tnc.cat", "metric": "audit_high_violations", "value": 0.95, "category": "Cultural"}, {"domain": "www.tnc.cat", "metric": "audit_medium_violations", "value": 0.94, "category": "Cultural"}, {"domain": "www.tnc.cat", "metric": "audit_low_violations", "value": 1.0, "category": "Cultural"}, {"domain": "www.tnc.cat", "metric": "page_flesch", "value": 0.5, "category": "Cultural"}, {"domain": "www.tnc.cat", "metric": "text_complexity", "value": 0.5, "category": "Cultural"}, {"domain": "www.tnc.cat", "metric": "heading_hierarchy", "value": 1.0, "category": "Cultural"}, {"domain": "www.tnc.cat", "metric": "alt_text_coverage", "value": 0.78, "category": "Cultural"}, {"domain": "www.tnc.cat", "metric": "landmark_coverage", "value": 1.0, "category": "Cultural"}, {"domain": "www.tnc.cat", "metric": "performance_lcp", "value": 0.5, "category": "Cultural"}, {"domain": "web.ub.edu", "metric": "color_contrast_ratio", "value": 0.5, "category": "Educatiu"}, {"domain": "web.ub.edu", "metric": "focus_visible_ratio", "value": 0.5, "category": "Educatiu"}, {"domain": "web.ub.edu", "metric": "target_size_clean", "value": 0.5, "category": "Educatiu"}, {"domain": "web.ub.edu", "metric": "keyboard_clean", "value": 0.5, "category": "Educatiu"}, {"domain": "web.ub.edu", "metric": "aria_roles_valid", "value": 0.998, "category": "Educatiu"}, {"domain": "web.ub.edu", "metric": "accessible_names_coverage", "value": 0.96, "category": "Educatiu"}, {"domain": "web.ub.edu", "metric": "audit_critical_violations", "value": 1.0, "category": "Educatiu"}, {"domain": "web.ub.edu", "metric": "audit_high_violations", "value": 0.95, "category": "Educatiu"}, {"domain": "web.ub.edu", "metric": "audit_medium_violations", "value": 0.98, "category": "Educatiu"}, {"domain": "web.ub.edu", "metric": "audit_low_violations", "value": 0.99, "category": "Educatiu"}, {"domain": "web.ub.edu", "metric": "page_flesch", "value": 0.5, "category": "Educatiu"}, {"domain": "web.ub.edu", "metric": "text_complexity", "value": 0.5, "category": "Educatiu"}, {"domain": "web.ub.edu", "metric": "heading_hierarchy", "value": 1.0, "category": "Educatiu"}, {"domain": "web.ub.edu", "metric": "alt_text_coverage", "value": 0.915, "category": "Educatiu"}, {"domain": "web.ub.edu", "metric": "landmark_coverage", "value": 0.75, "category": "Educatiu"}, {"domain": "web.ub.edu", "metric": "performance_lcp", "value": 0.5, "category": "Educatiu"}, {"domain": "www.lavanguardia.com", "metric": "color_contrast_ratio", "value": 0.5, "category": "Mitjans"}, {"domain": "www.lavanguardia.com", "metric": "focus_visible_ratio", "value": 0.5, "category": "Mitjans"}, {"domain": "www.lavanguardia.com", "metric": "target_size_clean", "value": 0.5, "category": "Mitjans"}, {"domain": "www.lavanguardia.com", "metric": "keyboard_clean", "value": 0.5, "category": "Mitjans"}, {"domain": "www.lavanguardia.com", "metric": "aria_roles_valid", "value": 1.0, "category": "Mitjans"}, {"domain": "www.lavanguardia.com", "metric": "accessible_names_coverage", "value": 0.923, "category": "Mitjans"}, {"domain": "www.lavanguardia.com", "metric": "audit_critical_violations", "value": 0.85, "category": "Mitjans"}, {"domain": "www.lavanguardia.com", "metric": "audit_high_violations", "value": 0.95, "category": "Mitjans"}, {"domain": "www.lavanguardia.com", "metric": "audit_medium_violations", "value": 1.0, "category": "Mitjans"}, {"domain": "www.lavanguardia.com", "metric": "audit_low_violations", "value": 1.0, "category": "Mitjans"}, {"domain": "www.lavanguardia.com", "metric": "page_flesch", "value": 0.5, "category": "Mitjans"}, {"domain": "www.lavanguardia.com", "metric": "text_complexity", "value": 0.5, "category": "Mitjans"}, {"domain": "www.lavanguardia.com", "metric": "heading_hierarchy", "value": 1.0, "category": "Mitjans"}, {"domain": "www.lavanguardia.com", "metric": "alt_text_coverage", "value": 1.0, "category": "Mitjans"}, {"domain": "www.lavanguardia.com", "metric": "landmark_coverage", "value": 0.75, "category": "Mitjans"}, {"domain": "www.lavanguardia.com", "metric": "performance_lcp", "value": 0.5, "category": "Mitjans"}, {"domain": "terrassadigital.cat", "metric": "color_contrast_ratio", "value": 0.5, "category": "Mitjans"}, {"domain": "terrassadigital.cat", "metric": "focus_visible_ratio", "value": 0.5, "category": "Mitjans"}, {"domain": "terrassadigital.cat", "metric": "target_size_clean", "value": 0.5, "category": "Mitjans"}, {"domain": "terrassadigital.cat", "metric": "keyboard_clean", "value": 0.5, "category": "Mitjans"}, {"domain": "terrassadigital.cat", "metric": "aria_roles_valid", "value": 1.0, "category": "Mitjans"}, {"domain": "terrassadigital.cat", "metric": "accessible_names_coverage", "value": 1.0, "category": "Mitjans"}, {"domain": "terrassadigital.cat", "metric": "audit_critical_violations", "value": 1.0, "category": "Mitjans"}, {"domain": "terrassadigital.cat", "metric": "audit_high_violations", "value": 1.0, "category": "Mitjans"}, {"domain": "terrassadigital.cat", "metric": "audit_medium_violations", "value": 0.96, "category": "Mitjans"}, {"domain": "terrassadigital.cat", "metric": "audit_low_violations", "value": 1.0, "category": "Mitjans"}, {"domain": "terrassadigital.cat", "metric": "page_flesch", "value": 0.5, "category": "Mitjans"}, {"domain": "terrassadigital.cat", "metric": "text_complexity", "value": 0.5, "category": "Mitjans"}, {"domain": "terrassadigital.cat", "metric": "heading_hierarchy", "value": 1.0, "category": "Mitjans"}, {"domain": "terrassadigital.cat", "metric": "alt_text_coverage", "value": 1.0, "category": "Mitjans"}, {"domain": "terrassadigital.cat", "metric": "landmark_coverage", "value": 0.25, "category": "Mitjans"}, {"domain": "terrassadigital.cat", "metric": "performance_lcp", "value": 0.5, "category": "Mitjans"}, {"domain": "www.sanidad.gob.es", "metric": "color_contrast_ratio", "value": 0.5, "category": "Institucional"}, {"domain": "www.sanidad.gob.es", "metric": "focus_visible_ratio", "value": 0.5, "category": "Institucional"}, {"domain": "www.sanidad.gob.es", "metric": "target_size_clean", "value": 0.5, "category": "Institucional"}, {"domain": "www.sanidad.gob.es", "metric": "keyboard_clean", "value": 0.5, "category": "Institucional"}, {"domain": "www.sanidad.gob.es", "metric": "aria_roles_valid", "value": 1.0, "category": "Institucional"}, {"domain": "www.sanidad.gob.es", "metric": "accessible_names_coverage", "value": 0.99, "category": "Institucional"}, {"domain": "www.sanidad.gob.es", "metric": "audit_critical_violations", "value": 0.85, "category": "Institucional"}, {"domain": "www.sanidad.gob.es", "metric": "audit_high_violations", "value": 0.95, "category": "Institucional"}, {"domain": "www.sanidad.gob.es", "metric": "audit_medium_violations", "value": 0.98, "category": "Institucional"}, {"domain": "www.sanidad.gob.es", "metric": "audit_low_violations", "value": 0.99, "category": "Institucional"}, {"domain": "www.sanidad.gob.es", "metric": "page_flesch", "value": 0.5, "category": "Institucional"}, {"domain": "www.sanidad.gob.es", "metric": "text_complexity", "value": 0.5, "category": "Institucional"}, {"domain": "www.sanidad.gob.es", "metric": "heading_hierarchy", "value": 1.0, "category": "Institucional"}, {"domain": "www.sanidad.gob.es", "metric": "alt_text_coverage", "value": 0.875, "category": "Institucional"}, {"domain": "www.sanidad.gob.es", "metric": "landmark_coverage", "value": 0.75, "category": "Institucional"}, {"domain": "www.sanidad.gob.es", "metric": "performance_lcp", "value": 0.5, "category": "Institucional"}, {"domain": "www.educacionfpydeportes.gob.es", "metric": "color_contrast_ratio", "value": 0.5, "category": "Institucional"}, {"domain": "www.educacionfpydeportes.gob.es", "metric": "focus_visible_ratio", "value": 0.5, "category": "Institucional"}, {"domain": "www.educacionfpydeportes.gob.es", "metric": "target_size_clean", "value": 0.5, "category": "Institucional"}, {"domain": "www.educacionfpydeportes.gob.es", "metric": "keyboard_clean", "value": 0.5, "category": "Institucional"}, {"domain": "www.educacionfpydeportes.gob.es", "metric": "aria_roles_valid", "value": 1.0, "category": "Institucional"}, {"domain": "www.educacionfpydeportes.gob.es", "metric": "accessible_names_coverage", "value": 0.973, "category": "Institucional"}, {"domain": "www.educacionfpydeportes.gob.es", "metric": "audit_critical_violations", "value": 1.0, "category": "Institucional"}, {"domain": "www.educacionfpydeportes.gob.es", "metric": "audit_high_violations", "value": 0.95, "category": "Institucional"}, {"domain": "www.educacionfpydeportes.gob.es", "metric": "audit_medium_violations", "value": 0.94, "category": "Institucional"}, {"domain": "www.educacionfpydeportes.gob.es", "metric": "audit_low_violations", "value": 1.0, "category": "Institucional"}, {"domain": "www.educacionfpydeportes.gob.es", "metric": "page_flesch", "value": 0.5, "category": "Institucional"}, {"domain": "www.educacionfpydeportes.gob.es", "metric": "text_complexity", "value": 0.5, "category": "Institucional"}, {"domain": "www.educacionfpydeportes.gob.es", "metric": "heading_hierarchy", "value": 1.0, "category": "Institucional"}, {"domain": "www.educacionfpydeportes.gob.es", "metric": "alt_text_coverage", "value": 0.714, "category": "Institucional"}, {"domain": "www.educacionfpydeportes.gob.es", "metric": "landmark_coverage", "value": 0.75, "category": "Institucional"}, {"domain": "www.educacionfpydeportes.gob.es", "metric": "performance_lcp", "value": 0.5, "category": "Institucional"}, {"domain": "sede.agenciatributaria.gob.es", "metric": "color_contrast_ratio", "value": 0.5, "category": "Institucional"}, {"domain": "sede.agenciatributaria.gob.es", "metric": "focus_visible_ratio", "value": 0.5, "category": "Institucional"}, {"domain": "sede.agenciatributaria.gob.es", "metric": "target_size_clean", "value": 0.5, "category": "Institucional"}, {"domain": "sede.agenciatributaria.gob.es", "metric": "keyboard_clean", "value": 0.5, "category": "Institucional"}, {"domain": "sede.agenciatributaria.gob.es", "metric": "aria_roles_valid", "value": 1.0, "category": "Institucional"}, {"domain": "sede.agenciatributaria.gob.es", "metric": "accessible_names_coverage", "value": 1.0, "category": "Institucional"}, {"domain": "sede.agenciatributaria.gob.es", "metric": "audit_critical_violations", "value": 1.0, "category": "Institucional"}, {"domain": "sede.agenciatributaria.gob.es", "metric": "audit_high_violations", "value": 1.0, "category": "Institucional"}, {"domain": "sede.agenciatributaria.gob.es", "metric": "audit_medium_violations", "value": 1.0, "category": "Institucional"}, {"domain": "sede.agenciatributaria.gob.es", "metric": "audit_low_violations", "value": 1.0, "category": "Institucional"}, {"domain": "sede.agenciatributaria.gob.es", "metric": "page_flesch", "value": 0.5, "category": "Institucional"}, {"domain": "sede.agenciatributaria.gob.es", "metric": "text_complexity", "value": 0.5, "category": "Institucional"}, {"domain": "sede.agenciatributaria.gob.es", "metric": "heading_hierarchy", "value": 1.0, "category": "Institucional"}, {"domain": "sede.agenciatributaria.gob.es", "metric": "alt_text_coverage", "value": 1.0, "category": "Institucional"}, {"domain": "sede.agenciatributaria.gob.es", "metric": "landmark_coverage", "value": 0.0, "category": "Institucional"}, {"domain": "sede.agenciatributaria.gob.es", "metric": "performance_lcp", "value": 0.5, "category": "Institucional"}, {"domain": "www.capraboacasa.com", "metric": "color_contrast_ratio", "value": 0.333, "category": "Comercial"}, {"domain": "www.capraboacasa.com", "metric": "focus_visible_ratio", "value": 0.5, "category": "Comercial"}, {"domain": "www.capraboacasa.com", "metric": "target_size_clean", "value": 0.5, "category": "Comercial"}, {"domain": "www.capraboacasa.com", "metric": "keyboard_clean", "value": 0.5, "category": "Comercial"}, {"domain": "www.capraboacasa.com", "metric": "aria_roles_valid", "value": 1.0, "category": "Comercial"}, {"domain": "www.capraboacasa.com", "metric": "accessible_names_coverage", "value": 0.995, "category": "Comercial"}, {"domain": "www.capraboacasa.com", "metric": "audit_critical_violations", "value": 0.85, "category": "Comercial"}, {"domain": "www.capraboacasa.com", "metric": "audit_high_violations", "value": 0.85, "category": "Comercial"}, {"domain": "www.capraboacasa.com", "metric": "audit_medium_violations", "value": 0.96, "category": "Comercial"}, {"domain": "www.capraboacasa.com", "metric": "audit_low_violations", "value": 1.0, "category": "Comercial"}, {"domain": "www.capraboacasa.com", "metric": "page_flesch", "value": 0.5, "category": "Comercial"}, {"domain": "www.capraboacasa.com", "metric": "text_complexity", "value": 0.5, "category": "Comercial"}, {"domain": "www.capraboacasa.com", "metric": "heading_hierarchy", "value": 1.0, "category": "Comercial"}, {"domain": "www.capraboacasa.com", "metric": "alt_text_coverage", "value": 0.961, "category": "Comercial"}, {"domain": "www.capraboacasa.com", "metric": "landmark_coverage", "value": 0.75, "category": "Comercial"}, {"domain": "www.capraboacasa.com", "metric": "performance_lcp", "value": 0.5, "category": "Comercial"}, {"domain": "es.wallapop.com", "metric": "color_contrast_ratio", "value": 0.5, "category": "Comercial"}, {"domain": "es.wallapop.com", "metric": "focus_visible_ratio", "value": 0.5, "category": "Comercial"}, {"domain": "es.wallapop.com", "metric": "target_size_clean", "value": 0.5, "category": "Comercial"}, {"domain": "es.wallapop.com", "metric": "keyboard_clean", "value": 0.5, "category": "Comercial"}, {"domain": "es.wallapop.com", "metric": "aria_roles_valid", "value": 1.0, "category": "Comercial"}, {"domain": "es.wallapop.com", "metric": "accessible_names_coverage", "value": 1.0, "category": "Comercial"}, {"domain": "es.wallapop.com", "metric": "audit_critical_violations", "value": 1.0, "category": "Comercial"}, {"domain": "es.wallapop.com", "metric": "audit_high_violations", "value": 0.95, "category": "Comercial"}, {"domain": "es.wallapop.com", "metric": "audit_medium_violations", "value": 0.96, "category": "Comercial"}, {"domain": "es.wallapop.com", "metric": "audit_low_violations", "value": 1.0, "category": "Comercial"}, {"domain": "es.wallapop.com", "metric": "page_flesch", "value": 0.5, "category": "Comercial"}, {"domain": "es.wallapop.com", "metric": "text_complexity", "value": 0.5, "category": "Comercial"}, {"domain": "es.wallapop.com", "metric": "heading_hierarchy", "value": 1.0, "category": "Comercial"}, {"domain": "es.wallapop.com", "metric": "alt_text_coverage", "value": 1.0, "category": "Comercial"}, {"domain": "es.wallapop.com", "metric": "landmark_coverage", "value": 0.0, "category": "Comercial"}, {"domain": "es.wallapop.com", "metric": "performance_lcp", "value": 0.5, "category": "Comercial"}, {"domain": "www.ucm.es", "metric": "color_contrast_ratio", "value": 0.5, "category": "Educatiu"}, {"domain": "www.ucm.es", "metric": "focus_visible_ratio", "value": 0.5, "category": "Educatiu"}, {"domain": "www.ucm.es", "metric": "target_size_clean", "value": 0.5, "category": "Educatiu"}, {"domain": "www.ucm.es", "metric": "keyboard_clean", "value": 0.5, "category": "Educatiu"}, {"domain": "www.ucm.es", "metric": "aria_roles_valid", "value": 1.0, "category": "Educatiu"}, {"domain": "www.ucm.es", "metric": "accessible_names_coverage", "value": 1.0, "category": "Educatiu"}, {"domain": "www.ucm.es", "metric": "audit_critical_violations", "value": 1.0, "category": "Educatiu"}, {"domain": "www.ucm.es", "metric": "audit_high_violations", "value": 0.95, "category": "Educatiu"}, {"domain": "www.ucm.es", "metric": "audit_medium_violations", "value": 0.96, "category": "Educatiu"}, {"domain": "www.ucm.es", "metric": "audit_low_violations", "value": 1.0, "category": "Educatiu"}, {"domain": "www.ucm.es", "metric": "page_flesch", "value": 0.5, "category": "Educatiu"}, {"domain": "www.ucm.es", "metric": "text_complexity", "value": 0.5, "category": "Educatiu"}, {"domain": "www.ucm.es", "metric": "heading_hierarchy", "value": 1.0, "category": "Educatiu"}, {"domain": "www.ucm.es", "metric": "alt_text_coverage", "value": 1.0, "category": "Educatiu"}, {"domain": "www.ucm.es", "metric": "landmark_coverage", "value": 0.0, "category": "Educatiu"}, {"domain": "www.ucm.es", "metric": "performance_lcp", "value": 0.5, "category": "Educatiu"}, {"domain": "www.uv.es", "metric": "color_contrast_ratio", "value": 0.5, "category": "Educatiu"}, {"domain": "www.uv.es", "metric": "focus_visible_ratio", "value": 0.5, "category": "Educatiu"}, {"domain": "www.uv.es", "metric": "target_size_clean", "value": 0.5, "category": "Educatiu"}, {"domain": "www.uv.es", "metric": "keyboard_clean", "value": 0.5, "category": "Educatiu"}, {"domain": "www.uv.es", "metric": "aria_roles_valid", "value": 1.0, "category": "Educatiu"}, {"domain": "www.uv.es", "metric": "accessible_names_coverage", "value": 1.0, "category": "Educatiu"}, {"domain": "www.uv.es", "metric": "audit_critical_violations", "value": 1.0, "category": "Educatiu"}, {"domain": "www.uv.es", "metric": "audit_high_violations", "value": 0.95, "category": "Educatiu"}, {"domain": "www.uv.es", "metric": "audit_medium_violations", "value": 0.96, "category": "Educatiu"}, {"domain": "www.uv.es", "metric": "audit_low_violations", "value": 1.0, "category": "Educatiu"}, {"domain": "www.uv.es", "metric": "page_flesch", "value": 0.5, "category": "Educatiu"}, {"domain": "www.uv.es", "metric": "text_complexity", "value": 0.5, "category": "Educatiu"}, {"domain": "www.uv.es", "metric": "heading_hierarchy", "value": 1.0, "category": "Educatiu"}, {"domain": "www.uv.es", "metric": "alt_text_coverage", "value": 1.0, "category": "Educatiu"}, {"domain": "www.uv.es", "metric": "landmark_coverage", "value": 0.0, "category": "Educatiu"}, {"domain": "www.uv.es", "metric": "performance_lcp", "value": 0.5, "category": "Educatiu"}, {"domain": "www.diba.cat", "metric": "color_contrast_ratio", "value": 0.5, "category": "Institucional"}, {"domain": "www.diba.cat", "metric": "focus_visible_ratio", "value": 0.5, "category": "Institucional"}, {"domain": "www.diba.cat", "metric": "target_size_clean", "value": 0.5, "category": "Institucional"}, {"domain": "www.diba.cat", "metric": "keyboard_clean", "value": 0.5, "category": "Institucional"}, {"domain": "www.diba.cat", "metric": "aria_roles_valid", "value": 1.0, "category": "Institucional"}, {"domain": "www.diba.cat", "metric": "accessible_names_coverage", "value": 0.908, "category": "Institucional"}, {"domain": "www.diba.cat", "metric": "audit_critical_violations", "value": 1.0, "category": "Institucional"}, {"domain": "www.diba.cat", "metric": "audit_high_violations", "value": 0.9, "category": "Institucional"}, {"domain": "www.diba.cat", "metric": "audit_medium_violations", "value": 0.92, "category": "Institucional"}, {"domain": "www.diba.cat", "metric": "audit_low_violations", "value": 1.0, "category": "Institucional"}, {"domain": "www.diba.cat", "metric": "page_flesch", "value": 0.5, "category": "Institucional"}, {"domain": "www.diba.cat", "metric": "text_complexity", "value": 0.5, "category": "Institucional"}, {"domain": "www.diba.cat", "metric": "heading_hierarchy", "value": 1.0, "category": "Institucional"}, {"domain": "www.diba.cat", "metric": "alt_text_coverage", "value": 0.694, "category": "Institucional"}, {"domain": "www.diba.cat", "metric": "landmark_coverage", "value": 0.75, "category": "Institucional"}, {"domain": "www.diba.cat", "metric": "performance_lcp", "value": 0.5, "category": "Institucional"}, {"domain": "www.rac1.cat", "metric": "color_contrast_ratio", "value": 0.5, "category": "Mitjans"}, {"domain": "www.rac1.cat", "metric": "focus_visible_ratio", "value": 0.5, "category": "Mitjans"}, {"domain": "www.rac1.cat", "metric": "target_size_clean", "value": 0.5, "category": "Mitjans"}, {"domain": "www.rac1.cat", "metric": "keyboard_clean", "value": 0.5, "category": "Mitjans"}, {"domain": "www.rac1.cat", "metric": "aria_roles_valid", "value": 1.0, "category": "Mitjans"}, {"domain": "www.rac1.cat", "metric": "accessible_names_coverage", "value": 1.0, "category": "Mitjans"}, {"domain": "www.rac1.cat", "metric": "audit_critical_violations", "value": 1.0, "category": "Mitjans"}, {"domain": "www.rac1.cat", "metric": "audit_high_violations", "value": 0.9, "category": "Mitjans"}, {"domain": "www.rac1.cat", "metric": "audit_medium_violations", "value": 0.96, "category": "Mitjans"}, {"domain": "www.rac1.cat", "metric": "audit_low_violations", "value": 1.0, "category": "Mitjans"}, {"domain": "www.rac1.cat", "metric": "page_flesch", "value": 0.5, "category": "Mitjans"}, {"domain": "www.rac1.cat", "metric": "text_complexity", "value": 0.5, "category": "Mitjans"}, {"domain": "www.rac1.cat", "metric": "heading_hierarchy", "value": 1.0, "category": "Mitjans"}, {"domain": "www.rac1.cat", "metric": "alt_text_coverage", "value": 1.0, "category": "Mitjans"}, {"domain": "www.rac1.cat", "metric": "landmark_coverage", "value": 0.0, "category": "Mitjans"}, {"domain": "www.rac1.cat", "metric": "performance_lcp", "value": 0.5, "category": "Mitjans"}, {"domain": "www.compraonline.bonpreuesclat.cat", "metric": "color_contrast_ratio", "value": 0.5, "category": "Comercial"}, {"domain": "www.compraonline.bonpreuesclat.cat", "metric": "focus_visible_ratio", "value": 0.5, "category": "Comercial"}, {"domain": "www.compraonline.bonpreuesclat.cat", "metric": "target_size_clean", "value": 0.5, "category": "Comercial"}, {"domain": "www.compraonline.bonpreuesclat.cat", "metric": "keyboard_clean", "value": 0.5, "category": "Comercial"}, {"domain": "www.compraonline.bonpreuesclat.cat", "metric": "aria_roles_valid", "value": 1.0, "category": "Comercial"}, {"domain": "www.compraonline.bonpreuesclat.cat", "metric": "accessible_names_coverage", "value": 0.992, "category": "Comercial"}, {"domain": "www.compraonline.bonpreuesclat.cat", "metric": "audit_critical_violations", "value": 1.0, "category": "Comercial"}, {"domain": "www.compraonline.bonpreuesclat.cat", "metric": "audit_high_violations", "value": 0.95, "category": "Comercial"}, {"domain": "www.compraonline.bonpreuesclat.cat", "metric": "audit_medium_violations", "value": 1.0, "category": "Comercial"}, {"domain": "www.compraonline.bonpreuesclat.cat", "metric": "audit_low_violations", "value": 1.0, "category": "Comercial"}, {"domain": "www.compraonline.bonpreuesclat.cat", "metric": "page_flesch", "value": 0.5, "category": "Comercial"}, {"domain": "www.compraonline.bonpreuesclat.cat", "metric": "text_complexity", "value": 0.5, "category": "Comercial"}, {"domain": "www.compraonline.bonpreuesclat.cat", "metric": "heading_hierarchy", "value": 1.0, "category": "Comercial"}, {"domain": "www.compraonline.bonpreuesclat.cat", "metric": "alt_text_coverage", "value": 0.241, "category": "Comercial"}, {"domain": "www.compraonline.bonpreuesclat.cat", "metric": "landmark_coverage", "value": 1.0, "category": "Comercial"}, {"domain": "www.compraonline.bonpreuesclat.cat", "metric": "performance_lcp", "value": 0.5, "category": "Comercial"}, {"domain": "web.gencat.cat", "metric": "color_contrast_ratio", "value": 0.5, "category": "Institucional"}, {"domain": "web.gencat.cat", "metric": "focus_visible_ratio", "value": 0.5, "category": "Institucional"}, {"domain": "web.gencat.cat", "metric": "target_size_clean", "value": 0.5, "category": "Institucional"}, {"domain": "web.gencat.cat", "metric": "keyboard_clean", "value": 0.5, "category": "Institucional"}, {"domain": "web.gencat.cat", "metric": "aria_roles_valid", "value": 1.0, "category": "Institucional"}, {"domain": "web.gencat.cat", "metric": "accessible_names_coverage", "value": 0.991, "category": "Institucional"}, {"domain": "web.gencat.cat", "metric": "audit_critical_violations", "value": 1.0, "category": "Institucional"}, {"domain": "web.gencat.cat", "metric": "audit_high_violations", "value": 0.95, "category": "Institucional"}, {"domain": "web.gencat.cat", "metric": "audit_medium_violations", "value": 0.98, "category": "Institucional"}, {"domain": "web.gencat.cat", "metric": "audit_low_violations", "value": 0.99, "category": "Institucional"}, {"domain": "web.gencat.cat", "metric": "page_flesch", "value": 0.5, "category": "Institucional"}, {"domain": "web.gencat.cat", "metric": "text_complexity", "value": 0.5, "category": "Institucional"}, {"domain": "web.gencat.cat", "metric": "heading_hierarchy", "value": 1.0, "category": "Institucional"}, {"domain": "web.gencat.cat", "metric": "alt_text_coverage", "value": 0.395, "category": "Institucional"}, {"domain": "web.gencat.cat", "metric": "landmark_coverage", "value": 0.75, "category": "Institucional"}, {"domain": "web.gencat.cat", "metric": "performance_lcp", "value": 0.5, "category": "Institucional"}, {"domain": "www.rcdespanyol.com", "metric": "color_contrast_ratio", "value": 0.333, "category": "Comercial"}, {"domain": "www.rcdespanyol.com", "metric": "focus_visible_ratio", "value": 0.5, "category": "Comercial"}, {"domain": "www.rcdespanyol.com", "metric": "target_size_clean", "value": 0.5, "category": "Comercial"}, {"domain": "www.rcdespanyol.com", "metric": "keyboard_clean", "value": 0.5, "category": "Comercial"}, {"domain": "www.rcdespanyol.com", "metric": "aria_roles_valid", "value": 1.0, "category": "Comercial"}, {"domain": "www.rcdespanyol.com", "metric": "accessible_names_coverage", "value": 1.0, "category": "Comercial"}, {"domain": "www.rcdespanyol.com", "metric": "audit_critical_violations", "value": 0.85, "category": "Comercial"}, {"domain": "www.rcdespanyol.com", "metric": "audit_high_violations", "value": 0.9, "category": "Comercial"}, {"domain": "www.rcdespanyol.com", "metric": "audit_medium_violations", "value": 0.92, "category": "Comercial"}, {"domain": "www.rcdespanyol.com", "metric": "audit_low_violations", "value": 1.0, "category": "Comercial"}, {"domain": "www.rcdespanyol.com", "metric": "page_flesch", "value": 0.5, "category": "Comercial"}, {"domain": "www.rcdespanyol.com", "metric": "text_complexity", "value": 0.5, "category": "Comercial"}, {"domain": "www.rcdespanyol.com", "metric": "heading_hierarchy", "value": 1.0, "category": "Comercial"}, {"domain": "www.rcdespanyol.com", "metric": "alt_text_coverage", "value": 1.0, "category": "Comercial"}, {"domain": "www.rcdespanyol.com", "metric": "landmark_coverage", "value": 0.25, "category": "Comercial"}, {"domain": "www.rcdespanyol.com", "metric": "performance_lcp", "value": 0.5, "category": "Comercial"}, {"domain": "www.uab.cat", "metric": "color_contrast_ratio", "value": 0.5, "category": "Educatiu"}, {"domain": "www.uab.cat", "metric": "focus_visible_ratio", "value": 0.5, "category": "Educatiu"}, {"domain": "www.uab.cat", "metric": "target_size_clean", "value": 0.5, "category": "Educatiu"}, {"domain": "www.uab.cat", "metric": "keyboard_clean", "value": 0.5, "category": "Educatiu"}, {"domain": "www.uab.cat", "metric": "aria_roles_valid", "value": 1.0, "category": "Educatiu"}, {"domain": "www.uab.cat", "metric": "accessible_names_coverage", "value": 0.75, "category": "Educatiu"}, {"domain": "www.uab.cat", "metric": "audit_critical_violations", "value": 1.0, "category": "Educatiu"}, {"domain": "www.uab.cat", "metric": "audit_high_violations", "value": 0.95, "category": "Educatiu"}, {"domain": "www.uab.cat", "metric": "audit_medium_violations", "value": 0.94, "category": "Educatiu"}, {"domain": "www.uab.cat", "metric": "audit_low_violations", "value": 1.0, "category": "Educatiu"}, {"domain": "www.uab.cat", "metric": "page_flesch", "value": 0.5, "category": "Educatiu"}, {"domain": "www.uab.cat", "metric": "text_complexity", "value": 0.5, "category": "Educatiu"}, {"domain": "www.uab.cat", "metric": "heading_hierarchy", "value": 1.0, "category": "Educatiu"}, {"domain": "www.uab.cat", "metric": "alt_text_coverage", "value": 1.0, "category": "Educatiu"}, {"domain": "www.uab.cat", "metric": "landmark_coverage", "value": 0.0, "category": "Educatiu"}, {"domain": "www.uab.cat", "metric": "performance_lcp", "value": 0.5, "category": "Educatiu"}, {"domain": "www.3cat.cat", "metric": "color_contrast_ratio", "value": 0.5, "category": "Mitjans"}, {"domain": "www.3cat.cat", "metric": "focus_visible_ratio", "value": 0.5, "category": "Mitjans"}, {"domain": "www.3cat.cat", "metric": "target_size_clean", "value": 0.5, "category": "Mitjans"}, {"domain": "www.3cat.cat", "metric": "keyboard_clean", "value": 0.5, "category": "Mitjans"}, {"domain": "www.3cat.cat", "metric": "aria_roles_valid", "value": 1.0, "category": "Mitjans"}, {"domain": "www.3cat.cat", "metric": "accessible_names_coverage", "value": 0.75, "category": "Mitjans"}, {"domain": "www.3cat.cat", "metric": "audit_critical_violations", "value": 1.0, "category": "Mitjans"}, {"domain": "www.3cat.cat", "metric": "audit_high_violations", "value": 0.9, "category": "Mitjans"}, {"domain": "www.3cat.cat", "metric": "audit_medium_violations", "value": 0.98, "category": "Mitjans"}, {"domain": "www.3cat.cat", "metric": "audit_low_violations", "value": 1.0, "category": "Mitjans"}, {"domain": "www.3cat.cat", "metric": "page_flesch", "value": 0.5, "category": "Mitjans"}, {"domain": "www.3cat.cat", "metric": "text_complexity", "value": 0.5, "category": "Mitjans"}, {"domain": "www.3cat.cat", "metric": "heading_hierarchy", "value": 1.0, "category": "Mitjans"}, {"domain": "www.3cat.cat", "metric": "alt_text_coverage", "value": 1.0, "category": "Mitjans"}, {"domain": "www.3cat.cat", "metric": "landmark_coverage", "value": 0.0, "category": "Mitjans"}, {"domain": "www.3cat.cat", "metric": "performance_lcp", "value": 0.5, "category": "Mitjans"}, {"domain": "serveiocupacio.gencat.cat", "metric": "color_contrast_ratio", "value": 0.5, "category": "Institucional"}, {"domain": "serveiocupacio.gencat.cat", "metric": "focus_visible_ratio", "value": 0.5, "category": "Institucional"}, {"domain": "serveiocupacio.gencat.cat", "metric": "target_size_clean", "value": 0.5, "category": "Institucional"}, {"domain": "serveiocupacio.gencat.cat", "metric": "keyboard_clean", "value": 0.5, "category": "Institucional"}, {"domain": "serveiocupacio.gencat.cat", "metric": "aria_roles_valid", "value": 1.0, "category": "Institucional"}, {"domain": "serveiocupacio.gencat.cat", "metric": "accessible_names_coverage", "value": 0.947, "category": "Institucional"}, {"domain": "serveiocupacio.gencat.cat", "metric": "audit_critical_violations", "value": 1.0, "category": "Institucional"}, {"domain": "serveiocupacio.gencat.cat", "metric": "audit_high_violations", "value": 0.8, "category": "Institucional"}, {"domain": "serveiocupacio.gencat.cat", "metric": "audit_medium_violations", "value": 0.98, "category": "Institucional"}, {"domain": "serveiocupacio.gencat.cat", "metric": "audit_low_violations", "value": 0.98, "category": "Institucional"}, {"domain": "serveiocupacio.gencat.cat", "metric": "page_flesch", "value": 0.5, "category": "Institucional"}, {"domain": "serveiocupacio.gencat.cat", "metric": "text_complexity", "value": 0.5, "category": "Institucional"}, {"domain": "serveiocupacio.gencat.cat", "metric": "heading_hierarchy", "value": 1.0, "category": "Institucional"}, {"domain": "serveiocupacio.gencat.cat", "metric": "alt_text_coverage", "value": 0.284, "category": "Institucional"}, {"domain": "serveiocupacio.gencat.cat", "metric": "landmark_coverage", "value": 1.0, "category": "Institucional"}, {"domain": "serveiocupacio.gencat.cat", "metric": "performance_lcp", "value": 0.5, "category": "Institucional"}, {"domain": "www.url.edu", "metric": "color_contrast_ratio", "value": 0.5, "category": "Educatiu"}, {"domain": "www.url.edu", "metric": "focus_visible_ratio", "value": 0.5, "category": "Educatiu"}, {"domain": "www.url.edu", "metric": "target_size_clean", "value": 0.5, "category": "Educatiu"}, {"domain": "www.url.edu", "metric": "keyboard_clean", "value": 0.5, "category": "Educatiu"}, {"domain": "www.url.edu", "metric": "aria_roles_valid", "value": 1.0, "category": "Educatiu"}, {"domain": "www.url.edu", "metric": "accessible_names_coverage", "value": 0.835, "category": "Educatiu"}, {"domain": "www.url.edu", "metric": "audit_critical_violations", "value": 0.85, "category": "Educatiu"}, {"domain": "www.url.edu", "metric": "audit_high_violations", "value": 0.95, "category": "Educatiu"}, {"domain": "www.url.edu", "metric": "audit_medium_violations", "value": 0.96, "category": "Educatiu"}, {"domain": "www.url.edu", "metric": "audit_low_violations", "value": 1.0, "category": "Educatiu"}, {"domain": "www.url.edu", "metric": "page_flesch", "value": 0.5, "category": "Educatiu"}, {"domain": "www.url.edu", "metric": "text_complexity", "value": 0.5, "category": "Educatiu"}, {"domain": "www.url.edu", "metric": "heading_hierarchy", "value": 0.6, "category": "Educatiu"}, {"domain": "www.url.edu", "metric": "alt_text_coverage", "value": 0.667, "category": "Educatiu"}, {"domain": "www.url.edu", "metric": "landmark_coverage", "value": 1.0, "category": "Educatiu"}, {"domain": "www.url.edu", "metric": "performance_lcp", "value": 0.5, "category": "Educatiu"}, {"domain": "educacio.gencat.cat", "metric": "color_contrast_ratio", "value": 0.5, "category": "Institucional"}, {"domain": "educacio.gencat.cat", "metric": "focus_visible_ratio", "value": 0.5, "category": "Institucional"}, {"domain": "educacio.gencat.cat", "metric": "target_size_clean", "value": 0.5, "category": "Institucional"}, {"domain": "educacio.gencat.cat", "metric": "keyboard_clean", "value": 0.5, "category": "Institucional"}, {"domain": "educacio.gencat.cat", "metric": "aria_roles_valid", "value": 1.0, "category": "Institucional"}, {"domain": "educacio.gencat.cat", "metric": "accessible_names_coverage", "value": 0.976, "category": "Institucional"}, {"domain": "educacio.gencat.cat", "metric": "audit_critical_violations", "value": 1.0, "category": "Institucional"}, {"domain": "educacio.gencat.cat", "metric": "audit_high_violations", "value": 0.85, "category": "Institucional"}, {"domain": "educacio.gencat.cat", "metric": "audit_medium_violations", "value": 1.0, "category": "Institucional"}, {"domain": "educacio.gencat.cat", "metric": "audit_low_violations", "value": 0.99, "category": "Institucional"}, {"domain": "educacio.gencat.cat", "metric": "page_flesch", "value": 0.5, "category": "Institucional"}, {"domain": "educacio.gencat.cat", "metric": "text_complexity", "value": 0.5, "category": "Institucional"}, {"domain": "educacio.gencat.cat", "metric": "heading_hierarchy", "value": 1.0, "category": "Institucional"}, {"domain": "educacio.gencat.cat", "metric": "alt_text_coverage", "value": 0.19, "category": "Institucional"}, {"domain": "educacio.gencat.cat", "metric": "landmark_coverage", "value": 1.0, "category": "Institucional"}, {"domain": "educacio.gencat.cat", "metric": "performance_lcp", "value": 0.5, "category": "Institucional"}, {"domain": "www.museunacional.cat", "metric": "color_contrast_ratio", "value": 0.5, "category": "Cultural"}, {"domain": "www.museunacional.cat", "metric": "focus_visible_ratio", "value": 0.5, "category": "Cultural"}, {"domain": "www.museunacional.cat", "metric": "target_size_clean", "value": 0.5, "category": "Cultural"}, {"domain": "www.museunacional.cat", "metric": "keyboard_clean", "value": 0.5, "category": "Cultural"}, {"domain": "www.museunacional.cat", "metric": "aria_roles_valid", "value": 1.0, "category": "Cultural"}, {"domain": "www.museunacional.cat", "metric": "accessible_names_coverage", "value": 0.856, "category": "Cultural"}, {"domain": "www.museunacional.cat", "metric": "audit_critical_violations", "value": 0.85, "category": "Cultural"}, {"domain": "www.museunacional.cat", "metric": "audit_high_violations", "value": 1.0, "category": "Cultural"}, {"domain": "www.museunacional.cat", "metric": "audit_medium_violations", "value": 0.96, "category": "Cultural"}, {"domain": "www.museunacional.cat", "metric": "audit_low_violations", "value": 1.0, "category": "Cultural"}, {"domain": "www.museunacional.cat", "metric": "page_flesch", "value": 0.5, "category": "Cultural"}, {"domain": "www.museunacional.cat", "metric": "text_complexity", "value": 0.5, "category": "Cultural"}, {"domain": "www.museunacional.cat", "metric": "heading_hierarchy", "value": 1.0, "category": "Cultural"}, {"domain": "www.museunacional.cat", "metric": "alt_text_coverage", "value": 0.636, "category": "Cultural"}, {"domain": "www.museunacional.cat", "metric": "landmark_coverage", "value": 0.5, "category": "Cultural"}, {"domain": "www.museunacional.cat", "metric": "performance_lcp", "value": 0.5, "category": "Cultural"}, {"domain": "www.meteo.cat", "metric": "color_contrast_ratio", "value": 0.5, "category": "Institucional"}, {"domain": "www.meteo.cat", "metric": "focus_visible_ratio", "value": 0.5, "category": "Institucional"}, {"domain": "www.meteo.cat", "metric": "target_size_clean", "value": 0.5, "category": "Institucional"}, {"domain": "www.meteo.cat", "metric": "keyboard_clean", "value": 0.5, "category": "Institucional"}, {"domain": "www.meteo.cat", "metric": "aria_roles_valid", "value": 1.0, "category": "Institucional"}, {"domain": "www.meteo.cat", "metric": "accessible_names_coverage", "value": 1.0, "category": "Institucional"}, {"domain": "www.meteo.cat", "metric": "audit_critical_violations", "value": 0.85, "category": "Institucional"}, {"domain": "www.meteo.cat", "metric": "audit_high_violations", "value": 0.95, "category": "Institucional"}, {"domain": "www.meteo.cat", "metric": "audit_medium_violations", "value": 1.0, "category": "Institucional"}, {"domain": "www.meteo.cat", "metric": "audit_low_violations", "value": 0.98, "category": "Institucional"}, {"domain": "www.meteo.cat", "metric": "page_flesch", "value": 0.5, "category": "Institucional"}, {"domain": "www.meteo.cat", "metric": "text_complexity", "value": 0.5, "category": "Institucional"}, {"domain": "www.meteo.cat", "metric": "heading_hierarchy", "value": 1.0, "category": "Institucional"}, {"domain": "www.meteo.cat", "metric": "alt_text_coverage", "value": 0.202, "category": "Institucional"}, {"domain": "www.meteo.cat", "metric": "landmark_coverage", "value": 1.0, "category": "Institucional"}, {"domain": "www.meteo.cat", "metric": "performance_lcp", "value": 0.5, "category": "Institucional"}, {"domain": "catsalut.gencat.cat", "metric": "color_contrast_ratio", "value": 0.5, "category": "Institucional"}, {"domain": "catsalut.gencat.cat", "metric": "focus_visible_ratio", "value": 0.5, "category": "Institucional"}, {"domain": "catsalut.gencat.cat", "metric": "target_size_clean", "value": 0.5, "category": "Institucional"}, {"domain": "catsalut.gencat.cat", "metric": "keyboard_clean", "value": 0.5, "category": "Institucional"}, {"domain": "catsalut.gencat.cat", "metric": "aria_roles_valid", "value": 1.0, "category": "Institucional"}, {"domain": "catsalut.gencat.cat", "metric": "accessible_names_coverage", "value": 0.963, "category": "Institucional"}, {"domain": "catsalut.gencat.cat", "metric": "audit_critical_violations", "value": 1.0, "category": "Institucional"}, {"domain": "catsalut.gencat.cat", "metric": "audit_high_violations", "value": 0.8, "category": "Institucional"}, {"domain": "catsalut.gencat.cat", "metric": "audit_medium_violations", "value": 0.98, "category": "Institucional"}, {"domain": "catsalut.gencat.cat", "metric": "audit_low_violations", "value": 0.99, "category": "Institucional"}, {"domain": "catsalut.gencat.cat", "metric": "page_flesch", "value": 0.5, "category": "Institucional"}, {"domain": "catsalut.gencat.cat", "metric": "text_complexity", "value": 0.5, "category": "Institucional"}, {"domain": "catsalut.gencat.cat", "metric": "heading_hierarchy", "value": 1.0, "category": "Institucional"}, {"domain": "catsalut.gencat.cat", "metric": "alt_text_coverage", "value": 0.212, "category": "Institucional"}, {"domain": "catsalut.gencat.cat", "metric": "landmark_coverage", "value": 1.0, "category": "Institucional"}, {"domain": "catsalut.gencat.cat", "metric": "performance_lcp", "value": 0.5, "category": "Institucional"}, {"domain": "www.upc.edu", "metric": "color_contrast_ratio", "value": 0.333, "category": "Educatiu"}, {"domain": "www.upc.edu", "metric": "focus_visible_ratio", "value": 0.5, "category": "Educatiu"}, {"domain": "www.upc.edu", "metric": "target_size_clean", "value": 0.5, "category": "Educatiu"}, {"domain": "www.upc.edu", "metric": "keyboard_clean", "value": 0.5, "category": "Educatiu"}, {"domain": "www.upc.edu", "metric": "aria_roles_valid", "value": 1.0, "category": "Educatiu"}, {"domain": "www.upc.edu", "metric": "accessible_names_coverage", "value": 0.948, "category": "Educatiu"}, {"domain": "www.upc.edu", "metric": "audit_critical_violations", "value": 0.85, "category": "Educatiu"}, {"domain": "www.upc.edu", "metric": "audit_high_violations", "value": 0.9, "category": "Educatiu"}, {"domain": "www.upc.edu", "metric": "audit_medium_violations", "value": 0.98, "category": "Educatiu"}, {"domain": "www.upc.edu", "metric": "audit_low_violations", "value": 0.98, "category": "Educatiu"}, {"domain": "www.upc.edu", "metric": "page_flesch", "value": 0.5, "category": "Educatiu"}, {"domain": "www.upc.edu", "metric": "text_complexity", "value": 0.5, "category": "Educatiu"}, {"domain": "www.upc.edu", "metric": "heading_hierarchy", "value": 1.0, "category": "Educatiu"}, {"domain": "www.upc.edu", "metric": "alt_text_coverage", "value": 0.458, "category": "Educatiu"}, {"domain": "www.upc.edu", "metric": "landmark_coverage", "value": 1.0, "category": "Educatiu"}, {"domain": "www.upc.edu", "metric": "performance_lcp", "value": 0.5, "category": "Educatiu"}, {"domain": "www.ara.cat", "metric": "color_contrast_ratio", "value": 0.5, "category": "Mitjans"}, {"domain": "www.ara.cat", "metric": "focus_visible_ratio", "value": 0.5, "category": "Mitjans"}, {"domain": "www.ara.cat", "metric": "target_size_clean", "value": 0.5, "category": "Mitjans"}, {"domain": "www.ara.cat", "metric": "keyboard_clean", "value": 0.5, "category": "Mitjans"}, {"domain": "www.ara.cat", "metric": "aria_roles_valid", "value": 1.0, "category": "Mitjans"}, {"domain": "www.ara.cat", "metric": "accessible_names_coverage", "value": 0.852, "category": "Mitjans"}, {"domain": "www.ara.cat", "metric": "audit_critical_violations", "value": 1.0, "category": "Mitjans"}, {"domain": "www.ara.cat", "metric": "audit_high_violations", "value": 0.9, "category": "Mitjans"}, {"domain": "www.ara.cat", "metric": "audit_medium_violations", "value": 0.94, "category": "Mitjans"}, {"domain": "www.ara.cat", "metric": "audit_low_violations", "value": 1.0, "category": "Mitjans"}, {"domain": "www.ara.cat", "metric": "page_flesch", "value": 0.5, "category": "Mitjans"}, {"domain": "www.ara.cat", "metric": "text_complexity", "value": 0.5, "category": "Mitjans"}, {"domain": "www.ara.cat", "metric": "heading_hierarchy", "value": 0.8, "category": "Mitjans"}, {"domain": "www.ara.cat", "metric": "alt_text_coverage", "value": 0.32, "category": "Mitjans"}, {"domain": "www.ara.cat", "metric": "landmark_coverage", "value": 1.0, "category": "Mitjans"}, {"domain": "www.ara.cat", "metric": "performance_lcp", "value": 0.5, "category": "Mitjans"}, {"domain": "www.seg-social.es", "metric": "color_contrast_ratio", "value": 0.5, "category": "Institucional"}, {"domain": "www.seg-social.es", "metric": "focus_visible_ratio", "value": 0.5, "category": "Institucional"}, {"domain": "www.seg-social.es", "metric": "target_size_clean", "value": 0.5, "category": "Institucional"}, {"domain": "www.seg-social.es", "metric": "keyboard_clean", "value": 0.5, "category": "Institucional"}, {"domain": "www.seg-social.es", "metric": "aria_roles_valid", "value": 1.0, "category": "Institucional"}, {"domain": "www.seg-social.es", "metric": "accessible_names_coverage", "value": 0.845, "category": "Institucional"}, {"domain": "www.seg-social.es", "metric": "audit_critical_violations", "value": 0.7, "category": "Institucional"}, {"domain": "www.seg-social.es", "metric": "audit_high_violations", "value": 0.85, "category": "Institucional"}, {"domain": "www.seg-social.es", "metric": "audit_medium_violations", "value": 1.0, "category": "Institucional"}, {"domain": "www.seg-social.es", "metric": "audit_low_violations", "value": 1.0, "category": "Institucional"}, {"domain": "www.seg-social.es", "metric": "page_flesch", "value": 0.5, "category": "Institucional"}, {"domain": "www.seg-social.es", "metric": "text_complexity", "value": 0.5, "category": "Institucional"}, {"domain": "www.seg-social.es", "metric": "heading_hierarchy", "value": 1.0, "category": "Institucional"}, {"domain": "www.seg-social.es", "metric": "alt_text_coverage", "value": 0.521, "category": "Institucional"}, {"domain": "www.seg-social.es", "metric": "landmark_coverage", "value": 1.0, "category": "Institucional"}, {"domain": "www.seg-social.es", "metric": "performance_lcp", "value": 0.5, "category": "Institucional"}, {"domain": "www.upf.edu", "metric": "color_contrast_ratio", "value": 0.5, "category": "Educatiu"}, {"domain": "www.upf.edu", "metric": "focus_visible_ratio", "value": 0.5, "category": "Educatiu"}, {"domain": "www.upf.edu", "metric": "target_size_clean", "value": 0.5, "category": "Educatiu"}, {"domain": "www.upf.edu", "metric": "keyboard_clean", "value": 0.5, "category": "Educatiu"}, {"domain": "www.upf.edu", "metric": "aria_roles_valid", "value": 1.0, "category": "Educatiu"}, {"domain": "www.upf.edu", "metric": "accessible_names_coverage", "value": 0.667, "category": "Educatiu"}, {"domain": "www.upf.edu", "metric": "audit_critical_violations", "value": 0.85, "category": "Educatiu"}, {"domain": "www.upf.edu", "metric": "audit_high_violations", "value": 1.0, "category": "Educatiu"}, {"domain": "www.upf.edu", "metric": "audit_medium_violations", "value": 1.0, "category": "Educatiu"}, {"domain": "www.upf.edu", "metric": "audit_low_violations", "value": 1.0, "category": "Educatiu"}, {"domain": "www.upf.edu", "metric": "page_flesch", "value": 0.5, "category": "Educatiu"}, {"domain": "www.upf.edu", "metric": "text_complexity", "value": 0.5, "category": "Educatiu"}, {"domain": "www.upf.edu", "metric": "heading_hierarchy", "value": 1.0, "category": "Educatiu"}, {"domain": "www.upf.edu", "metric": "alt_text_coverage", "value": 1.0, "category": "Educatiu"}, {"domain": "www.upf.edu", "metric": "landmark_coverage", "value": 0.0, "category": "Educatiu"}, {"domain": "www.upf.edu", "metric": "performance_lcp", "value": 0.5, "category": "Educatiu"}, {"domain": "www.liceubarcelona.cat", "metric": "color_contrast_ratio", "value": 0.5, "category": "Cultural"}, {"domain": "www.liceubarcelona.cat", "metric": "focus_visible_ratio", "value": 0.5, "category": "Cultural"}, {"domain": "www.liceubarcelona.cat", "metric": "target_size_clean", "value": 0.5, "category": "Cultural"}, {"domain": "www.liceubarcelona.cat", "metric": "keyboard_clean", "value": 0.5, "category": "Cultural"}, {"domain": "www.liceubarcelona.cat", "metric": "aria_roles_valid", "value": 1.0, "category": "Cultural"}, {"domain": "www.liceubarcelona.cat", "metric": "accessible_names_coverage", "value": 0.187, "category": "Cultural"}, {"domain": "www.liceubarcelona.cat", "metric": "audit_critical_violations", "value": 0.85, "category": "Cultural"}, {"domain": "www.liceubarcelona.cat", "metric": "audit_high_violations", "value": 0.9, "category": "Cultural"}, {"domain": "www.liceubarcelona.cat", "metric": "audit_medium_violations", "value": 0.98, "category": "Cultural"}, {"domain": "www.liceubarcelona.cat", "metric": "audit_low_violations", "value": 1.0, "category": "Cultural"}, {"domain": "www.liceubarcelona.cat", "metric": "page_flesch", "value": 0.5, "category": "Cultural"}, {"domain": "www.liceubarcelona.cat", "metric": "text_complexity", "value": 0.5, "category": "Cultural"}, {"domain": "www.liceubarcelona.cat", "metric": "heading_hierarchy", "value": 1.0, "category": "Cultural"}, {"domain": "www.liceubarcelona.cat", "metric": "alt_text_coverage", "value": 0.87, "category": "Cultural"}, {"domain": "www.liceubarcelona.cat", "metric": "landmark_coverage", "value": 1.0, "category": "Cultural"}, {"domain": "www.liceubarcelona.cat", "metric": "performance_lcp", "value": 0.5, "category": "Cultural"}, {"domain": "www.rtve.es", "metric": "color_contrast_ratio", "value": 0.143, "category": "Mitjans"}, {"domain": "www.rtve.es", "metric": "focus_visible_ratio", "value": 0.5, "category": "Mitjans"}, {"domain": "www.rtve.es", "metric": "target_size_clean", "value": 0.5, "category": "Mitjans"}, {"domain": "www.rtve.es", "metric": "keyboard_clean", "value": 0.5, "category": "Mitjans"}, {"domain": "www.rtve.es", "metric": "aria_roles_valid", "value": 1.0, "category": "Mitjans"}, {"domain": "www.rtve.es", "metric": "accessible_names_coverage", "value": 1.0, "category": "Mitjans"}, {"domain": "www.rtve.es", "metric": "audit_critical_violations", "value": 1.0, "category": "Mitjans"}, {"domain": "www.rtve.es", "metric": "audit_high_violations", "value": 0.95, "category": "Mitjans"}, {"domain": "www.rtve.es", "metric": "audit_medium_violations", "value": 0.98, "category": "Mitjans"}, {"domain": "www.rtve.es", "metric": "audit_low_violations", "value": 0.99, "category": "Mitjans"}, {"domain": "www.rtve.es", "metric": "page_flesch", "value": 0.5, "category": "Mitjans"}, {"domain": "www.rtve.es", "metric": "text_complexity", "value": 0.5, "category": "Mitjans"}, {"domain": "www.rtve.es", "metric": "heading_hierarchy", "value": 1.0, "category": "Mitjans"}, {"domain": "www.rtve.es", "metric": "alt_text_coverage", "value": 0.333, "category": "Mitjans"}, {"domain": "www.rtve.es", "metric": "landmark_coverage", "value": 0.75, "category": "Mitjans"}, {"domain": "www.rtve.es", "metric": "performance_lcp", "value": 0.5, "category": "Mitjans"}, {"domain": "sagradafamilia.org", "metric": "color_contrast_ratio", "value": 0.5, "category": "Cultural"}, {"domain": "sagradafamilia.org", "metric": "focus_visible_ratio", "value": 0.5, "category": "Cultural"}, {"domain": "sagradafamilia.org", "metric": "target_size_clean", "value": 0.5, "category": "Cultural"}, {"domain": "sagradafamilia.org", "metric": "keyboard_clean", "value": 0.5, "category": "Cultural"}, {"domain": "sagradafamilia.org", "metric": "aria_roles_valid", "value": 1.0, "category": "Cultural"}, {"domain": "sagradafamilia.org", "metric": "accessible_names_coverage", "value": 0.809, "category": "Cultural"}, {"domain": "sagradafamilia.org", "metric": "audit_critical_violations", "value": 1.0, "category": "Cultural"}, {"domain": "sagradafamilia.org", "metric": "audit_high_violations", "value": 0.85, "category": "Cultural"}, {"domain": "sagradafamilia.org", "metric": "audit_medium_violations", "value": 0.94, "category": "Cultural"}, {"domain": "sagradafamilia.org", "metric": "audit_low_violations", "value": 0.98, "category": "Cultural"}, {"domain": "sagradafamilia.org", "metric": "page_flesch", "value": 0.5, "category": "Cultural"}, {"domain": "sagradafamilia.org", "metric": "text_complexity", "value": 0.5, "category": "Cultural"}, {"domain": "sagradafamilia.org", "metric": "heading_hierarchy", "value": 0.0, "category": "Cultural"}, {"domain": "sagradafamilia.org", "metric": "alt_text_coverage", "value": 0.86, "category": "Cultural"}, {"domain": "sagradafamilia.org", "metric": "landmark_coverage", "value": 0.75, "category": "Cultural"}, {"domain": "sagradafamilia.org", "metric": "performance_lcp", "value": 0.5, "category": "Cultural"}, {"domain": "www.fcbarcelona.cat", "metric": "color_contrast_ratio", "value": 0.5, "category": "Comercial"}, {"domain": "www.fcbarcelona.cat", "metric": "focus_visible_ratio", "value": 0.5, "category": "Comercial"}, {"domain": "www.fcbarcelona.cat", "metric": "target_size_clean", "value": 0.5, "category": "Comercial"}, {"domain": "www.fcbarcelona.cat", "metric": "keyboard_clean", "value": 0.5, "category": "Comercial"}, {"domain": "www.fcbarcelona.cat", "metric": "aria_roles_valid", "value": 1.0, "category": "Comercial"}, {"domain": "www.fcbarcelona.cat", "metric": "accessible_names_coverage", "value": 0.98, "category": "Comercial"}, {"domain": "www.fcbarcelona.cat", "metric": "audit_critical_violations", "value": 0.55, "category": "Comercial"}, {"domain": "www.fcbarcelona.cat", "metric": "audit_high_violations", "value": 0.75, "category": "Comercial"}, {"domain": "www.fcbarcelona.cat", "metric": "audit_medium_violations", "value": 0.96, "category": "Comercial"}, {"domain": "www.fcbarcelona.cat", "metric": "audit_low_violations", "value": 0.97, "category": "Comercial"}, {"domain": "www.fcbarcelona.cat", "metric": "page_flesch", "value": 0.5, "category": "Comercial"}, {"domain": "www.fcbarcelona.cat", "metric": "text_complexity", "value": 0.5, "category": "Comercial"}, {"domain": "www.fcbarcelona.cat", "metric": "heading_hierarchy", "value": 1.0, "category": "Comercial"}, {"domain": "www.fcbarcelona.cat", "metric": "alt_text_coverage", "value": 0.325, "category": "Comercial"}, {"domain": "www.fcbarcelona.cat", "metric": "landmark_coverage", "value": 1.0, "category": "Comercial"}, {"domain": "www.fcbarcelona.cat", "metric": "performance_lcp", "value": 0.5, "category": "Comercial"}, {"domain": "www.uoc.edu", "metric": "color_contrast_ratio", "value": 0.5, "category": "Educatiu"}, {"domain": "www.uoc.edu", "metric": "focus_visible_ratio", "value": 0.5, "category": "Educatiu"}, {"domain": "www.uoc.edu", "metric": "target_size_clean", "value": 0.5, "category": "Educatiu"}, {"domain": "www.uoc.edu", "metric": "keyboard_clean", "value": 0.5, "category": "Educatiu"}, {"domain": "www.uoc.edu", "metric": "aria_roles_valid", "value": 1.0, "category": "Educatiu"}, {"domain": "www.uoc.edu", "metric": "accessible_names_coverage", "value": 1.0, "category": "Educatiu"}, {"domain": "www.uoc.edu", "metric": "audit_critical_violations", "value": 1.0, "category": "Educatiu"}, {"domain": "www.uoc.edu", "metric": "audit_high_violations", "value": 1.0, "category": "Educatiu"}, {"domain": "www.uoc.edu", "metric": "audit_medium_violations", "value": 0.98, "category": "Educatiu"}, {"domain": "www.uoc.edu", "metric": "audit_low_violations", "value": 1.0, "category": "Educatiu"}, {"domain": "www.uoc.edu", "metric": "page_flesch", "value": 0.5, "category": "Educatiu"}, {"domain": "www.uoc.edu", "metric": "text_complexity", "value": 0.5, "category": "Educatiu"}, {"domain": "www.uoc.edu", "metric": "heading_hierarchy", "value": 0.6, "category": "Educatiu"}, {"domain": "www.uoc.edu", "metric": "alt_text_coverage", "value": 0.167, "category": "Educatiu"}, {"domain": "www.uoc.edu", "metric": "landmark_coverage", "value": 0.5, "category": "Educatiu"}, {"domain": "www.uoc.edu", "metric": "performance_lcp", "value": 0.5, "category": "Educatiu"}, {"domain": "www.unav.edu", "metric": "color_contrast_ratio", "value": 0.5, "category": "Educatiu"}, {"domain": "www.unav.edu", "metric": "focus_visible_ratio", "value": 0.5, "category": "Educatiu"}, {"domain": "www.unav.edu", "metric": "target_size_clean", "value": 0.5, "category": "Educatiu"}, {"domain": "www.unav.edu", "metric": "keyboard_clean", "value": 0.5, "category": "Educatiu"}, {"domain": "www.unav.edu", "metric": "aria_roles_valid", "value": 1.0, "category": "Educatiu"}, {"domain": "www.unav.edu", "metric": "accessible_names_coverage", "value": 0.928, "category": "Educatiu"}, {"domain": "www.unav.edu", "metric": "audit_critical_violations", "value": 0.7, "category": "Educatiu"}, {"domain": "www.unav.edu", "metric": "audit_high_violations", "value": 0.85, "category": "Educatiu"}, {"domain": "www.unav.edu", "metric": "audit_medium_violations", "value": 0.92, "category": "Educatiu"}, {"domain": "www.unav.edu", "metric": "audit_low_violations", "value": 0.99, "category": "Educatiu"}, {"domain": "www.unav.edu", "metric": "page_flesch", "value": 0.5, "category": "Educatiu"}, {"domain": "www.unav.edu", "metric": "text_complexity", "value": 0.5, "category": "Educatiu"}, {"domain": "www.unav.edu", "metric": "heading_hierarchy", "value": 0.6, "category": "Educatiu"}, {"domain": "www.unav.edu", "metric": "alt_text_coverage", "value": 0.193, "category": "Educatiu"}, {"domain": "www.unav.edu", "metric": "landmark_coverage", "value": 0.75, "category": "Educatiu"}, {"domain": "www.unav.edu", "metric": "performance_lcp", "value": 0.5, "category": "Educatiu"}, {"domain": "www.promofarma.com", "metric": "color_contrast_ratio", "value": 0.067, "category": "Comercial"}, {"domain": "www.promofarma.com", "metric": "focus_visible_ratio", "value": 0.5, "category": "Comercial"}, {"domain": "www.promofarma.com", "metric": "target_size_clean", "value": 0.5, "category": "Comercial"}, {"domain": "www.promofarma.com", "metric": "keyboard_clean", "value": 0.5, "category": "Comercial"}, {"domain": "www.promofarma.com", "metric": "aria_roles_valid", "value": 1.0, "category": "Comercial"}, {"domain": "www.promofarma.com", "metric": "accessible_names_coverage", "value": 0.886, "category": "Comercial"}, {"domain": "www.promofarma.com", "metric": "audit_critical_violations", "value": 0.55, "category": "Comercial"}, {"domain": "www.promofarma.com", "metric": "audit_high_violations", "value": 0.9, "category": "Comercial"}, {"domain": "www.promofarma.com", "metric": "audit_medium_violations", "value": 0.96, "category": "Comercial"}, {"domain": "www.promofarma.com", "metric": "audit_low_violations", "value": 0.99, "category": "Comercial"}, {"domain": "www.promofarma.com", "metric": "page_flesch", "value": 0.5, "category": "Comercial"}, {"domain": "www.promofarma.com", "metric": "text_complexity", "value": 0.5, "category": "Comercial"}, {"domain": "www.promofarma.com", "metric": "heading_hierarchy", "value": 0.8, "category": "Comercial"}, {"domain": "www.promofarma.com", "metric": "alt_text_coverage", "value": 0.489, "category": "Comercial"}, {"domain": "www.promofarma.com", "metric": "landmark_coverage", "value": 0.5, "category": "Comercial"}, {"domain": "www.promofarma.com", "metric": "performance_lcp", "value": 0.5, "category": "Comercial"}];
+    var PROFILES      = ["wcag_strict", "readability_first", "visual_first"];
+    var PROFILE_LABELS = { wcag_strict: "WCAG Strict", readability_first: "Readability", visual_first: "Visual First" };
+    var PROFILE_COLORS = {
+      wcag_strict: "#1d4ed8",
+      readability_first: "#15803d",
+      visual_first: "#be123c"
+    };
+    var ALL_METRICS = ["color_contrast_ratio", "focus_visible_ratio", "target_size_clean", "keyboard_clean", "aria_roles_valid", "accessible_names_coverage", "audit_critical_violations", "audit_high_violations", "audit_medium_violations", "audit_low_violations", "page_flesch", "text_complexity", "heading_hierarchy", "alt_text_coverage", "landmark_coverage", "performance_lcp"];
+    var METRIC_LABELS = {"color_contrast_ratio": "Contrast de color", "focus_visible_ratio": "Visibilitat del focus", "target_size_clean": "Mida objectiu tàctil", "keyboard_clean": "Navegació per teclat", "aria_roles_valid": "Rols ARIA vàlids", "accessible_names_coverage": "Noms accessibles", "audit_critical_violations": "Violacions crítiques (axe)", "audit_high_violations": "Violacions altes (axe)", "audit_medium_violations": "Violacions mitjanes (axe)", "audit_low_violations": "Violacions baixes (axe)", "page_flesch": "Llegibilitat Flesch", "text_complexity": "Complexitat textual", "heading_hierarchy": "Jerarquia de capçaleres", "alt_text_coverage": "Alt text d'imatges", "landmark_coverage": "Landmarks de navegació", "performance_lcp": "LCP (Core Web Vitals)"};
+    var CATEGORY_COLORS = {"Institucional": "#1d4ed8", "Educatiu": "#15803d", "Cultural": "#7c3aed", "Mitjans": "#c2410c", "Comercial": "#0e7490"};
+    var ACTIVE_CAT = "";
+    var sortCol = -1, sortAsc = true;
+  </script>
 
-// Ordenació
-function sortBy(col) {
-  var ths = document.querySelectorAll('thead th');
-  ths.forEach(function (th) {
-    th.classList.remove('sort-asc', 'sort-desc');
-    th.removeAttribute('aria-sort');
-  });
-  if (sortCol === col) { sortAsc = !sortAsc; } else { sortCol = col; sortAsc = (col < 3); }
-  ths[col].classList.add(sortAsc ? 'sort-asc' : 'sort-desc');
-  ths[col].setAttribute('aria-sort', sortAsc ? 'ascending' : 'descending');
-
-  var rows = Array.from(document.querySelectorAll('#tbody tr'));
-  rows.sort(function (a, b) {
-    var av, bv, cmp;
-    if (col >= 3) {
-      av  = parseFloat(a.cells[col] && a.cells[col].dataset.val) || 0;
-      bv  = parseFloat(b.cells[col] && b.cells[col].dataset.val) || 0;
-      cmp = av - bv;
-    } else {
-      av  = (a.cells[col] && a.cells[col].textContent.trim()) || '';
-      bv  = (b.cells[col] && b.cells[col].textContent.trim()) || '';
-      cmp = av.localeCompare(bv, 'ca');
+  <script>
+  /* ── Detecta repo GitHub ── */
+  (function () {
+    var h = location.hostname, p = (location.pathname.split('/')[1] || '');
+    if (h.endsWith('github.io') && p) {
+      var owner = h.replace('.github.io', '');
+      var repo = 'https://github.com/' + owner + '/' + p;
+      document.getElementById('repo-link').href = repo;
+      document.getElementById('run-link').href = repo + '/actions/workflows/publish_reports.yml';
     }
-    return sortAsc ? cmp : -cmp;
-  });
-  var tbody = document.getElementById('tbody');
-  rows.forEach(function (r) { tbody.appendChild(r); });
-}
+  }());
 
-function resetFilters() {
-  document.getElementById('f-text').value = '';
-  document.getElementById('f-cat').value  = '';
-  document.getElementById('f-min').value  = '0';
-  applyFilters();
-}
+  /* ── Utils ── */
+  function aciColor(s) {
+    if (s === null || s === undefined) return '#9ca3af';
+    return s >= 3.5 ? '#27ae60' : s >= 2.5 ? '#e67e22' : '#e74c3c';
+  }
+  function esc(s) {
+    return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
 
-// Inicialitza
-document.getElementById('f-text').addEventListener('input',  applyFilters);
-document.getElementById('f-cat').addEventListener('change',  applyFilters);
-document.getElementById('f-min').addEventListener('input',   applyFilters);
-document.getElementById('f-count').textContent =
-  ALL_ROWS.length + ' resultat' + (ALL_ROWS.length !== 1 ? 's' : '');
-</script>
+  /* ── Ranking Chart (D3) ── */
+  (function () {
+    if (!window.d3 || !RANKING_DATA || !RANKING_DATA.length) return;
+    var data = RANKING_DATA.slice().reverse(); // ascending order for bottom-up display
+    var m = { top: 4, right: 55, bottom: 4, left: 155 };
+    var el = document.getElementById('ranking-chart');
+    if (!el) return;
+    var fullW = el.clientWidth || 500;
+    var W = Math.max(fullW - m.left - m.right, 100);
+    var BH = 18, GAP = 3;
+    var H = data.length * (BH + GAP);
+
+    var svg = d3.select('#ranking-chart').append('svg')
+      .attr('width', fullW).attr('height', H + m.top + m.bottom)
+      .attr('aria-hidden', 'true')
+      .append('g').attr('transform', 'translate(' + m.left + ',' + m.top + ')');
+
+    var xSc = d3.scaleLinear().domain([0, 5]).range([0, W]);
+    var ySc = d3.scaleBand()
+      .domain(data.map(function (_, i) { return i; }))
+      .range([0, H]).padding(0.15);
+
+    // Grid
+    [1, 2, 3, 4, 5].forEach(function (v) {
+      svg.append('line').attr('x1', xSc(v)).attr('x2', xSc(v))
+        .attr('y1', 0).attr('y2', H)
+        .attr('stroke', '#f3f4f6').attr('stroke-width', v === 5 ? 1 : 0.8);
+    });
+
+    // Bars
+    svg.selectAll('.bar').data(data).enter().append('rect')
+      .attr('x', 0).attr('y', function (d, i) { return ySc(i); })
+      .attr('width', function (d) { return xSc(d.aci || 0); })
+      .attr('height', ySc.bandwidth())
+      .attr('fill', function (d) { return d.color || '#888'; })
+      .attr('fill-opacity', 0.82).attr('rx', 2)
+      .style('cursor', 'pointer')
+      .on('click', function (event, d) { if (d.url) window.location.href = d.url; });
+
+    // Domain labels
+    svg.selectAll('.lbl').data(data).enter().append('text')
+      .attr('x', -6).attr('y', function (d, i) { return ySc(i) + ySc.bandwidth() / 2; })
+      .attr('dy', '0.35em').attr('text-anchor', 'end')
+      .attr('font-size', '10px').attr('fill', '#374151')
+      .text(function (d) { return d.domain.length > 23 ? d.domain.slice(0, 23) + '…' : d.domain; });
+
+    // Value labels
+    svg.selectAll('.val').data(data).enter().append('text')
+      .attr('x', function (d) { return xSc(d.aci || 0) + 4; })
+      .attr('y', function (d, i) { return ySc(i) + ySc.bandwidth() / 2; })
+      .attr('dy', '0.35em').attr('font-size', '10px').attr('font-weight', '700')
+      .attr('fill', function (d) { return d.color || '#888'; })
+      .text(function (d) { return (d.aci || 0).toFixed(2); });
+  }());
+
+  /* ── Category grouped bar chart ── */
+  (function () {
+    if (!window.d3 || !CATEGORY_DATA || !CATEGORY_DATA.length) return;
+    var m = { top: 16, right: 12, bottom: 60, left: 35 };
+    var el = document.getElementById('category-chart');
+    if (!el) return;
+    var fullW = el.clientWidth || 460;
+    var W = Math.max(fullW - m.left - m.right, 80), H = 200;
+    var profiles = ["wcag_strict", "readability_first", "visual_first"];
+
+    var svg = d3.select('#category-chart').append('svg')
+      .attr('width', fullW).attr('height', H + m.top + m.bottom)
+      .attr('aria-hidden', 'true')
+      .append('g').attr('transform', 'translate(' + m.left + ',' + m.top + ')');
+
+    var x0 = d3.scaleBand().domain(CATEGORY_DATA.map(function (d) { return d.category; }))
+      .range([0, W]).padding(0.22);
+    var x1 = d3.scaleBand().domain(profiles).range([0, x0.bandwidth()]).padding(0.06);
+    var y = d3.scaleLinear().domain([0, 5]).range([H, 0]);
+
+    svg.append('g').attr('transform', 'translate(0,' + H + ')')
+      .call(d3.axisBottom(x0).tickSize(0))
+      .call(function (g) {
+        g.select('.domain').remove();
+        g.selectAll('text').attr('font-size', '11px').attr('fill', '#374151').attr('font-weight', '600');
+      });
+
+    svg.append('g').call(d3.axisLeft(y).ticks(5).tickSize(-W))
+      .call(function (g) {
+        g.select('.domain').remove();
+        g.selectAll('.tick line').attr('stroke', '#f3f4f6');
+        g.selectAll('text').attr('font-size', '9px').attr('fill', '#9ca3af');
+      });
+
+    CATEGORY_DATA.forEach(function (d) {
+      profiles.forEach(function (p) {
+        if (d[p] === null || d[p] === undefined) return;
+        svg.append('rect')
+          .attr('x', x0(d.category) + x1(p))
+          .attr('y', y(d[p]))
+          .attr('width', x1.bandwidth())
+          .attr('height', H - y(d[p]))
+          .attr('fill', PROFILE_COLORS[p] || '#888')
+          .attr('fill-opacity', 0.82).attr('rx', 2);
+      });
+    });
+
+    // Legend
+    var leg = document.getElementById('cat-legend');
+    if (leg) {
+      profiles.forEach(function (p) {
+        leg.innerHTML += '<div class="legend-item"><div class="legend-dot" style="background:' + PROFILE_COLORS[p] + '"></div><span>' + PROFILE_LABELS[p] + '</span></div>';
+      });
+    }
+  }());
+
+  /* ── Heatmap ── */
+  (function () {
+    if (!window.d3 || !HEATMAP_DATA || !HEATMAP_DATA.length) return;
+    var domains = [];
+    var domainSet = {};
+    HEATMAP_DATA.forEach(function (d) {
+      if (!domainSet[d.domain]) { domainSet[d.domain] = true; domains.push(d.domain); }
+    });
+    var metrics = ALL_METRICS;
+    var cellW = 20, cellH = 17;
+    var m = { top: 4, right: 12, bottom: 120, left: 148 };
+    var W = metrics.length * cellW, H = domains.length * cellH;
+
+    var svg = d3.select('#heatmap-chart').append('svg')
+      .attr('width', W + m.left + m.right)
+      .attr('height', H + m.top + m.bottom)
+      .attr('aria-hidden', 'true')
+      .append('g').attr('transform', 'translate(' + m.left + ',' + m.top + ')');
+
+    var xSc = d3.scaleBand().domain(metrics).range([0, W]).padding(0.03);
+    var ySc = d3.scaleBand().domain(domains).range([0, H]).padding(0.03);
+    var colorSc = d3.scaleSequential(d3.interpolateRdYlGn).domain([0, 1]);
+
+    // Build lookup
+    var lookup = {};
+    HEATMAP_DATA.forEach(function (d) { lookup[d.domain + '|' + d.metric] = d.value; });
+
+    var tooltip = document.getElementById('hm-tooltip');
+
+    // Cells
+    domains.forEach(function (dom) {
+      metrics.forEach(function (met) {
+        var val = lookup[dom + '|' + met];
+        svg.append('rect')
+          .attr('x', xSc(met)).attr('y', ySc(dom))
+          .attr('width', xSc.bandwidth()).attr('height', ySc.bandwidth())
+          .attr('fill', (val !== undefined && val !== null) ? colorSc(val) : '#f3f4f6')
+          .attr('rx', 1)
+          .on('mousemove', function (event) {
+            if (!tooltip) return;
+            var ml = METRIC_LABELS[met] || met;
+            tooltip.style.display = 'block';
+            tooltip.style.left = (event.clientX + 12) + 'px';
+            tooltip.style.top  = (event.clientY - 28) + 'px';
+            tooltip.textContent = dom + ' · ' + ml + ': ' + (val != null ? val.toFixed(3) : '—');
+          })
+          .on('mouseleave', function () { if (tooltip) tooltip.style.display = 'none'; });
+      });
+    });
+
+    // Y axis
+    svg.append('g').call(d3.axisLeft(ySc).tickSize(0).tickPadding(5))
+      .call(function (g) {
+        g.select('.domain').remove();
+        g.selectAll('text').attr('font-size', '10px').attr('fill', '#374151');
+      });
+
+    // X axis (rotated metric labels)
+    var SHORT = {
+      color_contrast_ratio: "Contrast", focus_visible_ratio: "Focus",
+      target_size_clean: "Mida", keyboard_clean: "Teclat",
+      aria_roles_valid: "ARIA", accessible_names_coverage: "Noms",
+      audit_critical_violations: "Crít.", audit_high_violations: "Alt",
+      audit_medium_violations: "Mod.", audit_low_violations: "Baix",
+      page_flesch: "Flesch", text_complexity: "Compl.",
+      heading_hierarchy: "Jerarq.", alt_text_coverage: "AltTx",
+      landmark_coverage: "Land.", performance_lcp: "LCP"
+    };
+    svg.append('g').attr('transform', 'translate(0,' + H + ')')
+      .call(d3.axisBottom(xSc).tickFormat(function (k) { return SHORT[k] || k; }).tickSize(0).tickPadding(5))
+      .call(function (g) {
+        g.select('.domain').remove();
+        g.selectAll('text').attr('transform', 'rotate(-55)')
+          .style('text-anchor', 'end').attr('font-size', '9px').attr('fill', '#6b7280');
+      });
+  }());
+
+  /* ── Table rendering ── */
+  function aciCell(pd, rep) {
+    if (!pd || pd.aci === null || pd.aci === undefined) return '<td data-val="0"><span class="aci-dash">—</span></td>';
+    var c = aciColor(pd.aci), pct = Math.round(pd.aci / 5 * 100);
+    var lnk = rep ? ' <a href="' + esc(rep) + '" title="Informe">📄</a>' : '';
+    return '<td data-val="' + pd.aci.toFixed(3) + '">' +
+      '<span class="aci-num" style="color:' + c + '">' + pd.aci.toFixed(3) + '</span>' +
+      '<div class="mini-bar"><div style="width:' + pct + '%;background:' + c + '"></div></div>' + lnk + '</td>';
+  }
+
+  function renderRows(rows) {
+    var tbody = document.getElementById('tbody');
+    var noRes = document.getElementById('no-res');
+    var cnt   = document.getElementById('f-count');
+    cnt.textContent = rows.length + ' resultat' + (rows.length !== 1 ? 's' : '');
+    if (!rows.length) { tbody.innerHTML = ''; noRes.style.display = ''; return; }
+    noRes.style.display = 'none';
+    tbody.innerHTML = rows.map(function (r, i) {
+      var catColor = CATEGORY_COLORS[r.category] || '#374151';
+      var cells = [
+        '<td class="num">' + (i + 1) + '</td>',
+        '<td><strong>' + esc(r.domain) + '</strong>' +
+          '<span class="url-sm"><a href="' + esc(r.url) + '" target="_blank" rel="noopener">' + esc(r.url) + '</a></span></td>',
+        '<td><span class="cat-chip" style="background:' + catColor + '22;color:' + catColor + '">' + esc(r.category || '—') + '</span></td>',
+      ];
+      PROFILES.forEach(function (p) {
+        var pd = r.profiles[p] || {};
+        cells.push(aciCell({ aci: pd.aci }, pd.report));
+      });
+      var cmp = r.comparative ? '<a href="' + esc(r.comparative) + '">⇌</a>' : '—';
+      cells.push('<td style="text-align:center">' + cmp + '</td>');
+      return '<tr>' + cells.join('') + '</tr>';
+    }).join('');
+  }
+
+  function getFilters() {
+    return {
+      text:   document.getElementById('f-text').value.toLowerCase().trim(),
+      cat:    ACTIVE_CAT || document.getElementById('f-cat').value,
+      minAci: parseFloat(document.getElementById('f-min').value) || 0,
+    };
+  }
+
+  function applyFilters() {
+    var f = getFilters();
+    var filtered = TABLE_ROWS.filter(function (r) {
+      if (f.text && !r.domain.toLowerCase().includes(f.text) && !r.url.toLowerCase().includes(f.text)) return false;
+      if (f.cat && r.category !== f.cat) return false;
+      if (r.aci_best !== null && r.aci_best < f.minAci) return false;
+      return true;
+    });
+    renderRows(filtered);
+  }
+
+  function filterCat(cat) {
+    ACTIVE_CAT = cat;
+    document.getElementById('f-cat').value = cat;
+    // Update button states
+    document.querySelectorAll('.cat-btn').forEach(function (btn) {
+      btn.setAttribute('aria-pressed', 'false');
+      btn.style.opacity = '0.65';
+    });
+    var activeBtn = cat
+      ? document.getElementById('cat-' + cat.toLowerCase().replace(/ /g, '-'))
+      : document.getElementById('cat-all');
+    if (activeBtn) { activeBtn.setAttribute('aria-pressed', 'true'); activeBtn.style.opacity = '1'; }
+    applyFilters();
+  }
+
+  function resetFilters() {
+    document.getElementById('f-text').value = '';
+    document.getElementById('f-cat').value = '';
+    document.getElementById('f-min').value = '0';
+    ACTIVE_CAT = '';
+    document.querySelectorAll('.cat-btn').forEach(function (b) { b.setAttribute('aria-pressed', 'false'); b.style.opacity = '0.65'; });
+    var all = document.getElementById('cat-all');
+    if (all) { all.setAttribute('aria-pressed', 'true'); all.style.opacity = '1'; }
+    applyFilters();
+  }
+
+  /* ── Sorting ── */
+  function sortBy(col) {
+    var ths = document.querySelectorAll('table.res thead th');
+    ths.forEach(function (th) { th.classList.remove('sort-asc', 'sort-desc'); th.removeAttribute('aria-sort'); });
+    if (sortCol === col) { sortAsc = !sortAsc; } else { sortCol = col; sortAsc = col < 3; }
+    ths[col].classList.add(sortAsc ? 'sort-asc' : 'sort-desc');
+    ths[col].setAttribute('aria-sort', sortAsc ? 'ascending' : 'descending');
+    var rows = Array.from(document.querySelectorAll('#tbody tr'));
+    rows.sort(function (a, b) {
+      var av, bv, cmp;
+      if (col >= 3 && col <= 5) {
+        av = parseFloat((a.cells[col] && a.cells[col].dataset.val) || 0);
+        bv = parseFloat((b.cells[col] && b.cells[col].dataset.val) || 0);
+        cmp = av - bv;
+      } else {
+        av = (a.cells[col] && a.cells[col].textContent.trim()) || '';
+        bv = (b.cells[col] && b.cells[col].textContent.trim()) || '';
+        cmp = av.localeCompare(bv, 'ca');
+      }
+      return sortAsc ? cmp : -cmp;
+    });
+    var tbody = document.getElementById('tbody');
+    rows.forEach(function (r) { tbody.appendChild(r); });
+  }
+
+  /* ── Init ── */
+  document.getElementById('f-text').addEventListener('input', applyFilters);
+  document.getElementById('f-cat').addEventListener('change', function () { ACTIVE_CAT = ''; applyFilters(); });
+  document.getElementById('f-min').addEventListener('input', applyFilters);
+  document.getElementById('cat-all').style.opacity = '1';
+  renderRows(TABLE_ROWS);
+  </script>
 </body>
 </html>

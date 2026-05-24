@@ -3,1002 +3,834 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  
-  <title>Informe ACI — https://educacio.gencat.cat/ca/inici</title>
+  <title>WCAG Strict · educacio.gencat.cat — ACI Pipeline</title>
+  <meta name="description" content="Informe d'accessibilitat ACI per a educacio.gencat.cat (WCAG Strict). Puntuació: 3.54/5.0 — Bo.">
   <link rel="stylesheet" href="../static/css/site.css">
   <style>
-    :root {
-      --green: #28a745; --yellow: #ffc107; --red: #dc3545;
-      --orange: #fd7e14; --blue: #007bff; --gray: #6c757d;
-      --light: #f8f9fa; --border: #dee2e6;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Segoe UI', Arial, sans-serif; color: #333; background: #fff; }
-    .container { max-width: 960px; margin: 0 auto; padding: 24px; }
-    header { background: #2c3e50; color: #fff; padding: 24px; margin-bottom: 24px; border-radius: 8px; }
-    header h1 { font-size: 1.6em; margin-bottom: 8px; }
-    header p { opacity: 0.85; font-size: 0.95em; margin: 2px 0; }
-    header a { color: #aed6f1; }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif); background: #f0f2f5; color: #1a1a2e; margin: 0; line-height: 1.55; }
+    .visually-hidden { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    .container { max-width: 1040px; margin: 0 auto; padding: 1.25rem 1rem 3rem; }
 
-    /* Score box */
-    .score-section { display: flex; gap: 16px; margin: 24px 0; flex-wrap: wrap; }
-    .score-box {
-      flex: 1; min-width: 180px; padding: 24px; border-radius: 12px;
-      text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .score-box .score-value { font-size: 3.5em; font-weight: 700; line-height: 1; }
-    .score-box .score-label { font-size: 0.9em; margin-top: 6px; opacity: 0.8; }
-    .score-box .score-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.85em; font-weight: 600; margin-top: 8px; background: rgba(255,255,255,0.3); }
-    
-    .score-box.main { background: linear-gradient(135deg, #ffc107, #fd7e14); color: #fff; }
-    
+    /* Profile nav */
+    .profile-nav { display:flex; gap:0.5rem; flex-wrap:wrap; align-items:center; padding:0.65rem 1.25rem; background:#fff; border-bottom:1px solid #e5e7eb; position:sticky; top:0; z-index:10; }
+    .profile-chip { display:inline-flex; align-items:center; padding:0.28rem 0.85rem; border-radius:20px; font-size:0.78rem; font-weight:700; text-decoration:none; border:2px solid; transition:all 0.15s; }
+    .profile-chip[aria-current="page"] { box-shadow:0 2px 6px rgba(0,0,0,0.15); }
+    .profile-chip:not([aria-current]) { opacity:0.55; }
+    .profile-chip:hover { opacity:1; }
+    .cmp-link { margin-left:auto; display:inline-flex; align-items:center; gap:0.3rem; padding:0.28rem 0.85rem; border-radius:20px; font-size:0.78rem; font-weight:700; text-decoration:none; background:#001f3f; color:#fff; }
+    .cmp-link:hover { background:#003366; }
+    .nav-sep { font-size:0.7rem; font-weight:700; color:#9ca3af; text-transform:uppercase; letter-spacing:0.06em; }
 
-    /* Sub-score cards */
-    .sub-score-card { flex: 1; min-width: 120px; padding: 16px; border-radius: 8px; background: var(--light); border: 1px solid var(--border); text-align: center; }
-    .sub-score-card .sub-val { font-size: 1.8em; font-weight: 700; }
-    .sub-score-card .sub-name { font-size: 0.8em; color: var(--gray); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
-    
-    
-    
-    
-    
+    /* Identity card */
+    .identity { background:#fff; border-radius:8px; padding:1rem 1.5rem; margin-bottom:1rem; box-shadow:0 1px 6px rgba(0,0,0,.06); border-left:5px solid #1d4ed8; }
+    .identity h1 { font-size:0.9rem; font-weight:800; color:#1d4ed8; margin:0 0 0.55rem; text-transform:uppercase; letter-spacing:0.05em; }
+    .identity-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:0.35rem; font-size:0.83rem; }
+    .identity-item { display:flex; gap:0.4rem; align-items:baseline; }
+    .identity-item strong { color:#6b7280; min-width:75px; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.03em; }
 
-    /* Progress bars */
-    .metric-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
-    .metric-row:last-child { border-bottom: none; }
-    .metric-name { flex: 0 0 220px; font-size: 0.9em; color: #444; }
-    .bar-wrap { flex: 1; background: #e9ecef; border-radius: 4px; height: 18px; overflow: hidden; }
-    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.4s ease; }
-    .bar-fill.good { background: var(--green); }
-    .bar-fill.mid  { background: var(--yellow); }
-    .bar-fill.bad  { background: var(--red); }
-    .metric-score { flex: 0 0 50px; text-align: right; font-size: 0.85em; font-weight: 600; }
-    .metric-weight { flex: 0 0 30px; text-align: right; font-size: 0.8em; color: var(--gray); }
+    /* Score section */
+    .score-section { display:grid; grid-template-columns:auto 1fr; gap:1rem; margin-bottom:1rem; align-items:start; }
+    @media (max-width:600px) { .score-section { grid-template-columns:1fr; } }
+    .score-box { border-radius:12px; padding:1.5rem 2rem; text-align:center; color:#fff; min-width:150px; }
+    .score-box .sv { font-size:3.5rem; font-weight:900; line-height:1; letter-spacing:-2px; }
+    .score-box .sm { font-size:1rem; opacity:0.65; font-weight:400; }
+    .score-box .sl { display:inline-block; padding:0.2rem 0.85rem; border-radius:20px; font-size:0.82rem; font-weight:700; background:rgba(255,255,255,0.25); margin-top:0.45rem; }
+    .sub-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:0.65rem; }
+    @media (min-width:480px) { .sub-grid { grid-template-columns:repeat(4,1fr); } }
+    .sub-card { background:#fff; border-radius:8px; padding:0.85rem 0.5rem; text-align:center; box-shadow:0 1px 6px rgba(0,0,0,.06); }
+    .sub-card .sv { font-size:1.7rem; font-weight:800; line-height:1; }
+    .sub-card .sn { font-size:0.68rem; text-transform:uppercase; letter-spacing:0.05em; color:#6b7280; margin-top:0.3rem; }
+    .sub-card .sb { height:4px; background:#e5e7eb; border-radius:2px; margin:0.35rem 0.5rem 0; overflow:hidden; }
+    .sub-card .sbf { height:100%; border-radius:2px; }
 
-    /* Tables */
-    table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.9em; }
-    th { background: #2c3e50; color: #fff; padding: 10px 12px; text-align: left; font-weight: 600; }
-    td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
-    tr:nth-child(even) td { background: var(--light); }
-    tr:hover td { background: #e8f4fd; }
-    .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.8em; font-weight: 600; }
-    .badge-red { background: #fde8ea; color: var(--red); }
-    .badge-orange { background: #fff3e0; color: var(--orange); }
-    .badge-yellow { background: #fff9e6; color: #856404; }
-    .badge-green { background: #d4edda; color: var(--green); }
-    .badge-gray { background: #e9ecef; color: var(--gray); }
+    /* Cards */
+    .card { background:#fff; border-radius:8px; box-shadow:0 1px 6px rgba(0,0,0,.06); margin-bottom:1rem; overflow:hidden; }
+    .card-hd { padding:0.7rem 1.25rem; border-bottom:1px solid #f0f0f0; background:#fafafa; display:flex; align-items:center; justify-content:space-between; }
+    .card-hd h2 { font-size:0.82rem; font-weight:800; color:#374151; margin:0; text-transform:uppercase; letter-spacing:0.05em; }
+    .card-body { padding:1.25rem; }
+    #metrics-chart { overflow-x:auto; padding:0.25rem 0; }
 
-    /* Intervention table */
-    .priority-high td:first-child { border-left: 4px solid var(--red); }
-    .priority-mid td:first-child  { border-left: 4px solid var(--yellow); }
-    .priority-low td:first-child  { border-left: 4px solid var(--green); }
-    .rank-badge { display: inline-block; width: 28px; height: 28px; border-radius: 50%; background: #2c3e50; color: #fff; text-align: center; line-height: 28px; font-size: 0.85em; font-weight: 700; }
+    /* Metric table */
+    .met-table { width:100%; border-collapse:collapse; font-size:0.82rem; }
+    .met-table th { background:#f0f4f8; padding:0.5rem 0.75rem; text-align:left; font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:#555; white-space:nowrap; border-bottom:2px solid #e5e7eb; }
+    .met-table td { padding:0.55rem 0.75rem; border-bottom:1px solid #f3f4f6; vertical-align:top; }
+    .met-table tr:last-child td { border-bottom:none; }
+    .met-table tr:hover td { background:#f9fafb; }
+    .lv-good { color:#15803d; font-weight:700; }
+    .lv-mid  { color:#d97706; font-weight:700; }
+    .lv-bad  { color:#dc2626; font-weight:700; }
+    .lv-unknown { color:#9ca3af; }
+    .bar-sm { height:6px; background:#e5e7eb; border-radius:3px; overflow:hidden; min-width:70px; }
+    .bar-sm-fill { height:100%; border-radius:3px; }
+    .note-text { font-size:0.77rem; color:#4b5563; line-height:1.45; }
+    code { background:#f1f3f5; padding:1px 5px; border-radius:3px; font-size:0.8em; font-family:Consolas,"Courier New",monospace; }
 
-    /* Sections */
-    section { margin: 32px 0; }
-    section h2 { font-size: 1.25em; color: #2c3e50; padding-bottom: 8px; border-bottom: 2px solid var(--border); margin-bottom: 16px; }
-    section h3 { font-size: 1.05em; color: #444; margin: 16px 0 8px; }
+    /* Interventions */
+    .it { width:100%; border-collapse:collapse; font-size:0.82rem; }
+    .it th { background:#1e293b; color:#f8fafc; padding:0.5rem 0.75rem; text-align:left; font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; }
+    .it td { padding:0.55rem 0.75rem; border-bottom:1px solid #f3f4f6; vertical-align:top; }
+    .it tr:hover td { background:#f9fafb; }
+    .rk { display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:#1e293b; color:#fff; font-size:0.76rem; font-weight:700; }
+    .badge { display:inline-block; padding:0.15rem 0.5rem; border-radius:12px; font-size:0.7rem; font-weight:700; }
+    .b-red { background:#fee2e2; color:#dc2626; }
+    .b-orange { background:#ffedd5; color:#c2410c; }
+    .b-yellow { background:#fef9c3; color:#854d0e; }
+    .b-green { background:#dcfce7; color:#15803d; }
+    .b-gray { background:#f3f4f6; color:#4b5563; }
 
-    /* Axe violations */
-    .impact-critical { color: var(--red); font-weight: 700; }
-    .impact-serious  { color: var(--orange); font-weight: 700; }
-    .impact-moderate { color: #856404; font-weight: 600; }
-    .impact-minor    { color: var(--gray); }
-    code { background: #f1f3f5; padding: 1px 5px; border-radius: 3px; font-size: 0.88em; font-family: 'Consolas', monospace; }
+    /* Stats grid */
+    .stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:0.7rem; }
+    .stat-card { background:#f9fafb; border:1px solid #e5e7eb; border-radius:8px; padding:0.8rem; text-align:center; }
+    .stat-val { font-size:1.55rem; font-weight:800; line-height:1; }
+    .stat-lbl { font-size:0.7rem; color:#6b7280; margin-top:0.25rem; }
 
-    /* Screenshot */
-    .screenshot-wrap { margin: 12px 0; }
-    .screenshot-wrap img { max-width: 100%; border: 1px solid var(--border); border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    /* Axe */
+    .imp-critical { color:#dc2626; font-weight:700; }
+    .imp-serious  { color:#ea580c; font-weight:700; }
+    .imp-moderate { color:#d97706; font-weight:600; }
+    .imp-minor    { color:#6b7280; }
 
-    /* Summary stats */
-    .stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin: 16px 0; }
-    .stat-card { background: var(--light); border: 1px solid var(--border); border-radius: 8px; padding: 14px; text-align: center; }
-    .stat-card .stat-val { font-size: 1.8em; font-weight: 700; color: #2c3e50; }
-    .stat-card .stat-label { font-size: 0.8em; color: var(--gray); margin-top: 4px; }
-
-    footer { margin-top: 48px; padding: 20px 0; border-top: 2px solid var(--border); color: var(--gray); font-size: 0.85em; text-align: center; }
+    footer.site-footer { margin-top:2rem; }
   </style>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Salta al contingut principal</a>
+
   <header class="site-header" role="banner">
-    <a class="site-header__logo" href="../index.html" aria-label="ACI Pipeline — pàgina d'inici">
-      <img src="../static/img/uoc_logo.svg" alt="UOC" width="80" height="32">
-      <span class="site-header__wordmark" aria-hidden="true">ACI<br>Pipeline</span>
+    <a class="site-header__logo" href="../index.html" aria-label="ACI Pipeline — Inici">
+      <span class="site-header__wordmark">ACI<br>Pipeline</span>
     </a>
     <nav class="site-header__nav" aria-label="Navegació principal">
       <ul role="list">
-        <li><a href="../index.html">Índex</a></li>
-        <li><a href="../../report.html">Informe D3</a></li>
-        <li><a href="../../page_report.html" aria-current="page">Informe de pàgina</a></li>
+        <li><a href="../index.html">Índex global</a></li>
+        <li><a href="educacio_gencat_cat_ca_inici_Institucional_comparative.html">⇌ Comparatiu</a></li>
       </ul>
     </nav>
-    <div class="site-header__actions">
-      <div class="lang-selector" role="group" aria-label="Selecció de llengua">
-        <button class="lang-btn" data-lang="ca" aria-pressed="true">CA</button>
-        <button class="lang-btn" data-lang="es" aria-pressed="false">ES</button>
-        <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
-      </div>
-    </div>
   </header>
 
-<div class="container">
-<main id="main-content">
-
-  <!-- Navegació entre perfils (injectada per JS des del manifest) -->
-  <nav id="profile-nav" aria-label="Navegació entre perfils" style="display:none;
-       flex-wrap:wrap;gap:6px;align-items:center;
-       padding:0.65rem 1rem;background:#f8f9fa;border-radius:6px;
-       border:1px solid #dee2e6;margin-bottom:1rem;">
+  <!-- Navegació entre perfils -->
+  <nav class="profile-nav" aria-label="Canvi de perfil d'avaluació">
+    <span class="nav-sep">Perfil:</span>
+    <a class="profile-chip"
+       href="educacio_gencat_cat_ca_inici_Institucional_wcag_strict.html"
+       style="color:#1d4ed8;border-color:#1d4ed8;background:#dbeafe;"
+aria-current="page"       aria-label="Veure informe perfil WCAG Strict">
+      WCAG Strict
+    </a>
+    <a class="profile-chip"
+       href="educacio_gencat_cat_ca_inici_Institucional_readability_first.html"
+       style="color:#15803d;border-color:#15803d;"
+       aria-label="Veure informe perfil Readability First">
+      Readability First
+    </a>
+    <a class="profile-chip"
+       href="educacio_gencat_cat_ca_inici_Institucional_visual_first.html"
+       style="color:#be123c;border-color:#be123c;"
+       aria-label="Veure informe perfil Visual First">
+      Visual First
+    </a>
+    <a class="cmp-link" href="educacio_gencat_cat_ca_inici_Institucional_comparative.html"
+       aria-label="Informe comparatiu entre els 3 perfils">⇌ Comparatiu</a>
   </nav>
 
-  <!-- Report identity block -->
-  <section aria-label="Informació de la pàgina analitzada" style="margin-bottom:1.5rem; padding:1.25rem; background:#f1f3f5; border-radius:8px; border-left:4px solid #003366;">
-    <h1 style="font-size:1.15rem; margin:0 0 0.5rem; color:#003366;">Informe d'Accessibilitat Web — ACI Pipeline</h1>
-    <p><strong>URL:</strong> <a href="https://educacio.gencat.cat/ca/inici" target="_blank" rel="noopener">https://educacio.gencat.cat/ca/inici</a></p>
-    <p><strong>Tipus de web:</strong> Institucional</p>
-    <p><strong>Perfil actual:</strong> <strong>wcag_strict</strong> &nbsp;|&nbsp; <strong>Data:</strong> 2026-05-24 14:03 UTC</p>
-    <p><strong>Pipeline:</strong> aci_pipeline v0.1.0</p>
-  </section>
+  <div class="container">
+  <main id="main-content">
 
-  <!-- Score principal -->
-  <section>
-    <h2>Puntuació ACI Global</h2>
-    <div class="score-section">
-      <div class="score-box main">
-        <div class="score-value">3.52</div>
-        <div class="score-label">ACI Score / 5.0</div>
-        <div class="score-badge">
-          Bo
+    <!-- Identitat de la pàgina analitzada -->
+    <div class="identity" role="region" aria-label="Metadades de la pàgina analitzada">
+      <h1>Informe WCAG Strict</h1>
+      <div class="identity-grid">
+        <div class="identity-item"><strong>URL</strong><a href="https://educacio.gencat.cat/ca/inici" target="_blank" rel="noopener noreferrer">https://educacio.gencat.cat/ca/inici</a></div>
+        <div class="identity-item"><strong>Domini</strong><span>educacio.gencat.cat</span></div>
+        <div class="identity-item"><strong>Categoria</strong><span>Institucional</span></div>
+        <div class="identity-item"><strong>Data</strong><span>2026-05-24 14:58 UTC</span></div>
+        <div class="identity-item"><strong>Pipeline</strong><span>v0.1.0</span></div>
+      </div>
+    </div>
+
+    <!-- Puntuació ACI + sub-scores -->
+    <section aria-labelledby="score-h">
+      <h2 id="score-h" class="visually-hidden">Puntuació ACI global</h2>
+      <div class="score-section">
+        <div class="score-box" style="background:linear-gradient(135deg,#27ae60,#27ae60cc)"
+             role="img" aria-label="Puntuació ACI 3.54 sobre 5 — Bo">
+          <div class="sv">3.54</div>
+          <div class="sm">/ 5.0</div>
+          <div class="sl">Bo</div>
+        </div>
+        <div class="sub-grid">
+          <div class="sub-card">
+            <div class="sv" style="color:#e67e22">3.2</div>
+            <div class="sn">WCAG</div>
+            <div class="sb"><div class="sbf" style="width:65%;background:#e67e22"></div></div>
+          </div>
+          <div class="sub-card">
+            <div class="sv" style="color:#27ae60">3.8</div>
+            <div class="sn">Text</div>
+            <div class="sb"><div class="sbf" style="width:75%;background:#27ae60"></div></div>
+          </div>
+          <div class="sub-card">
+            <div class="sv" style="color:#27ae60">3.8</div>
+            <div class="sn">Elements</div>
+            <div class="sb"><div class="sbf" style="width:75%;background:#27ae60"></div></div>
+          </div>
+          <div class="sub-card">
+            <div class="sv" style="color:#e67e22">2.5</div>
+            <div class="sn">Rendiment</div>
+            <div class="sb"><div class="sbf" style="width:50%;background:#e67e22"></div></div>
+          </div>
         </div>
       </div>
+    </section>
 
-      
-      
-      <div class="sub-score-card">
-        <div class="sub-val" style="color: #ffc107">
-          3.2
-        </div>
-        <div class="sub-name">wcag</div>
+    <!-- Gràfic D3: barres de les 16 mètriques -->
+    <div class="card" role="region" aria-labelledby="chart-h">
+      <div class="card-hd">
+        <h2 id="chart-h">Mètriques normalitzades (0–1) · D3</h2>
+        <span style="font-size:0.72rem;color:#9ca3af">Clic a la barra per a més detall</span>
       </div>
-      
-      
-      
-      <div class="sub-score-card">
-        <div class="sub-val" style="color: #ffc107">
-          3.8
-        </div>
-        <div class="sub-name">text</div>
+      <div class="card-body" style="padding-bottom:0.75rem">
+        <div id="metrics-chart" aria-label="Gràfic de barres de les 16 mètriques normalitzades" style="min-height:100px"></div>
       </div>
-      
-      
-      
-      <div class="sub-score-card">
-        <div class="sub-val" style="color: #ffc107">
-          3.8
-        </div>
-        <div class="sub-name">elements</div>
-      </div>
-      
-      
-      
-      <div class="sub-score-card">
-        <div class="sub-val" style="color: #ffc107">
-          2.5
-        </div>
-        <div class="sub-name">performance</div>
-      </div>
-      
-      
     </div>
-  </section>
 
-  <!-- Metriques per barra -->
-  <section>
-    <h2>Detall de Metriques (normalitzades 0-1)</h2>
-    
-    
-    
-    <div class="metric-row">
-      <div class="metric-name">color_contrast_ratio</div>
-      <div class="bar-wrap">
-        <div class="bar-fill mid" style="width: 50%"></div>
+    <!-- Taula de mètriques amb notes interpretatives (TFM) -->
+    <div class="card" role="region" aria-labelledby="mettable-h">
+      <div class="card-hd"><h2 id="mettable-h">Detall de mètriques i notes interpretatives (TFM)</h2></div>
+      <div style="overflow-x:auto">
+        <table class="met-table" aria-label="Les 16 mètriques amb valors i notes interpretatives del TFM">
+          <thead>
+            <tr>
+              <th scope="col">Mètrica</th>
+              <th scope="col">Grup</th>
+              <th scope="col">Valor normalitzat</th>
+              <th scope="col">Raw</th>
+              <th scope="col">Pes</th>
+              <th scope="col">WCAG</th>
+              <th scope="col">Interpretació (TFM Cap. 4)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <code>color_contrast_ratio</code>
+                <div style="font-size:0.76rem;color:#6b7280;margin-top:2px">Contrast de color</div>
+              </td>
+              <td><span class="badge b-gray" style="font-size:0.68rem">wcag</span></td>
+              <td>
+                <div style="display:flex;align-items:center;gap:8px;min-width:130px">
+                  <div class="bar-sm" style="flex:1">
+                    <div class="bar-sm-fill" style="width:50%;background:#f59e0b"></div>
+                  </div>
+                  <span class="lv-mid" style="min-width:44px;text-align:right;font-variant-numeric:tabular-nums">
+                    0.500
+                  </span>
+                </div>
+              </td>
+              <td style="color:#6b7280;font-variant-numeric:tabular-nums">—</td>
+              <td style="text-align:center;font-weight:700;color:#374151">5</td>
+              <td><small style="color:#6b7280">1.4.3 AA</small></td>
+              <td>
+                <div class="note-text">Contrast acceptable però millorable. Algunes combinacions poden dificultar la lectura en dispositius mòbils o en condicions de llum adversa.</div>
+                <div style="font-size:0.71rem;color:#9ca3af;margin-top:3px;font-style:italic">Proporció de contrast entre el text/elements d'interfície i el fons de la pàgina.</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>focus_visible_ratio</code>
+                <div style="font-size:0.76rem;color:#6b7280;margin-top:2px">Visibilitat del focus</div>
+              </td>
+              <td><span class="badge b-gray" style="font-size:0.68rem">wcag</span></td>
+              <td>
+                <div style="display:flex;align-items:center;gap:8px;min-width:130px">
+                  <div class="bar-sm" style="flex:1">
+                    <div class="bar-sm-fill" style="width:50%;background:#f59e0b"></div>
+                  </div>
+                  <span class="lv-mid" style="min-width:44px;text-align:right;font-variant-numeric:tabular-nums">
+                    0.500
+                  </span>
+                </div>
+              </td>
+              <td style="color:#6b7280;font-variant-numeric:tabular-nums">—</td>
+              <td style="text-align:center;font-weight:700;color:#374151">4</td>
+              <td><small style="color:#6b7280">2.4.7 AA</small></td>
+              <td>
+                <div class="note-text">Focus parcialment visible. Alguns elements són difícils d'identificar sense ús del ratolí.</div>
+                <div style="font-size:0.71rem;color:#9ca3af;margin-top:3px;font-style:italic">Fracció d'elements interactius amb indicador de focus visible en la navegació per teclat.</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>target_size_clean</code>
+                <div style="font-size:0.76rem;color:#6b7280;margin-top:2px">Mida objectiu tàctil</div>
+              </td>
+              <td><span class="badge b-gray" style="font-size:0.68rem">wcag</span></td>
+              <td>
+                <div style="display:flex;align-items:center;gap:8px;min-width:130px">
+                  <div class="bar-sm" style="flex:1">
+                    <div class="bar-sm-fill" style="width:50%;background:#f59e0b"></div>
+                  </div>
+                  <span class="lv-mid" style="min-width:44px;text-align:right;font-variant-numeric:tabular-nums">
+                    0.500
+                  </span>
+                </div>
+              </td>
+              <td style="color:#6b7280;font-variant-numeric:tabular-nums">—</td>
+              <td style="text-align:center;font-weight:700;color:#374151">3</td>
+              <td><small style="color:#6b7280">2.5.8 AA</small></td>
+              <td>
+                <div class="note-text">Alguns elements massa petits per a una interacció tàctil confortable, especialment en dispositius mòbils.</div>
+                <div style="font-size:0.71rem;color:#9ca3af;margin-top:3px;font-style:italic">Proporció d'elements interactius (botons, enllaços, formularis) que superen la mida mínima de 24×24 px.</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>keyboard_clean</code>
+                <div style="font-size:0.76rem;color:#6b7280;margin-top:2px">Navegació per teclat</div>
+              </td>
+              <td><span class="badge b-gray" style="font-size:0.68rem">wcag</span></td>
+              <td>
+                <div style="display:flex;align-items:center;gap:8px;min-width:130px">
+                  <div class="bar-sm" style="flex:1">
+                    <div class="bar-sm-fill" style="width:50%;background:#f59e0b"></div>
+                  </div>
+                  <span class="lv-mid" style="min-width:44px;text-align:right;font-variant-numeric:tabular-nums">
+                    0.500
+                  </span>
+                </div>
+              </td>
+              <td style="color:#6b7280;font-variant-numeric:tabular-nums">—</td>
+              <td style="text-align:center;font-weight:700;color:#374151">5</td>
+              <td><small style="color:#6b7280">2.1.1 A</small></td>
+              <td>
+                <div class="note-text">Navegació bàsica per teclat, però amb algunes limitacions o trampes de focus intermitents.</div>
+                <div style="font-size:0.71rem;color:#9ca3af;margin-top:3px;font-style:italic">Ràtio d'elements interactius navegables per teclat sense trampes ni bloqueigs de focus.</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>aria_roles_valid</code>
+                <div style="font-size:0.76rem;color:#6b7280;margin-top:2px">Rols ARIA vàlids</div>
+              </td>
+              <td><span class="badge b-gray" style="font-size:0.68rem">elements</span></td>
+              <td>
+                <div style="display:flex;align-items:center;gap:8px;min-width:130px">
+                  <div class="bar-sm" style="flex:1">
+                    <div class="bar-sm-fill" style="width:100%;background:#27ae60"></div>
+                  </div>
+                  <span class="lv-good" style="min-width:44px;text-align:right;font-variant-numeric:tabular-nums">
+                    1.000
+                  </span>
+                </div>
+              </td>
+              <td style="color:#6b7280;font-variant-numeric:tabular-nums">1.0</td>
+              <td style="text-align:center;font-weight:700;color:#374151">4</td>
+              <td><small style="color:#6b7280">4.1.2 AA</small></td>
+              <td>
+                <div class="note-text">ARIA usat correctament i coherentment. Les tecnologies d'assistència reben informació semàntica precisa.</div>
+                <div style="font-size:0.71rem;color:#9ca3af;margin-top:3px;font-style:italic">Proporció de rols i atributs ARIA correctament implementats respecte al total detectat.</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>accessible_names_coverage</code>
+                <div style="font-size:0.76rem;color:#6b7280;margin-top:2px">Noms accessibles</div>
+              </td>
+              <td><span class="badge b-gray" style="font-size:0.68rem">elements</span></td>
+              <td>
+                <div style="display:flex;align-items:center;gap:8px;min-width:130px">
+                  <div class="bar-sm" style="flex:1">
+                    <div class="bar-sm-fill" style="width:97%;background:#27ae60"></div>
+                  </div>
+                  <span class="lv-good" style="min-width:44px;text-align:right;font-variant-numeric:tabular-nums">
+                    0.976
+                  </span>
+                </div>
+              </td>
+              <td style="color:#6b7280;font-variant-numeric:tabular-nums">0.976</td>
+              <td style="text-align:center;font-weight:700;color:#374151">5</td>
+              <td><small style="color:#6b7280">4.1.2 AA</small></td>
+              <td>
+                <div class="note-text">Cobertura gairebé total. Els lectors de pantalla identifiquen correctament tots els elements.</div>
+                <div style="font-size:0.71rem;color:#9ca3af;margin-top:3px;font-style:italic">Fracció d'elements interactius i imatges amb nom accessible (label, aria-label, aria-labelledby, alt).</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>audit_critical_violations</code>
+                <div style="font-size:0.76rem;color:#6b7280;margin-top:2px">Violacions crítiques (axe)</div>
+              </td>
+              <td><span class="badge b-gray" style="font-size:0.68rem">wcag</span></td>
+              <td>
+                <div style="display:flex;align-items:center;gap:8px;min-width:130px">
+                  <div class="bar-sm" style="flex:1">
+                    <div class="bar-sm-fill" style="width:100%;background:#27ae60"></div>
+                  </div>
+                  <span class="lv-good" style="min-width:44px;text-align:right;font-variant-numeric:tabular-nums">
+                    1.000
+                  </span>
+                </div>
+              </td>
+              <td style="color:#6b7280;font-variant-numeric:tabular-nums">0</td>
+              <td style="text-align:center;font-weight:700;color:#374151">5</td>
+              <td><small style="color:#6b7280">Múltiples</small></td>
+              <td>
+                <div class="note-text">Cap violació crítica. La pàgina compleix els requisits bàsics d'accessibilitat normativa.</div>
+                <div style="font-size:0.71rem;color:#9ca3af;margin-top:3px;font-style:italic">Nombre de violacions WCAG de nivell crític detectades per axe-core. Penalització: −0.15 per violació.</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>audit_high_violations</code>
+                <div style="font-size:0.76rem;color:#6b7280;margin-top:2px">Violacions altes (axe)</div>
+              </td>
+              <td><span class="badge b-gray" style="font-size:0.68rem">wcag</span></td>
+              <td>
+                <div style="display:flex;align-items:center;gap:8px;min-width:130px">
+                  <div class="bar-sm" style="flex:1">
+                    <div class="bar-sm-fill" style="width:85%;background:#27ae60"></div>
+                  </div>
+                  <span class="lv-good" style="min-width:44px;text-align:right;font-variant-numeric:tabular-nums">
+                    0.850
+                  </span>
+                </div>
+              </td>
+              <td style="color:#6b7280;font-variant-numeric:tabular-nums">3</td>
+              <td style="text-align:center;font-weight:700;color:#374151">4</td>
+              <td><small style="color:#6b7280">Múltiples</small></td>
+              <td>
+                <div class="note-text">Cap violació greu. Excel·lent conformitat amb els criteris WCAG principals.</div>
+                <div style="font-size:0.71rem;color:#9ca3af;margin-top:3px;font-style:italic">Nombre de violacions WCAG greus detectades per axe-core. Penalització: −0.05 per violació.</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>audit_medium_violations</code>
+                <div style="font-size:0.76rem;color:#6b7280;margin-top:2px">Violacions mitjanes (axe)</div>
+              </td>
+              <td><span class="badge b-gray" style="font-size:0.68rem">wcag</span></td>
+              <td>
+                <div style="display:flex;align-items:center;gap:8px;min-width:130px">
+                  <div class="bar-sm" style="flex:1">
+                    <div class="bar-sm-fill" style="width:100%;background:#27ae60"></div>
+                  </div>
+                  <span class="lv-good" style="min-width:44px;text-align:right;font-variant-numeric:tabular-nums">
+                    1.000
+                  </span>
+                </div>
+              </td>
+              <td style="color:#6b7280;font-variant-numeric:tabular-nums">0</td>
+              <td style="text-align:center;font-weight:700;color:#374151">2</td>
+              <td><small style="color:#6b7280">Múltiples</small></td>
+              <td>
+                <div class="note-text">Cap violació moderada. Molt bon nivell d'accessibilitat en els criteris d'avaluació automàtica.</div>
+                <div style="font-size:0.71rem;color:#9ca3af;margin-top:3px;font-style:italic">Nombre de violacions WCAG moderades detectades per axe-core. Penalització: −0.02 per violació.</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>audit_low_violations</code>
+                <div style="font-size:0.76rem;color:#6b7280;margin-top:2px">Violacions baixes (axe)</div>
+              </td>
+              <td><span class="badge b-gray" style="font-size:0.68rem">wcag</span></td>
+              <td>
+                <div style="display:flex;align-items:center;gap:8px;min-width:130px">
+                  <div class="bar-sm" style="flex:1">
+                    <div class="bar-sm-fill" style="width:99%;background:#27ae60"></div>
+                  </div>
+                  <span class="lv-good" style="min-width:44px;text-align:right;font-variant-numeric:tabular-nums">
+                    0.990
+                  </span>
+                </div>
+              </td>
+              <td style="color:#6b7280;font-variant-numeric:tabular-nums">1</td>
+              <td style="text-align:center;font-weight:700;color:#374151">1</td>
+              <td><small style="color:#6b7280">Múltiples</small></td>
+              <td>
+                <div class="note-text">Cap violació de baixa severitat. Excel·lent adherència als criteris WCAG menors i bones pràctiques.</div>
+                <div style="font-size:0.71rem;color:#9ca3af;margin-top:3px;font-style:italic">Nombre de violacions WCAG de baixa severitat per axe-core. Penalització: −0.01 per violació.</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>page_flesch</code>
+                <div style="font-size:0.76rem;color:#6b7280;margin-top:2px">Llegibilitat Flesch</div>
+              </td>
+              <td><span class="badge b-gray" style="font-size:0.68rem">text</span></td>
+              <td>
+                <div style="display:flex;align-items:center;gap:8px;min-width:130px">
+                  <div class="bar-sm" style="flex:1">
+                    <div class="bar-sm-fill" style="width:50%;background:#f59e0b"></div>
+                  </div>
+                  <span class="lv-mid" style="min-width:44px;text-align:right;font-variant-numeric:tabular-nums">
+                    0.500
+                  </span>
+                </div>
+              </td>
+              <td style="color:#6b7280;font-variant-numeric:tabular-nums">—</td>
+              <td style="text-align:center;font-weight:700;color:#374151">2</td>
+              <td><small style="color:#6b7280">3.1.5 AAA</small></td>
+              <td>
+                <div class="note-text">Llegibilitat acceptable però textos complexos. Recomanable simplificar algunes seccions clau.</div>
+                <div style="font-size:0.71rem;color:#9ca3af;margin-top:3px;font-style:italic">Índex Flesch Reading Ease del contingut textual principal. Escala 0–100: >60 llegible; >80 molt fàcil.</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>text_complexity</code>
+                <div style="font-size:0.76rem;color:#6b7280;margin-top:2px">Complexitat textual</div>
+              </td>
+              <td><span class="badge b-gray" style="font-size:0.68rem">text</span></td>
+              <td>
+                <div style="display:flex;align-items:center;gap:8px;min-width:130px">
+                  <div class="bar-sm" style="flex:1">
+                    <div class="bar-sm-fill" style="width:50%;background:#f59e0b"></div>
+                  </div>
+                  <span class="lv-mid" style="min-width:44px;text-align:right;font-variant-numeric:tabular-nums">
+                    0.500
+                  </span>
+                </div>
+              </td>
+              <td style="color:#6b7280;font-variant-numeric:tabular-nums">—</td>
+              <td style="text-align:center;font-weight:700;color:#374151">1</td>
+              <td><small style="color:#6b7280">3.1 AA</small></td>
+              <td>
+                <div class="note-text">Complexitat moderada. Algunes frases llargues o vocabulari especialitzat que pot dificultar la comprensió.</div>
+                <div style="font-size:0.71rem;color:#9ca3af;margin-top:3px;font-style:italic">Mesura composta de complexitat textual: longitud de frases, proporció de paraules difícils i estructura.</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>heading_hierarchy</code>
+                <div style="font-size:0.76rem;color:#6b7280;margin-top:2px">Jerarquia de capçaleres</div>
+              </td>
+              <td><span class="badge b-gray" style="font-size:0.68rem">text</span></td>
+              <td>
+                <div style="display:flex;align-items:center;gap:8px;min-width:130px">
+                  <div class="bar-sm" style="flex:1">
+                    <div class="bar-sm-fill" style="width:100%;background:#27ae60"></div>
+                  </div>
+                  <span class="lv-good" style="min-width:44px;text-align:right;font-variant-numeric:tabular-nums">
+                    1.000
+                  </span>
+                </div>
+              </td>
+              <td style="color:#6b7280;font-variant-numeric:tabular-nums">1.0</td>
+              <td style="text-align:center;font-weight:700;color:#374151">3</td>
+              <td><small style="color:#6b7280">1.3.1 A</small></td>
+              <td>
+                <div class="note-text">Jerarquia de capçaleres perfecta. Estructura lògica i navegació eficient per a lectors de pantalla.</div>
+                <div style="font-size:0.71rem;color:#9ca3af;margin-top:3px;font-style:italic">Correctesa de la jerarquia de capçaleres HTML (H1 → H2 → H3... sense salts ni redundàncies).</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>alt_text_coverage</code>
+                <div style="font-size:0.76rem;color:#6b7280;margin-top:2px">Alt text d'imatges</div>
+              </td>
+              <td><span class="badge b-gray" style="font-size:0.68rem">elements</span></td>
+              <td>
+                <div style="display:flex;align-items:center;gap:8px;min-width:130px">
+                  <div class="bar-sm" style="flex:1">
+                    <div class="bar-sm-fill" style="width:19%;background:#ef4444"></div>
+                  </div>
+                  <span class="lv-bad" style="min-width:44px;text-align:right;font-variant-numeric:tabular-nums">
+                    0.190
+                  </span>
+                </div>
+              </td>
+              <td style="color:#6b7280;font-variant-numeric:tabular-nums">0.19</td>
+              <td style="text-align:center;font-weight:700;color:#374151">5</td>
+              <td><small style="color:#6b7280">1.1.1 A</small></td>
+              <td>
+                <div class="note-text">Moltes imatges sense alt text o amb alt text buit/genèric. Pèrdua crítica d'informació per a lectors de pantalla.</div>
+                <div style="font-size:0.71rem;color:#9ca3af;margin-top:3px;font-style:italic">Fracció d'imatges i SVGs informatius amb text alternatiu significatiu i no genèric.</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>landmark_coverage</code>
+                <div style="font-size:0.76rem;color:#6b7280;margin-top:2px">Landmarks de navegació</div>
+              </td>
+              <td><span class="badge b-gray" style="font-size:0.68rem">elements</span></td>
+              <td>
+                <div style="display:flex;align-items:center;gap:8px;min-width:130px">
+                  <div class="bar-sm" style="flex:1">
+                    <div class="bar-sm-fill" style="width:100%;background:#27ae60"></div>
+                  </div>
+                  <span class="lv-good" style="min-width:44px;text-align:right;font-variant-numeric:tabular-nums">
+                    1.000
+                  </span>
+                </div>
+              </td>
+              <td style="color:#6b7280;font-variant-numeric:tabular-nums">1.0</td>
+              <td style="text-align:center;font-weight:700;color:#374151">3</td>
+              <td><small style="color:#6b7280">1.3.6 AAA</small></td>
+              <td>
+                <div class="note-text">Tots els landmarks principals presents. Navegació regional eficient per als lectors de pantalla.</div>
+                <div style="font-size:0.71rem;color:#9ca3af;margin-top:3px;font-style:italic">Presència i cobertura dels landmarks HTML5/ARIA principals (main, nav, header, footer, aside).</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>performance_lcp</code>
+                <div style="font-size:0.76rem;color:#6b7280;margin-top:2px">LCP (Core Web Vitals)</div>
+              </td>
+              <td><span class="badge b-gray" style="font-size:0.68rem">performance</span></td>
+              <td>
+                <div style="display:flex;align-items:center;gap:8px;min-width:130px">
+                  <div class="bar-sm" style="flex:1">
+                    <div class="bar-sm-fill" style="width:50%;background:#f59e0b"></div>
+                  </div>
+                  <span class="lv-mid" style="min-width:44px;text-align:right;font-variant-numeric:tabular-nums">
+                    0.500
+                  </span>
+                </div>
+              </td>
+              <td style="color:#6b7280;font-variant-numeric:tabular-nums">—</td>
+              <td style="text-align:center;font-weight:700;color:#374151">2</td>
+              <td><small style="color:#6b7280">EN 301 549</small></td>
+              <td>
+                <div class="note-text">LCP entre 2.5 s i 4 s. Càrrega acceptable però pot frustrar usuaris amb connexions limitades.</div>
+                <div style="font-size:0.71rem;color:#9ca3af;margin-top:3px;font-style:italic">Largest Contentful Paint (LCP): temps fins al renderitzat de l'element principal visible (en ms).</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="metric-score">0.5</div>
-      <div class="metric-weight">w=5</div>
     </div>
-    
-    
-    
-    <div class="metric-row">
-      <div class="metric-name">focus_visible_ratio</div>
-      <div class="bar-wrap">
-        <div class="bar-fill mid" style="width: 50%"></div>
-      </div>
-      <div class="metric-score">0.5</div>
-      <div class="metric-weight">w=4</div>
-    </div>
-    
-    
-    
-    <div class="metric-row">
-      <div class="metric-name">target_size_clean</div>
-      <div class="bar-wrap">
-        <div class="bar-fill mid" style="width: 50%"></div>
-      </div>
-      <div class="metric-score">0.5</div>
-      <div class="metric-weight">w=3</div>
-    </div>
-    
-    
-    
-    <div class="metric-row">
-      <div class="metric-name">keyboard_clean</div>
-      <div class="bar-wrap">
-        <div class="bar-fill mid" style="width: 50%"></div>
-      </div>
-      <div class="metric-score">0.5</div>
-      <div class="metric-weight">w=5</div>
-    </div>
-    
-    
-    
-    <div class="metric-row">
-      <div class="metric-name">aria_roles_valid</div>
-      <div class="bar-wrap">
-        <div class="bar-fill good" style="width: 100%"></div>
-      </div>
-      <div class="metric-score">1.0</div>
-      <div class="metric-weight">w=4</div>
-    </div>
-    
-    
-    
-    <div class="metric-row">
-      <div class="metric-name">accessible_names_coverage</div>
-      <div class="bar-wrap">
-        <div class="bar-fill good" style="width: 97%"></div>
-      </div>
-      <div class="metric-score">0.976</div>
-      <div class="metric-weight">w=5</div>
-    </div>
-    
-    
-    
-    <div class="metric-row">
-      <div class="metric-name">audit_critical_violations</div>
-      <div class="bar-wrap">
-        <div class="bar-fill good" style="width: 100%"></div>
-      </div>
-      <div class="metric-score">1.0</div>
-      <div class="metric-weight">w=5</div>
-    </div>
-    
-    
-    
-    <div class="metric-row">
-      <div class="metric-name">audit_high_violations</div>
-      <div class="bar-wrap">
-        <div class="bar-fill good" style="width: 80%"></div>
-      </div>
-      <div class="metric-score">0.8</div>
-      <div class="metric-weight">w=4</div>
-    </div>
-    
-    
-    
-    <div class="metric-row">
-      <div class="metric-name">audit_medium_violations</div>
-      <div class="bar-wrap">
-        <div class="bar-fill good" style="width: 98%"></div>
-      </div>
-      <div class="metric-score">0.98</div>
-      <div class="metric-weight">w=2</div>
-    </div>
-    
-    
-    
-    <div class="metric-row">
-      <div class="metric-name">audit_low_violations</div>
-      <div class="bar-wrap">
-        <div class="bar-fill good" style="width: 99%"></div>
-      </div>
-      <div class="metric-score">0.99</div>
-      <div class="metric-weight">w=1</div>
-    </div>
-    
-    
-    
-    <div class="metric-row">
-      <div class="metric-name">page_flesch</div>
-      <div class="bar-wrap">
-        <div class="bar-fill mid" style="width: 50%"></div>
-      </div>
-      <div class="metric-score">0.5</div>
-      <div class="metric-weight">w=2</div>
-    </div>
-    
-    
-    
-    <div class="metric-row">
-      <div class="metric-name">text_complexity</div>
-      <div class="bar-wrap">
-        <div class="bar-fill mid" style="width: 50%"></div>
-      </div>
-      <div class="metric-score">0.5</div>
-      <div class="metric-weight">w=1</div>
-    </div>
-    
-    
-    
-    <div class="metric-row">
-      <div class="metric-name">heading_hierarchy</div>
-      <div class="bar-wrap">
-        <div class="bar-fill good" style="width: 100%"></div>
-      </div>
-      <div class="metric-score">1.0</div>
-      <div class="metric-weight">w=3</div>
-    </div>
-    
-    
-    
-    <div class="metric-row">
-      <div class="metric-name">alt_text_coverage</div>
-      <div class="bar-wrap">
-        <div class="bar-fill bad" style="width: 19%"></div>
-      </div>
-      <div class="metric-score">0.191</div>
-      <div class="metric-weight">w=5</div>
-    </div>
-    
-    
-    
-    <div class="metric-row">
-      <div class="metric-name">landmark_coverage</div>
-      <div class="bar-wrap">
-        <div class="bar-fill good" style="width: 100%"></div>
-      </div>
-      <div class="metric-score">1.0</div>
-      <div class="metric-weight">w=3</div>
-    </div>
-    
-    
-    
-    <div class="metric-row">
-      <div class="metric-name">performance_lcp</div>
-      <div class="bar-wrap">
-        <div class="bar-fill mid" style="width: 50%"></div>
-      </div>
-      <div class="metric-score">0.5</div>
-      <div class="metric-weight">w=2</div>
-    </div>
-    
-  </section>
 
-  <!-- Intervencions prioritzades -->
-  <section>
-    <h2>Intervencions Prioritzades</h2>
-    <table>
-      <tr>
-        <th>#</th>
-        <th>Metrica</th>
-        <th>Accio recomanada</th>
-        <th>Score actual</th>
-        <th>Cost</th>
-        <th>Impacte</th>
-        <th>WCAG</th>
-      </tr>
-      
-      
-      <tr class="priority-high">
-        <td><span class="rank-badge">1</span></td>
-        <td><code>alt_text_coverage</code></td>
-        <td>Afegir text alternatiu a totes les imatges informatives</td>
-        <td>
-          <span class="badge badge-red">
-            0.19
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-yellow">
-            mig
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-orange">
-            alt
-          </span>
-        </td>
-        <td><small>1.1.1</small></td>
-      </tr>
-      
-      
-      <tr class="priority-mid">
-        <td><span class="rank-badge">2</span></td>
-        <td><code>color_contrast_ratio</code></td>
-        <td>Corregir contrast de color text/fons</td>
-        <td>
-          <span class="badge badge-yellow">
-            0.5
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-yellow">
-            mig
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-orange">
-            alt
-          </span>
-        </td>
-        <td><small>1.4.3</small></td>
-      </tr>
-      
-      
-      <tr class="priority-mid">
-        <td><span class="rank-badge">3</span></td>
-        <td><code>keyboard_clean</code></td>
-        <td>Eliminar trampes de focus i assegurar navegació per teclat</td>
-        <td>
-          <span class="badge badge-yellow">
-            0.5
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-orange">
-            alt
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-red">
-            critic
-          </span>
-        </td>
-        <td><small>2.1.1/2.1.2</small></td>
-      </tr>
-      
-      
-      <tr class="priority-mid">
-        <td><span class="rank-badge">4</span></td>
-        <td><code>focus_visible_ratio</code></td>
-        <td>Afegir indicadors de focus visibles (CSS :focus)</td>
-        <td>
-          <span class="badge badge-yellow">
-            0.5
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-green">
-            baix
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-orange">
-            alt
-          </span>
-        </td>
-        <td><small>2.4.7/2.4.11</small></td>
-      </tr>
-      
-      
-      <tr class="priority-mid">
-        <td><span class="rank-badge">5</span></td>
-        <td><code>target_size_clean</code></td>
-        <td>Ampliar àrees d'interacció (mínim 24x24 px WCAG 2.5.8)</td>
-        <td>
-          <span class="badge badge-yellow">
-            0.5
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-yellow">
-            mig
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-gray">
-            mig
-          </span>
-        </td>
-        <td><small>2.5.8</small></td>
-      </tr>
-      
-      
-      <tr class="priority-low">
-        <td><span class="rank-badge">6</span></td>
-        <td><code>page_flesch</code></td>
-        <td>Simplificar el text per millorar la llegibilitat (Flesch > 60)</td>
-        <td>
-          <span class="badge badge-yellow">
-            0.5
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-orange">
-            alt
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-gray">
-            mig
-          </span>
-        </td>
-        <td><small>3.1.5</small></td>
-      </tr>
-      
-      
-      <tr class="priority-low">
-        <td><span class="rank-badge">7</span></td>
-        <td><code>performance_lcp</code></td>
-        <td>Optimitzar LCP: imatges, fonts i recursos bloquejants</td>
-        <td>
-          <span class="badge badge-yellow">
-            0.5
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-orange">
-            alt
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-gray">
-            mig
-          </span>
-        </td>
-        <td><small>N/A (Web Vitals)</small></td>
-      </tr>
-      
-      
-      <tr class="priority-low">
-        <td><span class="rank-badge">8</span></td>
-        <td><code>audit_high_violations</code></td>
-        <td>Resoldre violacions greus d'axe-core (nivell AA)</td>
-        <td>
-          <span class="badge badge-green">
-            0.8
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-yellow">
-            mig
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-orange">
-            alt
-          </span>
-        </td>
-        <td><small>multiples</small></td>
-      </tr>
-      
-      
-      <tr class="priority-low">
-        <td><span class="rank-badge">9</span></td>
-        <td><code>text_complexity</code></td>
-        <td>Reduir frases llargues i vocabulari complex</td>
-        <td>
-          <span class="badge badge-yellow">
-            0.5
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-orange">
-            alt
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-gray">
-            mig
-          </span>
-        </td>
-        <td><small>3.1.5</small></td>
-      </tr>
-      
-      
-      <tr class="priority-low">
-        <td><span class="rank-badge">10</span></td>
-        <td><code>accessible_names_coverage</code></td>
-        <td>Afegir aria-label/aria-labelledby als elements interactius sense nom</td>
-        <td>
-          <span class="badge badge-green">
-            0.98
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-green">
-            baix
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-orange">
-            alt
-          </span>
-        </td>
-        <td><small>4.1.2/1.1.1</small></td>
-      </tr>
-      
-      
-      <tr class="priority-low">
-        <td><span class="rank-badge">11</span></td>
-        <td><code>audit_medium_violations</code></td>
-        <td>Revisar i corregir violacions moderades d'axe-core</td>
-        <td>
-          <span class="badge badge-green">
-            0.98
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-yellow">
-            mig
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-gray">
-            mig
-          </span>
-        </td>
-        <td><small>multiples</small></td>
-      </tr>
-      
-      
-      <tr class="priority-low">
-        <td><span class="rank-badge">12</span></td>
-        <td><code>aria_roles_valid</code></td>
-        <td>Corregir atributs ARIA invàlids o incorrectes</td>
-        <td>
-          <span class="badge badge-green">
-            1.0
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-green">
-            baix
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-gray">
-            mig
-          </span>
-        </td>
-        <td><small>4.1.2</small></td>
-      </tr>
-      
-      
-      <tr class="priority-low">
-        <td><span class="rank-badge">13</span></td>
-        <td><code>audit_critical_violations</code></td>
-        <td>Resoldre violacions critiques d'axe-core (nivell A)</td>
-        <td>
-          <span class="badge badge-green">
-            1.0
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-orange">
-            alt
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-red">
-            critic
-          </span>
-        </td>
-        <td><small>multiples</small></td>
-      </tr>
-      
-      
-      <tr class="priority-low">
-        <td><span class="rank-badge">14</span></td>
-        <td><code>heading_hierarchy</code></td>
-        <td>Corregir la jerarquia d'encapcalaments (H1->H2->H3...)</td>
-        <td>
-          <span class="badge badge-green">
-            1.0
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-green">
-            baix
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-gray">
-            mig
-          </span>
-        </td>
-        <td><small>1.3.1/2.4.6</small></td>
-      </tr>
-      
-      
-      <tr class="priority-low">
-        <td><span class="rank-badge">15</span></td>
-        <td><code>landmark_coverage</code></td>
-        <td>Afegir landmarks semantics (main, nav, header, footer)</td>
-        <td>
-          <span class="badge badge-green">
-            1.0
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-green">
-            baix
-          </span>
-        </td>
-        <td>
-          <span class="badge badge-gray">
-            mig
-          </span>
-        </td>
-        <td><small>1.3.1/4.1.2</small></td>
-      </tr>
-      
-    </table>
-  </section>
+    <!-- Intervencions prioritzades (M7) -->
 
-  <!-- Violacions axe-core -->
-  
-  <section>
-    <h2>Violacions axe-core (6)</h2>
-    <table>
-      <tr><th>ID</th><th>Impacte</th><th>Descripcio</th><th>Elements afectats</th></tr>
-      
-      <tr>
-        <td><code>aria-allowed-role</code></td>
-        <td><span class="impact-minor">minor</span></td>
-        <td>Ensures role attribute has an appropriate value for the element</td>
-        <td>2</td>
-      </tr>
-      
-      <tr>
-        <td><code>color-contrast</code></td>
-        <td><span class="impact-serious">serious</span></td>
-        <td>Ensures the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds</td>
-        <td>1</td>
-      </tr>
-      
-      <tr>
-        <td><code>label-title-only</code></td>
-        <td><span class="impact-serious">serious</span></td>
-        <td>Ensures that every form element has a visible label and is not solely labeled using hidden labels, or the title or aria-describedby attributes</td>
-        <td>1</td>
-      </tr>
-      
-      <tr>
-        <td><code>link-name</code></td>
-        <td><span class="impact-serious">serious</span></td>
-        <td>Ensures links have discernible text</td>
-        <td>1</td>
-      </tr>
-      
-      <tr>
-        <td><code>region</code></td>
-        <td><span class="impact-moderate">moderate</span></td>
-        <td>Ensures all page content is contained by landmarks</td>
-        <td>6</td>
-      </tr>
-      
-      <tr>
-        <td><code>tabindex</code></td>
-        <td><span class="impact-serious">serious</span></td>
-        <td>Ensures tabindex attribute values are not greater than 0</td>
-        <td>1</td>
-      </tr>
-      
-    </table>
-  </section>
-  
+    <!-- Violacions axe-core (M3) -->
 
-  <!-- Metriques textuals -->
-  
+    <!-- Mètriques de llegibilitat textual (M4) -->
 
-  <!-- Rendiment -->
-  
+    <!-- Rendiment — Core Web Vitals (M5) -->
 
-  <!-- Screenshot -->
-  
-  <section>
-    <h2>Captura de pantalla</h2>
-    <div class="screenshot-wrap">
-      <img src="../assets/educacio_gencat_cat_ca_inici_Institucional_screenshot.png" alt="Captura de pantalla de https://educacio.gencat.cat/ca/inici" loading="lazy">
+    <!-- Valors raw -->
+    <div class="card" role="region" aria-labelledby="raw-h">
+      <div class="card-hd"><h2 id="raw-h">Valors raw de les mètriques</h2></div>
+      <div style="overflow-x:auto">
+        <table class="met-table" aria-label="Valors raw de les mètriques del pipeline">
+          <thead>
+            <tr><th scope="col">Mètrica</th><th scope="col">Valor raw</th><th scope="col">Normalitzat</th><th scope="col">Pes</th><th scope="col">WCAG</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>color_contrast_ratio</code></td>
+              <td style="font-variant-numeric:tabular-nums">—</td>
+              <td class="lv-mid" style="font-variant-numeric:tabular-nums">0.5000</td>
+              <td style="text-align:center;font-weight:700">5</td>
+              <td><small style="color:#9ca3af">1.4.3 AA</small></td>
+            </tr>
+            <tr>
+              <td><code>focus_visible_ratio</code></td>
+              <td style="font-variant-numeric:tabular-nums">—</td>
+              <td class="lv-mid" style="font-variant-numeric:tabular-nums">0.5000</td>
+              <td style="text-align:center;font-weight:700">4</td>
+              <td><small style="color:#9ca3af">2.4.7 AA</small></td>
+            </tr>
+            <tr>
+              <td><code>target_size_clean</code></td>
+              <td style="font-variant-numeric:tabular-nums">—</td>
+              <td class="lv-mid" style="font-variant-numeric:tabular-nums">0.5000</td>
+              <td style="text-align:center;font-weight:700">3</td>
+              <td><small style="color:#9ca3af">2.5.8 AA</small></td>
+            </tr>
+            <tr>
+              <td><code>keyboard_clean</code></td>
+              <td style="font-variant-numeric:tabular-nums">—</td>
+              <td class="lv-mid" style="font-variant-numeric:tabular-nums">0.5000</td>
+              <td style="text-align:center;font-weight:700">5</td>
+              <td><small style="color:#9ca3af">2.1.1 A</small></td>
+            </tr>
+            <tr>
+              <td><code>aria_roles_valid</code></td>
+              <td style="font-variant-numeric:tabular-nums">1.0</td>
+              <td class="lv-good" style="font-variant-numeric:tabular-nums">1.0000</td>
+              <td style="text-align:center;font-weight:700">4</td>
+              <td><small style="color:#9ca3af">4.1.2 AA</small></td>
+            </tr>
+            <tr>
+              <td><code>accessible_names_coverage</code></td>
+              <td style="font-variant-numeric:tabular-nums">0.976</td>
+              <td class="lv-good" style="font-variant-numeric:tabular-nums">0.9760</td>
+              <td style="text-align:center;font-weight:700">5</td>
+              <td><small style="color:#9ca3af">4.1.2 AA</small></td>
+            </tr>
+            <tr>
+              <td><code>audit_critical_violations</code></td>
+              <td style="font-variant-numeric:tabular-nums">0</td>
+              <td class="lv-good" style="font-variant-numeric:tabular-nums">1.0000</td>
+              <td style="text-align:center;font-weight:700">5</td>
+              <td><small style="color:#9ca3af">Múltiples</small></td>
+            </tr>
+            <tr>
+              <td><code>audit_high_violations</code></td>
+              <td style="font-variant-numeric:tabular-nums">3</td>
+              <td class="lv-good" style="font-variant-numeric:tabular-nums">0.8500</td>
+              <td style="text-align:center;font-weight:700">4</td>
+              <td><small style="color:#9ca3af">Múltiples</small></td>
+            </tr>
+            <tr>
+              <td><code>audit_medium_violations</code></td>
+              <td style="font-variant-numeric:tabular-nums">0</td>
+              <td class="lv-good" style="font-variant-numeric:tabular-nums">1.0000</td>
+              <td style="text-align:center;font-weight:700">2</td>
+              <td><small style="color:#9ca3af">Múltiples</small></td>
+            </tr>
+            <tr>
+              <td><code>audit_low_violations</code></td>
+              <td style="font-variant-numeric:tabular-nums">1</td>
+              <td class="lv-good" style="font-variant-numeric:tabular-nums">0.9900</td>
+              <td style="text-align:center;font-weight:700">1</td>
+              <td><small style="color:#9ca3af">Múltiples</small></td>
+            </tr>
+            <tr>
+              <td><code>page_flesch</code></td>
+              <td style="font-variant-numeric:tabular-nums">—</td>
+              <td class="lv-mid" style="font-variant-numeric:tabular-nums">0.5000</td>
+              <td style="text-align:center;font-weight:700">2</td>
+              <td><small style="color:#9ca3af">3.1.5 AAA</small></td>
+            </tr>
+            <tr>
+              <td><code>text_complexity</code></td>
+              <td style="font-variant-numeric:tabular-nums">—</td>
+              <td class="lv-mid" style="font-variant-numeric:tabular-nums">0.5000</td>
+              <td style="text-align:center;font-weight:700">1</td>
+              <td><small style="color:#9ca3af">3.1 AA</small></td>
+            </tr>
+            <tr>
+              <td><code>heading_hierarchy</code></td>
+              <td style="font-variant-numeric:tabular-nums">1.0</td>
+              <td class="lv-good" style="font-variant-numeric:tabular-nums">1.0000</td>
+              <td style="text-align:center;font-weight:700">3</td>
+              <td><small style="color:#9ca3af">1.3.1 A</small></td>
+            </tr>
+            <tr>
+              <td><code>alt_text_coverage</code></td>
+              <td style="font-variant-numeric:tabular-nums">0.19</td>
+              <td class="lv-bad" style="font-variant-numeric:tabular-nums">0.1900</td>
+              <td style="text-align:center;font-weight:700">5</td>
+              <td><small style="color:#9ca3af">1.1.1 A</small></td>
+            </tr>
+            <tr>
+              <td><code>landmark_coverage</code></td>
+              <td style="font-variant-numeric:tabular-nums">1.0</td>
+              <td class="lv-good" style="font-variant-numeric:tabular-nums">1.0000</td>
+              <td style="text-align:center;font-weight:700">3</td>
+              <td><small style="color:#9ca3af">1.3.6 AAA</small></td>
+            </tr>
+            <tr>
+              <td><code>performance_lcp</code></td>
+              <td style="font-variant-numeric:tabular-nums">—</td>
+              <td class="lv-mid" style="font-variant-numeric:tabular-nums">0.5000</td>
+              <td style="text-align:center;font-weight:700">2</td>
+              <td><small style="color:#9ca3af">EN 301 549</small></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </section>
-  
 
-  <!-- Taula raw metrics -->
-  <section>
-    <h2>Valors Raw de Metriques</h2>
-    <table>
-      <tr><th>Metrica</th><th>Valor raw</th><th>Normalitzat</th><th>Pes</th></tr>
-      
-      <tr>
-        <td><code>color_contrast_ratio</code></td>
-        <td>0.5</td>
-        <td>0.5</td>
-        <td>5</td>
-      </tr>
-      
-      <tr>
-        <td><code>focus_visible_ratio</code></td>
-        <td>N/A</td>
-        <td>0.5</td>
-        <td>4</td>
-      </tr>
-      
-      <tr>
-        <td><code>target_size_clean</code></td>
-        <td>N/A</td>
-        <td>0.5</td>
-        <td>3</td>
-      </tr>
-      
-      <tr>
-        <td><code>keyboard_clean</code></td>
-        <td>N/A</td>
-        <td>0.5</td>
-        <td>5</td>
-      </tr>
-      
-      <tr>
-        <td><code>aria_roles_valid</code></td>
-        <td>1.0</td>
-        <td>1.0</td>
-        <td>4</td>
-      </tr>
-      
-      <tr>
-        <td><code>accessible_names_coverage</code></td>
-        <td>0.976</td>
-        <td>0.976</td>
-        <td>5</td>
-      </tr>
-      
-      <tr>
-        <td><code>audit_critical_violations</code></td>
-        <td>0</td>
-        <td>1.0</td>
-        <td>5</td>
-      </tr>
-      
-      <tr>
-        <td><code>audit_high_violations</code></td>
-        <td>4</td>
-        <td>0.8</td>
-        <td>4</td>
-      </tr>
-      
-      <tr>
-        <td><code>audit_medium_violations</code></td>
-        <td>1</td>
-        <td>0.98</td>
-        <td>2</td>
-      </tr>
-      
-      <tr>
-        <td><code>audit_low_violations</code></td>
-        <td>1</td>
-        <td>0.99</td>
-        <td>1</td>
-      </tr>
-      
-      <tr>
-        <td><code>page_flesch</code></td>
-        <td>N/A</td>
-        <td>0.5</td>
-        <td>2</td>
-      </tr>
-      
-      <tr>
-        <td><code>text_complexity</code></td>
-        <td>N/A</td>
-        <td>0.5</td>
-        <td>1</td>
-      </tr>
-      
-      <tr>
-        <td><code>heading_hierarchy</code></td>
-        <td>1.0</td>
-        <td>1.0</td>
-        <td>3</td>
-      </tr>
-      
-      <tr>
-        <td><code>alt_text_coverage</code></td>
-        <td>0.191</td>
-        <td>0.191</td>
-        <td>5</td>
-      </tr>
-      
-      <tr>
-        <td><code>landmark_coverage</code></td>
-        <td>1.0</td>
-        <td>1.0</td>
-        <td>3</td>
-      </tr>
-      
-      <tr>
-        <td><code>performance_lcp</code></td>
-        <td>N/A</td>
-        <td>0.5</td>
-        <td>2</td>
-      </tr>
-      
-    </table>
-  </section>
-
-</main>
-</div>
+  </main>
+  </div>
 
   <footer class="site-footer" role="contentinfo">
-    <p>Pipeline d'accessibilitat cognitiva i visual (ACI) v0.1.0 — TFM Jordi Miguel i Costal · UOC</p>
-    <p><small>Basat en WCAG 2.1/2.2, EN 301 549 i axe-core &nbsp;|&nbsp; 2026-05-24 14:03 UTC</small></p>
+    <p>ACI Pipeline v0.1.0 · Jordi Miguel i Costal · TFM 2026 · UOC EEPSM</p>
+    <p>WCAG 2.1/2.2 AA · EN 301 549 · axe-core · 2026-05-24 14:58 UTC</p>
   </footer>
-  <script type="module">
-    import { initI18n } from '../../static/js/i18n.js';
-    initI18n();
-  </script>
+
+  <!-- D3 chart init -->
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
   <script>
-  /* Injecta navegació entre perfils llegint el manifest */
-  (async () => {
-    const PROFILE_LABELS = {
-      wcag_strict: 'WCAG Strict',
-      readability_first: 'Readability',
-      visual_first: 'Visual First'
-    };
-    const PROFILE_COLORS = {
-      wcag_strict: { bg: '#dbeafe', fg: '#1e40af', border: '#93c5fd' },
-      readability_first: { bg: '#d4edda', fg: '#1a6e30', border: '#86efac' },
-      visual_first: { bg: '#f8d7da', fg: '#721c24', border: '#fca5a5' }
-    };
-    const CURRENT_PROFILE = 'wcag_strict';
-    const CURRENT_URL = 'https://educacio.gencat.cat/ca/inici';
+    var METRICS_DATA = [{"key": "color_contrast_ratio", "label": "Contrast de color", "normalized": 0.5, "weight": 5, "group": "wcag", "level": "mid"}, {"key": "focus_visible_ratio", "label": "Visibilitat del focus", "normalized": 0.5, "weight": 4, "group": "wcag", "level": "mid"}, {"key": "target_size_clean", "label": "Mida objectiu tàctil", "normalized": 0.5, "weight": 3, "group": "wcag", "level": "mid"}, {"key": "keyboard_clean", "label": "Navegació per teclat", "normalized": 0.5, "weight": 5, "group": "wcag", "level": "mid"}, {"key": "aria_roles_valid", "label": "Rols ARIA vàlids", "normalized": 1.0, "weight": 4, "group": "elements", "level": "good"}, {"key": "accessible_names_coverage", "label": "Noms accessibles", "normalized": 0.976, "weight": 5, "group": "elements", "level": "good"}, {"key": "audit_critical_violations", "label": "Violacions crítiques (axe)", "normalized": 1.0, "weight": 5, "group": "wcag", "level": "good"}, {"key": "audit_high_violations", "label": "Violacions altes (axe)", "normalized": 0.85, "weight": 4, "group": "wcag", "level": "good"}, {"key": "audit_medium_violations", "label": "Violacions mitjanes (axe)", "normalized": 1.0, "weight": 2, "group": "wcag", "level": "good"}, {"key": "audit_low_violations", "label": "Violacions baixes (axe)", "normalized": 0.99, "weight": 1, "group": "wcag", "level": "good"}, {"key": "page_flesch", "label": "Llegibilitat Flesch", "normalized": 0.5, "weight": 2, "group": "text", "level": "mid"}, {"key": "text_complexity", "label": "Complexitat textual", "normalized": 0.5, "weight": 1, "group": "text", "level": "mid"}, {"key": "heading_hierarchy", "label": "Jerarquia de capçaleres", "normalized": 1.0, "weight": 3, "group": "text", "level": "good"}, {"key": "alt_text_coverage", "label": "Alt text d'imatges", "normalized": 0.19, "weight": 5, "group": "elements", "level": "bad"}, {"key": "landmark_coverage", "label": "Landmarks de navegació", "normalized": 1.0, "weight": 3, "group": "elements", "level": "good"}, {"key": "performance_lcp", "label": "LCP (Core Web Vitals)", "normalized": 0.5, "weight": 2, "group": "performance", "level": "mid"}];
+    var SUB_SCORES_DATA = [{"name": "wcag", "label": "WCAG", "value": 3.25}, {"name": "text", "label": "Text", "value": 3.75}, {"name": "elements", "label": "Elements", "value": 3.774}, {"name": "performance", "label": "Rendiment", "value": 2.5}];
+    var PROFILE_COLOR = "#1d4ed8";
+  </script>
 
-    try {
-      const res = await fetch('../data/reports_manifest.json');
-      if (!res.ok) return;
-      const manifest = await res.json();
-      const entry = manifest.find(e => e.url === CURRENT_URL);
-      if (!entry) return;
+  <script>
+  (function () {
+    if (!window.d3 || !METRICS_DATA || !METRICS_DATA.length) return;
 
-      const profileReports = entry.profile_reports || {};
-      const hasCmp = !!entry.comparative_report;
-      if (!Object.keys(profileReports).length && !hasCmp) return;
+    var LC = { good: "#27ae60", mid: "#f59e0b", bad: "#ef4444", unknown: "#d1d5db" };
+    var GC = { wcag: "#eff6ff", text: "#f0fdf4", elements: "#faf5ff", performance: "#fff7ed" };
+    var el = document.getElementById("metrics-chart");
+    if (!el) return;
 
-      const nav = document.getElementById('profile-nav');
-      const parts = [];
+    var m = { top: 8, right: 95, bottom: 24, left: 215 };
+    var fullW = el.clientWidth || 720;
+    var W = Math.max(fullW - m.left - m.right, 160);
+    var BH = 22, GAP = 5;
+    var H = METRICS_DATA.length * (BH + GAP);
 
-      parts.push('<span style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:#6c757d;margin-right:4px;">Perfils:</span>');
+    var svg = d3.select("#metrics-chart").append("svg")
+      .attr("width", fullW).attr("height", H + m.top + m.bottom)
+      .attr("aria-hidden", "true")
+      .append("g").attr("transform", "translate(" + m.left + "," + m.top + ")");
 
-      for (const [p, url] of Object.entries(profileReports)) {
-        const isCurrent = p === CURRENT_PROFILE;
-        const c = PROFILE_COLORS[p] || { bg: '#f1f3f5', fg: '#333', border: '#ccc' };
-        parts.push(`<a href="${url}"
-          style="display:inline-flex;align-items:center;padding:4px 10px;border-radius:4px;
-                 font-size:0.78rem;font-weight:700;text-decoration:none;
-                 background:${isCurrent ? c.fg : c.bg};color:${isCurrent ? '#fff' : c.fg};
-                 border:1.5px solid ${c.border};"
-          ${isCurrent ? 'aria-current="page"' : ''}
-          aria-label="Informe perfil ${PROFILE_LABELS[p] || p}">
-          ${PROFILE_LABELS[p] || p}
-        </a>`);
-      }
+    var xSc = d3.scaleLinear().domain([0, 1]).range([0, W]);
+    var ySc = d3.scaleBand()
+      .domain(METRICS_DATA.map(function (d) { return d.key; }))
+      .range([0, H]).padding(0.18);
 
-      if (hasCmp) {
-        parts.push(`<a href="${entry.comparative_report}" target="_blank" rel="noopener"
-          style="display:inline-flex;align-items:center;padding:4px 10px;border-radius:4px;
-                 font-size:0.78rem;font-weight:700;text-decoration:none;
-                 background:#003366;color:#fff;border:1.5px solid #003366;"
-          aria-label="Informe comparatiu entre els tres perfils">
-          ⇌ Comparatiu
-        </a>`);
-      }
+    // Grid
+    [0.2, 0.4, 0.6, 0.8, 1.0].forEach(function (v) {
+      svg.append("line")
+        .attr("x1", xSc(v)).attr("x2", xSc(v)).attr("y1", 0).attr("y2", H)
+        .attr("stroke", "#e5e7eb").attr("stroke-dasharray", "3,3").attr("stroke-width", 1);
+    });
 
-      nav.innerHTML = parts.join('');
-      nav.style.display = 'flex';
-    } catch (_) { /* manifest no disponible: silenci */ }
-  })();
+    // Group row backgrounds
+    METRICS_DATA.forEach(function (d) {
+      svg.append("rect")
+        .attr("x", -m.left).attr("y", ySc(d.key))
+        .attr("width", fullW).attr("height", ySc.bandwidth())
+        .attr("fill", GC[d.group] || "#f9fafb").attr("fill-opacity", 0.45);
+    });
+
+    // Bars
+    svg.selectAll(".bar").data(METRICS_DATA).enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", 0).attr("y", function (d) { return ySc(d.key); })
+      .attr("width", function (d) { return xSc(d.normalized || 0); })
+      .attr("height", ySc.bandwidth())
+      .attr("fill", function (d) { return LC[d.level] || "#d1d5db"; })
+      .attr("rx", 3).attr("ry", 3);
+
+    // Metric labels (left)
+    svg.selectAll(".lbl").data(METRICS_DATA).enter().append("text")
+      .attr("x", -8).attr("y", function (d) { return ySc(d.key) + ySc.bandwidth() / 2; })
+      .attr("dy", "0.35em").attr("text-anchor", "end")
+      .attr("font-size", "11px").attr("fill", "#374151")
+      .text(function (d) { return d.label; });
+
+    // Value labels (right of bar)
+    svg.selectAll(".val").data(METRICS_DATA).enter().append("text")
+      .attr("x", function (d) { return xSc(d.normalized || 0) + 5; })
+      .attr("y", function (d) { return ySc(d.key) + ySc.bandwidth() / 2; })
+      .attr("dy", "0.35em").attr("font-size", "11px").attr("font-weight", "700")
+      .attr("fill", function (d) { return LC[d.level] || "#9ca3af"; })
+      .text(function (d) { return d.normalized != null ? d.normalized.toFixed(3) : "—"; });
+
+    // Weight badge (far right)
+    svg.selectAll(".wgt").data(METRICS_DATA).enter().append("text")
+      .attr("x", function (d) { return xSc(d.normalized || 0) + 55; })
+      .attr("y", function (d) { return ySc(d.key) + ySc.bandwidth() / 2; })
+      .attr("dy", "0.35em").attr("font-size", "9.5px").attr("fill", "#b0b7c3")
+      .text(function (d) { return "w=" + d.weight; });
+
+    // X axis ticks
+    svg.append("g").attr("transform", "translate(0," + (H + 4) + ")")
+      .call(d3.axisBottom(xSc).ticks(5).tickSize(3).tickFormat(d3.format(".1f")))
+      .call(function (g) {
+        g.select(".domain").remove();
+        g.selectAll("text").attr("font-size", "9px").attr("fill", "#9ca3af");
+        g.selectAll(".tick line").attr("stroke", "#e5e7eb");
+      });
+  }());
   </script>
 </body>
 </html>
