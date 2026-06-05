@@ -20,10 +20,9 @@
 6. [Execució local](#execució-local)
 7. [Execució via GitHub Actions](#execució-via-github-actions)
 8. [Publicació a GitHub Pages](#publicació-a-github-pages)
-9. [Com pujar a GitHub](#com-pujar-a-github)
-10. [Configuració de scoring](#configuració-de-scoring)
-11. [Seguretat i dades sensibles](#seguretat-i-dades-sensibles)
-12. [Versió i changelog](#versió-i-changelog)
+9. [Configuració de scoring](#configuració-de-scoring)
+10. [Seguretat i dades sensibles](#seguretat-i-dades-sensibles)
+11. [Versió i changelog](#versió-i-changelog)
 
 ---
 
