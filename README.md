@@ -329,38 +329,6 @@ Cada execució de CI desa els resultats com a **artifact**:
 
 ---
 
-## Publicació a GitHub Pages
-
-### Per què Pages no executa Python directament
-
-GitHub Pages és un servei d'**hosting estàtic**: serveix HTML, CSS i JavaScript,
-però **no executa Python ni cap llenguatge de servidor**. Per tant:
-
-1. El pipeline Python s'executa dins d'una **GitHub Action** (servidor Ubuntu efímer)
-2. Els resultats (HTML, JSON, CSV) es copien a la carpeta `docs/`
-3. `docs/index.html` llegeix `results.json` via **JavaScript** i mostra la taula
-4. `peaceiris/actions-gh-pages` fa push de `docs/` a la branca `gh-pages`
-5. GitHub Pages serveix la branca `gh-pages` com a lloc web públic
-
-### Passos per activar GitHub Pages
-
-1. **Fes el primer push** al repositori (veure secció *Com pujar a GitHub*)
-
-2. Al repositori de GitHub, ves a **Settings → Pages**
-
-3. A **"Source"**, selecciona:
-   - Branch: **`gh-pages`**
-   - Folder: **`/ (root)`**
-
-4. Fes clic a **Save**
-
-5. Espera 1–2 minuts. La URL del teu lloc serà:
-   ```
-   https://EL-TEU-USUARI.github.io/aci-pipeline/
-   ```
-
-6. Executa el workflow `publish_results.yml` manualment per veure els primers resultats.
-
 ### Configura secrets de GitHub
 
 Per a M5-IA (alt text automàtic) necessites la clau Anthropic:
@@ -375,52 +343,6 @@ Per a M5-IA (alt text automàtic) necessites la clau Anthropic:
 
 ---
 
-## Com pujar a GitHub
-
-### Pas a pas — primer push
-
-```bash
-# 1. Inicialitza git (si no s'ha fet al directori del projecte)
-cd C:\Users\JMiguel\TFM_1     # Windows
-# cd /ruta/al/projecte        # Unix
-
-git init
-git branch -M main
-
-# 2. Comprova que .gitignore exclou correctament les dades
-git status                    # Hauries de veure NOMÉS fitxers de codi/config
-
-# 3. Afegeix tots els fitxers elegibles
-git add src/ configs/ templates/ tests/ scripts/ docs/ i18n/ data/inputs/
-git add .github/ .env.example .gitignore pyproject.toml requirements.txt
-git add README.md Dockerfile
-
-# 4. Primer commit
-git commit -m "feat: ACI Pipeline v0.1.0 — estructura inicial del repositori"
-
-# 5a. Amb GitHub CLI (recomanat)
-gh repo create aci-pipeline --public \
-    --description "Pipeline automatitzat d'avaluació d'accessibilitat web (TFM 2026)"
-# Segueix les instruccions interactives
-
-# 5b. O manualment a https://github.com/new
-#     → Name: "aci-pipeline"  |  Public  |  Sense README ni .gitignore
-
-# 6. Afegeix el remote i fes push
-git remote add origin https://github.com/EL-TEU-USUARI/aci-pipeline.git
-git push -u origin main
-```
-
-> **Important (Windows):** Substitueix `EL-TEU-USUARI` pel teu nom d'usuari de GitHub.
-> Si el directori ja té un repo git (`.git/`), salta el pas `git init`.
-
-### Push de canvis posteriors
-
-```bash
-git add .
-git commit -m "feat: descripció del canvi"
-git push
-```
 
 ---
 
